@@ -4,3 +4,6 @@ test/fixtures/**/*.astro
 pnpm-lock.yaml
 .github
 .changeset
+# .prettierignore
+!src/pages/category/[...category].astro
+!src/pages/[...slug].astro

@@ -10,7 +10,7 @@ export async function get() {
 		site: import.meta.env.SITE,
 		items: posts.map((post) => ({
 			...post.data,
-			link: `post/${post.slug}/`
+			link: `/${post.slug}/`
 		}))
 	})
 }

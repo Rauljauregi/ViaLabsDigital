@@ -5,24 +5,25 @@ import GithubIcon from '@/components/icons/GithubIcon'
 import SunIcon from '@/components/icons/SunIcon'
 import MoonIcon from '@/components/icons/MoonIcon'
 import PageFindSearch from '@/components/Search'
+import LinkedinIcon from './icons/linkedinIcon.astro'
 
 // ADD YOUR SOCIAL NETWORKS HERE
 const SOCIALNETWORKS = [
 	{
-		name: 'Github',
-		url: 'https://github.com/danielcgilibert/blog-template',
-		icon: GithubIcon
+		name: 'LinkedIn',
+		url: 'https://www.linkedin.com/in/ra%C3%BAl-j%C3%A1uregui-mart%C3%ADnez-de-morentin-1b0732294/',
+		icon: LinkedinIcon
 	},
 	{
 		name: 'Twitter',
-		url: 'https://github.com/danielcgilibert/blog-template',
+		url: 'https://twitter.com/Rauljauregui',
 		icon: TwitterIcon
 	}
 ]
 ---
 
 <header class='flex justify-between items-center h-12 font-semibold'>
-	<a class='text-lg' href='/'>Home</a>
+	<a class='text-lg' href='/'>Inicio del Blog</a>
 	<nav class='nav-menu flex justify-center items-center md:flex gap-4'>
 		{
 			SOCIALNETWORKS.map((network) => (

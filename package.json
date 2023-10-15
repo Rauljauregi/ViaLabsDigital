@@ -26,11 +26,12 @@
 		"sync": "astro sync",
 		"preview": "astro preview",
 		"postbuild": "pagefind --source dist",
-		"format:check": "prettier --plugin-search-dir=. --check .",
-		"format": "prettier --plugin-search-dir=. --write .",
+		"format:check": "prettier --check .",
+		"format": "prettier --write .",
 		"lint": "eslint .",
 		"pre-commit": "lint-staged",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"format:astro": "prettier --write 'src/pages/[...category].astro' 'src/pages/[...slug].astro'"
 	},
 	"dependencies": {
 		"@astrojs/rss": "3.0.0",
@@ -62,8 +63,7 @@
 		"typescript": "^5.1.6"
 	},
 	"lint-staged": {
-		"*.{astro,js,jsx,ts,tsx,md,mdx,json}": [
-			"prettier --write --plugin-search-dir=."
-		]
+		"src/pages/[...category].astro": [],
+		"src/pages/[...slug].astro": []
 	}
 }

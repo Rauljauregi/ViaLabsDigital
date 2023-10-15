@@ -8,10 +8,10 @@ interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-	author: 'DanielCG',
-	title: 'Astro Theme OpenBlog',
-	description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-	lang: 'en-GB',
-	ogLocale: 'en_GB',
-	shareMessage: 'Share this post' // Message to share a post on social media
+	author: 'Raúl Jáuregui',
+	title: '★ Pyme Digital ★ El blog de ViaLabs Digital ★ ',
+	description: '★ ViaLabs Digital - Consultoría Tecnológica | Machine Learning | SEO | Diseño web',
+	lang: 'en-ES',
+	ogLocale: 'en_ES',
+	shareMessage: 'Comparte este artículo' // Message to share a post on social media
 }

@@ -28,7 +28,7 @@ const articleDate = pubDate.toISOString()
 			<div class='flex flex-col gap-2'>
 				<div class='flex items-center justify-center gap-x-1'>
 					<p class='text-center text-sm text-opacity-50'>
-						Published <FormattedDate date={pubDate} />
+						Publicado <FormattedDate date={pubDate} />
 					</p>
 					<p class='text-center text-sm text-opacity-50 font-bold'>
 						- {readTime}
@@ -50,11 +50,11 @@ const articleDate = pubDate.toISOString()
 					<Image
 						src={heroImage}
 						width={1000}
-						height={500}
+						height={80}
 						quality={100}
 						format='jpg'
 						loading='eager'
-						class='rounded-md w-full max-h-[500px] my-8 object-cover opacity-0 transition-opacity duration-700 ease-in'
+						class='rounded-md w-full max-h-[80px] my-8 object-cover opacity-0 transition-opacity duration-700 ease-in'
 						alt={`img of ${title}`}
 					/>
 				)
@@ -68,7 +68,7 @@ const articleDate = pubDate.toISOString()
 		{
 			updatedDate && (
 				<div class='last-updated-on'>
-					Last updated on <FormattedDate date={updatedDate} />
+					Ùltima actualización en <FormattedDate date={updatedDate} />
 				</div>
 			)
 		}
