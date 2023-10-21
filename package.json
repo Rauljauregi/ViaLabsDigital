@@ -35,7 +35,8 @@
 	},
 	"dependencies": {
 		"@astrojs/rss": "3.0.0",
-		"astro": "3.0.1"
+		"astro": "3.0.1",
+		"firebase": "^10.5.0"
 	},
 	"devDependencies": {
 		"@astrojs/mdx": "1.0.0",

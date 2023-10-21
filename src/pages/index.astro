@@ -1,7 +1,7 @@
 ---
 import ListCategories from '@/components/ListCategories'
 import ListPosts from '@/components/ListPosts'
-import Shape from '@/components/icons/Shape'
+import Shape from '@/components/icons/MindfulML'
 import BaseLayout from '@/layouts/BaseLayout'
 import { getPosts } from '@/utils'
 
@@ -12,7 +12,7 @@ const posts = await getPosts(MAX_POSTS)
 <BaseLayout title='Home'>
 	<div class='flex justify-start items-center gap-2 title'>
 		<Shape />
-		<h1 class='text-5xl font-semibold tracking-wide'>Pyme Digital - El blog de ViaLabs Digital</h1>
+		<h1 class='text-5xl font-semibold tracking-wide'>Mindful ML - Cada viernes un email sobre IA</h1>
 	</div>
 
 	<ListCategories />
