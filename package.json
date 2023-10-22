@@ -35,8 +35,10 @@
 	},
 	"dependencies": {
 		"@astrojs/rss": "3.0.0",
+		"@tinacms/cli": "^1.5.31",
 		"astro": "3.0.1",
-		"firebase": "^10.5.0"
+		"firebase": "^10.5.0",
+		"tinacms": "^1.5.22"
 	},
 	"devDependencies": {
 		"@astrojs/mdx": "1.0.0",
