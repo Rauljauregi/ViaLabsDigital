@@ -11,7 +11,12 @@
 			"@/data/*": ["src/data/*"],
 			"@/site-config": ["src/data/site.config.ts"],
 			"@/styles": ["src/styles/"]
-		}
+		},
+		"plugins": [
+			{
+				"name": "@astrojs/ts-plugin"
+			},
+		],
 	},
 	"exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]
 }
