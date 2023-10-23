@@ -5,6 +5,8 @@ import ListCategories from '@/components/ListCategories'
 import Shape from '@/components/icons/Shape'
 import { sluglify, unsluglify, getCategories, getPosts } from '@/utils'
 
+export const prerender = true;
+
 const { category } = Astro.params
 
 export async function getStaticPaths() {
@@ -16,7 +18,22 @@ export async function getStaticPaths() {
 	}))
 }
 
-const unsluglifyNameCategory = unsluglify(category!.toLowerCase())
+const unsluglifyNameCategory = unsluglify(category!.toLowerCase());
+
+function capitalizeFirstLetter(string: string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+function capitalizedCategory(category : string) {
+	const lowerCased = category.toLowerCase();
+	const words = lowerCased.split(' ');
+	const capitalizedWords = words.map(capitalizeFirstLetter);
+	return capitalizedWords.join(' ');
+}
+
+const capitalized = capitalizedCategory(unsluglifyNameCategory);
+console.log(capitalized);
+
 
 const posts = await getPosts()
 const filterPosts = posts.filter(
@@ -24,7 +41,7 @@ const filterPosts = posts.filter(
 )
 ---
 
-<BaseLayout title={category}>
+<BaseLayout title={capitalized}>
 	<div class='flex justify-start items-center gap-2'>
 		<Shape />
 		<h1 class='text-5xl font-semibold tracking-wide first-letter:uppercase'>

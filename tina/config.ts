@@ -15,7 +15,7 @@ export default defineConfig({
   media: {
     tina: {
       mediaRoot: "",
-      publicFolder: "public",
+      publicFolder: "src/assets",
     },
   },
   schema: {
@@ -23,19 +23,78 @@ export default defineConfig({
       {
         name: "post",
         label: "Posts",
-        path: "content/posts",
+        path: "src/content/blog/",
         fields: [
           {
             type: "string",
             name: "title",
-            label: "Title",
+            label: "Título",
             isTitle: true,
             required: true,
           },
           {
+            type: "string",
+            name: "description",
+            label: "Descripción",
+            required: true,
+          },
+          {
+            label: 'Categories',
+            name: 'category',
+            type: 'string',
+            list: false,
+            required: true,
+            options: [
+              {
+                value: 'Desarrollo web y SEO',
+                label: 'Desarrollo web y SEO',
+              },
+              {
+                value: 'Inteligencia Artificial',
+                label: 'Inteligencia Artificial',
+              },
+              {
+                value: 'Innovación',
+                label: 'Innovación',
+              },
+            ],
+          },
+          {
+            type: "datetime",
+            name: "pubDate",
+            label: "Fecha de Publicación",
+            required: true,
+          },
+          {
+            type: "image",
+            name: "heroImage",
+            label: "Imagen",
+            required: false,
+          },
+          {
+            label: 'Tags',
+            name: 'tags',
+            type: 'string',
+            list: true,
+            options: [
+              {
+                value: 'Apple',
+                label: 'Apple',
+              },
+              {
+                value: 'Inteligencia Artificial',
+                label: 'Inteligencia Artificial',
+              },
+              {
+                value: 'Innovaciòn',
+                label: 'Innovación',
+              },
+            ],
+          },
+          {
             type: "rich-text",
             name: "body",
-            label: "Body",
+            label: "Contenido",
             isBody: true,
           },
         ],

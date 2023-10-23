@@ -35,8 +35,9 @@
 	},
 	"dependencies": {
 		"@astrojs/rss": "3.0.0",
+		"@astrojs/vercel": "^5.0.2",
 		"@tinacms/cli": "^1.5.31",
-		"astro": "3.0.1",
+		"astro": "^3.3.3",
 		"firebase": "^10.5.0",
 		"tinacms": "^1.5.22"
 	},

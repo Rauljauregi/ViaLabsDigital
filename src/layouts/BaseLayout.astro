@@ -5,6 +5,11 @@ import Footer from '@/components/Footer'
 import ProviderTheme from '@/components/ProviderTheme'
 import ProviderAnimations from '@/components/ProviderAnimations'
 const { title, description, image, articleDate } = Astro.props
+
+const params = Astro.url.searchParams;
+const email = params.get('email');
+console.log("email is:", email);
+
 ---
 
 <html lang='es' class='scroll-smooth'>
@@ -25,3 +30,4 @@ const { title, description, image, articleDate } = Astro.props
 		</main>
 	</body>
 </html>
+
