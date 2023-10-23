@@ -14,8 +14,8 @@ export default defineConfig({
   },
   media: {
     tina: {
-      mediaRoot: "",
-      publicFolder: "src/assets",
+      mediaRoot: 'src/assets',
+      publicFolder: '',
     },
   },
   schema: {
@@ -24,6 +24,7 @@ export default defineConfig({
         name: "post",
         label: "Posts",
         path: "src/content/blog/",
+        format: "mdx",
         fields: [
           {
             type: "string",
