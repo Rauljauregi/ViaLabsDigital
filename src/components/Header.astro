@@ -10,6 +10,8 @@ import SignIn from './SignIn.astro'
 import { app } from '../firebase/server'
 import { getAuth } from 'firebase-admin/auth'
 
+export const prerender = true
+
 // ADD YOUR SOCIAL NETWORKS HERE
 const SOCIALNETWORKS = [
 	{
