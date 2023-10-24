@@ -1,0 +1,1 @@
+import{a as e}from"./Search.astro_astro_type_script_index_0_lang.0872b243.js";const a=document.querySelectorAll("img");document.addEventListener("DOMContentLoaded",function(){localStorage.getItem("animations")==="true"?e("img",{opacity:[0,1],clipPath:["circle(0% at 0% 0%)","circle(100% at 50% 50%)"]},{duration:2,easing:"ease"}):a.forEach(t=>{t.classList.remove("opacity-0")})});
