@@ -65,14 +65,9 @@ dataframe = pd.read_csv('/path/file.csv')
 
 Local variables can be used in curly braces to pass attribute values to both HTML elements and components:
 
-```astro
----
-const name = 'Astro'
----
-
-<h1 class={name}>Attribute expressions are supported</h1>
-
-<MyComponent templateLiteralNameAttribute={`MyNameIs${name}`} />
+```python
+import pandas as pd
+dataframe = pd.read_csv('/path/file.csv')
 ```
 
 \:::caution
