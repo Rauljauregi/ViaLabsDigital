@@ -7,7 +7,7 @@ import Share from '@/components/Share'
 import TableOfContents from '@/components/TableOfContents'
 import { getPosts } from '@/utils'
 
-export const prerender = false;
+export const prerender = true;
 const posts = await getCollection('blog')
 
 export async function getStaticPaths() {
