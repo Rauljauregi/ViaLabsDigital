@@ -4,15 +4,13 @@ import ListPosts from '@/components/ListPosts'
 import Shape from '@/components/icons/Shape'
 import BaseLayout from '@/layouts/BaseLayout'
 import { getPosts } from '@/utils'
-/* import { app } from '../firebase/server'
-import { getAuth } from 'firebase-admin/auth' */
+import { app } from '../firebase/server'
+import { getAuth } from 'firebase-admin/auth'
 
 export const prerender = false
-const cookie = Astro.cookies.get("session")?.value;
-const type = typeof(cookie);
 
 /* console.log("ER COOKIE:",Astro.cookies.get("session")?.value); */
-/* const auth = getAuth(app)
+const auth = getAuth(app)
 let isAuthenticated = false
 if (Astro.cookies.has('session')) {
 	const sessionCookie = Astro.cookies.get('session')?.value
@@ -23,18 +21,17 @@ if (Astro.cookies.has('session')) {
 }
 
 
-console.log("isAuthenticated : ",isAuthenticated); */
+console.log("isAuthenticated : ",isAuthenticated);
 
 const MAX_POSTS = 5 // max number of posts to show on the home page
 const posts = await getPosts(MAX_POSTS)
 ---
 
-<BaseLayout title='Home'>
+<BaseLayout title='Home' isAuthenticated={isAuthenticated}>
 	<div class='flex justify-start items-center gap-2 title'>
 		<Shape />
 		<h1 class='text-5xl font-semibold tracking-wide'>
 			Mindful ML - Cada viernes un email sobre IA
-			{cookie} - {type}
 		</h1>
 	</div>
 
