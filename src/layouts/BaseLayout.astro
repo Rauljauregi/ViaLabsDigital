@@ -7,6 +7,7 @@ import ProviderAnimations from '@/components/ProviderAnimations'
 import { app } from '../firebase/server'
 import { getAuth } from 'firebase-admin/auth'
 import { getFirestore } from 'firebase-admin/firestore'
+export const prerender = true
 
 interface User {
 	id: string
