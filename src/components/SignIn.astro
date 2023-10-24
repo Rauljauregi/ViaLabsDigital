@@ -33,53 +33,58 @@ const { isAuthenticated } = Astro.props
 	// This will prevent the browser from storing session data
 	auth.setPersistence(inMemoryPersistence)
 
-	const form = document.getElementById('sign_in') as HTMLFormElement
-	form.addEventListener('submit', async (e) => {
-		e.preventDefault()
-		const formData = new FormData(form)
-		const email = formData.get('email')?.toString()
+	document.addEventListener('DOMContentLoaded', () => {
+		const form = document.getElementById('sign_in') as HTMLFormElement
 
-		if (!email) {
-			return
-		}
+		if (form) {
+			form.addEventListener('submit', async (e) => {
+				e.preventDefault()
+				const formData = new FormData(form)
+				const email = formData.get('email')?.toString()
 
-		const fetchToken = await fetch('/api/auth/getCustomToken', {
-			method: 'GET',
-			headers: {
-				Authorization: email
-			}
-		})
+				if (!email) {
+					return
+				}
 
-		const customToken = await fetchToken.json()
-		console.log('customToken is :', customToken.token)
-
-		const userCredential = await signInWithCustomToken(auth, customToken.token)
-		const idToken = await userCredential.user.getIdToken()
-		const user = userCredential.user
-		if (!user.emailVerified) {
-			// Nuovo indirizzo email
-
-			// Aggiorna l'indirizzo email
-			verifyBeforeUpdateEmail(user, email)
-				.then(() => {
-					console.log('Email updated successfully')
+				const fetchToken = await fetch('/api/auth/getCustomToken', {
+					method: 'GET',
+					headers: {
+						Authorization: email
+					}
 				})
-				.catch((error) => {
-					console.error('Error updating email: ', error)
+
+				const customToken = await fetchToken.json()
+				console.log('customToken is :', customToken.token)
+
+				const userCredential = await signInWithCustomToken(auth, customToken.token)
+				const idToken = await userCredential.user.getIdToken()
+				const user = userCredential.user
+				if (!user.emailVerified) {
+					// Nuovo indirizzo email
+
+					// Aggiorna l'indirizzo email
+					verifyBeforeUpdateEmail(user, email)
+						.then(() => {
+							console.log('Email updated successfully')
+						})
+						.catch((error) => {
+							console.error('Error updating email: ', error)
+						})
+				} else {
+					console.log('No user is signed in')
+				}
+
+				const response = await fetch('/api/auth/signin', {
+					method: 'GET',
+					headers: {
+						Authorization: `Bearer ${idToken}`
+					}
 				})
-		} else {
-			console.log('No user is signed in')
-		}
 
-		const response = await fetch('/api/auth/signin', {
-			method: 'GET',
-			headers: {
-				Authorization: `Bearer ${idToken}`
-			}
-		})
-
-		if (response.redirected) {
-			window.location.assign(response.url)
+				if (response.redirected) {
+					window.location.assign(response.url)
+				}
+			})
 		}
 	})
 </script>
