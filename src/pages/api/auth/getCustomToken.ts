@@ -1,16 +1,14 @@
 import type { APIRoute } from 'astro'
 import { app } from '../../../firebase/server'
 import { getAuth } from 'firebase-admin/auth'
-import { getFirestore } from "firebase-admin/firestore";
+import { getUserFromFirestore } from "../../../utils/getUserFromFirestore";
 
 export const GET: APIRoute = async ({ request }) => {
 	const auth = getAuth(app);
 
-   const db = getFirestore(app)
-   const usersRef = db.collection('users')
-   const mail = request.headers.get('Authorization')
+   const email = request.headers.get('Authorization');
 
-   const querySnapshot = await usersRef.where('email', '==', mail).get()
+   const querySnapshot = await getUserFromFirestore(email);
    let token = ''
    if (querySnapshot.empty) {
       /* TRY REGISTRATION */
