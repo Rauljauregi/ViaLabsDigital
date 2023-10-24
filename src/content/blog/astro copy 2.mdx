@@ -30,7 +30,12 @@ See below for more examples of [differences between Astro and JSX](#differences-
 
 Local variables can be added into the HTML using the curly braces syntax:
 
-```
+### Dynamic Attributes
+
+Local variables can be used in curly braces to pass attribute values to both HTML elements and components:
+
+```astro
+Prueba aquí vendría la parte para suscriptores
 ---
 const name = 'Astro'
 ---
@@ -39,14 +44,6 @@ const name = 'Astro'
 	<h1>Hello {name}!</h1>
 	<!-- Outputs <h1>Hello Astro!</h1> -->
 </div>
-```
-
-### Dynamic Attributes
-
-Local variables can be used in curly braces to pass attribute values to both HTML elements and components:
-
-```astro
-Prueba aquí vendría la parte para suscriptores
 ```
 
 caution
@@ -136,14 +133,6 @@ When using dynamic tags:
 Astro supports using either `<Fragment> </Fragment>` or the shorthand `<> </>`.
 
 Fragments can be useful to avoid wrapper elements when adding [`set:*` directives](/en/reference/directives-reference/#sethtml), as in the following example:
-
-```astro
----
-const htmlString = '<p>Raw HTML content</p>'
----
-
-<Fragment set:html={htmlString} />
-```
 
 ### Differences between Astro and JSX
 
