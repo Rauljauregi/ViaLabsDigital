@@ -5,9 +5,9 @@ import Code from '@/components/mdx/Code'
 import ListRelatedPosts from '@/components/ListRelatedPosts'
 import Share from '@/components/Share'
 import TableOfContents from '@/components/TableOfContents'
+import { getPosts } from '@/utils'
 
-const posts = await getCollection('blog')
-
+const posts = await getCollection('blog');
 /* export async function getStaticPaths() {
 	const posts = await getPosts()
 
@@ -18,21 +18,21 @@ const posts = await getCollection('blog')
 } */
 type Props = CollectionEntry<'blog'>
 
-const post = Astro.props
+const post = posts.find((p) => p.slug === Astro.params.slug);
 
-const getRelatedPosts = (post: Props) => {
+const getRelatedPosts = (post: Props | undefined) => {
 	const relatedPosts = posts.filter(
-		(p) => p.slug !== post.slug && p.data.tags.some((t) => post.data.tags.includes(t))
+		(p) => p.slug !== post!.slug && p.data.tags.some((t) => post!.data.tags.includes(t))
 	)
 	return relatedPosts.slice(0, 3)
 }
 
 const relatedPosts = getRelatedPosts(post)
 
-const { Content, headings, remarkPluginFrontmatter } = await post.render()
+const { Content, headings, remarkPluginFrontmatter } = await post!.render()
 ---
 
-<BlogPost data={post.data} headings={headings} readTime={remarkPluginFrontmatter.minutesRead}>
+<BlogPost data={post!.data} headings={headings} readTime={remarkPluginFrontmatter.minutesRead}>
 	<div class='grid grid-cols-1 md:pl-2 md:grid-cols-[20%_auto] gap-16 mt-8'>
 		<!-- aside  -->
 		<aside class='md:flex flex-col gap-8 hidden'>
