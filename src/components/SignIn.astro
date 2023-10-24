@@ -56,7 +56,7 @@ const { isAuthenticated } = Astro.props
 		const userCredential = await signInWithCustomToken(auth, customToken.token)
 		const idToken = await userCredential.user.getIdToken()
 		const user = userCredential.user
-		if (user) {
+		if (!user.emailVerified) {
 			// Nuovo indirizzo email
 
 			// Aggiorna l'indirizzo email
@@ -71,6 +71,7 @@ const { isAuthenticated } = Astro.props
 			console.log('No user is signed in')
 		}
 
+		console.log("idToken:", idToken);
 		const response = await fetch('/api/auth/signin', {
 			method: 'GET',
 			headers: {
