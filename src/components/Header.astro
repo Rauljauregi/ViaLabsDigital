@@ -21,7 +21,6 @@ const SOCIALNETWORKS = [
 		icon: TwitterIcon
 	}
 ]
-const {isAuthenticated} = Astro.props
 ---
 
 <header class='flex justify-between items-center h-full font-semibold flex-wrap my-4'>
@@ -47,5 +46,5 @@ const {isAuthenticated} = Astro.props
 			</span>
 		</div>
 	</nav>
-	<SignIn isAuthenticated={isAuthenticated}/>
+	<SignIn />
 </header>

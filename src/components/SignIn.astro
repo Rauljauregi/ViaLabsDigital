@@ -1,23 +1,18 @@
 ---
-const { isAuthenticated } = Astro.props
+
 ---
 
 <div class='flex-grow w-full py-4 flex justify-end'>
-	{
-		!isAuthenticated ? (
 			<form method='post' action='/api/users' id='sign_in'>
 				<label for='email'>Email</label>
 				<input type='email' id='email' name='email' />
 				<button type='submit'>Subscribe to Mailing List</button>
 			</form>
-		) : (
 			<form action='/api/auth/signout'>
 				<button type='submit' id='sign_out'>
 					Sign out
 				</button>
 			</form>
-		)
-	}
 </div>
 
 <script>

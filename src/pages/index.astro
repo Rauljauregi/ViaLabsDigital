@@ -4,32 +4,32 @@ import ListPosts from '@/components/ListPosts'
 import Shape from '@/components/icons/Shape'
 import BaseLayout from '@/layouts/BaseLayout'
 import { getPosts } from '@/utils'
-import { app } from '../firebase/server'
-import { getAuth } from 'firebase-admin/auth'
+/* import { app } from '../firebase/server'
+import { getAuth } from 'firebase-admin/auth' */
 
 export const prerender = true
 /* console.log("ER COOKIE:",Astro.cookies.get("session")?.value); */
-const auth = getAuth(app)
-let isAuthenticated = "falso"
+/* const auth = getAuth(app)
+let isAuthenticated = false
 if (Astro.cookies.has('session')) {
 	const sessionCookie = Astro.cookies.get('session')?.value
 	const decodedCookie = await auth.verifySessionCookie(sessionCookie!)
 	if (decodedCookie) {
-		isAuthenticated = "vero";
+		isAuthenticated = true
 	}
 }
 
-console.log("isAuthenticated : ",isAuthenticated);
+console.log("isAuthenticated : ",isAuthenticated); */
 
-const MAX_POSTS = 10 // max number of posts to show on the home page
+const MAX_POSTS = 5 // max number of posts to show on the home page
 const posts = await getPosts(MAX_POSTS)
 ---
 
-<BaseLayout title='Home' isAuthenticated={isAuthenticated}>
+<BaseLayout title='Home'>
 	<div class='flex justify-start items-center gap-2 title'>
 		<Shape />
 		<h1 class='text-5xl font-semibold tracking-wide'>
-			Mindful ML - Cada viernes un email sobre IA{isAuthenticated}
+			Mindful ML - Cada viernes un email sobre IA
 		</h1>
 	</div>
 
