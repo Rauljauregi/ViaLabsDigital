@@ -13,7 +13,7 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
 
 	/* Verify id token */
 	try {
-		await auth.verifyIdToken(idToken)
+		await auth.verifyIdToken(idToken);
 	} catch (error) {
 		return new Response('Invalid token', { status: 401 })
 	}
@@ -23,6 +23,8 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
 	const sessionCookie = await auth.createSessionCookie(idToken, {
 		expiresIn: fiveDays
 	})
+
+	console.log("sessionCookie", sessionCookie);
 
 	cookies.set('session', sessionCookie, {
 		path: '/'

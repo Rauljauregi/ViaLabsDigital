@@ -71,7 +71,6 @@ const { isAuthenticated } = Astro.props
 			console.log('No user is signed in')
 		}
 
-		console.log("idToken:", idToken);
 		const response = await fetch('/api/auth/signin', {
 			method: 'GET',
 			headers: {
