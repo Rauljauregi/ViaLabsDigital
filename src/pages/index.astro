@@ -9,7 +9,7 @@ import { verifyBeforeUpdateEmail } from 'firebase/auth'
 export const prerender = true
 /* console.log("ER COOKIE:",Astro.cookies.get("session")?.value); */
 
-const MAX_POSTS = 5 // max number of posts to show on the home page
+const MAX_POSTS = 10 // max number of posts to show on the home page
 const posts = await getPosts(MAX_POSTS)
 ---
 
