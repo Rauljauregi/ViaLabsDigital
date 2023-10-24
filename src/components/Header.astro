@@ -6,6 +6,9 @@ import SunIcon from '@/components/icons/SunIcon'
 import MoonIcon from '@/components/icons/MoonIcon'
 import PageFindSearch from '@/components/Search'
 import LinkedinIcon from './icons/brand-linkedin.astro'
+import SignIn from './SignIn.astro'
+import { app } from '../firebase/server'
+import { getAuth } from 'firebase-admin/auth'
 
 // ADD YOUR SOCIAL NETWORKS HERE
 const SOCIALNETWORKS = [
@@ -20,9 +23,21 @@ const SOCIALNETWORKS = [
 		icon: TwitterIcon
 	}
 ]
+
+const auth = getAuth(app)
+let isAuthenticated = false
+if (Astro.cookies.has('session')) {
+	const sessionCookie = Astro.cookies.get('session')?.value
+	const decodedCookie = await auth.verifySessionCookie(sessionCookie!)
+	if (decodedCookie) {
+		isAuthenticated = true
+	}
+}
+
+
 ---
 
-<header class='flex justify-between items-center h-12 font-semibold'>
+<header class='flex justify-between items-center h-12 font-semibold flex-wrap'>
 	<a class='text-lg' href='/'>Inicio del Blog</a>
 	<nav class='nav-menu flex justify-center items-center md:flex gap-4'>
 		{
@@ -45,4 +60,5 @@ const SOCIALNETWORKS = [
 			</span>
 		</div>
 	</nav>
+	<SignIn isAuthenticated={isAuthenticated}/>
 </header>

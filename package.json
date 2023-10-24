@@ -34,6 +34,7 @@
 		"format:astro": "prettier --write 'src/pages/[...category].astro' 'src/pages/[...slug].astro'"
 	},
 	"dependencies": {
+		"@astrojs/check": "^0.2.1",
 		"@astrojs/rss": "3.0.0",
 		"@astrojs/vercel": "^5.0.2",
 		"@tinacms/cli": "^1.5.31",
@@ -43,7 +44,7 @@
 		"tinacms": "^1.5.22"
 	},
 	"devDependencies": {
-		"@astrojs/mdx": "1.0.0",
+		"@astrojs/mdx": "^1.1.2",
 		"@astrojs/sitemap": "3.0.0",
 		"@astrojs/tailwind": "5.0.0",
 		"@pagefind/default-ui": "^0.12.0",
@@ -65,7 +66,7 @@
 		"slugify": "^1.6.6",
 		"tailwind-merge": "1.14.0",
 		"tailwindcss": "3.3.3",
-		"typescript": "^5.1.6"
+		"typescript": "^5.2.2"
 	},
 	"lint-staged": {
 		"src/pages/[...category].astro": [],

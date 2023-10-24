@@ -5,7 +5,8 @@ import Shape from '@/components/icons/Shape'
 import BaseLayout from '@/layouts/BaseLayout'
 import { getPosts } from '@/utils'
 
-export const prerender = true;
+export const prerender = true
+/* console.log("ER COOKIE:",Astro.cookies.get("session")?.value); */
 
 const MAX_POSTS = 5 // max number of posts to show on the home page
 const posts = await getPosts(MAX_POSTS)
@@ -14,7 +15,9 @@ const posts = await getPosts(MAX_POSTS)
 <BaseLayout title='Home'>
 	<div class='flex justify-start items-center gap-2 title'>
 		<Shape />
-		<h1 class='text-5xl font-semibold tracking-wide'>Mindful ML - Cada viernes un email sobre IA</h1>
+		<h1 class='text-5xl font-semibold tracking-wide'>
+			Mindful ML - Cada viernes un email sobre IA
+		</h1>
 	</div>
 
 	<ListCategories />
@@ -26,7 +29,8 @@ const posts = await getPosts(MAX_POSTS)
 </BaseLayout>
 
 <script>
-	import { animate } from 'motion'
+	import { animate } from 'motion';
+
 	const showAnimations = localStorage.getItem('animations') === 'true'
 
 	if (showAnimations) {
