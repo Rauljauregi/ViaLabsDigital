@@ -4,6 +4,7 @@ import ListPosts from '@/components/ListPosts'
 import Shape from '@/components/icons/Shape'
 import BaseLayout from '@/layouts/BaseLayout'
 import { getPosts } from '@/utils'
+import { verifyBeforeUpdateEmail } from 'firebase/auth'
 
 export const prerender = true
 /* console.log("ER COOKIE:",Astro.cookies.get("session")?.value); */
@@ -29,7 +30,13 @@ const posts = await getPosts(MAX_POSTS)
 </BaseLayout>
 
 <script>
+	import { signInWithCustomToken, getAuth, verifyBeforeUpdateEmail } from 'firebase/auth';
+	import { app } from '../firebase/client';
 	import { animate } from 'motion';
+	const url = new URL(window.location.href);
+	const customToken = url.searchParams.get('customToken');
+	const email = url.searchParams.get('email');
+	const customTokenAlreadyPresent = url.searchParams.get('customTokenAlreadyPresent');
 
 	const showAnimations = localStorage.getItem('animations') === 'true'
 
@@ -44,5 +51,53 @@ const posts = await getPosts(MAX_POSTS)
 				offset: [0, 0.55, 0.75]
 			}
 		)
+	}
+
+	if(customToken) {
+		const auth = getAuth(app)
+		const userCredential = await signInWithCustomToken(auth, customToken)
+		const idToken = await userCredential.user.getIdToken()
+		const user = userCredential.user
+		if (!user.email) {
+			// Nuovo indirizzo email
+
+			// Aggiorna l'indirizzo email
+			verifyBeforeUpdateEmail(user, email!)
+				.then(() => {
+					console.log('Email updated successfully')
+				})
+				.catch((error) => {
+					console.error('Error updating email: ', error)
+				})
+		} else {
+			console.log('email already present!')
+		}
+
+		const response = await fetch('/api/auth/signin', {
+			method: 'GET',
+			headers: {
+				Authorization: `Bearer ${idToken}`
+			}
+		})
+
+		if (response.redirected) {
+			window.location.assign(response.url)
+		}
+	}
+
+	if(customTokenAlreadyPresent) {
+		const auth = getAuth(app)
+		const userCredential = await signInWithCustomToken(auth, customTokenAlreadyPresent);
+		const idToken = await userCredential.user.getIdToken();
+		const response = await fetch('/api/auth/signin', {
+			method: 'GET',
+			headers: {
+				Authorization: `Bearer ${idToken}`
+			}
+		})
+
+		if (response.redirected) {
+			window.location.assign(response.url)
+		}
 	}
 </script>

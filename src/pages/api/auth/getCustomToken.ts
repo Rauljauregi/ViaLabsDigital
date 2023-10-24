@@ -3,7 +3,7 @@ import { app } from '../../../firebase/server'
 import { getAuth } from 'firebase-admin/auth'
 import { getFirestore } from "firebase-admin/firestore";
 
-export const GET: APIRoute = async ({ request, cookies, redirect }) => {
+export const GET: APIRoute = async ({ request }) => {
 	const auth = getAuth(app);
 
    const db = getFirestore(app)
@@ -14,11 +14,9 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
    let token = ''
    if (querySnapshot.empty) {
       /* TRY REGISTRATION */
-      console.log('No matching user')
+      console.log('No matching user on get')
    } else {
       const userDoc = querySnapshot.docs[0]
-      const userData = userDoc.data()
-      console.log('User ID:', userDoc.id, 'Email:', userData.email)
       try {
          await auth
             .createCustomToken(userDoc.id)
