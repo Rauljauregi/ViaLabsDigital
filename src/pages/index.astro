@@ -10,12 +10,12 @@ import { getAuth } from 'firebase-admin/auth'
 export const prerender = true
 /* console.log("ER COOKIE:",Astro.cookies.get("session")?.value); */
 const auth = getAuth(app)
-let isAuthenticated = false
+let isAuthenticated = "falso"
 if (Astro.cookies.has('session')) {
 	const sessionCookie = Astro.cookies.get('session')?.value
 	const decodedCookie = await auth.verifySessionCookie(sessionCookie!)
 	if (decodedCookie) {
-		isAuthenticated = true
+		isAuthenticated = "vero";
 	}
 }
 
@@ -29,7 +29,7 @@ const posts = await getPosts(MAX_POSTS)
 	<div class='flex justify-start items-center gap-2 title'>
 		<Shape />
 		<h1 class='text-5xl font-semibold tracking-wide'>
-			Mindful ML - Cada viernes un email sobre IA
+			Mindful ML - Cada viernes un email sobre IA{isAuthenticated}
 		</h1>
 	</div>
 
