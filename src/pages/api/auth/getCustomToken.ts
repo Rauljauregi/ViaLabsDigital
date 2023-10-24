@@ -8,7 +8,7 @@ export const GET: APIRoute = async ({ request }) => {
 
    const email = request.headers.get('Authorization');
 
-   const querySnapshot = await getUserFromFirestore(email);
+   const querySnapshot = await getUserFromFirestore(email!);
    let token = ''
    if (querySnapshot.empty) {
       /* TRY REGISTRATION */
