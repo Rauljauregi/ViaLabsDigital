@@ -9,8 +9,6 @@ import { getAuth } from 'firebase-admin/auth'
 
 const { title, description, image, articleDate } = Astro.props
 
-export const prerender = false
-
 /* console.log("ER COOKIE:",Astro.cookies.get("session")?.value); */
 const auth = getAuth(app)
 let isAuthenticated = false

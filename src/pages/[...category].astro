@@ -5,18 +5,18 @@ import ListCategories from '@/components/ListCategories'
 import Shape from '@/components/icons/Shape'
 import { sluglify, unsluglify, getCategories, getPosts } from '@/utils'
 
-export const prerender = true;
+export const prerender = false;
 
 const { category } = Astro.params
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
 	const categories = await getCategories()
 
 	return categories.map((category) => ({
 		params: { category: sluglify(category.toLowerCase()) },
 		props: category
 	}))
-}
+} */
 
 const unsluglifyNameCategory = unsluglify(category!.toLowerCase());
 
