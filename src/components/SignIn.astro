@@ -2,7 +2,7 @@
 const { isAuthenticated } = Astro.props
 ---
 
-<div class='m-0 flex-grow w-full py-4 flex justify-end'>
+<div class='flex-grow w-full py-4 flex justify-end'>
 	{
 		!isAuthenticated ? (
 			<form method='post' action='/api/users' id='sign_in'>
@@ -21,7 +21,12 @@ const { isAuthenticated } = Astro.props
 </div>
 
 <script>
-	import { getAuth, inMemoryPersistence, signInWithCustomToken, verifyBeforeUpdateEmail } from 'firebase/auth'
+	import {
+		getAuth,
+		inMemoryPersistence,
+		signInWithCustomToken,
+		verifyBeforeUpdateEmail
+	} from 'firebase/auth'
 	import { app } from '../firebase/client'
 
 	const auth = getAuth(app)
@@ -51,12 +56,6 @@ const { isAuthenticated } = Astro.props
 		const userCredential = await signInWithCustomToken(auth, customToken.token)
 		const idToken = await userCredential.user.getIdToken()
 		const user = userCredential.user
-      console.log(user);
-      function wait(seconds:number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, seconds * 1000);
-  });
-}
 		if (user) {
 			// Nuovo indirizzo email
 
@@ -67,8 +66,7 @@ const { isAuthenticated } = Astro.props
 				})
 				.catch((error) => {
 					console.error('Error updating email: ', error)
-				});
-            await wait(20);
+				})
 		} else {
 			console.log('No user is signed in')
 		}
