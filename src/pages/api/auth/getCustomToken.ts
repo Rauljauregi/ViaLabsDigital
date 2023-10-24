@@ -24,9 +24,9 @@ export const GET: APIRoute = async ({ request }) => {
 				status: 500
 			})
 		}
-      console.log('No matching user on get')
+      console.log('No matching user on get');
    } else {
-      const userDoc = querySnapshot.docs[0]
+      const userDoc = querySnapshot.docs[0];
       try {
          await auth
             .createCustomToken(userDoc.id)
@@ -40,6 +40,8 @@ export const GET: APIRoute = async ({ request }) => {
          return new Response('Invalid token', { status: 401 })
       }
    }
+
+   console.log("Token is:", token);
 
 	return new Response(JSON.stringify({token: token}));
 }
