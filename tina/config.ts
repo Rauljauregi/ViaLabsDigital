@@ -70,7 +70,7 @@ export default defineConfig({
             type: "image",
             name: "heroImage",
             label: "Imagen",
-            required: false,
+            required: true,
           },
           {
             label: 'Tags',
