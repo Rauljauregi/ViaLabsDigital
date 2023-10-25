@@ -33,7 +33,7 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
          }});
    
          const customToken = await fetchToken.json();
-         return redirect(`/?customToken=${customToken.token}&email=${email}`);
+         return redirect(`/register?customToken=${customToken.token}&email=${email}`);
       }catch(err){
          console.log("Error to Sign in with custom token :", err);
       }
@@ -46,7 +46,7 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
          }});
    
          const customToken = await fetchToken.json();
-         return redirect(`/?customTokenAlreadyPresent=${customToken.token}&email=${email}`);
+         return redirect(`/register?customTokenAlreadyPresent=${customToken.token}&email=${email}`);
       }catch(err){
          console.log("Error to Sign in with custom token :", err);
       }
