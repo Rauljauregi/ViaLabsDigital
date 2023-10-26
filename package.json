@@ -37,6 +37,7 @@
 		"@astrojs/check": "^0.2.1",
 		"@astrojs/rss": "3.0.0",
 		"@astrojs/vercel": "^5.0.2",
+		"@mailerlite/mailerlite-nodejs": "^1.2.0",
 		"@tinacms/cli": "^1.5.31",
 		"astro": "^3.3.3",
 		"firebase": "^10.5.0",

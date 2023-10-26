@@ -12,9 +12,25 @@ const url = new URL(Astro.url);
 const emailParam = url.searchParams.get('email');
 const customToken = url.searchParams.get('customToken');
 const customTokenAlreadyPresent = url.searchParams.get('customTokenAlreadyPresent');
+const sessionCookie = Astro.cookies.get('session');
 
-if(!customToken || !customTokenAlreadyPresent){
-   console.log("ops");
+let customTokenMessage = "Procesando..."
+
+if(customToken && !customTokenAlreadyPresent){
+   customTokenMessage = "Suscribiendo a la Newsletter..."
+}
+
+if(customTokenAlreadyPresent && !customToken) {
+   customTokenMessage = "Preparando tus Artículos..."
+}
+
+if(!customToken && !customTokenAlreadyPresent){
+   console.log("!custom url is: ", url);
+   return Astro.redirect("/");
+}
+
+if(sessionCookie){
+   console.log("sessionCookie is present!");
    return Astro.redirect("/");
 }
 ---
@@ -29,7 +45,13 @@ if(!customToken || !customTokenAlreadyPresent){
 		<main
 			class='h-screen w-screen flex justify-center items-center'
 		>
-      <img src="./main.gif" alt="loader"/>
+         <div class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 transition ease-in-out duration-150 cursor-not-allowed">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            {customTokenMessage}
+         </div>
 		</main>
 	</body>
 </html>
@@ -42,26 +64,10 @@ if(!customToken || !customTokenAlreadyPresent){
 	const email = url.searchParams.get('email');
 	const customTokenAlreadyPresent = url.searchParams.get('customTokenAlreadyPresent');
 
-
 	if(customToken) {
 		const auth = getAuth(app)
 		const userCredential = await signInWithCustomToken(auth, customToken)
 		const idToken = await userCredential.user.getIdToken()
-		const user = userCredential.user
-		if (!user.email) {
-			// Nuovo indirizzo email
-
-			// Aggiorna l'indirizzo email
-			verifyBeforeUpdateEmail(user, email!)
-				.then(() => {
-					console.log('Email updated successfully')
-				})
-				.catch((error) => {
-					console.error('Error updating email: ', error)
-				})
-		} else {
-			console.log('email already present!')
-		}
 
 		const response = await fetch('/api/auth/signin', {
 			method: 'GET',
