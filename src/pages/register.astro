@@ -3,7 +3,9 @@ import ListCategories from '@/components/ListCategories'
 import ListPosts from '@/components/ListPosts'
 import ProviderAnimations from '@/components/ProviderAnimations'
 import ProviderTheme from '@/components/ProviderTheme'
+import MoonIcon from '@/components/icons/MoonIcon'
 import Shape from '@/components/icons/Shape'
+import SunIcon from '@/components/icons/SunIcon'
 import BaseLayout from '@/layouts/BaseLayout'
 import { getPosts } from '@/utils'
 
@@ -42,6 +44,20 @@ if(sessionCookie){
 	</head>
 
 	<body class='relative bg-white text-stone-950 dark:bg-[#0a0910] dark:text-white'>
+		<header class='flex justify-between items-center h-full font-semibold flex-wrap my-4'>
+				<div class='md:ml-3 pl-2.5 border-l-2 flex justify-center items-center gap-2'>
+					<span class='theme relative'>
+						<span class='sun-logo w-fit h-fit opacity-0 transition-transform duration-500'>
+							<SunIcon />
+						</span>
+						<span
+							class='moon-logo w-fit h-fit absolute opacity-0 inset-0 transition-transform duration-500'>
+							<MoonIcon />
+						</span>
+					</span>
+				</div>
+			</nav>
+		</header>
 		<main
 			class='h-screen w-screen flex justify-center items-center'
 		>
