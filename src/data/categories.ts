@@ -4,3 +4,9 @@ export const CATEGORIES = [
    'Desarrollo web y SEO', 
    'Innovación'
 ] as const
+
+export const NEWSLETTER = [
+   'Inteligencia Artificial', 
+   'Desarrollo web y SEO', 
+   'Innovación'
+] as const

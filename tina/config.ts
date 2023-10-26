@@ -100,6 +100,86 @@ export default defineConfig({
           },
         ],
       },
+      {
+        name: "newsletter",
+        label: "Newsletter",
+        path: "src/content/newsletter/",
+        format: "mdx",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Título",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Descripción",
+            required: true,
+          },
+          {
+            label: 'Categories',
+            name: 'category',
+            type: 'string',
+            list: false,
+            required: true,
+            options: [
+              {
+                value: 'Desarrollo web y SEO',
+                label: 'Desarrollo web y SEO',
+              },
+              {
+                value: 'Inteligencia Artificial',
+                label: 'Inteligencia Artificial',
+              },
+              {
+                value: 'Innovación',
+                label: 'Innovación',
+              },
+            ],
+          },
+          {
+            type: "datetime",
+            name: "pubDate",
+            label: "Fecha de Publicación",
+            required: true,
+          },
+          {
+            type: "image",
+            name: "heroImage",
+            label: "Imagen",
+            required: true,
+          },
+          {
+            label: 'Tags',
+            name: 'tags',
+            type: 'string',
+            list: true,
+            options: [
+              {
+                value: 'Apple',
+                label: 'Apple',
+              },
+              {
+                value: 'Inteligencia Artificial',
+                label: 'Inteligencia Artificial',
+              },
+              {
+                value: 'Innovaciòn',
+                label: 'Innovación',
+              },
+            ],
+          },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Contenido",
+            isBody: true,
+          },
+        ],
+      },
     ],
   },
 });
