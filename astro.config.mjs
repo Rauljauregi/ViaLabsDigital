@@ -10,7 +10,7 @@ import vercel from '@astrojs/vercel/serverless';
 export default defineConfig({
 	output: 'server',
 	adapter: vercel(),
-	site: 'https://vialabsdigital.com/', // Write here your website url
+	site: 'https://mindfulml.vialabsdigital.com/', // Write here your website url
 	markdown: {
 		remarkPlugins: [remarkReadingTime],
 		drafts: true,
