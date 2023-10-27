@@ -132,7 +132,8 @@ if(sessionCookie){
 				const response = await fetch('/api/auth/signin', {
 					method: 'GET',
 					headers: {
-						Authorization: `Bearer ${idToken}`
+						Authorization: `Bearer ${idToken}`,
+						Confirmation: "needed",
 					}
 				})
 

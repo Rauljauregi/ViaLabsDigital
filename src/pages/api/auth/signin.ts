@@ -4,6 +4,7 @@ import { getAuth } from 'firebase-admin/auth'
 
 export const GET: APIRoute = async ({ request, cookies, redirect }) => {
 	const auth = getAuth(app)
+	const confirmation = request.headers.get('Confirmation');
 
 	/* Get token from request headers */
 	const idToken = request.headers.get('Authorization')?.split('Bearer ')[1]
@@ -24,11 +25,14 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
 		expiresIn: fiveDays
 	})
 
-	console.log("sessionCookie", sessionCookie);
-
 	cookies.set('session', sessionCookie, {
 		path: '/'
 	})
 
+	if(confirmation === 'needed') {
+		return redirect('/?confirmation=needed')
+	}
+
 	return redirect('/')
+
 }
