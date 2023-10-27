@@ -71,6 +71,7 @@ const { Content, headings, remarkPluginFrontmatter } = await post!.render()
 <script>
 	const article = document.getElementById('blog-container');
 	const isAuth = article?.dataset.authentication;
+	
 	if(isAuth === "true"){
 		const blurred = document.getElementsByClassName('blur-lg');
 		Array.from(blurred).map((box : any) => {

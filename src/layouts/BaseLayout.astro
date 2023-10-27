@@ -66,3 +66,25 @@ if(confirmation === "success"){
 		</main>
 	</body>
 </html>
+
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+	const closeNotConfirmedPopup = document.getElementById('close-not-confirmed-pop-up');
+	const notConfirmedPopup = document.getElementById('not-confirmed');
+   
+   if (closeNotConfirmedPopup && notConfirmedPopup) {
+      closeNotConfirmedPopup.addEventListener('click', function() {
+            notConfirmedPopup.style.display = 'none';
+         });
+   }
+   
+   const closeConfirmedPopup = document.getElementById('close-confirmed-pop-up');
+   const confirmedPopup = document.getElementById('confirmed');
+   
+   if (closeConfirmedPopup && confirmedPopup) {
+      closeConfirmedPopup.addEventListener('click', function() {
+            confirmedPopup.style.display = 'none';
+         });
+   }
+});
+</script>
