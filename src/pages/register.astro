@@ -17,11 +17,11 @@ const sessionCookie = Astro.cookies.get('session')
 let customTokenMessage = 'Procesando...'
 
 if (customToken && !customTokenAlreadyPresent) {
-	customTokenMessage = 'Suscribiendo a la Newsletter...'
+	customTokenMessage = 'Registrando a Mindful ML...'
 }
 
 if (customTokenAlreadyPresent && !customToken) {
-	customTokenMessage = 'Preparando el blog...'
+	customTokenMessage = 'Accediendo Mindful ML...'
 }
 
 if(!customToken && !customTokenAlreadyPresent){

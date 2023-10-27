@@ -77,6 +77,7 @@ export default defineConfig({
             name: 'tags',
             type: 'string',
             list: true,
+            required: true,
             options: [
               {
                 value: 'Apple',
@@ -157,6 +158,7 @@ export default defineConfig({
             name: 'tags',
             type: 'string',
             list: true,
+            required: true,
             options: [
               {
                 value: 'Apple',
