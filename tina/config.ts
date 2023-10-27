@@ -127,16 +127,16 @@ export default defineConfig({
             required: true,
             options: [
               {
-                value: 'Desarrollo web y SEO',
-                label: 'Desarrollo web y SEO',
+                value: 'newsletter_1',
+                label: 'newsletter_1',
               },
               {
-                value: 'Inteligencia Artificial',
-                label: 'Inteligencia Artificial',
+                value: 'newsletter_2',
+                label: 'newsletter_2',
               },
               {
-                value: 'Innovación',
-                label: 'Innovación',
+                value: 'newsletter_3',
+                label: 'newsletter_3',
               },
             ],
           },

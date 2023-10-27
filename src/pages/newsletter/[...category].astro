@@ -1,0 +1,43 @@
+---
+import BaseLayout from '@/layouts/BaseLayout'
+import ListPosts from '@/components/newsletter/ListPosts'
+import ListCategories from '@/components/ListCategories'
+import Shape from '@/components/icons/Shape'
+import { unsluglify, getNewsletterPosts } from '@/utils'
+
+const { category } = Astro.params
+
+const unsluglifyNameCategory = unsluglify(category!.toLowerCase());
+
+function capitalizeFirstLetter(string: string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+function capitalizedCategory(category : string) {
+	const lowerCased = category.toLowerCase();
+	const words = lowerCased.split(' ');
+	const capitalizedWords = words.map(capitalizeFirstLetter);
+	return capitalizedWords.join(' ');
+}
+
+const capitalized = capitalizedCategory(unsluglifyNameCategory);
+
+
+const posts = await getNewsletterPosts();
+
+const filterPosts = posts.filter(
+	(post) => post.data.category.toLowerCase() === unsluglifyNameCategory
+)
+---
+
+<BaseLayout title={capitalized}>
+	<div class='flex justify-start items-center gap-2'>
+		<Shape />
+		<h1 class='text-5xl font-semibold tracking-wide first-letter:uppercase'>
+			{unsluglifyNameCategory}
+		</h1>
+	</div>
+
+	<ListCategories activeCategory={category} />
+	<ListPosts posts={filterPosts} />
+</BaseLayout>
