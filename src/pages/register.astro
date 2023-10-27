@@ -25,12 +25,10 @@ if (customTokenAlreadyPresent && !customToken) {
 }
 
 if(!customToken && !customTokenAlreadyPresent){
-   console.log("!custom url is: ", url);
    return Astro.redirect("/");
 }
 
 if(sessionCookie){
-   console.log("sessionCookie is present!");
    return Astro.redirect("/");
 }
 ---

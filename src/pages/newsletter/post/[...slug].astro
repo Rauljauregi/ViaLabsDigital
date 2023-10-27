@@ -8,7 +8,6 @@ import TableOfContents from '@/components/TableOfContents'
 import { app } from '../../../firebase/server'
 import { getAuth } from 'firebase-admin/auth'
 
-/* console.log("ER COOKIE:",Astro.cookies.get("session")?.value); */
 const auth = getAuth(app)
 let authentication = "false"
 if (Astro.cookies.has('session')) {
