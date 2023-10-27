@@ -46,7 +46,7 @@ async function createSubscriberOnMailerLite(email: string) {
    const formattedDate: string = getCurrentDateTime();
 
 	const defineStatus: 'active' | 'unsubscribed' | 'unconfirmed' | 'bounced' | 'junk' | undefined =
-		'active'
+		'unconfirmed'
 
 	const params = {
 		email: email,
