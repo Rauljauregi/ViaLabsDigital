@@ -1,7 +1,6 @@
 ---
 import ListCategories from '@/components/ListCategories'
 import ListPosts from '@/components/ListPosts'
-import CloseIcon from '@/components/icons/CloseIcon'
 import Shape from '@/components/icons/Shape'
 import BaseLayout from '@/layouts/BaseLayout'
 import { getPosts } from '@/utils'
@@ -10,18 +9,6 @@ export const prerender = false
 
 const MAX_POSTS = 5 // max number of posts to show on the home page
 const posts = await getPosts(MAX_POSTS);
-const confirmation = Astro.url.searchParams.get('confirmation');
-let confirm = ""
-
-if(confirmation === "needed"){
-	confirm = "not confirmed"
-}
-
-if(confirmation === "success"){
-	Astro.cookies.set('confirmed', 'true');
-	confirm = "confirmed"
-}
-
 
 ---
 
@@ -37,18 +24,6 @@ if(confirmation === "success"){
 			Mindful ML - Cada viernes un email sobre IA
 		</h1>
 	</div>
-	{confirm === "not confirmed" && (
-	<div class="w-full bg-yellow-300 text-center flex justify-center items-center rounded-lg py-2 px-2" id="not-confirmed">
-		<p class="flex-grow text-sm">¡Confirma con tu correo electronico!</p>
-		<button id="close-not-confirmed-pop-up"><CloseIcon /> </button>
-	</div>
-	)}
-	{confirm === "confirmed" && (
-	<div class="w-full bg-green-300 text-center flex justify-center items-center rounded-lg py-2 px-2" id="confirmed">
-		<p class="flex-grow text-sm">¡Correo electrónico confirmado correctamente!</p>
-		<button id="close-confirmed-pop-up"><CloseIcon /> </button>
-	</div>
-	)}
 	<ListCategories />
 
 	<div>

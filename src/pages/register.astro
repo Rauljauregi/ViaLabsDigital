@@ -9,7 +9,7 @@ import { getPosts } from '@/utils'
 
 export const prerender = false
 const url = new URL(Astro.url)
-const emailParam = url.searchParams.get('email')
+const locationParam = url.searchParams.get('location')
 const customToken = url.searchParams.get('customToken')
 const customTokenAlreadyPresent = url.searchParams.get('customTokenAlreadyPresent')
 const sessionCookie = Astro.cookies.get('session')
@@ -25,10 +25,18 @@ if (customTokenAlreadyPresent && !customToken) {
 }
 
 if(!customToken && !customTokenAlreadyPresent){
+	console.log("locationParam is:",locationParam)
+	if(locationParam){
+		return Astro.redirect(locationParam);
+	}
    return Astro.redirect("/");
 }
 
 if(sessionCookie){
+	console.log("locationParam is:",locationParam)
+	if(locationParam){
+		return Astro.redirect(locationParam);
+	}
    return Astro.redirect("/");
 }
 ---
@@ -123,6 +131,8 @@ if(sessionCookie){
 			const url = new URL(window.location.href)
 			const customToken = url.searchParams.get('customToken')
 			const customTokenAlreadyPresent = url.searchParams.get('customTokenAlreadyPresent')
+			const location = url.searchParams.get('location');
+			console.log("register location is:", location);
 
 			if (customToken) {
 				const auth = getAuth(app)
@@ -134,6 +144,7 @@ if(sessionCookie){
 					headers: {
 						Authorization: `Bearer ${idToken}`,
 						Confirmation: "needed",
+						Location: `${location}`,
 					}
 				})
 
@@ -149,7 +160,8 @@ if(sessionCookie){
 				const response = await fetch('/api/auth/signin', {
 					method: 'GET',
 					headers: {
-						Authorization: `Bearer ${idToken}`
+						Authorization: `Bearer ${idToken}`,
+						Location: `${location}`,
 					}
 				})
 

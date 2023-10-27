@@ -73,6 +73,7 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
 	const usersRef = db.collection('users')
 	const url = new URL(request.url)
 	const email = url.searchParams.get('email')
+	const location = url.searchParams.get('location') || '/'
 
 	if (email) {
 		try {
@@ -96,7 +97,7 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
 				try {
 					const customToken = await getCustomToken(email);
 					await createSubscriberOnMailerLite(email)
-					return redirect(`/register?customToken=${customToken}`)
+					return redirect(`/register?customToken=${customToken}?location=${location}`)
 				} catch (err) {
 					console.log('Error to Sign in with custom token :', err)
 					return new Response('Something went wrong', {
@@ -107,7 +108,7 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
 				try {
 					/* GETTING CUSTOM TOKEN AND REDIRECT TO LOGIN*/
 					const customToken = await getCustomToken(email);
-					return redirect(`/register?customTokenAlreadyPresent=${customToken}`)
+					return redirect(`/register?customTokenAlreadyPresent=${customToken}?location=${location}`)
 				} catch (err) {
 					console.log('Error to Sign in with custom token :', err)
 					return new Response('Something went wrong', {

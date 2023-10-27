@@ -1,5 +1,6 @@
 ---
 const { isAuthenticated } = Astro.props
+const currentLocation = Astro.url.pathname;
 ---
 
 <div class='flex-grow w-full py-4 flex justify-end'>
@@ -8,6 +9,7 @@ const { isAuthenticated } = Astro.props
 			<form method='post' action='/api/users' id='sign_in'>
 				<label for='email'>Email</label>
 				<input type='email' id='email' name='email' />
+				<input type="text" id="location" name="location" value={currentLocation} hidden>
 				<button type='submit'>Subscribe to Mailing List</button>
 			</form>
 		) : (

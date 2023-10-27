@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import ProviderTheme from '@/components/ProviderTheme'
 import ProviderAnimations from '@/components/ProviderAnimations'
 import { app } from '../firebase/server'
+import CloseIcon from '@/components/icons/CloseIcon'
 import { getAuth } from 'firebase-admin/auth'
 
 const { title, description, image, articleDate } = Astro.props
@@ -19,6 +20,19 @@ if (Astro.cookies.has('session')) {
 		isAuthenticated = true
 	}
 }
+
+const confirmation = Astro.url.searchParams.get('confirmation');
+let confirm = ""
+
+if(confirmation === "needed"){
+	confirm = "not confirmed"
+}
+
+if(confirmation === "success"){
+	Astro.cookies.set('confirmed', 'true');
+	confirm = "confirmed"
+}
+
 ---
 
 <html lang='es' class='scroll-smooth'>
@@ -33,7 +47,20 @@ if (Astro.cookies.has('session')) {
 		<main
 			class='mx-auto max-w-xs sm:max-w-2xl sm:px-8 lg:px-0 antialiased md:max-w-6xl grid gap-12 mt-4'
 		>
+			
 			<Header isAuthenticated={isAuthenticated}/>
+			{confirm === "not confirmed" && (
+			<div class="w-full bg-yellow-300 text-center flex justify-center items-center rounded-lg py-2 px-2" id="not-confirmed">
+				<p class="flex-grow text-sm">¡Confirma con tu correo electronico!</p>
+				<button id="close-not-confirmed-pop-up"><CloseIcon /> </button>
+			</div>
+			)}
+			{confirm === "confirmed" && (
+			<div class="w-full bg-green-300 text-center flex justify-center items-center rounded-lg py-2 px-2" id="confirmed">
+				<p class="flex-grow text-sm">¡Correo electrónico confirmado correctamente!</p>
+				<button id="close-confirmed-pop-up"><CloseIcon /> </button>
+			</div>
+			)}
 			<slot />
 			<Footer />
 		</main>
