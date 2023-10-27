@@ -5,6 +5,19 @@ import Code from '@/components/mdx/Code'
 import ListRelatedPosts from '@/components/newsletter/ListRelatedPosts'
 import Share from '@/components/Share'
 import TableOfContents from '@/components/TableOfContents'
+import { app } from '../../../firebase/server'
+import { getAuth } from 'firebase-admin/auth'
+
+/* console.log("ER COOKIE:",Astro.cookies.get("session")?.value); */
+const auth = getAuth(app)
+let authentication = "false"
+if (Astro.cookies.has('session')) {
+	const sessionCookie = Astro.cookies.get('session')?.value
+	const decodedCookie = await auth.verifySessionCookie(sessionCookie!)
+	if (decodedCookie) {
+		authentication = "true"
+	}
+}
 
 const posts = await getCollection('newsletter');
 /* export async function getStaticPaths() {
@@ -29,6 +42,7 @@ const getRelatedPosts = (post: Props | undefined) => {
 const relatedPosts = getRelatedPosts(post)
 
 const { Content, headings, remarkPluginFrontmatter } = await post!.render()
+
 ---
 
 <BlogPost data={post!.data} headings={headings} readTime={remarkPluginFrontmatter.minutesRead}>
@@ -43,9 +57,9 @@ const { Content, headings, remarkPluginFrontmatter } = await post!.render()
 
 		<!-- main -->
 		<div class='max-w-full w-full'>
-			<div class='prose prose-lg md:prose-xl dark:prose-invert mb-12 min-w-full'>
+			<blog-post id="blog-container" class='prose prose-lg md:prose-xl dark:prose-invert mb-12 min-w-full' data-authentication={authentication}>
 				<Content components={{ pre: Code }} />
-			</div>
+			</blog-post>
 
 			<div>
 				<h2 class='font-bold text-lg dark:text-white mb-6'>Artículos Relacionados</h2>
@@ -54,3 +68,23 @@ const { Content, headings, remarkPluginFrontmatter } = await post!.render()
 		</div>
 	</div>
 </BlogPost>
+
+<script>
+	const article = document.getElementById('blog-container');
+	const isAuth = article?.dataset.authentication;
+	if(isAuth === "true"){
+		const blurred = document.getElementsByClassName('blur-lg');
+		Array.from(blurred).map((box : any) => {
+			box.classList.add('blur-none');
+			box.classList.remove('blur-lg');
+		});
+	}
+
+	if(isAuth === "false"){
+		const blurred = document.getElementsByClassName('blur-none');
+		Array.from(blurred).map((box : any) => {
+			box.classList.add('blur-lg');
+			box.classList.remove('blur-none');
+		});
+	}
+</script>
