@@ -3,6 +3,7 @@ import { getCategories } from '@/utils'
 import { getNewsletterCategories } from '@/utils';
 import Category from '@/components/Category'
 import CategoryNewsletter from './newsletter/CategoryNewsletter.astro';
+import { sluglify } from '@/utils'
 
 const categories = await getCategories()
 const newsletterCategories = await getNewsletterCategories()
@@ -18,10 +19,10 @@ const { activeCategory } = Astro.props
 		))
 	}
 	<CategoryNewsletter />
-	{
+<!-- 	{
 		newsletterCategories.map((newsletterCategory: string) => (
 			<CategoryNewsletter name={newsletterCategory} activeCategory={activeCategory} />
 		))
-	}
+	} -->
 	<div class='hidden sm:block absolute w-full bottom-0 border-b-2 -z-40 dark:border-gray-600'></div>
 </div>
