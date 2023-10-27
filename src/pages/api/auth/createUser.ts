@@ -51,6 +51,7 @@ async function createSubscriberOnMailerLite(email: string) {
 	const params = {
 		email: email,
 		status: defineStatus,
+		groups: ['101178350423246269'],
 		subscribed_at: formattedDate
 	}
 
@@ -73,7 +74,7 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
 	const url = new URL(request.url)
 	const email = url.searchParams.get('email')
 
-	if (email !== null) {
+	if (email) {
 		try {
 			const querySnapshot = await usersRef.where('email', '==', email).get()
 			if (querySnapshot.empty) {
@@ -121,5 +122,6 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
 			})
 		}
 	}
+
 	return redirect('/')
 }
