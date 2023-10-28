@@ -111,12 +111,16 @@ const { Content, headings, remarkPluginFrontmatter } = await post!.render()
 			)
 
 			// Creare il pulsante di invio
-			const submitButton = document.createElement('button')
+			const submitButton = document.createElement('button');
+			submitButton.classList.add(
+				'flex',
+				'flex-col',
+				'items-center',
+				'justify-center'
+				)
 			submitButton.type = 'submit'
-			submitButton.textContent = 'Invia'
-			submitButton.onclick=() => {
-				console.log("ahahahhaahah")
-			}
+			submitButton.textContent = 'Desbloquea el contenido'
+
 
 			// Creare l'icona con l'occhio
 

@@ -1,4 +1,4 @@
-<h1 align="center">
+<!-- <h1 align="center">
  Astro Theme OpenBLOG
 </h1>
 
@@ -102,3 +102,4 @@ pnpm dev
 <a href="https://github.com/danielcgilibert/blog-template/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=danielcgilibert/blog-template" />
 </a>
+ -->

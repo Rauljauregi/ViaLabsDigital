@@ -1,7 +1,32 @@
 ---
+import LinkedinIcon from './icons/brand-linkedin.astro'
+import HeaderLink from '@/components/HeaderLink'
+import TwitterIcon from '@/components/icons/TwitterIcon'
+
 const today = new Date()
+const SOCIALNETWORKS = [
+	{
+		name: 'LinkedIn',
+		url: 'https://www.linkedin.com/in/ra%C3%BAl-j%C3%A1uregui-mart%C3%ADnez-de-morentin-1b0732294/',
+		icon: LinkedinIcon
+	},
+	{
+		name: 'Twitter',
+		url: 'https://twitter.com/Rauljauregui',
+		icon: TwitterIcon
+	}
+]
 ---
 
-<footer class='flex justify-center items-center w-full px-16 h-28 border-t-2'>
-	&copy; {today.getFullYear()} ViaLabs Digital. Todos los derechos reservados.
+<footer class='flex flex-col justify-center items-center w-full px-16 h-28 border-t-2'>
+	<div class="flex flex-row items-center justify-center py-2">
+	{
+		SOCIALNETWORKS.map((network) => (
+			<HeaderLink class='' href={network.url} target='_blank' aria-label={network.name}>
+				<span>{<network.icon />} </span>
+			</HeaderLink>
+		))
+	}
+	</div>
+	<p>&copy; {today.getFullYear()} ViaLabs Digital. Todos los derechos reservados.</p>
 </footer>
