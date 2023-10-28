@@ -45,7 +45,7 @@ const { Content, headings, remarkPluginFrontmatter } = await post!.render()
 ---
 
 <BlogPost data={post!.data} headings={headings} readTime={remarkPluginFrontmatter.minutesRead}>
-	<PopUp></PopUp>
+	<PopUp />
 	<div class='grid grid-cols-1 md:pl-2 md:grid-cols-[20%_auto] gap-16 mt-8'>
 		<!-- aside  -->
 		<aside class='md:flex flex-col gap-8 hidden'>
@@ -66,14 +66,14 @@ const { Content, headings, remarkPluginFrontmatter } = await post!.render()
 			</blog-post>
 
 			<div>
-				<h2 class='font-bold text-lg dark:text-white mb-6'>Artículos Relacionados</h2>
+				<h5 class='font-bold text-lg dark:text-white mb-6'>Artículos Relacionados</h5>
 				<ListRelatedPosts posts={relatedPosts} />
 			</div>
 		</div>
 	</div>
 </BlogPost>
-<script>import PopUp from "@/components/article/PopUp"
 
+<script>
 	const article = document.getElementById('blog-container')
 	const isAuth = article?.dataset.authentication
 

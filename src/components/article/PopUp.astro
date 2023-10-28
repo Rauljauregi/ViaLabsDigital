@@ -1,8 +1,8 @@
 ---
-
+import FormMailerLite from "./FormMailerLite.astro"
 ---
 
-<div class="absolute top-0 left-0 w-full h-full z-30" id="pop-up">
+<div class="absolute top-0 left-0 w-full h-full z-30 hidden" id="pop-up">
    <div class="w-full h-full bg-black opacity-75 absolute top-0 left-0" />
    <div class="w-full h-full z-50 flex flex-col fixed">
       <div class="w-full flex flex-row justify-end items-center px-8 py-6">
@@ -22,8 +22,10 @@
                <path d='M18 6l-12 12'></path>
                <path d='M6 6l12 12'></path>
             </svg>
-   
          </button>
+      </div>
+      <div class="w-full h-full flex justify-center items-center">
+         <FormMailerLite>
       </div>
    </div>
 </div>

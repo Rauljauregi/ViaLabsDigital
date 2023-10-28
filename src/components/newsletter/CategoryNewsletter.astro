@@ -37,9 +37,11 @@ const isActive =
 		<ul>
 			{
 				newsletterCategories.map((category) => (
+				<a href={sluglify(`/newsletter/${category}`)}>
 					<li class="hover:bg-slate-300 rounded-lg px-4 py-2">
-						<a href={sluglify(`/newsletter/${category}`)}>{category}</a>
+						{category}
 					</li>
+				</a>
 				))
 			}
 		</ul>
