@@ -4,21 +4,22 @@ import BlogPost from '@/layouts/newsletter/BlogPost'
 import Code from '@/components/mdx/Code'
 import ListRelatedPosts from '@/components/newsletter/ListRelatedPosts'
 import Share from '@/components/Share'
+import PopUp from '@/components/article/PopUp'
 import TableOfContents from '@/components/TableOfContents'
 import { app } from '../../../firebase/server'
 import { getAuth } from 'firebase-admin/auth'
 
 const auth = getAuth(app)
-let authentication = "false"
+let authentication = 'false'
 if (Astro.cookies.has('session')) {
 	const sessionCookie = Astro.cookies.get('session')?.value
 	const decodedCookie = await auth.verifySessionCookie(sessionCookie!)
 	if (decodedCookie) {
-		authentication = "true"
+		authentication = 'true'
 	}
 }
 
-const posts = await getCollection('newsletter');
+const posts = await getCollection('newsletter')
 /* export async function getStaticPaths() {
 	const posts = await getPosts()
 
@@ -29,7 +30,7 @@ const posts = await getCollection('newsletter');
 } */
 type Props = CollectionEntry<'newsletter'>
 
-const post = posts.find((p) => p.slug === Astro.params.slug);
+const post = posts.find((p) => p.slug === Astro.params.slug)
 
 const getRelatedPosts = (post: Props | undefined) => {
 	const relatedPosts = posts.filter(
@@ -41,10 +42,10 @@ const getRelatedPosts = (post: Props | undefined) => {
 const relatedPosts = getRelatedPosts(post)
 
 const { Content, headings, remarkPluginFrontmatter } = await post!.render()
-
 ---
 
 <BlogPost data={post!.data} headings={headings} readTime={remarkPluginFrontmatter.minutesRead}>
+	<PopUp></PopUp>
 	<div class='grid grid-cols-1 md:pl-2 md:grid-cols-[20%_auto] gap-16 mt-8'>
 		<!-- aside  -->
 		<aside class='md:flex flex-col gap-8 hidden'>
@@ -56,7 +57,11 @@ const { Content, headings, remarkPluginFrontmatter } = await post!.render()
 
 		<!-- main -->
 		<div class='max-w-full w-full'>
-			<blog-post id="blog-container" class='prose prose-lg md:prose-xl dark:prose-invert mb-12 min-w-full' data-authentication={authentication}>
+			<blog-post
+				id='blog-container'
+				class='prose prose-lg md:prose-xl dark:prose-invert mb-12 min-w-full'
+				data-authentication={authentication}
+			>
 				<Content components={{ pre: Code }} />
 			</blog-post>
 
@@ -67,24 +72,98 @@ const { Content, headings, remarkPluginFrontmatter } = await post!.render()
 		</div>
 	</div>
 </BlogPost>
+<script>import PopUp from "@/components/article/PopUp"
 
-<script>
-	const article = document.getElementById('blog-container');
-	const isAuth = article?.dataset.authentication;
-	
-	if(isAuth === "true"){
-		const blurred = document.getElementsByClassName('blur-lg');
-		Array.from(blurred).map((box : any) => {
-			box.classList.add('blur-none');
-			box.classList.remove('blur-lg');
-		});
+	const article = document.getElementById('blog-container')
+	const isAuth = article?.dataset.authentication
+
+	if (isAuth === 'true') {
+		const blurred = document.getElementsByClassName('blur-lg')
+		Array.from(blurred).map((box: any) => {
+			box.classList.add('blur-none')
+			box.classList.remove('blur-lg')
+		})
 	}
 
-	if(isAuth === "false"){
-		const blurred = document.getElementsByClassName('blur-none');
-		Array.from(blurred).map((box : any) => {
-			box.classList.add('blur-lg');
-			box.classList.remove('blur-none');
-		});
+	if (isAuth === 'false') {
+		const blurred = document.getElementsByClassName('blur-lg')
+		Array.from(blurred).map((box: any) => {
+			box.classList.add('z-0');
+			
+			const container = document.createElement('div')
+			container.classList.add('relative')
+
+			const eyeContainer = document.createElement('div')
+			eyeContainer.classList.add(
+				'p-2',
+				'absolute',
+				'top-1/3',
+				'left-1/2',
+				'transform',
+				'-translate-x-1/2',
+				'-translate-y-1/3',
+				'flex',
+				'flex-col',
+				'justify-center',
+				'items-center',
+				'gap-4',
+				'z-10'
+			)
+
+			// Creare il pulsante di invio
+			const submitButton = document.createElement('button')
+			submitButton.type = 'submit'
+			submitButton.textContent = 'Invia'
+			submitButton.onclick=() => {
+				console.log("ahahahhaahah")
+			}
+
+			// Creare l'icona con l'occhio
+
+			const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+			svg.classList.add('flex-grow')
+			svg.setAttribute('width', '64')
+			svg.setAttribute('height', '64')
+			svg.setAttribute('fill', 'currentColor')
+			svg.setAttribute('class', 'bi bi-eye-slash')
+			svg.setAttribute('viewBox', '0 0 16 16')
+
+			const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+			path1.setAttribute(
+				'd',
+				'M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z'
+			)
+
+			const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+			path2.setAttribute(
+				'd',
+				'M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z'
+			)
+
+			const path3 = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+			path3.setAttribute(
+				'd',
+				'M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z'
+			)
+
+			svg.appendChild(path1)
+			svg.appendChild(path2)
+			svg.appendChild(path3)
+			const popUp = document.getElementById('pop-up');
+			submitButton.appendChild(svg)
+			submitButton.addEventListener(('click'), () => {
+				popUp?.classList.remove('hidden');
+			})
+
+			eyeContainer.appendChild(submitButton)
+
+			// Aggiungere il form e il box blurrato al container
+			container.appendChild(box)
+			container.appendChild(eyeContainer)
+
+			// Aggiungere il container al DOM
+			article!.appendChild(container)
+			// Aggiungere il form
+		})
 	}
 </script>
