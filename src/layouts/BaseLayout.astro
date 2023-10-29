@@ -7,6 +7,20 @@ import ProviderAnimations from '@/components/ProviderAnimations'
 import { app } from '../firebase/server'
 import CloseIcon from '@/components/icons/CloseIcon'
 import { getAuth } from 'firebase-admin/auth'
+import MailerLite from '@mailerlite/mailerlite-nodejs';
+
+const mailerlite = new MailerLite({
+  api_key: process.env.MAILERLITE_API || "",
+});
+
+const subsOnMailerLite = mailerlite.subscribers.find("SUBSCRIBER_ID")
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    if (error.response) console.log(error.response.data);
+  });
+
 
 const { title, description, image, articleDate } = Astro.props
 
@@ -16,6 +30,8 @@ let isAuthenticated = false
 if (Astro.cookies.has('session')) {
 	const sessionCookie = Astro.cookies.get('session')?.value
 	const decodedCookie = await auth.verifySessionCookie(sessionCookie!)
+	const user = await auth.getUser(decodedCookie.uid);
+	console.log("user is:",user);
 	if (decodedCookie) {
 		isAuthenticated = true
 	}
