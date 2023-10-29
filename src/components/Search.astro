@@ -97,9 +97,10 @@ import SearchIcon from '@/components/icons/SearchIcon'
 				if (import.meta.env.DEV) return
 				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1))
 				onIdle(async () => {
-					try {
+					
 					// @ts-ignore
 					const { PagefindUI } = await import('@pagefind/default-ui')
+					try {
 					new PagefindUI({
 						element: '#pagefind__search',
 						baseUrl: import.meta.env.BASE_URL,
