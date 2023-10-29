@@ -87,9 +87,11 @@ const article = document.getElementById('blog-container')
 		Array.from(blurred).map((box: any) => {
 			box.classList.add('z-0');
 			
+			// CREATE THE MAIN CONTAINER
 			const container = document.createElement('div')
 			container.classList.add('relative')
 
+			// CREATE THE EYE CONTAINER
 			const eyeContainer = document.createElement('div')
 			eyeContainer.classList.add(
 				'p-2',
@@ -107,7 +109,7 @@ const article = document.getElementById('blog-container')
 				'z-10'
 			)
 
-			// Creare il pulsante di invio
+			// CREATE OF THE BUTTON AND IMPLEMENTED THE CLASSES
 			const submitButton = document.createElement('button')
 			submitButton.classList.add(
 				'flex',
@@ -118,8 +120,7 @@ const article = document.getElementById('blog-container')
 			submitButton.type = 'submit'
 			submitButton.textContent = 'Desbloquea el contenido'
 
-			// Creare l'icona con l'occhio
-
+			// CREATED THE EYES SVG
 			const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
 			svg.classList.add('flex-grow')
 			svg.setAttribute('width', '64')
@@ -146,24 +147,27 @@ const article = document.getElementById('blog-container')
 				'M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z'
 			)
 
+			// APPEND THE PATH TO THE SVG TO CREATE A UNIQUE COMPONENT
 			svg.appendChild(path1)
 			svg.appendChild(path2)
 			svg.appendChild(path3)
+
+			// GETTING THE POP-UP COMPONENT AND IMPLEMENTED FUNCTIONS TO THE BUTTON TO CLOSE THE POP-UP
 			const popUp = document.getElementById('pop-up');
 			submitButton.appendChild(svg)
 			submitButton.addEventListener(('click'), () => {
 				popUp?.classList.remove('hidden');
 			})
 
+			// APPEND THE BUTTON TO THE EYE CONTAINER
 			eyeContainer.appendChild(submitButton)
 
-			// Aggiungere il form e il box blurrato al container
+			// APPEND THE BOX AND EYE CONTAINER TO THE MAIN CONTAINER
 			container.appendChild(box)
 			container.appendChild(eyeContainer)
 
-			// Aggiungere il container al DOM
+			// APPEND THE CONTAINER TO THE ARTICLE
 			article!.appendChild(container)
-			// Aggiungere il form
 		})
 	}
 </script>
