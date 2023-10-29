@@ -97,21 +97,16 @@ import SearchIcon from '@/components/icons/SearchIcon'
 				if (import.meta.env.DEV) return
 				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1))
 				onIdle(async () => {
-					
-					
-					try {
+					// @ts-ignore
 							// @ts-ignore
-					import { PageFindUI} from '@pagefind/default-ui'
+							import { PageFindUI} from '@pagefind/default-ui'
 					const page = PageFindUI
 					new page({
 						element: '#pagefind__search',
 						baseUrl: import.meta.env.BASE_URL,
 						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/_pagefind/',
 						showImages: false
-					});
-					} catch (e) {
-						console.error("pagefind:",e)
-					}
+					})
 				})
 			})
 		}
