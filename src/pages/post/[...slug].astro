@@ -1,4 +1,13 @@
 ---
+/**
+ * THIS FILE IS RESPONSIBLE FOR RENDERING A BLOG POST PAGE.
+ * IT IMPORTS NECESSARY MODULES SUCH AS BLOGPOST, CODE, LISTRELATEDPOSTS, SHARE, POPUP, AND TABLEOFCONTENTS.
+ * IT ALSO IMPORTS THE FIREBASE SERVER AND FIREBASE-ADMIN/AUTH MODULES TO GET THE AUTHENTICATION STATUS OF THE USER.
+ * THE FUNCTION GETCOLLECTION IS USED TO GET THE BLOG POST COLLECTION AND THE FUNCTION FIND IS USED TO FIND THE POST WITH THE GIVEN SLUG.
+ * THE FUNCTION GETRELATEDPOSTS IS USED TO GET THE RELATED POSTS OF THE CURRENT POST. FINALLY, THE POST CONTENT IS RENDERED USING THE RENDER FUNCTION. 
+ */
+
+// IMPORTING NECESSARY MODULES
 import { type CollectionEntry, getCollection } from 'astro:content'
 import BlogPost from '@/layouts/BlogPost'
 import Code from '@/components/mdx/Code'
@@ -9,7 +18,7 @@ import TableOfContents from '@/components/TableOfContents'
 import { app } from '../../firebase/server'
 import { getAuth } from 'firebase-admin/auth'
 
-/* console.log("ER COOKIE:",Astro.cookies.get("session")?.value); */
+// GETTING AUTHENTICATION STATUS
 const auth = getAuth(app)
 let authentication = "false"
 if (Astro.cookies.has('session')) {
@@ -20,19 +29,15 @@ if (Astro.cookies.has('session')) {
 	}
 }
 
+// GETTING THE BLOG POST COLLECTION
 const posts = await getCollection('blog');
-/* export async function getStaticPaths() {
-	const posts = await getPosts()
 
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: post
-	}))
-} */
 type Props = CollectionEntry<'blog'>
 
+// FINDING THE POST WITH THE GIVEN SLUG
 const post = posts.find((p) => p.slug === Astro.params.slug);
 
+// FUNCTION TO GET RELATED POSTS
 const getRelatedPosts = (post: Props | undefined) => {
 	const relatedPosts = posts.filter(
 		(p) => p.slug !== post!.slug && p.data.tags.some((t) => post!.data.tags.includes(t))
@@ -40,9 +45,20 @@ const getRelatedPosts = (post: Props | undefined) => {
 	return relatedPosts.slice(0, 3)
 }
 
+// GETTING RELATED POSTS
 const relatedPosts = getRelatedPosts(post)
 
+// RENDERING THE POST CONTENT
 const { Content, headings, remarkPluginFrontmatter } = await post!.render()
+
+// DOCUMENTATION COMMENT
+/**
+ * This file is responsible for rendering a blog post page.
+ * It imports necessary modules such as BlogPost, Code, ListRelatedPosts, Share, PopUp, and TableOfContents.
+ * It also imports the firebase server and firebase-admin/auth modules to get the authentication status of the user.
+ * The function getCollection is used to get the blog post collection and the function find is used to find the post with the given slug.
+ * The function getRelatedPosts is used to get the related posts of the current post. Finally, the post content is rendered using the render function. 
+ */
 ---
 
 <BlogPost data={post!.data} headings={headings} readTime={remarkPluginFrontmatter.minutesRead}>

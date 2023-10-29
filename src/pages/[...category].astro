@@ -1,27 +1,24 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout'
-import ListPosts from '@/components/ListPosts'
-import ListCategories from '@/components/ListCategories'
-import Shape from '@/components/icons/Shape'
-import { sluglify, unsluglify, getCategories, getPosts } from '@/utils'
 
+// IMPORT NECESSARY COMPONENTS AND UTILITIES
+import BaseLayout from '@/layouts/BaseLayout' // Base layout component
+import ListPosts from '@/components/ListPosts' // Component to list posts
+import ListCategories from '@/components/ListCategories' // Component to list categories
+import Shape from '@/components/icons/Shape' // Shape icon component
+import { sluglify, unsluglify, getCategories, getPosts } from '@/utils' // Utility functions
+
+// GET THE CATEGORY PARAMETER FROM THE URL
 const { category } = Astro.params
 
-/* export async function getStaticPaths() {
-	const categories = await getCategories()
-
-	return categories.map((category) => ({
-		params: { category: sluglify(category.toLowerCase()) },
-		props: category
-	}))
-} */
-
+// CONVERT THE CATEGORY PARAMETER TO A READABLE FORMAT
 const unsluglifyNameCategory = unsluglify(category!.toLowerCase());
 
+// FUNCTION TO CAPITALIZE THE FIRST LETTER OF A STRING
 function capitalizeFirstLetter(string: string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
+// FUNCTION TO CAPITALIZE EACH WORD IN A STRING
 function capitalizedCategory(category : string) {
 	const lowerCased = category.toLowerCase();
 	const words = lowerCased.split(' ');
@@ -29,13 +26,15 @@ function capitalizedCategory(category : string) {
 	return capitalizedWords.join(' ');
 }
 
+// CAPITALIZE THE CATEGORY NAME
 const capitalized = capitalizedCategory(unsluglifyNameCategory);
 
-
-const posts = await getPosts()
+// GET ALL POSTS AND FILTER THEM BY CATEGORY
+const posts = await getPosts() // Get all posts
 const filterPosts = posts.filter(
-	(post) => post.data.category.toLowerCase() === unsluglifyNameCategory
+	(post) => post.data.category.toLowerCase() === unsluglifyNameCategory // Filter posts by category
 )
+
 ---
 
 <BaseLayout title={capitalized}>
