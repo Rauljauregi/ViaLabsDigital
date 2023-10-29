@@ -99,7 +99,7 @@ import SearchIcon from '@/components/icons/SearchIcon'
 				onIdle(async () => {
 					// @ts-ignore
 					const { PagefindUI } = import('@pagefind/default-ui')
-					new PagefindUI({
+					await new PagefindUI({
 						element: '#pagefind__search',
 						baseUrl: import.meta.env.BASE_URL,
 						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/_pagefind/',
