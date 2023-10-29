@@ -98,13 +98,11 @@ import SearchIcon from '@/components/icons/SearchIcon'
 				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1))
 				onIdle(async () => {
 					// @ts-ignore
-							// @ts-ignore
-							import { PageFindUI} from '@pagefind/default-ui'
-					const page = PageFindUI
-					new page({
+					const { PagefindUI } = await import('@pagefind/default-ui')
+					new PagefindUI({
 						element: '#pagefind__search',
 						baseUrl: import.meta.env.BASE_URL,
-						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/_pagefind/',
+						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
 						showImages: false
 					})
 				})
