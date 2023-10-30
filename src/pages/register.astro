@@ -7,7 +7,6 @@ import SunIcon from '@/components/icons/SunIcon'
 import BaseLayout from '@/layouts/BaseLayout'
 import { getPosts } from '@/utils'
 
-export const prerender = false
 const url = new URL(Astro.url)
 const locationParam = url.searchParams.get('location')
 const customToken = url.searchParams.get('customToken')
