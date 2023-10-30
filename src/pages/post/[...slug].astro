@@ -101,11 +101,12 @@ const article = document.getElementById('blog-container')
 	if (isAuth === 'false') {
 		const blurred = document.getElementsByClassName('blur-lg')
 		Array.from(blurred).map((box: any) => {
+			const container = box.cloneNode(false);
 			box.classList.add('z-0');
 			
 			// CREATE THE MAIN CONTAINER
-			const container = document.createElement('div')
-			container.classList.add('relative')
+			container.classList.add('relative','flex')
+			container.classList.remove('blur-lg')
 
 			// CREATE THE EYE CONTAINER
 			const eyeContainer = document.createElement('div')
@@ -178,12 +179,14 @@ const article = document.getElementById('blog-container')
 			// APPEND THE BUTTON TO THE EYE CONTAINER
 			eyeContainer.appendChild(submitButton)
 
+			const parent = box.parentNode;
+			parent.insertBefore(container, box.nextSibling);
+
 			// APPEND THE BOX AND EYE CONTAINER TO THE MAIN CONTAINER
 			container.appendChild(box)
 			container.appendChild(eyeContainer)
 
 			// APPEND THE CONTAINER TO THE ARTICLE
-			article!.appendChild(container)
 		})
 	}
 </script>
