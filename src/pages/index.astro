@@ -19,10 +19,15 @@ const posts = await getPosts(MAX_POSTS);
 
 
 	<div class='flex justify-start items-center gap-2 title'>
-		<Shape />
-		<h1 class='text-5xl font-semibold tracking-wide'>
-			Mindful ML - Cada viernes un email sobre IA
-		</h1>
+		<div class="h-50 w-50">
+		  <Shape />
+		</div>
+		<div class='flex-col'>
+			<h1 class='text-5xl font-semibold tracking-wide'>
+			Mindful ML
+			</h1>
+			<p class='text-l font-semibold tracking-wide'>Cada viernes un email sobre IA</p>
+	    </div>
 	</div>
 	<ListCategories />
 
