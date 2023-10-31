@@ -23,9 +23,11 @@ const auth = getAuth(app)
 let authentication = "false"
 if (Astro.cookies.has('session')) {
 	const sessionCookie = Astro.cookies.get('session')?.value
-	const decodedCookie = await auth.verifySessionCookie(sessionCookie!)
-	if (decodedCookie) {
+	try {
+		await auth.verifySessionCookie(sessionCookie!)
 		authentication = "true"
+	} catch (error) {
+		authentication = "false"
 	}
 }
 
