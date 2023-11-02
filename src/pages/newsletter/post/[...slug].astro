@@ -75,99 +75,105 @@ const { Content, headings, remarkPluginFrontmatter } = await post!.render()
 
 <script>
 	const article = document.getElementById('blog-container')
-	const isAuth = article?.dataset.authentication
-
-	if (isAuth === 'true') {
-		const blurred = document.getElementsByClassName('blur-lg')
-		Array.from(blurred).map((box: any) => {
-			box.classList.add('blur-none')
-			box.classList.remove('blur-lg')
-		})
-	}
-
-	if (isAuth === 'false') {
-		const blurred = document.getElementsByClassName('blur-lg')
-		Array.from(blurred).map((box: any) => {
-			box.classList.add('z-0');
-			
-			const container = document.createElement('div')
-			container.classList.add('relative')
-
-			const eyeContainer = document.createElement('div')
-			eyeContainer.classList.add(
-				'p-2',
-				'absolute',
-				'top-1/3',
-				'left-1/2',
-				'transform',
-				'-translate-x-1/2',
-				'-translate-y-1/3',
-				'flex',
-				'flex-col',
-				'justify-center',
-				'items-center',
-				'gap-4',
-				'z-10'
-			)
-
-			// Creare il pulsante di invio
-			const submitButton = document.createElement('button');
-			submitButton.classList.add(
-				'flex',
-				'flex-col',
-				'items-center',
-				'justify-center'
-				)
-			submitButton.type = 'submit'
-			submitButton.textContent = 'Desbloquea el contenido'
-
-
-			// Creare l'icona con l'occhio
-
-			const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-			svg.classList.add('flex-grow')
-			svg.setAttribute('width', '64')
-			svg.setAttribute('height', '64')
-			svg.setAttribute('fill', 'currentColor')
-			svg.setAttribute('class', 'bi bi-eye-slash')
-			svg.setAttribute('viewBox', '0 0 16 16')
-
-			const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-			path1.setAttribute(
-				'd',
-				'M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z'
-			)
-
-			const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-			path2.setAttribute(
-				'd',
-				'M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z'
-			)
-
-			const path3 = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-			path3.setAttribute(
-				'd',
-				'M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z'
-			)
-
-			svg.appendChild(path1)
-			svg.appendChild(path2)
-			svg.appendChild(path3)
-			const popUp = document.getElementById('pop-up');
-			submitButton.appendChild(svg)
-			submitButton.addEventListener(('click'), () => {
-				popUp?.classList.remove('hidden');
+		const isAuth = article?.dataset.authentication
+	
+		if (isAuth === 'true') {
+			const blurred = document.getElementsByClassName('blur-lg')
+			Array.from(blurred).map((box: any) => {
+				box.classList.add('blur-none')
+				box.classList.remove('blur-lg')
 			})
-
-			eyeContainer.appendChild(submitButton)
-
-			// Aggiungere il form e il box blurrato al container
-			container.appendChild(box)
-			container.appendChild(eyeContainer)
-
-			// Aggiungere il container al DOM
-			article!.appendChild(container)
-			// Aggiungere il form
-		})
-	}
-</script>
+		}
+	
+		if (isAuth === 'false') {
+			const blurred = document.getElementsByClassName('blur-lg')
+			Array.from(blurred).map((box: any) => {
+				const container = box.cloneNode(false);
+				box.classList.add('z-0');
+				
+				// CREATE THE MAIN CONTAINER
+				container.classList.add('relative','flex')
+				container.classList.remove('blur-lg')
+	
+				// CREATE THE EYE CONTAINER
+				const eyeContainer = document.createElement('div')
+				eyeContainer.classList.add(
+					'p-2',
+					'absolute',
+					'top-1/3',
+					'left-1/2',
+					'transform',
+					'-translate-x-1/2',
+					'-translate-y-1/3',
+					'flex',
+					'flex-col',
+					'justify-center',
+					'items-center',
+					'gap-4',
+					'z-10'
+				)
+	
+				// CREATE OF THE BUTTON AND IMPLEMENTED THE CLASSES
+				const submitButton = document.createElement('button')
+				submitButton.classList.add(
+					'flex',
+					'flex-col',
+					'items-center',
+					'justify-center'
+					)
+				submitButton.type = 'submit'
+				submitButton.textContent = 'Suscríbete a la newsletter para desbloquear el contenido'
+	
+				// CREATED THE EYES SVG
+				const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+				svg.classList.add('flex-grow')
+				svg.setAttribute('width', '64')
+				svg.setAttribute('height', '64')
+				svg.setAttribute('fill', 'currentColor')
+				svg.setAttribute('class', 'bi bi-eye-slash')
+				svg.setAttribute('viewBox', '0 0 16 16')
+	
+				const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+				path1.setAttribute(
+					'd',
+					'M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z'
+				)
+	
+				const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+				path2.setAttribute(
+					'd',
+					'M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z'
+				)
+	
+				const path3 = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+				path3.setAttribute(
+					'd',
+					'M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z'
+				)
+	
+				// APPEND THE PATH TO THE SVG TO CREATE A UNIQUE COMPONENT
+				svg.appendChild(path1)
+				svg.appendChild(path2)
+				svg.appendChild(path3)
+	
+				// GETTING THE POP-UP COMPONENT AND IMPLEMENTED FUNCTIONS TO THE BUTTON TO CLOSE THE POP-UP
+				const popUp = document.getElementById('pop-up');
+				submitButton.appendChild(svg)
+				submitButton.addEventListener(('click'), () => {
+					popUp?.classList.remove('hidden');
+				})
+	
+				// APPEND THE BUTTON TO THE EYE CONTAINER
+				eyeContainer.appendChild(submitButton)
+	
+				const parent = box.parentNode;
+				parent.insertBefore(container, box.nextSibling);
+	
+				// APPEND THE BOX AND EYE CONTAINER TO THE MAIN CONTAINER
+				container.appendChild(box)
+				container.appendChild(eyeContainer)
+	
+				// APPEND THE CONTAINER TO THE ARTICLE
+			})
+		}
+	</script>
