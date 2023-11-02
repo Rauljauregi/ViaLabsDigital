@@ -13,13 +13,15 @@ const URL = Astro.url.href
 		<li>
 			<a
 				href={`https://twitter.com/intent/tweet?text=${message + ' ' + URL}`}
-				aria-label='Share on Twitter'><TwitterColorIcon /></a
+				aria-label='Share on Twitter'
+				target='_blank'><TwitterColorIcon /></a
 			>
 		</li>
 		<li>
 			<a
 				href={`https://www.linkedin.com/shareArticle?mini=true&url=${URL}`}
 				aria-label='Share on LinkedIn'
+				target='_blank'
 			>
 				<LinkedinIcon /></a
 			>

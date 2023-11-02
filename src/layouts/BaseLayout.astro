@@ -23,26 +23,30 @@ let confirm = ''
 const auth = getAuth(app)
 let isAuthenticated = false
 if (Astro.cookies.has('session')) {
-	const sessionCookie = Astro.cookies.get('session')?.value
-	const decodedCookie = await auth.verifySessionCookie(sessionCookie!)
-	const user = await auth.getUser(decodedCookie.uid)
-
-	if (user) {
-		const email = await getUserMail(user.uid)
-		await mailerlite.subscribers
-			.find(email.get('email'))
-			.then((response) => {
-				console.log(response.data)
-				if(response.data.data.status === 'unconfirmed'){
-					confirm = 'not confirmed'
-				}
-			})
-			.catch((error) => {
-				if (error.response) console.log(error.response.data)
-			})
+		try {
+		const sessionCookie = Astro.cookies.get('session')?.value
+		const decodedCookie = await auth.verifySessionCookie(sessionCookie!)
+		const user = await auth.getUser(decodedCookie.uid)
+		if (user) {
+			const email = await getUserMail(user.uid)
+			await mailerlite.subscribers
+				.find(email.get('email'))
+				.then((response) => {
+					console.log(response.data)
+					if(response.data.data.status === 'unconfirmed'){
+						confirm = 'not confirmed'
+					}
+				})
+				.catch((error) => {
+					if (error.response) console.log(error.response.data)
+				})
+		}
+		if (decodedCookie) {
+			isAuthenticated = true
+		}
 	}
-	if (decodedCookie) {
-		isAuthenticated = true
+	catch (error) {
+		isAuthenticated = false
 	}
 }
 
