@@ -38,9 +38,9 @@ const filterPosts = posts.filter(
 ---
 
 <BaseLayout title={capitalized}>
-	<div class='flex justify-start items-center gap-2'>
+	<div class='flex flex-col md:flex-row justify-start items-center gap-2 title'>
 		<Shape />
-		<h1 class='text-5xl font-semibold tracking-wide first-letter:uppercase'>
+		<h1 class='text-3xl lg:text-5xl font-semibold tracking-wide text-center md:text-left'>
 			{unsluglifyNameCategory}
 		</h1>
 	</div>

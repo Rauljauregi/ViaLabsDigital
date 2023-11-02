@@ -16,13 +16,13 @@ const posts = await getPosts(MAX_POSTS);
 >
 
 
-	<div class='flex justify-start items-center gap-2 title'>
+	<div class='flex flex-col md:flex-row justify-start items-center gap-2 title'>
 		<Shape />
 		<div class="flex flex-col gap-2 w-3/4">
-			<h1 class='text-4xl lg:text-5xl font-semibold tracking-wide'>
+			<h1 class='text-3xl lg:text-5xl font-semibold tracking-wide text-center md:text-left'>
 				Blog y Newsletter sobre Machine Learning
 			</h1>
-			<p class="text-lg">Un email sobre machine learning cada viernes</p>
+			<p class="text-lg text-center md:text-left">Un email sobre machine learning cada viernes</p>
 		</div>
 	</div>
 	<ListCategories />
