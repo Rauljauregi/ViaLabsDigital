@@ -1,12 +1,13 @@
-// List of categories for blog posts
+// Categorias Blog
 export const CATEGORIES = [
    'Inteligencia Artificial', 
    'Desarrollo web y SEO', 
    'Innovación'
 ] as const
 
+// Categorias Newsletter
 export const NEWSLETTER = [
-   'newsletter_1', 
-   'newsletter_2', 
-   'newsletter_3'
+   'Inteligencia Artificial', 
+   'Machine Learning', 
+   'Deep Learning'
 ] as const

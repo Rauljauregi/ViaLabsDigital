@@ -47,16 +47,16 @@ export default defineConfig({
             required: true,
             options: [
               {
-                value: 'Desarrollo web y SEO',
-                label: 'Desarrollo web y SEO',
-              },
-              {
                 value: 'Inteligencia Artificial',
                 label: 'Inteligencia Artificial',
               },
               {
-                value: 'Innovación',
-                label: 'Innovación',
+                value: 'Machine Learning',
+                label: 'Machine Learning',
+              },
+              {
+                value: 'Deep Learning',
+                label: 'Deep Learning',
               },
             ],
           },
@@ -91,6 +91,10 @@ export default defineConfig({
                 value: 'Innovaciòn',
                 label: 'Innovación',
               },
+              {
+                value: 'LLM',
+                label: 'LLM',
+              }
             ],
           },
           {
@@ -128,16 +132,16 @@ export default defineConfig({
             required: true,
             options: [
               {
-                value: 'newsletter_1',
-                label: 'newsletter_1',
+                value: 'Inteligencia Artificial',
+                label: 'Inteligencia Artificial',
               },
               {
-                value: 'newsletter_2',
-                label: 'newsletter_2',
+                value: 'Machine Learning',
+                label: 'Machine Learning',
               },
               {
-                value: 'newsletter_3',
-                label: 'newsletter_3',
+                value: 'Deep Learning',
+                label: 'Deep Learning',
               },
             ],
           },
@@ -172,6 +176,10 @@ export default defineConfig({
                 value: 'Innovaciòn',
                 label: 'Innovación',
               },
+              {
+                value: 'LLM',
+                label: 'LLM',
+              }
             ],
           },
           {
