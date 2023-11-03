@@ -106,7 +106,7 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
 				}
 			} else {
 				try {
-					/* GETTING CUSTOM TOKEN AND REDIRECT TO LOGIN*/
+					/* GETTING CUSTOM TOKEN AND REDIRECT TO LOGIN */
 					const customToken = await getCustomToken(email);
 					return redirect(`/register?customTokenAlreadyPresent=${customToken}&location=${location}`)
 				} catch (err) {
