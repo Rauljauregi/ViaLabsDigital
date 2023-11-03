@@ -136,7 +136,7 @@ if(sessionCookie){
 			// GETTING THE CUSTOM TOKEN ALREADY PRESENT FROM THE URL
 			const customTokenAlreadyPresent = url.searchParams.get('customTokenAlreadyPresent')
 			// GETTING THE LOCATION FROM THE URL
-			const location = url.searchParams.get('location');
+			const location = url.searchParams.get('location') || '/';
 			// LOGGING THE LOCATION
 			console.log("register location is:", location);
 

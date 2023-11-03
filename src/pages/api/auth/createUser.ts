@@ -97,7 +97,7 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
 				try {
 					const customToken = await getCustomToken(email);
 					await createSubscriberOnMailerLite(email)
-					return redirect(`/register?customToken=${customToken}6location=${location}`)
+					return redirect(`/register?customToken=${customToken}&location=${location}`)
 				} catch (err) {
 					console.log('Error to Sign in with custom token :', err)
 					return new Response('Something went wrong', {
