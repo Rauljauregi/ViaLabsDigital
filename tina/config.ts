@@ -94,6 +94,42 @@ export default defineConfig({
               {
                 value: 'LLM',
                 label: 'LLM',
+              },
+              {
+                value: 'Educación',
+                label: 'Educación',
+              },
+              {
+                value: 'Política',
+                label: 'Política',
+              },
+              {
+                value: 'Eventos',
+                label: 'Eventos',
+              },
+              {
+                value: 'Innovación',
+                label: 'Innovación',
+              },
+              {
+                value: 'Ética',
+                label: 'Ética',
+              },
+              {
+                value: 'Empresas',
+                label: 'Empresas',
+              },
+              {
+                value: 'Aplicaciones',
+                label: 'Aplicaciones',
+              },
+              {
+                value: 'Investigación',
+                label: 'Investigación',
+              },
+              {
+                value: 'Tendencias',
+                label: 'Tendencias',
               }
             ],
           },
@@ -179,6 +215,42 @@ export default defineConfig({
               {
                 value: 'LLM',
                 label: 'LLM',
+              },
+              {
+                value: 'Educación',
+                label: 'Educación',
+              },
+              {
+                value: 'Política',
+                label: 'Política',
+              },
+              {
+                value: 'Eventos',
+                label: 'Eventos',
+              },
+              {
+                value: 'Innovación',
+                label: 'Innovación',
+              },
+              {
+                value: 'Ética',
+                label: 'Ética',
+              },
+              {
+                value: 'Empresas',
+                label: 'Empresas',
+              },
+              {
+                value: 'Aplicaciones',
+                label: 'Aplicaciones',
+              },
+              {
+                value: 'Investigación',
+                label: 'Investigación',
+              },
+              {
+                value: 'Tendencias',
+                label: 'Tendencias',
               }
             ],
           },
