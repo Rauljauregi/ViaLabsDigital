@@ -32,8 +32,8 @@ import FormMailerLite from "./FormMailerLite.astro"
 <script>
    const close = document.getElementById('close-pop-up');
    const popUp = document.getElementById('pop-up');
-   close.addEventListener('click', () => {
+   close!.addEventListener('click', () => {
       console.log(popUp);
-      popUp.classList.add('hidden');
+      popUp!.classList.add('hidden');
    })
 </script>

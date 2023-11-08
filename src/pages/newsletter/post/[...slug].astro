@@ -75,30 +75,62 @@ const { Content, headings, remarkPluginFrontmatter } = await post!.render()
 
 <script>
 	const article = document.getElementById('blog-container')
-		const isAuth = article?.dataset.authentication
+	const isAuth = article?.dataset.authentication
+	const table = document.getElementsByClassName('mlContentTable');
+
+	for (let i = 0; i < table.length; i++) {
+	table[i].removeAttribute('style');
+	table[i].classList.add('dark:border-0')
+    const rows = table[i].querySelectorAll('tr'); // Seleziona tutti i <tr> all'interno della tabella
+	 const body = table[i].querySelectorAll('tbody'); // Seleziona tutti i <tr> all'interno della tabella
 	
-		if (isAuth === 'true') {
-			const blurred = document.getElementsByClassName('blur-lg')
-			Array.from(blurred).map((box: any) => {
-				box.classList.add('blur-none')
-				box.classList.remove('blur-lg')
-			})
-		}
+
+    // Itera attraverso ciascun <tr> all'interno della tabella corrente
+    for (let j = 0; j < rows.length; j++) {
+		const row = rows[j];
+		const cells = rows[j].querySelectorAll('th, td');
+      // Aggiungi la classe 'even' ai <tr> pari e 'odd' ai dispari
+      if (j % 2 === 0) {
+			row.setAttribute('style', 'background-color: #c8cbcf !important');
+			row.classList.add('px-4')
+			if (cells.length > 0 ) { // Cambia il colore del primo <th>
+		  for(let k = 0; k < cells.length; k++){
+			cells[k].removeAttribute('style');
+			cells[k].setAttribute('style', 'padding: 1rem')
+			cells[k].classList.add('bg-white','dark:bg-[#4b5563]', 'p-4','px-4');
+		  }
+      }
+      } else {
+        rows[j].classList.add('dark:bg-[#616e80]','text-[#4b5563]','px-4');
+      }
+				if (cells.length > 0 && cells[0].tagName.toLowerCase() === 'th') {
+        cells[0].classList.add('dark:bg-[#38414d]',) // Cambia il colore del primo <th>
+      }
+    }
+  }
 	
-		if (isAuth === 'false') {
-			const blurred = document.getElementsByClassName('blur-lg')
-			Array.from(blurred).map((box: any) => {
-				const container = box.cloneNode(false);
-				box.classList.add('z-0');
-				
-				// CREATE THE MAIN CONTAINER
-				container.classList.add('relative','flex')
-				container.classList.remove('blur-lg')
+	if (isAuth === 'true') {
+		const blurred = document.getElementsByClassName('blur-lg')
+		Array.from(blurred).map((box: any) => {
+			box.classList.add('blur-none')
+			box.classList.remove('blur-lg')
+		})
+	}
 	
-				// CREATE THE EYE CONTAINER
-				const eyeContainer = document.createElement('div')
-				eyeContainer.classList.add(
-					'p-2',
+	if (isAuth === 'false') {
+		const blurred = document.getElementsByClassName('blur-lg')
+		Array.from(blurred).map((box: any) => {
+		const container = box.cloneNode(false);
+		box.classList.add('z-0');
+			
+		// CREATE THE MAIN CONTAINER
+		container.classList.add('relative','flex')
+		container.classList.remove('blur-lg')
+	
+		// CREATE THE EYE CONTAINER
+		const eyeContainer = document.createElement('div')
+		eyeContainer.classList.add(
+			'p-2',
 					'absolute',
 					'top-1/3',
 					'left-1/2',
@@ -179,5 +211,11 @@ const { Content, headings, remarkPluginFrontmatter } = await post!.render()
 	
 				// APPEND THE CONTAINER TO THE ARTICLE
 			})
-		}
+	}
 	</script>
+
+	<style>
+		td > p {
+			padding-right: 20px;
+		}
+	</style>
