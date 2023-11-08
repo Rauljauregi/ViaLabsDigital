@@ -32,13 +32,13 @@ const isActive =
 	</a>
 	<nav
 		id='nav-${unsluglifyNameCategory}'
-		class='hidden absolute mt-1.5 bg-white text-black shadow-lg rounded-lg -left-6 p-2'
+		class='hidden absolute mt-1.5 bg-white text-black shadow-lg rounded-lg -left-6 p-2 w-max z-10'
 	>
 		<ul>
 			{
 				newsletterCategories.map((category) => (
 				<a href={sluglify(`/newsletter/${category}`)}>
-					<li class="hover:bg-slate-300 rounded-lg px-4 py-2">
+					<li class="hover:bg-slate-300 rounded-lg px-4 py-2  transition-all duration-300">
 						{category}
 					</li>
 				</a>
