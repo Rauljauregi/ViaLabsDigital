@@ -51,7 +51,7 @@
 		"@astrojs/tailwind": "^5.0.2",
 		"@pagefind/default-ui": "^0.12.0",
 		"@tailwindcss/typography": "0.5.9",
-		"@typescript-eslint/parser": "^6.5.0",
+		"@typescript-eslint/parser": "^6.11.0",
 		"clsx": "2.0.0",
 		"eslint": "^8.48.0",
 		"eslint-plugin-astro": "^0.29.0",
