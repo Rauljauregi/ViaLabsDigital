@@ -15,14 +15,16 @@ const NewsletterDirectoryPath = path.join(__dirname, 'src', 'content', 'newslett
 const files = fs.readdirSync(directoryPath);
 const newsletterFiles = fs.readdirSync(NewsletterDirectoryPath);
 const blogUrl = 'https://mindfulml.vialabsdigital.com/post';
-const newsletterUrl = 'https://mindfulml.vialabsdigital.com/newsletter/post'
+const newsletterUrl = 'https://mindfulml.vialabsdigital.com/newsletter/post';
+
 const blogUrls = files.map((file) => {
   const fileName = file.split('.')[0];
   return `${blogUrl}/${fileName}`;
 });
+
 const newsletterUrls = newsletterFiles.map((file) => {
-	const fileName = file.split('.')[0];
-	return `${newsletterUrl}/${fileName}`;
+	const newsletterfileName = file.split('.')[0];
+	return `${newsletterUrl}/${newsletterfileName}`;
  });
 
 
