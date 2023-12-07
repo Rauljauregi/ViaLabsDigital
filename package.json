@@ -35,6 +35,7 @@
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.2.1",
+		"@astrojs/partytown": "^2.0.2",
 		"@astrojs/rss": "3.0.0",
 		"@astrojs/vercel": "^5.0.2",
 		"@mailerlite/mailerlite-nodejs": "^1.2.0",

@@ -6,6 +6,7 @@ import { remarkReadingTime } from './src/utils/readTime.ts'
 import vercel from '@astrojs/vercel/serverless';
 import { fileURLToPath } from 'node:url';
 import * as path from 'path';
+import partytown from '@astrojs/partytown'
 
 const __filename = fileURLToPath(import.meta.url);
 console.log("__filename is : ",__filename);
@@ -61,6 +62,11 @@ export default defineConfig({
 			priority: 0.5,
 			changefreq: 'weekly'
 		 }),
+		partytown({
+			config: {
+				forward: ["dataLayer.push"],
+			},
+		}),
 		tailwind()
 	]
 })
