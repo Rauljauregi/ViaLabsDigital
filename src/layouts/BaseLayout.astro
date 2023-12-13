@@ -46,11 +46,13 @@ if (Astro.cookies.has('session')) {
 		}
 	}
 	catch (error) {
+		console.log("error is:",error);
+		await Astro.cookies.delete('session', {
+		path: '/'
+	})
 		isAuthenticated = false
 	}
 }
-
-
 
 if (confirmation === 'needed') {
 	confirm = 'not confirmed'
