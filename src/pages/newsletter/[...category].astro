@@ -10,7 +10,6 @@ const { category } = Astro.params
 
 
 const unsluglifyNameCategory = unsluglify(category!.toLowerCase());
-console.log(unsluglifyNameCategory);
 
 function capitalizeFirstLetter(string: string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
@@ -31,10 +30,6 @@ const posts = await getNewsletterPosts();
 const filterPosts = posts.filter(
 	(post : any) => post.data.category.toLowerCase() === unsluglifyNameCategory
 );
-
-filterPosts.forEach((post) => {
-	console.log(post.data.category.toLowerCase());
-})
 ---
 
 <BaseLayout title={capitalized}>
