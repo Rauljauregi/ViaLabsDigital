@@ -4,9 +4,10 @@ import ListPosts from '@/components/newsletter/ListPosts'
 import Shape from '@/components/icons/Shape'
 import BaseLayout from '@/layouts/BaseLayout'
 import { getNewsletterPosts } from '@/utils'
+import ListCategoriesNewsletter from '@/components/newsletter/ListCategoriesNewsletter'
 
 export const prerender = false
-const MAX_POSTS = 5 // max number of posts to show on the home page
+const MAX_POSTS = 10 // max number of posts to show on the home page
 const posts = await getNewsletterPosts(MAX_POSTS)
 ---
 
@@ -17,11 +18,11 @@ const posts = await getNewsletterPosts(MAX_POSTS)
 	<div class='flex flex-col md:flex-row justify-start items-center gap-2 title'>
 		<Shape />
 		<h1 class='text-3xl lg:text-5xl font-semibold tracking-wide text-center md:text-left'>
-			Mindful ML - Cada viernes un email sobre IA
+			Newsletter - Mindful ML
 		</h1>
 	</div>
 
-	<ListCategories />
+	<ListCategoriesNewsletter />
 
 	<div>
 		<h2 class='text-lg font-medium tracking-wide text-end'>Último Artículo</h2>

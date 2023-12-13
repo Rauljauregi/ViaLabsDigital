@@ -19,7 +19,11 @@ const { posts, FirstBig = false } = Astro.props
 >
 	{
 		posts
-			.sort((a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate))// Ordina i post in base alla data di pubblicazione (dall'ultimo al primo)
+			.sort((a, b) => {
+				const dateA: Date = new Date(b.data.pubDate);
+				const dateB: Date = new Date(a.data.pubDate);
+				return dateA.getTime() - dateB.getTime();
+			})// Ordina i post in base alla data di pubblicazione (dall'ultimo al primo)
 			.map(async (post) => {
 				const { remarkPluginFrontmatter } = await post.render()
 

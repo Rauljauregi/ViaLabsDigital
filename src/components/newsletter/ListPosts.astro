@@ -1,5 +1,5 @@
 ---
-import type { CollectionEntry } from 'astro:content'
+import { getCollection, type CollectionEntry } from 'astro:content'
 import PostCard from '@/components/newsletter/PostCard'
 import { cn } from '@/utils'
 
@@ -7,7 +7,7 @@ type Props = {
 	posts: CollectionEntry<'newsletter'>[]
 	FirstBig?: boolean
 }
-
+/* const allNewsletterPosts = await getCollection('newsletter'); */
 const { posts, FirstBig = false } = Astro.props
 ---
 
@@ -18,7 +18,11 @@ const { posts, FirstBig = false } = Astro.props
 	)}>
 		{
 		posts
-			.sort((a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate))
+			.sort((a, b) => {
+				const dateA: Date = new Date(b.data.pubDate);
+				const dateB: Date = new Date(a.data.pubDate);
+				return dateA.getTime() - dateB.getTime();
+			})
 			.map(async (post) => {
 				const { remarkPluginFrontmatter } = await post.render()
 

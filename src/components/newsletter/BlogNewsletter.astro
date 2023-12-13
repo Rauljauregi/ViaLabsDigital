@@ -1,16 +1,15 @@
 ---
-import { cn, sluglify } from '@/utils'
-import { getNewsletterCategories } from '@/utils'
+import { cn, getCategories, sluglify } from '@/utils'
 
-const { name = 'Newsletter', activeCategory } = Astro.props
+const { name = 'Blog', activeCategory } = Astro.props
 const currentPath = Astro.url.pathname
 const unsluglifyNameCategory = sluglify(name.toLowerCase())
 
-const newsletterCategories = await getNewsletterCategories()
+const newsletterCategories = await getCategories()
 
 const isActive =
 	activeCategory?.toLocaleLowerCase() === unsluglifyNameCategory ||
-	(currentPath === '/newsletter' && name === 'Newsletter')
+	(currentPath === '/' && name === 'Blog')
 ---
 
 <div
@@ -21,7 +20,7 @@ const isActive =
 	onmouseout="document.getElementById('nav-${unsluglifyNameCategory}').classList.add('hidden')"
 >
 	<a
-		href={name === 'Newsletter' ? '/newsletter' : sluglify(`/newsletter/${unsluglifyNameCategory}`)}
+		href={name === 'Blog' ? '/' : sluglify(`/${unsluglifyNameCategory}`)}
 		class={cn(
 			`text-gray-600  dark:text-gray-300 tracking-wide pb-2.5 first-letter:uppercase font-medium hover:text-gray-800 border-b-2 border-opacity-0 dark:border-opacity-0 border-black dark:border-white dark:hover:border-white hover:border-opacity-100 transition-colors duration-150 ease-linear`,
 			isActive &&
