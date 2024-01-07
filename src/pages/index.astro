@@ -3,10 +3,11 @@ import ListCategories from '@/components/ListCategories'
 import ListPosts from '@/components/ListPosts'
 import Shape from '@/components/icons/Shape'
 import BaseLayout from '@/layouts/BaseLayout'
-import { getPosts } from '@/utils'
+import { getNewsletterPosts, getPosts } from '@/utils'
 
 const MAX_POSTS = 5 // max number of posts to show on the home page
 const posts = await getPosts(MAX_POSTS);
+const newsletters = await getNewsletterPosts(MAX_POSTS);
 
 ---
 
@@ -29,7 +30,7 @@ const posts = await getPosts(MAX_POSTS);
 
 	<div>
 		<h2 class='text-lg font-medium tracking-wide text-end'>Último Artículo</h2>
-		<ListPosts FirstBig={true} posts={posts} />
+		<ListPosts FirstBig={true} posts={posts} newsletters={newsletters}/>
 	</div>
 </BaseLayout>
 

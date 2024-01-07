@@ -5,10 +5,13 @@ import { cn } from '@/utils'
 
 type Props = {
 	posts: CollectionEntry<'blog'>[]
+	newsletters: CollectionEntry<'newsletter'>[]
 	FirstBig?: boolean
 }
 
-const { posts, FirstBig = false } = Astro.props
+const { newsletters, posts, FirstBig = false } = Astro.props
+
+const toRead: CollectionEntry<'blog' | 'newsletter'>[]  = [...posts, ...newsletters]
 ---
 
 <section
@@ -18,7 +21,7 @@ const { posts, FirstBig = false } = Astro.props
 	)}
 >
 	{
-		posts
+		toRead
 			.sort((a, b) => {
 				const dateA: Date = new Date(b.data.pubDate);
 				const dateB: Date = new Date(a.data.pubDate);
