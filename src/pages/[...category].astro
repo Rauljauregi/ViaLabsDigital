@@ -2,7 +2,7 @@
 
 // IMPORT NECESSARY COMPONENTS AND UTILITIES
 import BaseLayout from '@/layouts/BaseLayout' // Base layout component
-import ListPosts from '@/components/ListPosts' // Component to list posts
+import ListPost from '@/components/ListPost' // Component to list posts
 import ListCategories from '@/components/ListCategories' // Component to list categories
 import Shape from '@/components/icons/Shape' // Shape icon component
 import { sluglify, unsluglify, getCategories, getPosts } from '@/utils' // Utility functions
@@ -46,5 +46,5 @@ const filterPosts = posts.filter(
 	</div>
 
 	<ListCategories activeCategory={category} />
-	<ListPosts posts={filterPosts} />
+	<ListPost posts={filterPosts} />
 </BaseLayout>
