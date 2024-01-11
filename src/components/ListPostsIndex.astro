@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import PostCard from '@/components/PostCard'
+import NewsletterPostCard from '@/components/newsletter/PostCard'
 import { cn } from '@/utils'
 
 type Props = {
@@ -15,7 +16,7 @@ const { newsletters, posts, FirstBig = false } = Astro.props
 const toRead: CollectionEntry<'blog' | 'newsletter'>[]  = [...posts, ...newsletters]
 ---
 <>
-<h2 class='text-2xl font-medium tracking-wide text-start'>Blog Posts</h2>
+<h2 class='text-2xl font-medium tracking-wide text-start my-4'>Newsletters Posts</h2>
 <section
 	class={cn(
 		`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 mt-3`,
@@ -23,7 +24,7 @@ const toRead: CollectionEntry<'blog' | 'newsletter'>[]  = [...posts, ...newslett
 	)}
 >
 	{
-		posts
+		newsletters
 			.sort((a, b) => {
 				const dateA: Date = new Date(b.data.pubDate);
 				const dateB: Date = new Date(a.data.pubDate);
@@ -33,7 +34,7 @@ const toRead: CollectionEntry<'blog' | 'newsletter'>[]  = [...posts, ...newslett
 				const { remarkPluginFrontmatter } = await post.render()
 
 				return (
-					<PostCard
+					<NewsletterPostCard
 						data={post.data}
 						slug={post.slug}
 						readTime={remarkPluginFrontmatter.minutesRead}
@@ -56,7 +57,7 @@ const toRead: CollectionEntry<'blog' | 'newsletter'>[]  = [...posts, ...newslett
 	} -->
 </section>
 <hr>
-<h2 class='text-2xl font-medium tracking-wide text-start my-4'>Newsletters Posts</h2>
+<h2 class='text-2xl font-medium tracking-wide text-start my-4'>Blog Posts</h2>
 <section
 	class={cn(
 		`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 mt-3`,
@@ -64,7 +65,7 @@ const toRead: CollectionEntry<'blog' | 'newsletter'>[]  = [...posts, ...newslett
 	)}
 >
 	{
-		newsletters
+		posts
 			.sort((a, b) => {
 				const dateA: Date = new Date(b.data.pubDate);
 				const dateB: Date = new Date(a.data.pubDate);
