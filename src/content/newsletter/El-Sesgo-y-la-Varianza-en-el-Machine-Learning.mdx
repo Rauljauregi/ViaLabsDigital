@@ -16,21 +16,21 @@ tags:
 
 Esta semana, he decidido sumergirnos en las profundidades de un concepto crucial en el mundo del machine learning: el sesgo (bias) y la varianza (variance), inspirándome en la especialización en Deep Learning de Andrew Ng. Para aquellos con una base sólida en machine learning, este tema no solo es fundamental sino también intrincado, ofreciendo capas de complejidad que incluso los practicantes más experimentados encuentran desafiantes.
 
-El Equilibrio entre Sesgo y Varianza: Un Arte Delicado
+## El Equilibrio entre Sesgo y Varianza: Un Arte Delicado
 
 El sesgo y la varianza son dos caras de una moneda que, al intentar equilibrar, definimos la eficacia de nuestros modelos de machine learning. El bias hace referencia a errores sistemáticos en las predicciones, donde un modelo simple puede no capturar la verdadera relación entre los datos debido a suposiciones simplistas. La variance, por otro lado, describe cuánto varían las predicciones del modelo ante nuevos datos, reflejando un modelo excesivamente complejo que memoriza los datos de entrenamiento, pero falla en generalizar.
 
-La Evolución del Trade-off
+## La Evolución del Trade-off
 
 Históricamente, el trade-off (o compromiso) entre sesgo y varianza ha sido un pilar en la teoría del machine learning, guiando la selección de modelos para evitar el subajuste (underfitting) y el sobreajuste (overfitting). Sin embargo, en la era del Deep Learning, este equilibrio ha evolucionado. Las arquitecturas profundas, con su capacidad para aprender representaciones jerárquicas de los datos, han demostrado ser menos susceptibles a este compromiso de manera tradicional, aunque los conceptos de sesgo y varianza siguen siendo críticos para comprender su funcionamiento y limitaciones.
 
-Diagnóstico a través del Error de Entrenamiento y Validación
+## Diagnóstico a través del Error de Entrenamiento y Validación
 
 Una forma práctica de evaluar el sesgo y la varianza en nuestros modelos es a través del análisis del error en el conjunto de entrenamiento y el conjunto de validación. Por ejemplo, considera un algoritmo de clasificación de imágenes de gatos donde logras un error de entrenamiento del 1% pero un error de validación del 11%. Este escenario indica una alta varianza, sugiriendo que el modelo está sobreajustando los datos de entrenamiento y fallando en generalizar a nuevos ejemplos.
 
 Por contraste, si observamos un error de entrenamiento del 15% y un error de validación del 16%, esto sugiere un alto sesgo, indicando que el modelo es demasiado simple para capturar la complejidad subyacente de los datos, incluso antes de considerar su capacidad de generalización.
 
-El Papel de la Complejidad del Modelo
+## El Papel de la Complejidad del Modelo
 
 La selección de la complejidad del modelo juega un papel crucial en la gestión del sesgo y la varianza. Un modelo demasiado simple (por ejemplo, una regresión lineal aplicada a datos no lineales) puede sufrir de alto sesgo, mientras que un modelo excesivamente complejo (como una red neuronal profunda con millones de parámetros para un conjunto de datos pequeño) puede sufrir de alta varianza.
 
@@ -38,25 +38,25 @@ Para ilustrar mejor estos conceptos, consideremos una gráfica típica del trade
 
 ![sesgo y Varianza en Machine Learning](/src/assets/Bias-variance-trade-off-in-machine-learning-This-figure-illustrates-the-trade-off.png)
 
-En el eje horizontal, tenemos la complejidad del modelo, que aumenta de izquierda a derecha.
+La gráfica se compone de tres partes fundamentales:
 
-En el eje vertical, el error de predicción.
+1. Curvas de Error: Observamos dos curvas que representan el error debido al sesgo (en verde) y al error debido a la varianza (en rojo). La curva de sesgo decrece con el aumento de la complejidad del modelo, reflejando cómo los modelos más complejos pueden capturar mejor la estructura de los datos. La curva de varianza, por otro lado, se incrementa con la complejidad del modelo, ya que modelos más complejos tienden a ajustarse en exceso a los datos de entrenamiento y, por lo tanto, su desempeño empeora en datos nuevos.
+2. Áreas de Desempeño (las tres zonas de colores): La gráfica está dividida en tres áreas representando distintas fases de ajuste del modelo:
+   * Subajuste (Underfitting): En la zona azul a la izquierda, los modelos tienen un alto sesgo y baja varianza, lo que significa que son demasiado simples y no capturan la relación subyacente entre las variables.
+   * Sobreajuste (Overfitting): En la zona verde a la derecha, los modelos tienen bajo sesgo y alta varianza, lo que indica que son demasiado complejos y capturan el ruido específico del conjunto de entrenamiento en lugar de la verdadera tendencia de los datos.
+   * Modelo Óptimo: En el centro, donde las curvas de sesgo y varianza se cruzan, hay un rectángulo rojo que señala la zona donde se encuentra el modelo más generalizable y con la complejidad adecuada para lograr el menor error total.
+3. Ejemplos de Ajuste del Modelo: En la parte inferior, se proporcionan tres gráficos para ilustrar ejemplos de subajuste, ajuste correcto y sobreajuste. Estos gráficos muestran cómo un modelo se ajusta a los datos de entrenamiento:
+   * Subajuste: El modelo no logra capturar la tendencia de los datos, resultando en un alto error tanto en entrenamiento como en validación.
+   * Ajuste Correcto (Good Fit): El modelo se ajusta bien a la tendencia subyacente, minimizando el error en ambos conjuntos.
+   * Sobreajuste: El modelo se ajusta demasiado a los datos específicos, incluyendo el ruido, lo que resulta en un bajo error de entrenamiento pero un alto error de validación.
 
-Una curva ascendente representa la varianza: a medida que el modelo se vuelve más complejo, su varianza aumenta.
-
-Una curva descendente representa el sesgo: a medida que aumentamos la complejidad, el sesgo disminuye.
-
-El punto donde estas curvas se cruzan representa el equilibrio óptimo entre sesgo y varianza.
-
-Hacia un Equilibrio Dinámico
+## Hacia un Equilibrio Dinámico
 
 En el contexto actual del machine learning, especialmente con el avance de las técnicas de deep learning, buscar el balance perfecto entre sesgo y varianza requiere un enfoque dinámico y adaptativo. Herramientas como la regularización, el dropout en redes neuronales, y técnicas de ensamble, junto con estrategias de validación cruzada, son esenciales para afinar nuestros modelos.
 
-Conclusión
-
 Entender y equilibrar el sesgo y la varianza es más un arte que una ciencia, requiriendo no solo un conocimiento teórico profundo sino también una intuición desarrollada a través de la práctica y experimentación. A medida que avanzamos en el apasionante mundo del machine learning, estos conceptos siguen siendo tan relevantes como siempre, guiándonos en la creación de modelos que no solo son precisos sino también robustos y generalizables.
 
-Hasta la próxima semana, donde continuaremos desentrañando los misterios del machine learning y sus aplicaciones prácticas.
+Hasta la próxima semana, donde continuaremos desentrañando los misterios del machine learning y sus aplicaciones prácticas. Con  lo de esta semana sí que vas a dejar flipados a tus colegas en la Kupela... 'txotx' ;)
 
 Un saludo,
-Raúl Jáuregui de Mindfulml.vialabsdigital.com
+Raúl Jáuregui de [Mindfulml.vialabsdigital.com]()
