@@ -1,0 +1,77 @@
+---
+title: >-
+  Interpretabilidad vs. Explicabilidad: Desvelando el Enigma del Machine
+  Learning
+description: >-
+  Sumérgete en la fascinante dualidad de Interpretabilidad y Explicabilidad en
+  Machine Learning. Desenreda los secretos de la caja negra y cómo mejorar las
+  habilidades predictivas. ¡Haz clic para explorar el arte de crear modelos de
+  ML transparentes y responsables!
+category: Deep Learning
+pubDate: 2024-01-25T23:00:00.000Z
+heroImage: /src/assets/Interpretabilidad_Explicabilidad.jpg
+tags:
+  - Investigación
+  - Inteligencia Artificial
+---
+
+¡Saludos a los apasionados del Machine Learning!
+
+En este viernes lleno de ilusión, te invito a explorar los secretos más profundos del aprendizaje automático mientras disfrutas de tu café o trifásico. Hoy nos sumergiremos en la fascinante dualidad de la interpretabilidad y la explicabilidad, desentrañando la magia detrás de la caja negra del Machine Learning.
+
+## **Definiciones Fundamentales:**
+
+* Interpretabilidad en Machine Learning:
+  * Definición: La interpretabilidad, como el arte de un mago, permite que aquellos con conocimiento profundo interpreten modelos complejos, como las redes neuronales. Es la capacidad de vincular causa y efecto con precisión, brindando una comprensión clara de cómo las entradas afectan las salidas del modelo. Un acto reservado para aquellos familiarizados con los entresijos de la magia del ML.
+* Explicabilidad en Machine Learning:
+  * Definición: La explicabilidad es como levantar el velo que oculta los actos de magia de un modelo de Machine Learning. Su propósito va más allá, siendo accesible incluso para aquellos no iniciados. Desglosa las complejidades de la función oculta en las redes neuronales, revelando cómo factores específicos impactan las predicciones del modelo. Un acto que busca la claridad para todos, incluso aquellos que no son expertos.
+
+## **Metáforas Mágicas:**
+
+Imagina nuestro modelo de Machine Learning como un mago ambidiestro. Con una mano, provoca asombro a través de la interpretabilidad, destinada a aquellos con conocimientos profundos. Con la otra, revela los secretos de su truco mediante la explicabilidad, accesible incluso para el público no iniciado. Estamos en la primera fila, listos para desvelar el acto con detectores de humo y espejos, preparados para interrelacionar y fijar conceptos.
+
+Cuando hablamos de interpretabilidad, estamos señalando esa habilidad mágica de prever las consecuencias, como adivinar que comer un pimiento del piquillo picante desencadenará una tormenta más tarde. ¡Voilà, interpretable!
+
+La explicabilidad, en cambio, se asemeja a la picante revelación del mago, guiñándonos un ojo y desentrañando los entresijos mientras desglosa los actos de la función oculta. Es como descubrir que desafiar tu paladar con un pimiento del piquillo picante activa misteriosamente un 75% de probabilidad en la predicción de que, a continuación, optarás por tomar leche u otra bebida para aliviar el pico. ¿No es fascinante?
+
+## **Relación con Redes Neuronales:**
+
+En el mar de complejidades, las redes neuronales actúan como el núcleo de nuestra magia. Cuantas más capas (layers), más profundo el misterio. La interpretabilidad se convierte en una danza sofisticada para aquellos que pueden seguir el ritmo de estas capas, mientras que la explicabilidad desentraña los secretos para todos, sin importar cuán intrincadas sean las conexiones neuronales.
+
+## **Navegando por el Mar de Riesgos y Responsabilidades:**
+
+En aguas tranquilas, un modelo con baja interpretabilidad es como pescar sin red: una aventura, pero no un desastre. Sin embargo, en asuntos de vida o muerte, como el diagnóstico de cáncer, queremos que nuestro timonel sea altamente interpretable.
+
+## **En la Torre de Control de la Explicabilidad:**
+
+Piensa en la explicabilidad como el control de tráfico aéreo para aviones de Machine Learning. La explicabilidad nos permite inspeccionar los controles, ajustar las trayectorias y asegurarnos de que no estamos programando sesgos inadvertidamente en nuestros vuelos automáticos.
+
+## **La Técnica detrás de la Magia: Logrando Interpretabilidad y Explicabilidad en los Modelos**
+
+En Machine Learning, la interpretabilidad y la explicabilidad son clave para generar confianza y comprensión en los modelos. Veamos cómo se logran estos aspectos técnicos y cómo medirlos, centrándonos en el entorno de TensorFlow:
+
+### 1. Interpretabilidad: Descifrando las Capas en las Redes Neuronales con TensorFlow
+
+La interpretabilidad en modelos complejos, como las redes neuronales, se puede lograr utilizando herramientas específicas de TensorFlow. Al aprovechar las capacidades de TensorFlow Explainability, podemos explorar y comprender el impacto de las diferentes capas y nodos en la toma de decisiones del modelo. SHAP y LIME también se integran eficazmente con TensorFlow, proporcionando explicaciones locales y destacando la importancia de características específicas.
+
+### 2. Explicabilidad: El Corazón de las Predicciones con TensorFlow
+
+Para desentrañar la función oculta de las redes neuronales, TensorFlow ofrece funcionalidades como Integrated Gradients y Layer-wise Relevance Propagation (LRP). Estos métodos permiten visualizar cómo las contribuciones de las características se distribuyen a lo largo de las capas del modelo. Complementariamente, Gradient-based Class Activation Mapping (Grad-CAM) brinda una visión detallada de las regiones clave en imágenes, facilitando la comprensión de las predicciones.
+
+### 3. Herramientas y Métricas en TensorFlow
+
+TensorFlow proporciona métricas incorporadas, como la importancia de la característica, que permiten evaluar la interpretabilidad de modelos basados en árboles. Además, métricas específicas del dominio, integradas con TensorFlow, pueden ser empleadas para medir la explicabilidad en contextos particulares, brindando una evaluación más precisa.
+
+La interpretación y explicación de modelos en Machine Learning dependen de su complejidad. Modelos simples, como los basados en árboles o regresión lineal, son más fáciles de entender porque siguen reglas lógicas claras. En cambio, las redes neuronales, al aprender patrones complejos, son más difíciles de interpretar. Sus conexiones internas complican entender cómo toman decisiones. Aunque técnicas como visualización pueden ayudar, la complejidad inherente de las redes neuronales las hace menos comprensibles que modelos simples.
+
+## **Implicaciones Regulatorias y Seguridad:**
+
+La explicabilidad no es solo para entender los modelos por parte de todos, sobre todo es una necesidad para las autoridades y la seguridad del modelo. Un modelo debe ser explicable, especialmente en situaciones críticas como el diagnóstico médico, para garantizar que las decisiones sean comprensibles y justas. Además, la explicabilidad actúa como una barrera contra posibles hackeos, ya que conocer la lógica interna del modelo es esencial para su seguridad.
+
+En ML, interpretar y explicar es una necesidad y una práctica fundamental. Desde las grandes compañías, Microsoft Google, etc. hasta los laboratorios universitarios menos conocidos, hay que estar concienciados y trabajar para levantar las cortinas y dejar que la luz ilumine la función oculta que se desarrolla en este teatro de sombras. Nos jugamos mucho en ello.
+
+Entonces, ¿por qué es importante para todos nosotros? Porque somos parte del público que tiene derecho a entender no solo el resultado del espectáculo de magia de ML, sino también las maniobras que hay detrás del telón.
+
+Y eso es precisamente lo que vamos a seguir explorando en nuestras pildoras de ML semanales. No te pierdas el próximo email del viernes que viene, pues promete ser aún más revelador.
+
+Con curiosidad infinita, te saluda Raúl Jáuregui de Mindfulml.vialabsdigital.com 🎩🤖🔮 ¡Hasta pronto!

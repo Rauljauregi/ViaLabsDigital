@@ -1,0 +1,210 @@
+---
+title: "\U0001F916\U0001F31F ¡Tu IA Personalizada! Los GPTs de OpenAI han llegado"
+description: "Descubre cómo personalizar tu experiencia con AI sin programar. Los GPTs personalizados han llegado. ¡Únete a la newsletter \"Mindful ML\" y transforma ideas en soluciones únicas! \U0001F680\U0001F916"
+category: Inteligencia Artificial
+pubDate: 2023-11-16T23:00:00.000Z
+heroImage: /src/assets/GPTs-personalizados.jpg
+tags:
+  - LLM
+  - Inteligencia Artificial
+  - Aplicaciones
+---
+
+¡Buenos días, entusiasta de la Inteligencia Artificial!
+
+Hoy te traigo una noticia que quizás ya hayas leído o escuchado, pero, como de costumbre, la presentaremos desde un punto de vista diferente al que te han contado. Y es que, en breve, ¡atención!... cada uno podrá tener su propio ChatGPT personalizado. ¡Casi nada!
+
+Hace casi un año, OpenAI lanzó ChatGPT al gran público y desde entonces muchas cosas han cambiado. Entre otras, la empresa ha informado que ahora son 100 millones de usuarios semanales los que utilizan el servicio.
+
+Aunque en mi caso ya venía utilizando ChatGPT con frecuencia, este año ha habido un aumento significativo en las aplicaciones basadas en este LLM (que es lo que es ChatGPT, un *Large Language Model*), y como a todo el mundo, le he encontrado otros mil usos nuevos. Y es que, está habiendo mejoras de todo tipo a pasos agigantados.
+
+**El Arte de Personalizar Tu ChatGPT**
+
+<div class="blur-lg">
+  ```javascript
+  ```
+
+  La fascinante novedad es que ahora la creación de aplicaciones básicas (e incluso no tan básicas) de IA está en manos de los usuarios. Ahora se pueden crear versiones personalizadas de ChatGPT, diseñadas para tareas específicas y adaptadas a necesidades concretas. Y sí, has leído bien: para empezar a modelar tu propio agente de IA no tienes que ser un gurú de la programación, en realidad no necesitas ya ni siquiera programar. Son los GPTs personalizados, que ya lo vas a ver, vas a escuchar hablar de ellos, en todas partes a partir de ahora.
+
+  **Monetizar el ingenio creativo** También van a crear la GPT Store, donde los creadores de GTPs podrán comercializar sus creaciones. Este *marketplace* se convertirá en un punto de encuentro para que las creaciones de los usuarios se puedan adquirir. Si tu GPT personalizado resuelve algún problema concreto, o tiene la habilidad de fascinar de alguna manera a tu público, ¿por qué no recibir dinero por ello? OpenAI abre la posibilidad de vender IA a cualquier persona, (es una herramienta no-code, es decir que no requiere conocimientos de programación).
+
+  Hasta ahora si querías utilizar el potencial de ChatGPT como LLM, y programar una aplicación debías utilizar la API (como sabes es la forma en la que mediante código puedes utilizar las funcionalidades de otro *software*). El uso de esta API de OPenAI es de pago, y hay multitud de empresas, startups y proyectos que se han creado gracias a su uso. Yo mismo lo utilizo con frecuencia y he hecho algunos desarrollos muy interesantes. Pero eso es otra historia que contaremos en otro email.
+
+  Lo que es interesante de este anuncio de la GPT Store, es saber qué va a ocurrir con todos esos servicios, startups, y aplicaciones. En otras palabras ahora cualquier persona sin conocimientos de programación puede crear de manera sencilla una aplicación para la que antes era necesario crear una startup.
+
+  En este primer DevDay (la conferencia de desarrolladores OpenAi en San Francisco), no solo se presentó la GPT Store, sino también una versión turbo de GPT-4, la bajada de precios de acceso a la API, y se hizo público que ChatGPT ya tiene 100 millones de usuarios semanales. ¡Los números hablan por sí solos!
+
+  Lo que hace muy atómico a los GPTs es que cada uno de ellos podrá acceder a navegación web, DALL-E y hasta ejecutar código si se configura para ello. Imagina las aplicaciones que se van a poder crear, desde agendas iteractivas, digitalizador de tickets (OCR), chatbots para los documentos de tu oficina, hasta diseñar imágenes para tus proyectos. Pero hay más: podrán conectarse a servicios externos gracias a alianzas con Canva y Zapier, entre otros. Con lo que realmente el desarrollo de estos servicios estará al alcance de cualquiera.
+
+  **Ética y Transparencia** Una característica que han anunciado es que para asegurar un entorno seguro y confiable, los creadores no tendrán acceso a las conversaciones individuales que los usuarios tengan con sus GPTs.
+
+  Estas son solo pinceladas de lo que está por venir, pero sin duda esta noticia tiene un trasfondo que merece la pena seguir, y te lo contaremos aquí en esta newsletter, para que el bombardeo de noticias de todo tipo, no te impida ver el bosque. Te prometo que cada correo que te envío es una fusión de actualidad y aplicabilidad, seleccionada para ofrecerte valor práctico real, en tu bandeja de entrada, y por solo unos minutos de lectura semanal.
+</div>
+
+A continuación te dejo el video de la apertura de OpenAI DevDay, la primera conferencia para desarrolladores. Por si tienes interés en ampliar toda la información.
+
+<div class="aspect-w-16 aspect-h-9">
+  <iframe class="content-center" src="https://www.youtube.com/embed/U9mJuUkhUzk" width="90%" height="300" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen />
+</div>
+
+Sin más me despido, ¡Hasta la próxima semana! Seguiremos atentos a todas las novedad del fascinante mundo de *Machine Learning*, *Data Science* y *Deep Learning*.
+
+PD1 - ¡Comparte este correo y deja que más gente curiosa se una a nuestra comunidad!
+
+PD2 - ¿Quieres más? El email de la próxima semana ya está más cerca ;) ¡No te lo pierdas! Estará en tu bandeja de entrada el próximo viernes a las 11:00.
+
+Recuerda, ¿Tienes sugerencias, preguntas o simplemente quieres compartir tus ideas? ¡No dudes en responder a este correo! Tu participación es siempre bienvenida.
+
+<hr />
+
+<table role="presentation" bgcolor="#FFFFFF" border="1" bordercolor="#EEEEEE" style="border-collapse: collapse; border: 1px solid #eeeeee" cellpadding="0" cellspacing="0" align="center" width="100%" class="mlContentTable">
+  <tbody>
+    <tr>
+      <th align="left" bgcolor="#F6F6F6" colspan="2" valign="middle" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; border-color: #eeeeee;">
+        <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+          Herramientas
+        </p>
+      </th>
+    </tr>
+
+    <tr class="">
+      <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; border-color: #eeeeee;">
+        <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+          Taskade
+        </p>
+      </td>
+
+      <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; border-color: #eeeeee;">
+        <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+          <a href="https://taskade.com/?via=9f1ck" rel="noopener noreferrer" data-token-index="0" tabindex="0" style="color: #000000; text-decoration: none;">[https://taskade.com?via=9f1ck](https://taskade.com?via=9f1ck)</a>
+        </p>
+      </td>
+    </tr>
+
+    <tr class="striped">
+      <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; background: #f5f5f5; border-color: #eeeeee;">
+        <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+          Notion AI
+        </p>
+      </td>
+
+      <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; background: #f5f5f5; border-color: #eeeeee;">
+        <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+          <a href="https://affiliate.notion.so/a50o0a7tl9z5-4y5a7" rel="noopener noreferrer" data-token-index="0" tabindex="0" style="color: #000000; text-decoration: none;">[https://affiliate.notion.so/a50o0a7tl9z5-4y5a7](https://affiliate.notion.so/a50o0a7tl9z5-4y5a7)</a>
+        </p>
+      </td>
+    </tr>
+
+    <tr class="">
+      <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; border-color: #eeeeee;">
+        <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+          Machine Learning For Absolute Beginners: A Plain English
+          Introduction: 3 (AI, Data Science, Python & Statistics for
+          Beginners)
+        </p>
+      </td>
+
+      <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; border-color: #eeeeee;">
+        <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+          <span class="ml-rte-link-wrapper" style="line-height: 125%;"><a href="https://amzn.to/49jY4KN" style="color: #000000; text-decoration: none;"><u>[https://amzn.to/49jY4KN](https://amzn.to/49jY4KN)</u></a></span>
+        </p>
+      </td>
+    </tr>
+
+    <tr class="striped">
+      <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; background: #f5f5f5; border-color: #eeeeee;">
+        <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+          ChatGPT
+        </p>
+      </td>
+
+      <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; background: #f5f5f5; border-color: #eeeeee;">
+        <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+          <span class="ml-rte-link-wrapper" style="line-height: 125%;"><a href="https://chat.openai.com/" style="color: #000000; text-decoration: none;"><u>[https://chat.openai.com/](https://chat.openai.com/)</u></a></span>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" id="tableBlock-74" width="100%" style="table-layout: fixed;">
+  <tbody>
+    <tr>
+      <td align="center" class="ml-rte-table" style="padding: 0 0 20px 0;">
+        <div class="table-responsive" style="line-height: 125%; display: block; width: 100%; overflow-x: auto; -ms-overflow-style: -ms-autohiding-scrollbar;">
+          <table role="presentation" bgcolor="#FFFFFF" border="1" bordercolor="#EEEEEE" style="border-collapse: collapse; border: 1px solid #eeeeee" cellpadding="0" cellspacing="0" align="center" width="100%" class="mlContentTable">
+            <tbody>
+              <tr>
+                <th align="left" bgcolor="#F6F6F6" colspan="2" valign="middle" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; border-color: #eeeeee;">
+                  <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+                    Noticias de la semana
+                  </p>
+                </th>
+              </tr>
+
+              <tr class="">
+                <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; border-color: #eeeeee;">
+                  <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+                    Prediciendo el tiempo mediante machine learning
+                  </p>
+                </td>
+
+                <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; border-color: #eeeeee;">
+                  <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+                    [https://t.ly/ylTjq](https://t.ly/ylTjq)
+                  </p>
+                </td>
+              </tr>
+
+              <tr class="striped">
+                <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; background: #f5f5f5; border-color: #eeeeee;">
+                  <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+                    ¿Es la IA la respuesta a la agricultura sostenible?
+                  </p>
+                </td>
+
+                <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; background: #f5f5f5; border-color: #eeeeee;">
+                  <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+                    <span class="ml-rte-link-wrapper" style="line-height: 125%;"><a href="https://www.forbes.com/sites/bernardmarr/2023/11/01/the-top-5-artificial-intelligence-trends-for-2024/?sh=4be842962c34" style="color: #000000; text-decoration: none;"><u><span class="ml-rte-link-wrapper" style="line-height: 125%;" /></u></a></span>[https://t.ly/WLUUI](https://t.ly/WLUUI)
+                  </p>
+                </td>
+              </tr>
+
+              <tr class="">
+                <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; border-color: #eeeeee;">
+                  <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+                    Google utiliza el aprendizaje automático para comprender si el
+                    contenido es útil
+                  </p>
+                </td>
+
+                <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; border-color: #eeeeee;">
+                  <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+                    [https://t.ly/sGcs\\](https://t.ly/sGcs\\)\_
+                  </p>
+                </td>
+              </tr>
+
+              <tr class="striped">
+                <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; background: #f5f5f5; border-color: #eeeeee;">
+                  <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+                    La IA generativa y el aprendizaje automático están diseñando el
+                    futuro en estas 9 disciplinas
+                  </p>
+                </td>
+
+                <td width="50%" style="padding: 10px 20px; padding-top: 10; padding-bottom: 10; background: #f5f5f5; border-color: #eeeeee;">
+                  <p style="word-break: break-word; font-family: Helvetica, sans-serif; color: #000000; font-size: 14px; line-height: 125%; margin: 0;">
+                    [https://t.ly/hqsFG](https://t.ly/hqsFG)
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />

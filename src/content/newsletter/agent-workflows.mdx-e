@@ -1,0 +1,56 @@
+---
+title: 'Agent Workflows: La Revolución Silenciosa de la IA que No Puedes Ignorar'
+description: >-
+  Los Agent Workflows están cambiando el desarrollo en el campo de la IA y te
+  cuento por qué son esenciales para el futuro del Machine Learning
+category: Inteligencia Artificial
+pubDate: 2024-04-04T22:00:00.000Z
+heroImage: /src/assets/Agentic-Flow.png
+tags:
+  - Tendencias
+  - Investigación
+  - Aplicaciones
+---
+
+Estimado entusiasta del *machine learning*,
+
+¡Feliz viernes! Con la primavera en pleno esplendor. Esta semana he estado avanzando con un patrón que promete ser parte de la nueva ola en el desarrollo de la IA. Y quiero compartir contigo esta nueva tendencia: los *Agent Workflows* (flujos de trabajo con el patrón de Agente).
+
+Imaginad una orquesta cuyos instrumentos se afinan no solo una vez, sino repetidamente durante una actuación, en búsqueda de la excelencia. Los *Agent Workflows* en AI son justamente eso: iteraciones meticulosas que convierten lo bueno en lo extraordinario.
+
+Todos estamos impresionados con los resultados que proporcionan los *Large Language Models* (LLM, Grandes Modelos de Lenguaje) trabajando en *Zero-shot mode* (modo de una sola inferencia o pregunta), ya que producen resultados en un solo intento, como escribir un ensayo de principio a fin sin ninguna revisión. Esto ya nos parece impresionante y los resultados son increibles.
+
+Desde la liberación de LLaMA-2 como código abierto (*open-source*), hemos sido testigos de un auge sin precedentes en la creación de nuevos\* Large Language Models\* (LLM). Este fenómeno es comparable a una lluvia fértil que transforma un desierto en un oasis de innovación. La comunidad global ha aprovechado la disponibilidad de este modelo para experimentar con técnicas como el *Fine-tuning* y *Retrieval-Augmented Generation* (RAG), personalizando LLMs para adaptarse a necesidades específicas que antes parecían inalcanzables.
+
+El *Fine-tuning* permite ajustar modelos preentrenados con un conjunto de datos más especializado, lo que resulta en un modelo afinado y más alineado con tareas concretas. Imaginad, por ejemplo, un modelo general que, tras ser afinado con datos de literatura clásica, empieza a escribir como si fuera\* Shakespeare\*.
+
+Por otro lado, RAG combina la generación de lenguaje con la recuperación de información, dotando al modelo de la capacidad de consultar una base de datos de conocimientos durante el proceso de generación de texto. Esto significa que si se le pregunta sobre tratamientos médicos recientes, podría buscar y sintetizar información actual para ofrecer una respuesta informada y precisa.
+
+Google, siempre a la vanguardia, ha contribuido a esta ola (noticia de hace unos días) con modelos como GEMM-2 (*Google's Evolutionary Model Maker*), cuya arquitectura de open-source ha facilitado avances significativos en la precisión y funcionalidad de los LLM. Estos modelos están especializados en dominios específicos, lo que les permite generar resultados notablemente superiores en esas áreas. Por ejemplo, un modelo GEMM-2 entrenado en textos legales podría proporcionar asesoramiento jurídico preliminar con una exactitud que antes requeriría de un experto humano.
+
+Este ecosistema en expansión de LLMs, impulsado por la generosidad de la comunidad de código abierto, está allanando el camino para una nueva era de inteligencia artificial más accesible y potente, prometiendo revoluciones en campos desde la atención sanitaria hasta la creatividad artística.
+
+Pero además Andrew Ng, una autoridad en IA, sugiere que la verdadera magia sucede cuando estos LLM se ejecutan en ciclos iterativos, refinando su obra como un escultor con su creación.
+
+Las últimas investigaciones son reveladoras: GPT-3.5 lograba un 48.1% de precisión en *Zero-shot mode*, mientras que GPT-4 llegó al 67.0%. Pero la implementación de un Agent Workflow eleva la precisión de GPT-3.5 ¡hasta un increíble 95.1%!
+
+Te puedo decir que con algunos modelos no tan conocidos se están consiguiendo resultados mucho mejores a los de Open AI (GPT). Y si la temática es más específica, mayor es la diferencia en favor de estso modelos no tan conocidos y que se pueden encontrar en *Huggingface* por ejemplo. En próximas semanas te contaré más sobre esto.
+
+Los patrones de diseño clave para estos workflows que quiero explorar con vosotros son:
+
+1. *Reflection* (Reflexión): La IA examina su trabajo en busca de mejoras.
+2. *Tool Use* (Uso de Herramientas): El LLM utiliza herramientas adicionales para recopilar información o ejecutar acciones.
+3. *Planning* (Planificación): El LLM crea y ejecuta un plan de múltiples pasos para lograr una meta.
+4. *Multi-agent Collaboration* (Colaboración Multiagente): Varios agentes de IA colaboran, compartiendo tareas para encontrar soluciones más eficaces.
+
+![](/src/assets/agentic-pattern-bullets.jpeg)
+
+La próxima semana os contaré más sobre los entresijos de los *Agent Workflows*, y os compartiré mis avances en el curso \*Deep Learning Specialization \*que me van ayudando a entender mejor estos conceptos y cómo los estoy aplicando en mis proyectos de *Machine Learning*.
+
+Y es que  el uso de diferentes LLMs y AI agents están moldeando el futuro de la IA, a una velocidad dificil de expresar. como sabes me toca estar muy al tanto de todos estos cambios. Y puedes beneficiarte, porque cada viernes os traigo un trozo de todo este futuro, directo a vuestro buzón de entrada.
+
+Hasta la próxima semana, donde seguiremos desenredando esta fascinante red de innovación.
+
+Con un saludo tan dinámico como el avance de la IA,
+
+Raúl Jáuregui de Mindfulml.vialabsdigital.com 🌟🚀🧠

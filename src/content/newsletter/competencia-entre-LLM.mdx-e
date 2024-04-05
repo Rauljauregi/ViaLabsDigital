@@ -1,0 +1,45 @@
+---
+title: Batalla entre los Grandes Modelos de Lenguaje (LLM)
+description: >-
+  Conoce más sobre el mundo de los Grandes Modelos de Lenguaje (LLMs) con
+  nuestra última newsletter. Explora cómo Bard de Google desafía a GPT-4 de
+  OpenAI y descubre el impacto que tienen estas innovaciones en el desarrollo de
+  aplicaciones. Mantente actualizado sobre lo último en la IA. Haz click para
+  saber más de esto.
+category: Inteligencia Artificial
+pubDate: 2024-02-15T23:00:00.000Z
+heroImage: /src/assets/Batalla-LLMs.jpg
+tags:
+  - LLM
+  - Inteligencia Artificial
+---
+
+¡Hola! Estamos de vuelta con nuestro encuentro semanal sobre Machine Learning.
+
+Recientemente, un suscriptor me planteó una pregunta intrigante sobre cómo se clasifican los Grandes Modelos de Lenguaje (LLMs), esos gigantes de la inteligencia artificial que a menudo vemos en titulares de noticias. Y más aún, cómo estas clasificaciones indican cuáles son los más avanzados para diferentes tareas.
+
+En esencia, los LLMs, como GPT (el modelo detrás de ChatGPT) y Bard de Google, compiten en una especie de "batalla de chatbots" llamada [Chatbot Arena](https://lmsys.org/blog/2023-05-03-arena/ "Chatbot Arena"). Este es un espacio donde se enfrentan de manera anónima y aleatoria, y los usuarios votan por las respuestas que consideran mejores.
+
+El Chatbot Arena es una plataforma de referencia para los grandes modelos de lenguaje (LLMs) que cuenta con batallas anónimas y aleatorias en las que los usuarios votan por las respuestas que consideran mejores. Esta iniciativa es gestionada por la Organización de Sistemas de Modelos Grandes (LMSYS Org), una organización de investigación abierta fundada por estudiantes y profesores de la Universidad de California en colaboración con UCSD (Universidad de California, San Diego) y CMU (Universidad Carnegie Mellon). El proceso de clasificación se realiza utilizando el [sistema de calificación Elo](https://es.wikipedia.org/wiki/Sistema_de_puntuaci%C3%B3n_Elo "Elo"), ampliamente utilizado en juegos competitivos como el ajedrez, donde cada modelo recibe una puntuación basada en sus resultados en las batallas y el voto de los usuarios. Invitamos a toda la comunidad a unirse a este esfuerzo contribuyendo con nuevos modelos y evaluándolos mediante preguntas y votaciones por sus respuestas favoritas.
+
+Recientemente, Bard de Google (Gemini Pro) ha escalado hasta la tercera posición en esta clasificación, acercándose rápidamente a GPT-4 de OpenAI, [que lidera la tabla](https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard?utm_campaign=The+Batch\&utm_medium=email&_hsmi=293208337&_hsenc=p2ANqtz-_WHycIT9HTykZzpHS9dxfhKkYcL7ov28eMBfNheGnmF_MdA50ulXmGej9er7WAPwyfLKX4zNB2eJZYcHeGZd8jCmb8VA\&utm_content=293208223\&utm_source=hs_email "Arena Elo"). Y modelos de código abierto como Mistral-8x7b-Instruct también están demostrando su valía, compitiendo de igual a igual con los gigantes.
+
+Pero, ¿cuál es el propósito de estos concursos de LLMs? Fundamentalmente, impulsan la innovación y la mejora continua de los modelos mediante la comparación competitiva. Permiten identificar fortalezas y debilidades frente a problemas reales, acelerando así el desarrollo y la adopción de esta tecnología.
+
+A medida que las barreras para crear Grandes Modelos de Lenguaje se desvanecen, parece que están a punto de convertirse en herramientas tan comunes como la conexión a Internet. Y esto plantea preguntas importantes sobre quiénes serán los principales beneficiados en este nuevo panorama.
+
+Las empresas como Meta, que optan por el código abierto, están generando avances notables para la comunidad de IA. Esta estrategia, liderada por figuras como Yann LeCun, es una táctica inteligente cuando te encuentras en desventaja en un mercado dominado por otros. Abrir tu código de pronto te da una ventaja en el mundo de los desarrolladores, lo cual es crucial en este campo altamente competitivo. Los modelos de Meta ahora están adelante en ese campo.
+
+Mientras tanto, gigantes como Google Cloud y Microsoft Azure podrían beneficiarse al ofrecer LLMs propietarios y exclusivos vinculados a sus servicios en la nube.
+
+Pero, ¿qué pasa con las startups? En este mercado en rápida evolución, deben encontrar formas de generar ingresos y establecer barreras competitivas sin desaparecer en el intento. Los pequeños laboratorios poco conocidos, tienen ahora la ventaja de un desarrollo tecnológico más accesible, pero por otro lado la dificultad de un mercado cada vez más competitivo. Como siempre la diferenciación será la clave para su avance.
+
+La competencia por ofrecer los LLMs más avanzados es una gran noticia para todos los que usamos o desarrollamos aplicaciones. La inversión en su mejora, tanto por parte de gigantes como de startups, es una mina de oro que promete un futuro emocionante.
+
+Prepárate para nuestra próxima entrega, donde continuaremos explorando los últimos desarrollos en este emocionante campo.
+
+¡Hasta entonces!, espero haberte aportado alguna cosa nueva con la que dejar flipados a tus colegas, o a esa persona especial que cree que sólo te gusta el fútbol... 😉
+
+¡Saludos!
+
+Raúl Jáuregui de Mindfulml.vialabsdigital.com 🌟📉💻
