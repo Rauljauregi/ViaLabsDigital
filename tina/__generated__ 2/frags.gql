@@ -1,0 +1,21 @@
+fragment PostParts on Post {
+  __typename
+  title
+  description
+  category
+  pubDate
+  heroImage
+  tags
+  body
+}
+
+fragment NewsletterParts on Newsletter {
+  __typename
+  title
+  description
+  category
+  pubDate
+  heroImage
+  tags
+  body
+}

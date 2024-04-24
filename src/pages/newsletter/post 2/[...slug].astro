@@ -1,0 +1,221 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content'
+import BlogPost from '@/layouts/newsletter/BlogPost'
+import Code from '@/components/mdx/Code'
+import ListRelatedPosts from '@/components/newsletter/ListRelatedPosts'
+import Share from '@/components/Share'
+import PopUp from '@/components/article/PopUp'
+import TableOfContents from '@/components/TableOfContents'
+import { app } from '../../../firebase/server'
+import { getAuth } from 'firebase-admin/auth'
+
+const auth = getAuth(app)
+let authentication = 'false'
+if (Astro.cookies.has('session')) {
+	const sessionCookie = Astro.cookies.get('session')?.value
+	const decodedCookie = await auth.verifySessionCookie(sessionCookie!)
+	if (decodedCookie) {
+		authentication = 'true'
+	}
+}
+
+const posts = await getCollection('newsletter')
+/* export async function getStaticPaths() {
+	const posts = await getPosts()
+
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: post
+	}))
+} */
+type Props = CollectionEntry<'newsletter'>
+
+const post = posts.find((p) => p.slug === Astro.params.slug)
+
+const getRelatedPosts = (post: Props | undefined) => {
+	const relatedPosts = posts.filter(
+		(p) => p.slug !== post!.slug && p.data.tags.some((t) => post!.data.tags.includes(t))
+	)
+	return relatedPosts.slice(0, 3)
+}
+
+const relatedPosts = getRelatedPosts(post)
+
+const { Content, headings, remarkPluginFrontmatter } = await post!.render()
+---
+
+<BlogPost data={post!.data} headings={headings} readTime={remarkPluginFrontmatter.minutesRead}>
+	<PopUp />
+	<div class='grid grid-cols-1 md:pl-2 md:grid-cols-[20%_auto] gap-16 mt-8'>
+		<!-- aside  -->
+		<aside class='md:flex flex-col gap-8 hidden'>
+			<Share />
+			<div class='sticky top-24 self-start hidden md:block transition-all duration-200'>
+				{headings && headings.length > 0 && <TableOfContents {headings} />}
+			</div>
+		</aside>
+
+		<!-- main -->
+		<div class='max-w-full w-full'>
+			<blog-post
+				id='blog-container'
+				class='prose prose-lg md:prose-xl dark:prose-invert mb-12 min-w-full'
+				data-authentication={authentication}
+			>
+				<Content components={{ pre: Code }} />
+			</blog-post>
+
+			<div>
+				<h5 class='font-bold text-lg dark:text-white mb-6'>Artículos Relacionados</h5>
+				<ListRelatedPosts posts={relatedPosts} />
+			</div>
+		</div>
+	</div>
+</BlogPost>
+
+<script>
+	const article = document.getElementById('blog-container')
+	const isAuth = article?.dataset.authentication
+	const table = document.getElementsByClassName('mlContentTable');
+
+	for (let i = 0; i < table.length; i++) {
+	table[i].removeAttribute('style');
+	table[i].classList.add('dark:border-0')
+    const rows = table[i].querySelectorAll('tr'); // Seleziona tutti i <tr> all'interno della tabella
+	 const body = table[i].querySelectorAll('tbody'); // Seleziona tutti i <tr> all'interno della tabella
+	
+
+    // Itera attraverso ciascun <tr> all'interno della tabella corrente
+    for (let j = 0; j < rows.length; j++) {
+		const row = rows[j];
+		const cells = rows[j].querySelectorAll('th, td');
+      // Aggiungi la classe 'even' ai <tr> pari e 'odd' ai dispari
+      if (j % 2 === 0) {
+			row.setAttribute('style', 'background-color: #c8cbcf !important');
+			row.classList.add('px-4')
+			if (cells.length > 0 ) { // Cambia il colore del primo <th>
+		  for(let k = 0; k < cells.length; k++){
+			cells[k].removeAttribute('style');
+			cells[k].setAttribute('style', 'padding: 1rem')
+			cells[k].classList.add('bg-white','dark:bg-[#4b5563]', 'p-4','px-4');
+		  }
+      }
+      } else {
+        rows[j].classList.add('dark:bg-[#616e80]','text-[#4b5563]','px-4');
+      }
+				if (cells.length > 0 && cells[0].tagName.toLowerCase() === 'th') {
+        cells[0].classList.add('dark:bg-[#38414d]',) // Cambia il colore del primo <th>
+      }
+    }
+  }
+	
+	if (isAuth === 'true') {
+		const blurred = document.getElementsByClassName('blur-lg')
+		Array.from(blurred).map((box: any) => {
+			box.classList.add('blur-none')
+			box.classList.remove('blur-lg')
+		})
+	}
+	
+	if (isAuth === 'false') {
+		const blurred = document.getElementsByClassName('blur-lg')
+		Array.from(blurred).map((box: any) => {
+		const container = box.cloneNode(false);
+		box.classList.add('z-0');
+			
+		// CREATE THE MAIN CONTAINER
+		container.classList.add('relative','flex')
+		container.classList.remove('blur-lg')
+	
+		// CREATE THE EYE CONTAINER
+		const eyeContainer = document.createElement('div')
+		eyeContainer.classList.add(
+			'p-2',
+					'absolute',
+					'top-1/3',
+					'left-1/2',
+					'transform',
+					'-translate-x-1/2',
+					'-translate-y-1/3',
+					'flex',
+					'flex-col',
+					'justify-center',
+					'items-center',
+					'gap-4',
+					'z-10',
+					'w-full',
+					'h-full'
+				)
+	
+				// CREATE OF THE BUTTON AND IMPLEMENTED THE CLASSES
+				const submitButton = document.createElement('button')
+				submitButton.classList.add(
+					'flex',
+					'flex-col',
+					'items-center',
+					'justify-center',
+					'w-full',
+					'h-full'
+					)
+				submitButton.type = 'submit'
+				submitButton.textContent = 'Suscríbete a la newsletter para desbloquear el contenido'
+	
+				// CREATED THE EYES SVG
+				const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+				svg.classList.add('flex-grow')
+				svg.setAttribute('width', '64')
+				svg.setAttribute('height', '64')
+				svg.setAttribute('fill', 'currentColor')
+				svg.setAttribute('class', 'bi bi-eye-slash')
+				svg.setAttribute('viewBox', '0 0 16 16')
+	
+				const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+				path1.setAttribute(
+					'd',
+					'M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z'
+				)
+	
+				const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+				path2.setAttribute(
+					'd',
+					'M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z'
+				)
+	
+				const path3 = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+				path3.setAttribute(
+					'd',
+					'M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z'
+				)
+	
+				// APPEND THE PATH TO THE SVG TO CREATE A UNIQUE COMPONENT
+				svg.appendChild(path1)
+				svg.appendChild(path2)
+				svg.appendChild(path3)
+	
+				// GETTING THE POP-UP COMPONENT AND IMPLEMENTED FUNCTIONS TO THE BUTTON TO CLOSE THE POP-UP
+				const popUp = document.getElementById('pop-up');
+				submitButton.appendChild(svg)
+				submitButton.addEventListener(('click'), () => {
+					popUp?.classList.remove('hidden');
+				})
+	
+				// APPEND THE BUTTON TO THE EYE CONTAINER
+				eyeContainer.appendChild(submitButton)
+	
+				const parent = box.parentNode;
+				parent.insertBefore(container, box.nextSibling);
+	
+				// APPEND THE BOX AND EYE CONTAINER TO THE MAIN CONTAINER
+				container.appendChild(box)
+				container.appendChild(eyeContainer)
+	
+				// APPEND THE CONTAINER TO THE ARTICLE
+			})
+	}
+	</script>
+
+	<style>
+		td > p {
+			padding-right: 20px;
+		}
+	</style>

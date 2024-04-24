@@ -1,0 +1,26 @@
+---
+import { getCategories } from '@/utils'
+import { getNewsletterCategories } from '@/utils';
+import Category from '@/components/Category'
+import CategoryNewsletter from './CategoryNewsletter.astro';
+import { sluglify } from '@/utils'
+import CategoriesNewsletter from './CategoriesNewsletter.astro';
+import BlogNewsletter from './BlogNewsletter.astro';
+
+const categories = await getCategories()
+const newsletterCategories = await getNewsletterCategories()
+
+const { activeCategory } = Astro.props
+---
+
+<div class='relative flex flex-wrap min-w-full gap-5'>
+	<CategoriesNewsletter />
+{
+		newsletterCategories.map((newsletterCategory: string) => (
+			<CategoriesNewsletter name={newsletterCategory} activeCategory={activeCategory} />
+		))
+	}
+	<BlogNewsletter>
+
+	<div class='hidden sm:block absolute w-full bottom-0 border-b-2 -z-40 dark:border-gray-600'></div>
+</div>
