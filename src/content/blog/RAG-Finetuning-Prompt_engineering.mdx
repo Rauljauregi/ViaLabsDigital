@@ -52,7 +52,7 @@ A pesar de sus ventajas, el *Finetuning* presenta varios desafíos y costos sign
 
 ## Introducción al *Retrieval-Augmented Generation* (*RAG*)
 
-\###Definición de *RAG* y su función combinando la generación de texto con la recuperación de datos
+### Definición de *RAG* y su función combinando la generación de texto con la recuperación de datos
 
 El *Retrieval-Augmented Generation* (*RAG*) es una técnica avanzada en el campo del procesamiento del lenguaje natural que enriquece la generación de texto de los Grandes Modelos de Lenguaje (*LLMs*) con un componente de recuperación de datos. Esta metodología combina lo mejor de dos mundos: utiliza la capacidad de un modelo de lenguaje para generar respuestas coherentes y contextualmente apropiadas, y lo complementa con información recuperada de una base de datos (vectorial) o un conjunto de documentos externos. En la práctica, cuando se le hace una pregunta al modelo, *RAG* busca primero en su base de datos vectorial (los *embeddings* almacenados) para encontrar información relevante y luego utiliza esos datos para informar y estructurar la respuesta que genera.
 
@@ -78,13 +78,13 @@ El *Prompt Engineering* es menos efectivo en mantener la relevancia contextual y
 
 ## Estudios de Caso y Aplicaciones Prácticas
 
-Ejemplos reales de implementaciones exitosas de cada técnica en diferentes industrias
+### Ejemplos de implementaciones de cada técnica en diferentes industrias
 
 * *Prompt Engineering*: Una compañía de comercio electrónico puede utilizar *Prompt Engineering* para facilitar las consultas de los clientes sobre el estado de sus pedidos y recomendaciones de productos basadas en consultas anteriores. Este enfoque les permite manejar un gran volumen de interacciones diarias sin necesidad de entrenar constantemente el modelo.
 * *Finetuning*: Empresas de tecnología médica implementan el *Finetuning* en sus *LLMs* (*opensource* o propietarios) para proporcionar asistencia virtual personalizada a pacientes con enfermedades crónicas. Este modelo ajustado puede entender y responder a preguntas específicas sobre síntomas y tratamientos, adaptándose a terminología médica especializada que no está presente en los modelos estándar.
 * *Retrieval-Augmented Generation* (*RAG*): Un caso de uso es el de medios de comunicación digital utilizando *RAG* para mejorar su asistente de noticias, permitiendo que el sistema extraiga y genere contenido en tiempo real. Esto asegura que las respuestas a las consultas de los usuarios sobre acontecimientos actuales sean tanto precisas como actualizadas.
 
-## Diferentes organizaciones eligen entre estos métodos según sus necesidades específicas
+#### Diferentes organizaciones eligen entre estos métodos según sus necesidades específicas
 
 Las organizaciones tienden a seleccionar el método basado en sus requisitos específicos de precisión, escalabilidad y frescura de la información. Por ejemplo, las entidades financieras priorizan el *Finetuning* debido a la necesidad de precisión en las respuestas, mientras que las empresas de medios prefieren *RAG* por la necesidad de actualizar constantemente la información. En contextos donde la velocidad y la eficiencia son cruciales, como en atención al cliente de bajo nivel, el *Prompt Engineering* es a menudo suficiente y más coste-efectivo.
 
