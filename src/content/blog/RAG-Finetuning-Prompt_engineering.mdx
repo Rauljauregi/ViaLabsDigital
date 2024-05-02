@@ -65,7 +65,7 @@ Una de las principales ventajas de utilizar *RAG* es su capacidad para mantener 
 
 Implementar *RAG* de manera efectiva presenta varios desafíos técnicos y requisitos de recursos. Primero, requiere una integración cuidadosa entre el sistema de generación de texto y el mecanismo de recuperación de información, lo que puede ser complejo y requiere habilidades especializadas en ingeniería de software y ciencia de datos. Además, mantener una base de datos externa actualizada y relevante implica un esfuerzo continuo y puede requerir acceso a fuentes de información costosas o difíciles de gestionar. Desde el punto de vista de los recursos, *RAG* puede ser intensivo en el uso de cómputo durante la fase de recuperación de datos, especialmente cuando se manejan grandes volúmenes de información o cuando la recuperación debe realizarse en tiempo real. También se necesita una infraestructura robusta para soportar tanto el almacenamiento como el procesamiento de datos, lo que puede implicar inversiones significativas en hardware y software especializado.
 
-## Comparación Detallada
+## Comparación
 
 ### Análisis comparativo: facilidad de uso, costos, personalización y requisitos de datos
 
@@ -76,3 +76,27 @@ El *Prompt Engineering* es generalmente el más accesible en términos de facili
 En cuanto a la calidad de la información, el *Finetuning* tiende a proporcionar respuestas más precisas y adaptadas a contextos específicos, siempre y cuando el modelo haya sido entrenado con un conjunto de datos adecuadamente relevante. *Prompt Engineering*, aunque menos preciso, es flexible y puede adaptarse rápidamente a diferentes casos de uso sin entrenamiento adicional. *RAG*, por su parte, combina la calidad de las respuestas generadas con la relevancia de los datos recuperados, ofreciendo un balance entre adaptabilidad y precisión.
 
 El *Prompt Engineering* es menos efectivo en mantener la relevancia contextual y la frescura de la información, ya que depende completamente del conocimiento preexistente del modelo. El *Finetuning* puede ser muy efectivo en proporcionar relevancia contextual, pero su frescura está limitada por la fecha de su último entrenamiento. En contraste, *RAG* sobresale en mantener tanto la relevancia como la frescura de la información, gracias a su capacidad de integrar continuamente nuevas fuentes de datos en tiempo real, lo que lo hace ideal para aplicaciones que requieren información actualizada constantemente, como seguimiento de noticias, atención médica y servicios financieros.
+
+## Estudios de Caso y Aplicaciones Prácticas
+
+Ejemplos reales de implementaciones exitosas de cada técnica en diferentes industrias
+
+* *Prompt Engineering*: Una compañía de comercio electrónico puede utilizar *Prompt Engineering* para facilitar las consultas de los clientes sobre el estado de sus pedidos y recomendaciones de productos basadas en consultas anteriores. Este enfoque les permite manejar un gran volumen de interacciones diarias sin necesidad de entrenar constantemente el modelo.
+* *Finetuning*: Empresas de tecnología médica implementan el *Finetuning* en sus *LLMs* (*opensource* o propietarios) para proporcionar asistencia virtual personalizada a pacientes con enfermedades crónicas. Este modelo ajustado puede entender y responder a preguntas específicas sobre síntomas y tratamientos, adaptándose a terminología médica especializada que no está presente en los modelos estándar.
+* *Retrieval-Augmented Generation* (*RAG*): Un caso de uso es el de medios de comunicación digital utilizando *RAG* para mejorar su asistente de noticias, permitiendo que el sistema extraiga y genere contenido en tiempo real. Esto asegura que las respuestas a las consultas de los usuarios sobre acontecimientos actuales sean tanto precisas como actualizadas.
+
+## Diferentes organizaciones eligen entre estos métodos según sus necesidades específicas
+
+Las organizaciones tienden a seleccionar el método basado en sus requisitos específicos de precisión, escalabilidad y frescura de la información. Por ejemplo, las entidades financieras priorizan el *Finetuning* debido a la necesidad de precisión en las respuestas, mientras que las empresas de medios prefieren *RAG* por la necesidad de actualizar constantemente la información. En contextos donde la velocidad y la eficiencia son cruciales, como en atención al cliente de bajo nivel, el *Prompt Engineering* es a menudo suficiente y más coste-efectivo.
+
+## El Futuro de los Métodos de Interacción con *LLMs*
+
+### Tendencias emergentes y cómo la combinación de estos métodos podría formar el futuro de la interacción con *LLMs*
+
+La tendencia hacia la combinación de técnicas como *Prompt Engineering*, *Finetuning*, y *RAG* está marcando un camino prometedor. Por ejemplo, integrar *RAG* para obtener la frescura de la información y luego aplicar *Finetuning* para personalizar las respuestas ofrece un equilibrio entre precisión y actualidad, adecuado para muchos escenarios de uso.
+
+### Perspectivas sobre nuevos desarrollos tecnológicos que podrían influir en estos métodos
+
+El avance en tecnologías de computación distribuida y la creciente disponibilidad de conjuntos de datos de alta calidad pueden mejorar significativamente cómo se implementan y combinan estos métodos. Además, el desarrollo de técnicas de aprendizaje semi-supervisado y no supervisado podría reducir la dependencia de conjuntos de datos extensos para el Finetuning, abriendo nuevas posibilidades para aplicaciones más flexibles y robustas de LLMs.
+
+Cada día hay nuevos papers que investigan y proponen mejoras en cada uno de estos métodos, o en la combinanción de todos o de algunos de ellos. Además los *LLMs* disponibles cada día son más,  y más específicos para tareas concretas. Haciendo que las posibilidades creacan exponencialmente.
