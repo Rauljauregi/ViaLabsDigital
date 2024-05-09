@@ -16,23 +16,23 @@ tags:
 
 La idea es ayudarme incluso a mí a clarificar los conceptos. Y es que los avances en el campo de la inteligencia artificial han llevado al desarrollo de modelos de lenguaje cada vez más sofisticados y poderosos, ya sabes los archi-conocidísimos como Grandes Modelos de Lenguaje (\*LLMs\*). Estos modelos han revolucionado la forma en que interactuamos con la tecnología, desde asistentes virtuales hasta sistemas avanzados de respuesta a preguntas. A continuación, explicaremos muy brevementes su importancia en diversas aplicaciones y las limitaciones inherentes a estos modelos.
 
-### Aplicaciones Generales de los LLMs
+## Aplicaciones Generales de los LLMs
 
 Los LLMs tienen una amplia gama de aplicaciones que impactan numerosos sectores. En el ámbito empresarial, facilitan la automatización de tareas relacionadas con el servicio al cliente mediante chatbots inteligentes que pueden manejar consultas complejas. En el sector educativo, apoyan la creación de contenidos educativos personalizados y la tutoría automatizada. Además, en el campo del derecho y la medicina, los LLMs ayudan en la organización y búsqueda de información extensa, permitiendo a los profesionales centrarse en tareas más especializadas.
 
-### Limitaciones de los LLMs Convencionales
+## Limitaciones de los LLMs Convencionales
 
 A pesar de su avanzada capacidad y utilidad, los *LLMs* enfrentan varias limitaciones significativas:
 
-#### Dependencia de los Datos de Entrenamiento
+### Dependencia de los Datos de Entrenamiento
 
 Los *LLMs* dependen en gran medida de los datos con los que son entrenados. Su conocimiento está limitado a la información contenida en estos datos, lo que significa que \*\*cualquier sesgo o error \*\*en los datos de entrenamiento se reflejará en las respuestas y comportamientos del modelo. Esta dependencia restringe su capacidad para adaptarse a situaciones o información nueva que no esté representada en el conjunto de entrenamiento.
 
-#### Incapacidad para Responder a Preguntas sobre Información Actualizada o Desconocida
+### Incapacidad para Responder a Preguntas sobre Información Actualizada o Desconocida
 
 Los *LLMs* **pueden no responder adecuadamente a preguntas sobre eventos recientes** o datos específicos que no estaban disponibles durante su entrenamiento. Por ejemplo, un modelo entrenado hasta el año 2019 no tendría información sobre eventos ocurridos en 2021, lo que limita su utilidad en aplicaciones que requieren actualizaciones constantes de conocimiento.
 
-#### Problemas de "Alucinación" en Respuestas
+### Problemas de "Alucinación" en Respuestas
 
 Un desafío particular es la tendencia de los *LLMs* a "alucinar" respuestas; es decir, **generar información falsa o inventada** cuando no están seguros de la respuesta correcta. Esto puede ser problemático en aplicaciones críticas donde la precisión de la información es fundamental, como en el ámbito médico o legal.
 
@@ -40,7 +40,7 @@ Estas limitaciones subrayan la necesidad de desarrollos adicionales en el campo 
 
 La Generación Aumentada por Recuperación (\*RAG\*, por sus siglas en inglés) es un enfoque innovador en el campo de los modelos de lenguaje que combina las capacidades de generación de texto con sistemas de recuperación de información. Este concepto busca superar algunas de las limitaciones más significativas de los Modelos de Lenguaje Grandes (LLMs), especialmente en términos de precisión y relevancia de la información generada.
 
-### Propósito del RAG
+## Propósito del RAG
 
 El *RAG* es un modelo híbrido que **integra un componente de recuperación de información con un modelo generativo de lenguaje**. El propósito principal del *RAG* es enriquecer la generación de texto de los *LLMs* con información actual y específica obtenida de fuentes externas en tiempo real. Esto permite al modelo generar respuestas más precisas y basadas en datos actuales, lo cual es crucial en aplicaciones donde la veracidad y la actualidad de la información son esenciales.
 
@@ -83,7 +83,7 @@ El *RAG* puede ser particularmente potente cuando se alimenta con documentos per
 
 La arquitectura técnica de un modelo *RAG* se basa en dos pilares principales: el modelo generador que es normalmente un *LLM* grande, como *MISTRAL*, *GPT*, *GEMINI* etc.., y un modelo recuperador que puede ser un sistema de indexación y recuperación como una base de datos vectorial.
 
-#### Cómo se Procesan y Utilizan los *Embeddings*
+### Cómo se Procesan y Utilizan los *Embeddings*
 
 Los *embeddings*, o representaciones vectoriales de texto, juegan un papel crucial en ambos componentes del *RAG*. En el modelo recuperador, los *embeddings* ayudan a mapear consultas y documentos a un espacio vectorial donde los textos similares están cerca unos de otros, de acuerdo a sus dimensiones.
 
@@ -93,8 +93,6 @@ Esto facilita la recuperación eficiente de información relevante. En el modelo
 
 El modelo de Generación Aumentada por Recuperación (RAG) tiene una amplia gama de aplicaciones prácticas en diversas industrias debido a su capacidad única para combinar generación de texto avanzada con recuperación de información específica y relevante.
 
-####
-
-Así que el futuro desarrollo de *RAG* va a incluir mejoras en la precisión de la recuperación de información, la capacidad de integración en tiempo real de datos actualizados y la mejora de la generación de texto para hacerla aún más contextual y relevante. 
+Así que el futuro desarrollo de *RAG* va a incluir mejoras en la precisión de la recuperación de información, la capacidad de integración en tiempo real de datos actualizados y la mejora de la generación de texto para hacerla aún más contextual y relevante.
 
 La continua evolución de RAG promete avances significativos en cómo las máquinas comprenden y procesan el lenguaje humano, llevando a un futuro donde la inteligencia artificial puede asistir a los humanos de una mejor marera y paradojicamente al menos en mi opinión ayudarnos a ser mejores humanos. ¡Hasta la semana que viene!.
