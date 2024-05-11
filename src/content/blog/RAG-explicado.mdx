@@ -3,7 +3,7 @@ title: 'RAG, Retrieval-augmented Generation Explicado'
 description: >-
   RAG, Retrieval-augmented Generation, sus definiciones, flujo de trabajo,  y
   cómo supera las limitaciones de los modelos de lenguaje actuales.. 
-category: Inteligencia Artificial
+category: Deep Learning
 pubDate: 2024-05-09T22:00:00.000Z
 heroImage: /public/images/RAG- explicado.webp
 tags:
@@ -40,6 +40,8 @@ Estas limitaciones subrayan la necesidad de desarrollos adicionales en el campo 
 
 La Generación Aumentada por Recuperación (*RAG*, por sus siglas en inglés) es un enfoque innovador en el campo de los modelos de lenguaje que combina las capacidades de generación de texto con sistemas de recuperación de información. Este concepto busca superar algunas de las limitaciones más significativas de los Modelos de Lenguaje Grandes (LLMs), especialmente en términos de precisión y relevancia de la información generada.
 
+![](</images/RAG- explicado.webp>)
+
 ## Propósito del RAG
 
 El *RAG* es un modelo híbrido que **integra un componente de recuperación de información con un modelo generativo de lenguaje**. El propósito principal del *RAG* es enriquecer la generación de texto de los *LLMs* con información actual y específica obtenida de fuentes externas en tiempo real. Esto permite al modelo generar respuestas más precisas y basadas en datos actuales, lo cual es crucial en aplicaciones donde la veracidad y la actualidad de la información son esenciales.
@@ -56,8 +58,6 @@ El modelo RAG consta de dos componentes principales:
 2. el modelo recuperador.
 
 El modelo generador es un LLM convencional que produce texto basado en la entrada del usuario y los datos recuperados. Por otro lado, el modelo recuperador es un sistema de búsqueda que identifica y recupera información relevante de una base de datos o un conjunto de documentos. De ahí el nombre de Retrieval-augmented generation, que en sí es ya muy descriptivo.
-
-![](/public/images/images/media-1024x545.png)
 
 ### Modelo Generador y Modelo Recuperador
 
