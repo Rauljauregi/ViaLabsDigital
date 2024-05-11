@@ -1,8 +1,8 @@
 // Categorias Blog
 export const CATEGORIES = [
    'Inteligencia Artificial', 
-   'Desarrollo web y SEO', 
-   'Innovación'
+   'Machine Learning', 
+   'Deep Learning'
 ] as const
 
 // Categorias Newsletter
