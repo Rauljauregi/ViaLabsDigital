@@ -33,9 +33,14 @@ En otras palabras, *RAG* actúa como un asistente personal para nuestra IA, prop
 
 Entonces, ¿cómo funciona *RAG*? Pues explicado de forma sencilla, es algo así:
 
-1. **Optimización de la consulta**: La IA toma la pregunta del usuario y la optimiza para una mejor búsqueda.
-2. **Recuperación de información**: Busca en una base de conocimiento específica y actualizada.
-3. **Generación de respuesta**: El *LLM* utiliza esta información para generar una respuesta en lenguaje natural.
+1. **Consulta del usuario**: El usuario introduce una pregunta o solicitud que necesita ser respondida.
+2. **Optimización de la consulta**: La IA toma la pregunta del usuario y la optimiza para una mejor búsqueda.
+3. **Consulta optimizada**: La pregunta ajustada se prepara para buscar información relevante.
+4. **Recuperación de información**: Busca en una base de conocimiento específica y actualizada.
+5. **Resultados de la recuperación**: Los datos relevantes y precisos se recuperan de la base de conocimiento.
+6. **Consulta del usuario + información contextual**: La consulta inicial del usuario se combina con los resultados recuperados para proporcionar un contexto completo.
+7. **Generación de respuesta**: El LLM utiliza esta información para generar una respuesta en lenguaje natural.
+8. **Respuesta**: La respuesta generada se envía de vuelta al usuario, proporcionando una solución precisa y contextualizada a su consulta.
 
 ![](/public/images/Esquema-RAG.webp)
 
