@@ -21,21 +21,23 @@ Hoy se me ha ocurrido que podía ser interesante agrupar las ventajas que tiene 
 
 Vamos a ser honestos: aunque las IA generativas son impresionantes, tienen sus pegas. Uno de los mayores problemas es asegurar que las respuestas sean precisas y adecuadas a la marca. Imagínate que tienes una IA que responde a tus clientes, pero sus respuestas no siempre son exactas o, peor aún, no reflejan los valores de tu marca. ¡Un desastre total! Aquí es donde *RAG* entra en juego.
 
-## Cómo *0RAG* Mejora la Precisión
+## Cómo *RAG* Mejora la Precisión
 
-*RAG*, o Generación Aumentada por Recuperación, es una técnica que permite a los modelos de lenguaje grande (*LLM*) acceder a información específica y actualizada. ¿El resultado? Respuestas que son aproximadamente un 43% (según este paper)más precisas que las generadas solo por LLMs afinados. En otras palabras, RAG actúa como un asistente personal para nuestra IA, proporcionándole los datos más relevantes justo cuando los necesita.
+*RAG*, o Generación Aumentada por Recuperación, es una técnica que permite a los modelos de lenguaje grande (*LLM*) acceder a información específica y actualizada. ¿El resultado? Respuestas que son aproximadamente un 43% (según este [paper](https://arxiv.org/abs/2005.11401v4 "artículo científico")) más precisas que las generadas solo por *LLMs* sin el contexto particular. En otras palabras, *RAG* actúa como un asistente personal para nuestra IA, proporcionándole los datos más relevantes justo cuando los necesita.
 
-Funcionamiento de RAG
+## Funcionamiento de *RAG*
 
-Entonces, ¿cómo funciona RAG? Aquí te lo explico de forma sencilla:
+Entonces, ¿cómo funciona *RAG*? Explicado de forma sencilla:
 
 1. **Optimización de la consulta**: La IA toma la pregunta del usuario y la optimiza para una mejor búsqueda.
 2. **Recuperación de información**: Busca en una base de conocimiento específica y actualizada.
-3. **Generación de respuesta**: El LLM utiliza esta información para generar una respuesta en lenguaje natural.
+3. **Generación de respuesta**: El *LLM* utiliza esta información para generar una respuesta en lenguaje natural.
+
+![](/public/images/Esquema-RAG.webp)
 
 Esta metodología no solo mejora la precisión, sino que también asegura que las respuestas estén alineadas con la información más reciente y relevante.
 
-Problemas Clave al Implementar RAG
+## Problemas Clave al Implementar *RAG*
 
 Implementar RAG no es un paseo por el parque. Aquí hay algunos problemas clave que debemos considerar:
 
