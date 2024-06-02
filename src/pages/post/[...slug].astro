@@ -41,11 +41,18 @@ const post = posts.find((p) => p.slug === Astro.params.slug);
 
 // FUNCTION TO GET RELATED POSTS
 const getRelatedPosts = (post: Props | undefined) => {
-	const relatedPosts = posts.filter(
-		(p) => p.slug !== post!.slug && p.data.tags.some((t) => post!.data.tags.includes(t))
-	)
-	return relatedPosts.slice(0, 3)
-}
+  if (post) { // Aggiunto controllo per post undefined
+    console.log("Slug del post corrente:", post.slug);
+
+    const relatedPosts = posts.filter(
+      (p) => p.slug !== post.slug && p.data.tags.some((t) => post.data.tags.includes(t))
+    );
+    return relatedPosts.slice(0, 3);
+  } else {
+    console.warn("Post undefined in getRelatedPosts"); // Avviso opzionale
+    return []; // O un valore di default appropriato
+  }
+};
 
 // GETTING RELATED POSTS
 const relatedPosts = getRelatedPosts(post)
