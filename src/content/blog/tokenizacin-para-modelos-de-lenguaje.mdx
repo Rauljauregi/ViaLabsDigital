@@ -1,0 +1,106 @@
+---
+title: Tokenización para Modelos de Lenguaje
+description: >-
+  los tokenizadores BPE, WordPiece y SentencePiece transforman el texto para
+  modelos de lenguaje. Para entender su funcionamiento, diferencias y
+  aplicaciones prácticas en NLP.
+category: Inteligencia Artificial
+pubDate: 2024-06-13T22:00:00.000Z
+heroImage: /public/images/tokenizacion-llm.webp
+tags:
+  - LLM
+---
+
+# ¡Hola! 🌟
+
+La semana pasada te hablé sobre el fascinante mundo de los *[word embeddings](https://mindfulml.vialabsdigital.com/post/semantica-inteligencia-artificial/ "word embeddings")* y cómo estos representan las palabras en un espacio vectorial, ayudándonos a entender las relaciones semánticas entre ellas. En esta semana vamos a ver cómo se crean los *embeddings* partiendo de las palabras. Como vas a ver estos están íntimamente ligados a la tokenización, un proceso crucial para cualquier modelo de lenguaje. Así que hoy, vamos a ver ¿qué es la tokenización?.
+
+## Tokenizadores de LLMs
+
+### 1. Los Tokenizadores de LLMs
+
+La **tokenización** es un proceso esencial en el procesamiento del lenguaje natural (*NLP*), ya que convierte el texto en una forma comprensible para los modelos de lenguaje. Los tokenizadores dividen el texto en palabras o subpalabras y asignan identificadores únicos a cada token. Sin una buena tokenización, los modelos no podrían interpretar correctamente el texto. Hay varias formas de hacer esto, sigue leyendo y lo vas a entender perfectamente.
+
+### 2. Tokenización por Emparejamiento de Bytes (Byte Pair Encoding - BPE)
+
+#### Descripción General
+
+El *Byte Pair Encoding (BPE)* es un algoritmo de subtokenización que fusiona los pares de bytes o caracteres consecutivos más frecuentes en un corpus. Este método mejora la representación de las palabras, permitiendo una mayor flexibilidad y precisión.
+
+#### Proceso Detallado
+
+* **Inicialización de la oración**: Dividimos la oración en palabras.
+* **Creación del vocabulario inicial**: Empezamos con todos los caracteres individuales.
+* **Iteración para fusionar caracteres frecuentes**: Fusionamos los pares de caracteres más frecuentes.
+* **Actualización del vocabulario**: Añadimos los nuevos pares fusionados al vocabulario.
+* **Repetición**: Continuamos el proceso hasta alcanzar el tamaño de vocabulario deseado.
+
+#### Ejemplo Práctico
+
+Tomemos la frase "deep learning engineer":
+
+1. Iniciamos con tokens individuales: \["d", "e", "e", "p", " ", "l", "e", "a", "r", "n", "i", "n", "g", " ", "e", "n", "g", "i", "n", "e", "e", "r"].
+2. Fusionamos pares frecuentes como "d+e" -> "de".
+3. Continuamos hasta obtener tokens más largos y significativos.
+
+### 3. Tokenización por Pieza de Palabra (WordPiece)
+
+#### Descripción General
+
+El *WordPiece* es similar al BPE, pero utiliza un criterio diferente para la fusión de pares de símbolos, maximizando la probabilidad de los datos de entrenamiento.
+
+#### Proceso Detallado
+
+* **Inicialización del vocabulario**: Comenzamos con todos los caracteres presentes en los datos.
+* **Cálculo de la probabilidad**: Evaluamos la probabilidad de los pares de tokens.
+* **Fusión de tokens**: Fusionamos el par que maximiza la probabilidad.
+* **Comparación**: Contrastamos con el criterio de frecuencia del BPE.
+* **Repetición**: Continuamos hasta alcanzar el tamaño de vocabulario deseado.
+
+#### Ejemplo Práctico
+
+Con la misma frase "deep learning engineer":
+
+1. Iniciamos con tokens individuales.
+2. Fusionamos tokens basados en la probabilidad de ocurrencia.
+3. Comparamos los resultados con BPE para ver diferencias en los tokens generados.
+
+### 4. Tokenización por Pieza de Sentencia (SentencePiece)
+
+#### Descripción General
+
+El *SentencePiece* está diseñado para manejar lenguajes sin espacios explícitos entre palabras, como el japonés y el chino. Trata el texto como una secuencia de caracteres, incluyendo espacios.
+
+#### Proceso Detallado
+
+* **Uso del mismo algoritmo de fusión**: Utilizamos BPE o el tokenizador unigram.
+* **Inicialización del vocabulario**: Comenzamos con un gran número de tokens.
+* **Reducción progresiva**: Reducimos el vocabulario hasta el tamaño deseado.
+
+#### Ejemplo Práctico
+
+Para "deep learning engineer":
+
+1. Tratamos el texto como una secuencia continua.
+2. Utilizamos guiones bajos como marcadores de espacio: "\_deep \_learning \_engineer".
+3. Simplificamos la reconstrucción de la oración original.
+
+### 5. Comparación entre BPE, WordPiece y SentencePiece
+
+|   |   |   |   |
+| - | - | - | - |
+|   |   |   |   |
+|   |   |   |   |
+|   |   |   |   |
+|   |   |   |   |
+
+### 6. Conclusión
+
+En resumen, la elección del tokenizador adecuado puede marcar una gran diferencia en el rendimiento de tu modelo de lenguaje. Los métodos como BPE, WordPiece y SentencePiece tienen sus propias ventajas y desventajas, dependiendo del idioma y el contexto de uso. En el futuro, continuaremos viendo mejoras en estos algoritmos para facilitar aún más el procesamiento del lenguaje natural.
+
+Nos vemos la próxima semana con más novedades y aprendizajes sobre el fascinante mundo del Machine Learning y la Inteligencia Artificial.
+
+¡Hasta la próxima!
+
+Saludos,
+Raúl Jáuregui
