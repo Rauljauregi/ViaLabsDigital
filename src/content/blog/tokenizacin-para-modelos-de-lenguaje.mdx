@@ -26,10 +26,27 @@ La **tokenización** es un proceso esencial en el procesamiento del lenguaje nat
 La imagen ilustra cómo una oración se procesa a través de un tokenizador y se convierte en *embeddings*, elementos fundamentales para que los modelos de lenguaje comprendan y generen texto.
 ![](/public/images/images/tokenizacion_1.jpg)
 
+> Vamos a desglosar el proceso paso a paso:
+> Oración Original:
+
+> La frase "Today is a beautiful day outside."
+> Tokenización:
+
+> La oración se divide en subpalabras o tokens: \["To", "day", "is", "a", "beaut", "iful", "day", "out", "side", "."].
+> Aquí se puede observar que algunas palabras se descomponen en subpalabras (por ejemplo, "beautiful" en "beaut" y "iful").
+> Asignación de Identificadores:
+
+> Cada token se convierte en un identificador único basado en un vocabulario predefinido: \[98, 1452, 43, 15, 2932, 1709, 740, 1452, 3112, 3823, 74].
+> Estos identificadores son índices que corresponden a los embeddings almacenados en el modelo.
+> Generación de Embeddings:
+
+> Cada identificador se convierte en un vector numérico de alta dimensión, conocido como embedding, que captura las características semánticas del token correspondiente.
+> Estos embeddings permiten al modelo de lenguaje comprender el contexto y las relaciones entre las palabras en la oración.
+
+La tokenización y los *embeddings* trabajan juntos para transformar texto en datos que los modelos de lenguaje pueden interpretar y manipular eficazmente. Recuerda:
+
 * **Tokenización**: Es el primer paso crucial que convierte el texto en una forma que los modelos pueden procesar. Una buena tokenización mejora la precisión y eficiencia del modelo.
 * **Embeddings**: Transforman los tokens en vectores que el modelo utiliza para comprender el significado y contexto, facilitando tareas como traducción, generación de texto y análisis de sentimiento.
-
-La tokenización y los *embeddings* trabajan juntos para transformar texto en datos que los modelos de lenguaje pueden interpretar y manipular eficazmente.
 
 ### 2. Tokenización por Emparejamiento de Bytes (Byte Pair Encoding - BPE)
 
