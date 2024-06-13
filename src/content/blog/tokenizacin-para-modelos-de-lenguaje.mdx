@@ -119,12 +119,12 @@ Para "deep learning engineer":
 
 ### 5. Comparación entre BPE, WordPiece y SentencePiece
 
-|   |   |   |   |
-| - | - | - | - |
-|   |   |   |   |
-|   |   |   |   |
-|   |   |   |   |
-|   |   |   |   |
+| **Criterio**            | **BPE**                    | **WordPiece**              | **SentencePiece**                            |
+| ----------------------- | -------------------------- | -------------------------- | -------------------------------------------- |
+| **Criterio de Fusión**  | Frecuencia                 | Probabilidad               | Frecuencia o probabilidad                    |
+| **Manejo de Lenguajes** | Funciona bien con espacios | Funciona bien con espacios | Ideal para lenguajes sin espacios            |
+| **Eficiencia**          | Alta, pero menos flexible  | Alta y flexible            | Alta, simplifica preprocesamiento            |
+| **Complejidad**         | Moderada                   | Moderada                   | Baja, especialmente para lenguajes complejos |
 
 Así que la elección del tokenizador adecuado puede marcar una gran diferencia en el rendimiento de tu modelo de lenguaje. Los métodos como BPE, WordPiece y SentencePiece tienen sus propias ventajas y desventajas, dependiendo del idioma y el contexto de uso. En el futuro, continuaremos viendo mejoras en estos algoritmos para facilitar aún más el procesamiento del lenguaje natural.
 
