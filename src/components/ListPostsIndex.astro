@@ -16,7 +16,51 @@ const { newsletters, posts, FirstBig = false } = Astro.props
 const toRead: CollectionEntry<'blog' | 'newsletter'>[]  = [...posts, ...newsletters]
 ---
 <>
-<h2 class='text-2xl font-medium tracking-wide text-start my-4'>Newsletters Posts</h2>
+<hr>
+<h2 class='text-4xl font-medium tracking-wide text-start my-4'>Blog Posts</h2>
+<section
+	class={cn(
+		`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 mt-3`,
+		FirstBig && `md:[&>*:first-child]:col-span-2`
+	)}
+>
+	{
+		posts
+			.sort((a, b) => {
+				const dateA: Date = new Date(b.data.pubDate);
+				const dateB: Date = new Date(a.data.pubDate);
+				return dateA.getTime() - dateB.getTime();
+			}) // Ordina i post in base alla data di pubblicazione (dall'ultimo al primo)
+			.map(async (post) => {
+				const { remarkPluginFrontmatter } = await post.render()
+
+				return (
+					<PostCard
+						data={post.data}
+						slug={post.slug}
+						readTime={remarkPluginFrontmatter.minutesRead}
+					/>
+				)
+			})
+	}
+	<!-- 	{
+		posts.map(async (post) => {
+			const { remarkPluginFrontmatter } = await post.render()
+
+			return (
+				<PostCard
+					data={post.data}
+					slug={post.slug}
+					readTime={remarkPluginFrontmatter.minutesRead}
+				/>
+			)
+		})
+	} -->
+</section>
+<br>
+<hr>
+<br>
+<h2 class='text-4xl font-medium tracking-wide text-start my-4'>Newsletters Posts</h2>
 <section
 	class={cn(
 		`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 mt-3`,
@@ -57,44 +101,4 @@ const toRead: CollectionEntry<'blog' | 'newsletter'>[]  = [...posts, ...newslett
 	} -->
 </section>
 <hr>
-<h2 class='text-2xl font-medium tracking-wide text-start my-4'>Blog Posts</h2>
-<section
-	class={cn(
-		`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 mt-3`,
-		FirstBig && `md:[&>*:first-child]:col-span-2`
-	)}
->
-	{
-		posts
-			.sort((a, b) => {
-				const dateA: Date = new Date(b.data.pubDate);
-				const dateB: Date = new Date(a.data.pubDate);
-				return dateA.getTime() - dateB.getTime();
-			}) // Ordina i post in base alla data di pubblicazione (dall'ultimo al primo)
-			.map(async (post) => {
-				const { remarkPluginFrontmatter } = await post.render()
-
-				return (
-					<PostCard
-						data={post.data}
-						slug={post.slug}
-						readTime={remarkPluginFrontmatter.minutesRead}
-					/>
-				)
-			})
-	}
-	<!-- 	{
-		posts.map(async (post) => {
-			const { remarkPluginFrontmatter } = await post.render()
-
-			return (
-				<PostCard
-					data={post.data}
-					slug={post.slug}
-					readTime={remarkPluginFrontmatter.minutesRead}
-				/>
-			)
-		})
-	} -->
-</section>
 </>
