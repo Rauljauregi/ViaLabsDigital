@@ -130,7 +130,35 @@ export default defineConfig({
               {
                 value: 'Tendencias',
                 label: 'Tendencias',
-              }
+              },
+              {
+                value: "LLMs",
+                label: "LLMs",
+              },
+              {
+                value: "Chatbots",
+                label: "Chatbots",
+              },
+              {
+                value: "Tecnologías",
+                label: "Tecnologías",
+              },
+              {
+                value: "Conceptos",
+                label: "Conceptos",
+              },
+              {
+                value: "Eventos",
+                label: "Eventos",
+              },
+              {
+                value: "Noticias",
+                label: "Noticias",
+              },
+              {
+                value: "Automatizaciones",
+                label: "Automatizaciones",
+              },
             ],
           },
           {
@@ -251,7 +279,35 @@ export default defineConfig({
               {
                 value: 'Tendencias',
                 label: 'Tendencias',
-              }
+              },
+              {
+                value: "LLMs",
+                label: "LLMs",
+              },
+              {
+                value: "Chatbots",
+                label: "Chatbots",
+              },
+              {
+                value: "Tecnologías",
+                label: "Tecnologías",
+              },
+              {
+                value: "Conceptos",
+                label: "Conceptos",
+              },
+              {
+                value: "Eventos",
+                label: "Eventos",
+              },
+              {
+                value: "Noticias",
+                label: "Noticias",
+              },
+              {
+                value: "Automatizaciones",
+                label: "Automatizaciones",
+              },
             ],
           },
           {
