@@ -6,6 +6,7 @@ import ProviderTheme from '@/components/ProviderTheme'
 import ProviderAnimations from '@/components/ProviderAnimations'
 import TwSizeIndicator from '@/components/TwSizeIndicator'
 import EditBlog from '@/components/editBlog'
+import Mermaid, { MermaidModule } from '../components/mermaid'
 const { title, description, image, articleDate } = Astro.props
 ---
 
@@ -31,5 +32,6 @@ const { title, description, image, articleDate } = Astro.props
 				margin-left: calc(100vw - 100%); /* prevent layout shift */
 			}
 		</style>
+		<MermaidModule />
 	</body>
 </html>

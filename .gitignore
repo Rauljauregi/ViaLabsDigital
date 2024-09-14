@@ -24,3 +24,7 @@ pnpm-debug.log*
 .DS_Store
 
 node_modules
+
+.direnv
+.venv
+.idea

@@ -7,14 +7,25 @@ const blog = defineCollection({
 		z.object({
 			title: z.string().max(80),
 			description: z.string(),
+			date: z
+				.string()
+				.or(z.date())
+				.default(new Date())
+				.transform((val) => new Date(val)),
 			// Transform string to Date object
 			pubDate: z
 				.string()
 				.or(z.date())
-				.transform((val) => new Date(val)),
-			heroImage: image(),
-			category: z.enum(CATEGORIES),
-			tags: z.array(z.string()),
+				.transform((val) => new Date(val))
+				.optional(),
+			heroImage: image().optional(),
+			category: z.enum(CATEGORIES).or(
+				z.object({
+					names: z.string()
+				})
+			),
+			tags: z.array(z.string()).default([]),
+			comments: z.boolean().default(true),
 			draft: z.boolean().default(false)
 		})
 })

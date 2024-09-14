@@ -1,0 +1,59 @@
+---
+title: Giscus
+description: Giscus for comments sections
+date: 2023-10-22T00:00:00
+category:
+  name: blogs
+layout: blog-post
+comments: true
+---
+
+I added [Giscus](https://giscus.app) to use GitHub Discussions as my comments backends.
+This way I can provide interactivity to the blog.
+
+Hopefully people will not use it for spam, because the moderation option is limited.
+
+You can use the posts' frontmatter to enable or disable comments sections.
+For example, this post's frontmatter looks like this.
+
+```yaml
+---
+title: Giscus
+description: Giscus for comments sections
+date: 2023-10-22T00:00:00
+category:
+  name: blogs
+layout: blog-post
+comments: true
+---
+```
+
+Alternatively, you can set the default value of the comments sections using gatsby-theme options.
+In your `gatsby-config.js`, provide the option like this:
+
+```js
+...
+    {
+      resolve: "gatsby-theme",
+      options: {
+        commentsEnabled: true,
+        commentsProps: {
+          repo: "lucernae/gatsby-starter-lucernae",
+          repoId:"R_kgDOKRTVcw",
+          category: "Announcements",
+          categoryId: "DIC_kwDOKRTVc84CaVF-",
+          mapping: "pathname",
+          strict: "0",
+          reactionsEnabled: "1",
+          emitMetadata: "1",
+          inputPosition: "top",
+          theme: "preferred_color_scheme",
+          lang: "en",
+          loading: "lazy",
+        },
+      },
+    },
+...
+```
+
+<Mermaid />

@@ -1,0 +1,62 @@
+---
+title: Garmin
+description: Garmin viewer integration
+date: 2024-08-30T00:00:00
+category:
+  name: blogs
+layout: blog-post
+---
+
+# Garmin FIT file support
+
+This blog provides some supports rendering and embedding Garmin activity data.
+
+# Garmin Embed Link
+
+[Garmin Connect Activity](https://connect.garmin.com) can be embedded if the activity ID is known.
+
+Use MDX directly and pass activityId and Title props
+
+```mdx
+<ActivityEmbedViewer activityId={16813834908} title='Indramayu - Long Easy Run'>
+```
+
+<ActivityEmbedViewer activityId={16813834908} title='Indramayu - Long Easy Run' />
+
+The iframe above can be clicked to redirect to Garmin Connect page.
+
+# FIT file processing
+
+FIT file is a format standardized for Garmin Activity data.
+You can export your FIT file from Garmin Connect webpage, then put it in the content page of your blog.
+
+An example below uses MDX to leverage webpack to import FIT data into the component.
+After the static link is generated, it can be passed to `FITDataProvider` component.
+You can embed charts/viewer inside the `FITDataProvider` component, and the viewer will try to use FIT data defined by the parent context.
+This lets you load FIT data once upon build time, and let several charts refers to the same data.
+
+```mdx
+import activity_link from './16813834908_ACTIVITY.fit'
+
+<FITDataProvider fitFile={activity_link}>
+
+    <a href={`${activity_link}`}>Downloadable link to the FIT data, built by webpack</a>
+
+    <HeartRateViewer />
+    <PaceViewer />
+    <CadenceViewer />
+
+</FITDataProvider>
+```
+
+import activity_link from './16813834908_ACTIVITY.fit'
+
+<FITDataProvider fitFile={activity_link}>
+
+    <a href={`${activity_link}`}>Downloadable link to the FIT data, built by webpack</a>
+
+    <HeartRateViewer />
+    <PaceViewer />
+    <CadenceViewer />
+
+</FITDataProvider>

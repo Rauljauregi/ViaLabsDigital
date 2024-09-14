@@ -33,15 +33,19 @@
 		"prepare": "husky install"
 	},
 	"dependencies": {
+		"@astrojs/react": "^3.6.2",
 		"@astrojs/rss": "4.0.1",
-		"astro": "4.0.8",
+		"astro": "^4.15.6",
 		"astro-font": "^0.0.72"
 	},
 	"devDependencies": {
 		"@astrojs/mdx": "2.0.3",
+		"@astrojs/markdown-remark": "^5.2.0",
 		"@astrojs/sitemap": "3.0.4",
 		"@astrojs/tailwind": "5.1.0",
+		"@garmin/fitsdk": "^21.141.0",
 		"@pagefind/default-ui": "^1.0.4",
+		"@shikijs/transformers": "^1.17.6",
 		"@tailwindcss/typography": "0.5.10",
 		"@tinacms/cli": "^1.5.30",
 		"@typescript-eslint/parser": "^6.16.0",
@@ -62,7 +66,8 @@
 		"tailwind-merge": "2.0.0",
 		"tailwindcss": "3.3.5",
 		"tinacms": "^1.5.21",
-		"typescript": "^5.2.2"
+		"typescript": "^5.2.2",
+		"unist-util-visit": "^5.0.0"
 	},
 	"lint-staged": {
 		"*.{astro,js,jsx,ts,tsx,md,mdx,json}": [

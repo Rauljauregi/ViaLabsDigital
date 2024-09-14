@@ -1,0 +1,87 @@
+---
+title: Twitter UI
+description: Twitter UI example
+date: 2023-10-14T00:00:00
+category:
+  name: blogs
+layout: blog-post
+---
+
+# Twitter UI
+
+You can embed Twitter post, and the html will be rendered as twitter page.
+
+Go to the https://publish.twitter.com/ and paste your tweet link to generate the HTML embed code.
+Alternatively, from the tweet itself, click the triple dot menu and choose "embed tweet".
+
+Since the file format is MDX, make sure every tag is closed properly.
+For example, `<br>` needs to be replaced with `<br />`. `class` should be replaced with `className`.
+
+You also need to remove the script tag.
+
+So, an example would be this long line of HTML code:
+
+```html
+<blockquote className="twitter-tweet">
+	<p lang="en" dir="ltr">
+		I&#39;m now trying to catch up with my friends at work on using Javascript.<br /><br />This is
+		my Javascript journey.
+	</p>
+	&mdash; Maulana 🌸 eiyuuden chronicle (@maulana_pcfre)<a
+		href="https://twitter.com/maulana_pcfre/status/1202397636952608768?ref_src=twsrc%5Etfw"
+		>December 5, 2019</a
+	>
+</blockquote>
+```
+
+Will render into this:
+
+<blockquote className='twitter-tweet'>
+	<p lang='en' dir='ltr'>
+		I&#39;m now trying to catch up with my friends at work on using Javascript.
+		<br />
+		<br />
+		This is my Javascript journey.
+	</p>
+	&mdash; Maulana 🌸 eiyuuden chronicle (@maulana_pcfre)
+	<a href='https://twitter.com/maulana_pcfre/status/1202397636952608768?ref_src=twsrc%5Etfw'>
+		December 5, 2019
+	</a>
+</blockquote>
+
+Alternatively, you can write it like this:
+
+```html
+<blockquote class="twitter-tweet">
+	<p lang="en" dir="ltr">
+		I&#39;m now trying to catch up with my friends at work on using Javascript.<br /><br />This is
+		my Javascript journey.
+	</p>
+	&mdash; Maulana 🌸 eiyuuden chronicle (@maulana_pcfre)
+	<a href="https://twitter.com/maulana_pcfre/status/1202397636952608768?ref_src=twsrc%5Etfw"
+		>December 5, 2019</a
+	>
+</blockquote>
+```
+
+Or, since this is MDX, you can just copy the HTML embed code, and render it as JSX expression
+
+```jsx
+<div
+	dangerouslySetInnerHTML={{
+		__html: `<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I&#39;m now trying to catch up with my friends at work on using Javascript.<br><br>This is my Javascript journey.</p>&mdash; Maulana 🌸 eiyuuden chronicle (@maulana_pcfre) <a href="https://twitter.com/maulana_pcfre/status/1202397636952608768?ref_src=twsrc%5Etfw">December 5, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>`
+	}}
+/>
+```
+
+This theme also supports [mdx-embed](https://github.com/PaulieScanlon/mdx-embed)
+
+So you can use a `Tweet` component:
+
+```jsx
+<Tweet tweetLink='maulana_pcfre/status/1202397636952608768?ref_src=twsrc%5Etfw' />
+```
+
+You can retrieve the tweetLink from the URL of the tweet (click the date timestamp of tweet to navigate to that URL).
+The downside of using `Tweet` component is that the tweet is fetched at runtime.
+So you don't have a markdown copy of it in your file.

@@ -1,0 +1,53 @@
+---
+title: Algolia
+description: Algolia integration
+date: 2024-05-22T00:00:00
+category:
+  name: blogs
+layout: blog-post
+---
+
+# Algolia
+
+[Algolia](https://algolia.com) is a search indexing service.
+This blog theme provides integration with Algolia.
+
+# Workflow
+
+These are the general workflow.
+See [Adding search with Algolia](https://www.gatsbyjs.com/docs/adding-search-with-algolia/
+
+```mermaid render
+graph TD
+    A[Create Algolia Account] --> B[Note API Key]
+    B --> C[Put API Key in environment]
+    C --> D[Build index using yarn build]
+    D --> E[Set API Key in prod build environment]
+```
+
+## Local setup
+
+Create the following entries in your `.env` file
+
+```.env
+GATSBY_ALGOLIA_APP_ID=
+GATSBY_ALGOLIA_SEARCH_KEY=
+GATSBY_ALGOLIA_WRITE_KEY=
+```
+
+Fill in the value from Algolia API key page
+
+```shell
+# run this to trigger index rebuild
+yarn clean-build
+```
+
+## Prod deployment (Netlify)
+
+Attach build environment for the following env (similar with local setup)
+
+```.env
+GATSBY_ALGOLIA_APP_ID=
+GATSBY_ALGOLIA_SEARCH_KEY=
+GATSBY_ALGOLIA_WRITE_KEY=
+```

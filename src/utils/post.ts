@@ -7,10 +7,20 @@ export const getCategories = async () => {
 }
 
 export const getPosts = async (max?: number) => {
-	return (await getCollection('blog'))
+	return (await getCollection('soft-dev'))
 		.filter((post) => !post.data.draft)
 		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 		.slice(0, max)
+		.map((post) => {
+			if (post.data.date) {
+				post.data.pubDate = post.data.date
+			}
+			if (post.data.tags === undefined) {
+				post.data.tags = []
+			}
+			console.log(`post tags ${post.data.title} ${post.data.tags}`)
+			return post
+		})
 }
 
 export const getTags = async () => {
