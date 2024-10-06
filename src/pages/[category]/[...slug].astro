@@ -5,17 +5,20 @@ import Code from '@/components/mdx/Code'
 import ListRelatedPosts from '@/components/ListRelatedPosts'
 import Share from '@/components/Share'
 import TableOfContents from '@/components/TableOfContents'
-import { getPosts } from '@/utils'
+import { getAllCollection, getPosts, getCategoryName, sluglify } from '@/utils'
 import SButton from '@/components/mdx/SButton'
 import Disqus from '@/components/Disqus'
 import { disqusConfig } from '@/data/disqus.config'
 
-const posts = await getCollection('blog')
+const posts = await getAllCollection()
 export async function getStaticPaths() {
 	const posts = await getPosts()
 
 	return posts.map((post) => ({
-		params: { slug: post.slug },
+		params: {
+			slug: post.slug,
+			category: sluglify(getCategoryName(post.data.category).toLowerCase())
+		},
 		props: post
 	}))
 }

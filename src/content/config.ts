@@ -19,11 +19,14 @@ const blog = defineCollection({
 				.transform((val) => new Date(val))
 				.optional(),
 			heroImage: image().optional(),
-			category: z.enum(CATEGORIES).or(
-				z.object({
-					names: z.string()
-				})
-			),
+			category: z
+				.enum([CATEGORIES[0].slug, ...CATEGORIES.slice(1).map((c) => c.slug)])
+				.or(z.string())
+				.or(
+					z.object({
+						name: z.string()
+					})
+				),
 			tags: z.array(z.string()).default([]),
 			comments: z.boolean().default(true),
 			draft: z.boolean().default(false)

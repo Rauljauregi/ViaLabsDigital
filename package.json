@@ -35,12 +35,15 @@
 	"dependencies": {
 		"@astrojs/react": "^3.6.2",
 		"@astrojs/rss": "4.0.1",
+		"@astrojs/starlight": "^0.28.2",
+		"@astrojs/starlight-docsearch": "^0.2.0",
+		"algoliasearch": "^5.4.3",
 		"astro": "^4.15.6",
 		"astro-font": "^0.0.72"
 	},
 	"devDependencies": {
-		"@astrojs/mdx": "2.0.3",
 		"@astrojs/markdown-remark": "^5.2.0",
+		"@astrojs/mdx": "2.0.3",
 		"@astrojs/sitemap": "3.0.4",
 		"@astrojs/tailwind": "5.1.0",
 		"@garmin/fitsdk": "^21.141.0",

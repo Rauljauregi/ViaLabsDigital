@@ -1,16 +1,39 @@
 import { getCollection } from 'astro:content'
+import { CATEGORIES } from '@/data/categories.ts'
+import { unsluglify } from './sluglify.ts'
+
+export const getAllCollection = async () => {
+	const allPosts = [await getCollection('blog'), await getCollection('soft-dev')]
+	return allPosts.flat()
+}
 
 export const getCategories = async () => {
-	const posts = await getCollection('blog')
-	const categories = new Set(posts.map((post) => post.data.category))
+	// const posts = await getCollection('blog')
+	const posts = await getAllCollection()
+	const categories = new Set(posts.map((post) => getCategoryName(post.data.category)))
 	return Array.from(categories)
 }
 
+export const getCategoryTitleFromSlug = (cat: string | any) => {
+	const name = getCategoryName(cat)
+	const title = CATEGORIES.find((o) => o.slug === name)?.title
+	return title || unsluglify(cat)
+}
+
+export const getCategoryName = (cat: string | any) => {
+	switch (typeof cat) {
+		case 'string':
+			return cat
+		case 'object':
+			return cat.name
+	}
+	return cat
+}
+
 export const getPosts = async (max?: number) => {
-	return (await getCollection('soft-dev'))
+	// return (await getCollection('soft-dev'))
+	return (await getAllCollection())
 		.filter((post) => !post.data.draft)
-		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-		.slice(0, max)
 		.map((post) => {
 			if (post.data.date) {
 				post.data.pubDate = post.data.date
@@ -18,13 +41,15 @@ export const getPosts = async (max?: number) => {
 			if (post.data.tags === undefined) {
 				post.data.tags = []
 			}
-			console.log(`post tags ${post.data.title} ${post.data.tags}`)
 			return post
 		})
+		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+		.slice(0, max)
 }
 
 export const getTags = async () => {
-	const posts = await getCollection('blog')
+	// const posts = await getCollection('blog')
+	const posts = await getAllCollection()
 	const tags = new Set()
 	posts.forEach((post) => {
 		post.data.tags.forEach((tag) => {

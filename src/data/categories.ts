@@ -1,8 +1,19 @@
 // List of categories for blog posts
 export const CATEGORIES = [
-	'Category 1',
-	'Category 2',
-	'Category 3',
-	'Category 4',
-	'Category 5'
+	{
+		title: 'All',
+		slug: 'all'
+	},
+	{
+		title: 'Blogs',
+		slug: 'blogs'
+	},
+	{
+		title: 'Physics',
+		slug: 'physics'
+	},
+	{
+		title: 'Software Development',
+		slug: 'soft-dev'
+	}
 ] as const
