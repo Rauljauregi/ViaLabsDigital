@@ -6,18 +6,19 @@ import MenuIcon from './icons/MenuIcon.astro'
 import Search from '@/components/Search'
 import TagIcon from './icons/TagIcon.astro'
 import ToggleTheme from './ToggleTheme.astro'
+import { siteConfig } from '@/data/site.config'
 
 // ADD YOUR SOCIAL NETWORKS HERE
 const SOCIALNETWORKS = [
 	{
 		name: 'Github',
-		url: 'https://github.com/danielcgilibert/blog-template',
+		url: `https://github.com/${siteConfig.social.github}`,
 		icon: GithubIcon
 	},
 
 	{
 		name: 'Twitter',
-		url: 'https://github.com/danielcgilibert/blog-template',
+		url: `https://twitter.com/${siteConfig.social.twitter}`,
 		icon: TwitterIcon
 	}
 ]

@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content'
 import { CATEGORIES } from '@/data/categories'
+import { siteConfig } from '@/site-config'
 
 const blog = defineCollection({
 	// Type-check frontmatter using a schema
@@ -7,11 +8,8 @@ const blog = defineCollection({
 		z.object({
 			title: z.string().max(80),
 			description: z.string(),
-			date: z
-				.string()
-				.or(z.date())
-				.default(new Date())
-				.transform((val) => new Date(val)),
+			index: z.boolean().default(false),
+			date: z.string().or(z.date()).optional(),
 			// Transform string to Date object
 			pubDate: z
 				.string()
@@ -24,12 +22,14 @@ const blog = defineCollection({
 				.or(z.string())
 				.or(
 					z.object({
-						name: z.string()
+						name: z.string(),
+						index: z.number().optional(),
+						depth: z.number().optional()
 					})
 				),
 			tags: z.array(z.string()).default([]),
-			comments: z.boolean().default(true),
-			draft: z.boolean().default(false)
+			comments: z.boolean().default(false),
+			draft: z.boolean().default(siteConfig.config.commentsEnabled)
 		})
 })
 

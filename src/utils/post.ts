@@ -3,8 +3,15 @@ import { CATEGORIES } from '@/data/categories.ts'
 import { unsluglify } from './sluglify.ts'
 
 export const getAllCollection = async () => {
-	const allPosts = [await getCollection('blog'), await getCollection('soft-dev')]
-	return allPosts.flat()
+	const allPosts = [
+		await getCollection('blogs'),
+		await getCollection('physics'),
+		await getCollection('soft-dev'),
+		await getCollection('blog')
+	]
+	return allPosts.flat().filter((c) => {
+		return c.data.title !== undefined
+	})
 }
 
 export const getCategories = async () => {
@@ -33,10 +40,11 @@ export const getCategoryName = (cat: string | any) => {
 export const getPosts = async (max?: number) => {
 	// return (await getCollection('soft-dev'))
 	return (await getAllCollection())
-		.filter((post) => !post.data.draft)
+		.filter((post) => !post.data.draft && !post.data.index)
 		.map((post) => {
-			if (post.data.date) {
-				post.data.pubDate = post.data.date
+			post.data.pubDate = post.data.pubDate || post.data.date
+			if (post.data.pubDate === undefined) {
+				post.data.pubDate = new Date()
 			}
 			if (post.data.tags === undefined) {
 				post.data.tags = []
@@ -49,7 +57,8 @@ export const getPosts = async (max?: number) => {
 
 export const getTags = async () => {
 	// const posts = await getCollection('blog')
-	const posts = await getAllCollection()
+	// const posts = await getAllCollection()
+	const posts = await getPosts()
 	const tags = new Set()
 	posts.forEach((post) => {
 		post.data.tags.forEach((tag) => {
@@ -58,6 +67,13 @@ export const getTags = async () => {
 	})
 
 	return Array.from(tags)
+}
+
+export const getIndexPageByCategory = async (category: string) => {
+	const posts = await getAllCollection()
+	return posts.find(
+		(post) => post.data.index && getCategoryName(post.data.category).toLowerCase() === category
+	)
 }
 
 export const getPostByTag = async (tag: string) => {
@@ -70,5 +86,5 @@ export const getPostByTag = async (tag: string) => {
 
 export const filterPostsByCategory = async (category: string) => {
 	const posts = await getPosts()
-	return posts.filter((post) => post.data.category.toLowerCase() === category)
+	return posts.filter((post) => getCategoryName(post.data.category).toLowerCase() === category)
 }

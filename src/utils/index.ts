@@ -8,6 +8,7 @@ export {
 	getPosts,
 	getTags,
 	getPostByTag,
+	getIndexPageByCategory,
 	filterPostsByCategory
 } from './post'
 export { remarkReadingTime } from './readTime'

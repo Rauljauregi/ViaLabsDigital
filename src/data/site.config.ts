@@ -66,7 +66,7 @@ export const siteConfig: SiteConfig = {
 		// assetPath: `${__dirname}/../assets`,
 		categoryNameForAll: 'all',
 		paginationPageSize: 10,
-		commentsEnabled: true,
+		commentsEnabled: false,
 		commentsProps: {
 			repo: 'lucernae/astro-blog-template',
 			repoId: 'R_kgDOMuDGhA',

@@ -9,10 +9,14 @@ import {
 	getCategories,
 	getCategoryName,
 	getCategoryTitleFromSlug,
+	getIndexPageByCategory,
 	getPosts
 } from '@/utils'
 import { siteConfig } from '@/data/site.config'
 import Pagination from '@/components/Pagination'
+import Code from '@/components/mdx/Code'
+import SButton from '@/components/mdx/SButton'
+import { components } from '../../components/mixins/AutoImportComponents'
 
 export async function getStaticPaths({ paginate }: any) {
 	const categories = await getCategories()
@@ -36,12 +40,20 @@ const params = Astro.params
 const { page } = Astro.props
 
 const categoryTitle = getCategoryTitleFromSlug(params.category!.toLowerCase())
+const indexPage = await getIndexPageByCategory(params.category!.toLowerCase())
 const posts = page.data
 ---
 
 <BaseLayout title={params.category}>
 	<TitlePage title={categoryTitle} />
 	<ListCategories activeCategory={params.category} />
+	{
+		indexPage &&
+			[indexPage].map(async (post) => {
+				const { Content } = await post.render()
+				return <Content components={{ ...components, pre: Code, SButton }} />
+			})
+	}
 	<ListPosts posts={posts} />
 	<Pagination page={page} />
 </BaseLayout>

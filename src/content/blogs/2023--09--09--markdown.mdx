@@ -1,0 +1,344 @@
+---
+title: Markdown
+description: Markdown example
+date: 2023-09-09T00:00:00
+category:
+  name: blogs
+<!-- layout: blog-post -->
+---
+
+# Markdown
+
+This is a markdown <a id="cookbook" href="#cookbook">cookbook</a>
+
+# Heading
+
+To make a heading simply uses `#`
+
+```markdown
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+```
+
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+# Font style
+
+```markdown
+_single star_ brackets is italic
+
+**double star** brackets is bold
+
+_single underscore_ brackets is italic
+
+**double underscore** brackets is bold
+
+~tilde~ brackets is strike thru
+
+~~double tilde~~ brackets is strike thru
+```
+
+_single star_ brackets is italic
+
+**double star** brackets is bold
+
+_single underscore_ brackets is italic
+
+**double underscore** brackets is bold
+
+~tilde~ brackets is strike thru
+
+~~double tilde~~ brackets is strike thru
+
+# Bullets/Numbering
+
+```markdown
+1. Use Number
+2. Without extra new line
+3. To perform numbered lists
+4. Note that the numbers will be automatically incremented
+5. Even if the source is wrong
+
+- You can use `-`
+- Without extra new line
+- To perform bulleted lists
+
+* If you use `*` after `-` it will be separated into a different group
+* Use this to automatically break two different lists
+```
+
+1. Use Number
+2. Without extra new line
+3. To perform numbered lists
+4. Note that the numbers will be automatically incremented
+5. Even if the source is wrong
+
+- You can use `-`
+- Without extra new line
+- To perform bulleted lists
+
+* If you use `*` after `-` it will be separated into a different group
+* Use this to automatically break two different lists
+
+# Anchor
+
+```markdown
+Anchor is tag used to define link between two objects.
+
+To link into anchor located in the same page, use the slugified heading: [go to heading 1](#heading)
+
+An anchor doesn't have to be a heading.
+
+To define a new anchor, attach an html `id` attribtue to the object: <a id="my-anchor" name="my-anchor-name" href="#my-anchor">this is an anchor</a>.
+
+Then you can link into your own anchor: [go to my anchor](#my-anchor)
+
+You can also uses `name` attribute: [go to my anchor by name](#my-anchor-name)
+```
+
+Anchor is tag used to define link between two objects.
+
+To link into anchor located in the same page, use the slugified heading: [go to heading 1](#heading)
+
+An anchor doesn't have to be a heading.
+
+To define a new anchor, attach an html `id` attribtue to the object: <a id="my-anchor" name="my-anchor-name" href="#my-anchor">this is an anchor</a>.
+
+Then you can link into your own anchor: [go to my anchor](#my-anchor)
+
+You can also uses `name` attribute: [go to my anchor by name](#my-anchor-name)
+
+# Block Elements
+
+```markdown
+Simply write anything.
+If it is still not separated by two line break.
+It will count as the same paragraph.
+
+This is a new paragraph.
+
+This is another new paragraph.
+
+Your new line in source code won't matter.
+The block will render it as one long sentence.
+```
+
+Simply write anything.
+If it is still not separated by two line break.
+It will count as the same paragraph.
+
+This is a new paragraph.
+
+This is another new paragraph.
+
+Your new line in source code won't matter.
+The block will render it as one long sentence.
+
+# Blockquotes
+
+```markdown
+Block quotes is used as an email/RFC styles of quoting.
+
+Append a new line with `>` sign, and then it will becomes a quoted block.
+As long as it doesn't encounter two new lines, the following new line will be treated as the same block quotes
+
+> This is a new line.
+> This is another new line inside the same Blockquotes
+
+> This is a different Blockquotes
+
+> You can copy paste block quotes from email,
+> where each line has `>` sign.
+```
+
+Block quotes is used as an email/RFC styles of quoting.
+
+Append a new line with `>` sign, and then it will becomes a quoted block.
+As long as it doesn't encounter two new lines, the following new line will be treated as the same block quotes
+
+> This is a new line.
+> This is another new line inside the same Blockquotes
+
+> This is a different Blockquotes
+
+> You can copy paste block quotes from email,
+> where each line has `>` sign.
+
+# Code block
+
+Code block, or preformatted blocks is used to show a block you write, as it is, without markdown processing.
+
+Add three backticks before and after the blocks
+
+```
+This is a code block
+
+**markdown syntax** will be displayed as it is.
+
+One sentence.
+Two sentence.
+Three sentence.
+
+1. Numbering
+2. Is not
+10. automatically incremented
+```
+
+You can add syntax highlighting if the renderer supports it. Add the syntax name after the first three backticks
+For example, this is a python code:
+
+```python
+def my_func():
+    print("Hello World")
+
+my_func()
+```
+
+You can also syntax highlight Markdown syntax:
+
+```markdown
+Bold sentence **is here**
+```
+
+Here's the source code of above code blocks (Code block-ception):
+
+````markdown
+```
+This is a code block
+
+**markdown syntax** will be displayed as it is.
+
+One sentence.
+Two sentence.
+Three sentence.
+
+1. Numbering
+2. Is not
+10. automatically incremented
+```
+
+You can add syntax highlighting if the renderer supports it. Add the syntax name after the first three backticks
+For example, this is a python code:
+
+```python
+def my_func():
+    print("Hello World")
+
+my_func()
+```
+
+You can also syntax highlight Markdown syntax:
+
+```markdown
+Bold sentence **is here**
+```
+````
+
+# Escaping backticks
+
+Backticks is used to enclose a preformatted character, `like this`.
+
+You also used a code block, before. It uses backticks.
+
+`This is a code block.
+And it is displayed as **it is**.`
+
+You most often sees that there are three backticks used for blocks ` ``` `.
+
+```
+This is a code block
+```
+
+This is because three backticks is used to escape two or one backticks inside a code block.
+
+So, if you want to put text that contains 3 backticks, for example, showing a source of the code blocks,
+use 4 backticks or more.
+
+`````markdown
+````markdown
+Use 4 backticks to escape 3 backticks code blocks
+
+```markdown
+My markdown **syntax** example.
+```
+````
+
+By the way, this also means, this blocks uses 5 backticks in the source code :D.
+`````
+
+# Horizontal separator
+
+You can make separator by using three dashes `---` or stars `***` or underscores `___`
+
+---
+
+```markdown
+You can make separator by using three dashes `---` or stars `***` or underscores `___`
+
+---
+```
+
+# HTML Tags
+
+```markdown
+Non-scripted, unstyled, HTML tags will mostly works.
+
+Things like <a href="#html-tags">anchor links</a>
+
+Or <i>italics</i>
+
+Or <b>bolds</b>
+
+Or <s>strike thru</s>
+```
+
+Non-scripted, unstyled, HTML tags will mostly works.
+
+Things like <a href="#html-tags">anchor links</a>
+
+Or <i>italics</i>
+
+Or <b>bolds</b>
+
+Or <s>strike thru</s>
+
+## Collapsible
+
+A collapsible section can be made using `<details>` and `<summary>` tags. Like this:
+
+<details>
+<summary>Click Me!</summary>
+
+This is the details with valid **Markdown**
+
+Leave newline after the tag to format content as MDX.
+
+```python
+print('Hello world')
+```
+
+</details>
+
+````markdown
+A collapsible section can be made using `<details>` and `<summary>` tags. Like this:
+
+<details>
+<summary>Click Me!</summary>
+
+This is the details with valid **Markdown**.
+
+Leave newline after the tag to format content as MDX.
+
+```python
+print('Hello world')
+```
+
+</details>
+````

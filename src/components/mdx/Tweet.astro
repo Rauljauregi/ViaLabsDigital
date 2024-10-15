@@ -1,0 +1,11 @@
+---
+import { Tweet as AstroTweet } from 'astro-embed'
+let tweetID
+if (Astro.props.tweetLink !== undefined) {
+	tweetID = `https://twitter.com/${Astro.props.tweetLink}`
+} else {
+	tweetID = Astro.props.id
+}
+---
+
+<AstroTweet id={tweetID} />

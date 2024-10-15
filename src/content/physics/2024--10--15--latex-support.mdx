@@ -1,0 +1,142 @@
+---
+title: LaTeX support
+description: Writing equation in MDX
+date: 2024-10-15T00:00:00
+category:
+  name: blogs
+<!-- layout: blog-post -->
+---
+
+We can write math and physic equation using $LaTeX$ and $KaTeX$
+
+# Inline style
+
+Wrap with single dollar sign to create equation inline
+
+```markdown
+My function: $f(x) = e^{x^2}$
+```
+
+My function: $f(x) = e^{x^2}$
+
+# Block style
+
+You can make equation block like this using double dollar sign
+
+```markdown
+This is the derivation rule of exponent
+
+$$
+\begin{align*}
+f(x) &= x^2 \\
+\frac{d}{dx} f(x) &= 2x
+\end{align*}
+$$
+```
+
+This is the derivation rule of power
+
+$$
+\begin{align*}
+f(x) &= x^2 \\
+\frac{d}{dx} f(x) &= 2x
+\end{align*}
+$$
+
+# FAQ and Tips
+
+## Subscript and Superscript
+
+Use `_` for subscript and `^` for superscript. Order don't matter. Multicharacter can be grouped using `{}`
+
+```markdown
+$$
+\sum_{i=0}^N i
+$$
+```
+
+$$
+\sum_{i=0}^N i
+$$
+
+## Greek Letter
+
+Prefix the latin name of the greek letter with `\` to render as greek letter
+
+```markdown
+$$
+\alpha \beta \gamma
+$$
+```
+
+$$
+\alpha \beta \gamma
+$$
+
+## Character Spacing
+
+$LaTeX$ assume single letter as a symbol. Other than that, we need to use special character
+
+### Regular Spacing
+
+```markdown
+Regular spacing
+
+$$
+\begin{align}
+abc=def \\
+a    b    c = d    e    f \\
+\end{align}
+$$
+```
+
+Regular spacing
+
+$$
+\begin{align}
+abc=def \\
+a    b    c = d    e    f \\
+\end{align}
+$$
+
+### Extra Spacing
+
+```markdown
+Extra spacing
+
+$$
+\begin{align}
+a\,b\,c = d\,e\,f \\
+a   \,   b   \,   c = d   \,   e   \,f
+\end{align}
+$$
+```
+
+Extra spacing
+
+$$
+\begin{align}
+a\,b\,c = d\,e\,f \\
+a   \,   b   \,   c = d   \,   e   \,f
+\end{align}
+$$
+
+### Grouping Several Characters
+
+```markdown
+Making operator name
+
+$$
+\begin{align}
+\operatorname{sinc}(t) = \frac{\sin(t)}{t}
+\end{align}
+$$
+```
+
+Making operator name
+
+$$
+\begin{align}
+\operatorname{sinc}(t) = \frac{\sin(\pi t)}{t}
+\end{align}
+$$

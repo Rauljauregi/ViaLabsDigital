@@ -9,8 +9,9 @@ import { getAllCollection, getPosts, getCategoryName, sluglify } from '@/utils'
 import SButton from '@/components/mdx/SButton'
 import Disqus from '@/components/Disqus'
 import { disqusConfig } from '@/data/disqus.config'
+import { components } from '../../components/mixins/AutoImportComponents'
 
-const posts = await getAllCollection()
+const posts = await getPosts()
 export async function getStaticPaths() {
 	const posts = await getPosts()
 
@@ -59,7 +60,7 @@ const disqusEnabled = disqusConfig.enabled
 		<!-- post -->
 		<article class='max-w-full w-full'>
 			<div class='prose prose-lg md:prose-xl dark:prose-invert mb-12 min-w-full'>
-				<Content components={{ pre: Code, SButton }} />
+				<Content components={{ ...components, pre: Code, SButton }} />
 			</div>
 
 			<!-- related posts -->

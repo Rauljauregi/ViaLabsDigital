@@ -1,0 +1,16 @@
+---
+import { sluglify, getCategories } from '@/utils'
+export async function getStaticPaths() {
+	const categories = await getCategories()
+
+	return categories.flatMap((category: string) => {
+		return {
+			params: {
+				category: sluglify(category.toLowerCase())
+			}
+		}
+	})
+}
+const params = Astro.params
+return Astro.redirect(`/${params.category}/1`)
+---
