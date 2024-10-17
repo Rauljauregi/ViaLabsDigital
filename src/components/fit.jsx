@@ -13,6 +13,7 @@ import moment from 'moment'
 import Loadable from 'react-loadable'
 import { atom, map } from 'nanostores'
 import { useStore } from '@nanostores/react'
+import styled from '@emotion/styled'
 
 const LoadablePlotlyPlot = Loadable({
 	loader: () => import('react-plotly.js'),
@@ -75,6 +76,14 @@ const fitDataStoreEffect = (setFitReader, setFitData, $fitDataStore) => {
 			setFitData(fitData)
 		}
 	}
+}
+
+const FITChartWrapper = ({ className, children }) => {
+	const StyledDiv = styled.div`
+		overflow-x: auto;
+		white-space: nowrap;
+	`
+	return <StyledDiv className={`${className} m-8`}>{children}</StyledDiv>
 }
 
 export const FITDataProvider = ({ id, fitFile, children }) => {
@@ -208,49 +217,51 @@ export const HeartRateViewer = ({ providerID, fitFile, width, height, useMUI }) 
 	}
 	if (useMUI) {
 		return (
-			<LineChart
-				client:only={'react'}
-				title={'Heart Rate (bpm)'}
-				className={'bg-white'}
-				xAxis={[
-					{
-						colorMap: {
-							type: 'piecewise',
-							thresholds: chartData.thresholdsData.map((val) => {
+			<FITChartWrapper className={'heart-rate-viewer'}>
+				<LineChart
+					client:only={'react'}
+					title={'Heart Rate (bpm)'}
+					className={'bg-white'}
+					xAxis={[
+						{
+							colorMap: {
+								type: 'piecewise',
+								thresholds: chartData.thresholdsData.map((val) => {
+									return val - chartData.startTimeStamp
+								}),
+								colors: chartData.thresholdsClass
+							},
+							data: chartData.xAxis.map((val) => {
 								return val - chartData.startTimeStamp
 							}),
-							colors: chartData.thresholdsClass
-						},
-						data: chartData.xAxis.map((val) => {
-							return val - chartData.startTimeStamp
-						}),
-						scaleType: 'point',
-						tickInterval: (value, index) => {
-							return value % (60 * 1000 * 10) === 0
-						},
-						valueFormatter: (timeSpan, context) => {
-							return moment(timeSpan).utc().format('HH:mm:ss')
+							scaleType: 'point',
+							tickInterval: (value, index) => {
+								return value % (60 * 1000 * 10) === 0
+							},
+							valueFormatter: (timeSpan, context) => {
+								return moment(timeSpan).utc().format('HH:mm:ss')
+							}
 						}
-					}
-				]}
-				series={[
-					{
-						label: 'Heart Rate (bpm)',
-						data: chartData.heartRateData,
-						showMark: false,
-						curve: 'linear',
-						color: 'red',
-						valueFormatter: (value) => {
-							const hrZone = HeartRateZoneMapping(value, hrZoneBoundary)
-							return <span>{`${hrZone.zoneClass} ${value} bpm`}</span>
-						},
-						area: true
-					}
-				]}
-				disableLineItemHighlight
-				width={width || 800}
-				height={height || 300}
-			/>
+					]}
+					series={[
+						{
+							label: 'Heart Rate (bpm)',
+							data: chartData.heartRateData,
+							showMark: false,
+							curve: 'linear',
+							color: 'red',
+							valueFormatter: (value) => {
+								const hrZone = HeartRateZoneMapping(value, hrZoneBoundary)
+								return <span>{`${hrZone.zoneClass} ${value} bpm`}</span>
+							},
+							area: true
+						}
+					]}
+					disableLineItemHighlight
+					width={width || 800}
+					height={height || 300}
+				/>
+			</FITChartWrapper>
 		)
 	}
 	return (
@@ -346,53 +357,55 @@ export const PaceViewer = ({ providerID, fitFile, width, height, useMUI }) => {
 	}
 	if (useMUI) {
 		return (
-			<LineChart
-				className={'bg-white'}
-				xAxis={[
-					{
-						data: chartData.xAxis.map((val) => {
-							return val - chartData.startTimeStamp
-						}),
-						scaleType: 'point',
-						tickInterval: (value, index) => {
-							return value % (60 * 1000 * 10) === 0
-						},
-						valueFormatter: (timeSpan, context) => {
-							return moment(timeSpan).utc().format('HH:mm:ss')
+			<FITChartWrapper className={'pace-viewer'}>
+				<LineChart
+					className={'bg-white'}
+					xAxis={[
+						{
+							data: chartData.xAxis.map((val) => {
+								return val - chartData.startTimeStamp
+							}),
+							scaleType: 'point',
+							tickInterval: (value, index) => {
+								return value % (60 * 1000 * 10) === 0
+							},
+							valueFormatter: (timeSpan, context) => {
+								return moment(timeSpan).utc().format('HH:mm:ss')
+							}
 						}
-					}
-				]}
-				yAxis={[
-					{
-						scaleType: 'linear',
-						valueFormatter: (speed, context) => {
-							try {
-								return FormatPaceToString(SpeedToPace(speed))
-							} catch (e) {}
-							return ''
+					]}
+					yAxis={[
+						{
+							scaleType: 'linear',
+							valueFormatter: (speed, context) => {
+								try {
+									return FormatPaceToString(SpeedToPace(speed))
+								} catch (e) {}
+								return ''
+							}
 						}
-					}
-				]}
-				series={[
-					{
-						label: 'Pace (min/km)',
-						data: chartData.paceData,
-						showMark: false,
-						curve: 'linear',
-						color: 'blue',
-						area: true,
-						valueFormatter: (speed, context) => {
-							try {
-								return FormatPaceToString(SpeedToPace(speed))
-							} catch (e) {}
-							return ''
+					]}
+					series={[
+						{
+							label: 'Pace (min/km)',
+							data: chartData.paceData,
+							showMark: false,
+							curve: 'linear',
+							color: 'blue',
+							area: true,
+							valueFormatter: (speed, context) => {
+								try {
+									return FormatPaceToString(SpeedToPace(speed))
+								} catch (e) {}
+								return ''
+							}
 						}
-					}
-				]}
-				disableLineItemHighlight
-				width={width || 800}
-				height={height || 300}
-			/>
+					]}
+					disableLineItemHighlight
+					width={width || 800}
+					height={height || 300}
+				/>
+			</FITChartWrapper>
 		)
 	}
 	return (
@@ -490,48 +503,50 @@ export const CadenceViewer = ({ providerID, fitFile, width, height, useMUI }) =>
 	}
 	if (useMUI) {
 		return (
-			<LineChart
-				className={'bg-white'}
-				xAxis={[
-					{
-						data: chartData.xAxis.map((val) => {
-							return val - chartData.startTimeStamp
-						}),
-						scaleType: 'point',
-						tickInterval: (value, index) => {
-							return value % (60 * 1000 * 10) === 0
-						},
-						valueFormatter: (timeSpan, context) => {
-							return moment(timeSpan).utc().format('HH:mm:ss')
+			<FITChartWrapper className={'cadence-viewer'}>
+				<LineChart
+					className={'bg-white'}
+					xAxis={[
+						{
+							data: chartData.xAxis.map((val) => {
+								return val - chartData.startTimeStamp
+							}),
+							scaleType: 'point',
+							tickInterval: (value, index) => {
+								return value % (60 * 1000 * 10) === 0
+							},
+							valueFormatter: (timeSpan, context) => {
+								return moment(timeSpan).utc().format('HH:mm:ss')
+							}
 						}
-					}
-				]}
-				yAxis={[
-					{
-						scaleType: 'linear',
-						colorMap: {
-							type: 'piecewise',
-							thresholds: [151, 163, 174, 186],
-							colors: ['#ff0035', '#ed7e00', '#50b012', '#11a9ed', '#cf23b8']
+					]}
+					yAxis={[
+						{
+							scaleType: 'linear',
+							colorMap: {
+								type: 'piecewise',
+								thresholds: [151, 163, 174, 186],
+								colors: ['#ff0035', '#ed7e00', '#50b012', '#11a9ed', '#cf23b8']
+							}
 						}
-					}
-				]}
-				series={[
-					{
-						label: 'Cadence (spm)',
-						data: chartData.cadenceData,
-						color: '#cf23b8',
-						showMark: false,
-						curve: 'linear',
-						valueFormatter: (cadence, context) => {
-							return `${cadence} spm ${CadenceZoneMapping(cadence)}`
+					]}
+					series={[
+						{
+							label: 'Cadence (spm)',
+							data: chartData.cadenceData,
+							color: '#cf23b8',
+							showMark: false,
+							curve: 'linear',
+							valueFormatter: (cadence, context) => {
+								return `${cadence} spm ${CadenceZoneMapping(cadence)}`
+							}
 						}
-					}
-				]}
-				disableLineItemHighlight
-				width={width || 800}
-				height={height || 300}
-			/>
+					]}
+					disableLineItemHighlight
+					width={width || 800}
+					height={height || 300}
+				/>
+			</FITChartWrapper>
 		)
 	}
 	return (

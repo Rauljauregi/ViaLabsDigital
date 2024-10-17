@@ -1,6 +1,6 @@
 import Tweet from '../mdx/Tweet.astro'
 import Mermaid from '../mermaid.jsx'
-import Geogebra from '../geogebra.jsx'
+import GeoGebra from '../geogebra.jsx'
 import {
 	FITDataProvider,
 	ActivityEmbedViewer,
@@ -12,7 +12,7 @@ import {
 export const components = {
 	Tweet,
 	Mermaid,
-	Geogebra,
+	GeoGebra,
 	FITDataProvider,
 	ActivityEmbedViewer,
 	HeartRateViewer,
