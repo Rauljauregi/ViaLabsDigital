@@ -10,7 +10,6 @@ import fs from 'node:fs'
 import partytown from '@astrojs/partytown'
 
 const __filename = fileURLToPath(import.meta.url)
-console.log('__filename is : ', __filename)
 const __dirname = path.dirname(__filename)
 const directoryPath = path.join(__dirname, 'src', 'content', 'blog')
 const NewsletterDirectoryPath = path.join(__dirname, 'src', 'content', 'newsletter')
