@@ -18,7 +18,11 @@ const blog = defineCollection({
 				.string()
 				.optional()
 				.transform((str) => (str ? new Date(str) : undefined)),
-			heroImage: image(),
+			heroImage: z
+				.string()
+				.refine((path) => path.startsWith('/images/'), {
+				  message: 'La imagen debe estar en la carpeta /public/images/ y comenzar con /images/',
+				}),
 			category: z.enum(CATEGORIES),
 			tags: z.array(z.string()),
 			draft: z.boolean().default(false)
@@ -41,7 +45,11 @@ const newsletter = defineCollection({
 				.string()
 				.optional()
 				.transform((str) => (str ? new Date(str) : undefined)),
-			heroImage: image(),
+			heroImage: z
+				.string()
+				.refine((path) => path.startsWith('/images/'), {
+				  message: 'La imagen debe estar en la carpeta /public/images/ y comenzar con /images/',
+				}),
 			category: z.enum(NEWSLETTER),
 			tags: z.array(z.string()),
 			draft: z.boolean().default(false),
