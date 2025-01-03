@@ -30,7 +30,7 @@ const newsletterUrls = newsletterFiles.map((file) => {
 
 // https://astro.build/config
 export default defineConfig({
-	output: 'static',
+	output: 'server',
 	adapter: vercel(),
 	site: 'https://mindfulml.vialabsdigital.com/', // Write here your website url
 	markdown: {
