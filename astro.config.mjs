@@ -21,7 +21,7 @@ export default defineConfig({
   integrations: [
     mdx({
       syntaxHighlight: 'shiki',
-      rehypePlugins: [['rehype-katex', { throwOnError: true }]],
+      rehypePlugins: [rehypeKatex, { throwOnError: true }],
       shikiConfig: {
         theme: 'material-theme-palenight',
         wrap: true,
