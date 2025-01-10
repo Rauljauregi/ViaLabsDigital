@@ -1,4 +1,3 @@
-
 ---
 title: "El Mecanismo de Atención en Modelos Transformer: Una Introducción Detallada"
 description: "El mecanismo de atención en los modelos Transformer como BERT y GPT. Aprende sobre Q, K, V, sus fórmulas y aplicaciones en NLP con ejemplos prácticos y claros."
@@ -36,7 +35,6 @@ En modelos modernos como *BERT* y *GPT*, este enfoque permite que el modelo:
 - **V (Value)**: Representa la información asociada a cada clave.
 
 ### Fórmula Fundamental
-La base matemática del mecanismo de atención se define como:
 
 $$
 Q = W_q \cdot x, \quad K = W_k \cdot x, \quad V = W_v \cdot x
@@ -47,6 +45,7 @@ Donde:
 - \( W_q, W_k, W_v \): Son matrices de pesos aprendibles que proyectan la entrada en los espacios de *query*, *key* y *value*.
 
 ### Ejemplo Práctico del Cálculo de Q, K y V
+
 Imagina una oración: *"El gato persigue al ratón"*.  
 Si \( x \) representa los embeddings de las palabras individuales:
 - \( Q \) de *gato*: Es una proyección que busca similitudes con otras palabras relacionadas con "gato".
@@ -60,6 +59,7 @@ El cálculo de la atención usa estas representaciones para determinar qué pala
 ## Impacto de las Máscaras y los Pesos de Atención
 
 ### Fórmula para el Peso de Atención
+
 El peso de atención entre dos palabras \( i \) y \( j \) se calcula como:
 
 $$
@@ -72,6 +72,7 @@ Donde:
 - \(\text{softmax}\): Convierte estas similitudes en probabilidades.
 
 ### Ejemplo de Enmascaramiento Causal
+
 En una secuencia de entrada como "El gato persigue al ratón":
 - El token "persigue" solo puede atender a "El" y "gato", pero no a "ratón" (que está más adelante).
 
