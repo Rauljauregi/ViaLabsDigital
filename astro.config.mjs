@@ -15,11 +15,17 @@ export default defineConfig({
         assetsInclude: ['**/*.fit'], // Incluye tipos de archivos adicionales si es necesario
     },
     markdown: {
-        remarkPlugins: [remarkReadingTime, remarkMath], // Plugins de remark para lectura y matemáticas
-        rehypePlugins: [rehypeKatex], // Renderizado de fórmulas matemáticas con KaTeX
-        drafts: true, // Habilita borradores
+        remarkPlugins: [remarkReadingTime, [remarkMath, {
+            singleDollar: false, // Opcional: habilita $...$ para matemáticas inline
+        }]],
+        rehypePlugins: [[rehypeKatex, {
+            // Opciones de KaTeX
+            throwOnError: false,
+            strict: false
+        }]],
+        drafts: true,
         shikiConfig: {
-            theme: 'material-theme-palenight', // Tema para resaltado de código
+            theme: 'material-theme-palenight',
             wrap: true,
         },
     },

@@ -1,0 +1,36 @@
+---
+interface Props {
+    display?: boolean;
+    formula: string;
+}
+
+const { display = false, formula } = Astro.props;
+---
+
+<div class={`math-content ${display ? 'math-display' : 'math-inline'} prose dark:prose-invert`}>
+    {display ? (
+        <div class="katex-display">
+            <span class="katex-html" set:html={formula} />
+        </div>
+    ) : (
+        <span class="katex" set:html={formula} />
+    )}
+</div>
+
+<style is:global>
+    .katex-display {
+        @apply overflow-x-auto overflow-y-hidden py-4;
+    }
+    
+    .katex-display::-webkit-scrollbar {
+        @apply h-2;
+    }
+    
+    .katex-display::-webkit-scrollbar-track {
+        @apply bg-zinc-200 dark:bg-zinc-700 rounded-full;
+    }
+    
+    .katex-display::-webkit-scrollbar-thumb {
+        @apply bg-zinc-400 dark:bg-zinc-500 rounded-full hover:bg-zinc-500 dark:hover:bg-zinc-400;
+    }
+</style>

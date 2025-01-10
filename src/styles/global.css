@@ -50,6 +50,23 @@
 	h6 {
 		@apply text-zinc-800 dark:text-zinc-100 !important;
 	}
+	.katex-display {
+        @apply overflow-x-auto overflow-y-hidden py-4;
+    }
+
+    .katex {
+        @apply text-zinc-800 dark:text-zinc-100;
+    }
+
+    /* Estilos para fórmulas matemáticas en modo oscuro */
+    .dark .katex {
+        @apply text-zinc-100;
+    }
+
+    /* Ajustes para el contenedor de fórmulas */
+    .math-display {
+        @apply my-4 px-2;
+    }
 }
 
 .moon-logo {
