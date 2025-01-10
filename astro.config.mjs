@@ -13,6 +13,7 @@ export default defineConfig({
   site: 'https://mindfulml.vialabsdigital.com/',
   markdown: {
     remarkPlugins: [remarkReadingTime],
+	rehypePlugins: [rehypeKatex],
     drafts: true,
     shikiConfig: {
       theme: 'material-theme-palenight',
@@ -22,7 +23,6 @@ export default defineConfig({
   integrations: [
     mdx({
       syntaxHighlight: 'shiki',
-      rehypePlugins: [rehypeKatex, { throwOnError: true }],
       shikiConfig: {
         theme: 'material-theme-palenight',
         wrap: true,
