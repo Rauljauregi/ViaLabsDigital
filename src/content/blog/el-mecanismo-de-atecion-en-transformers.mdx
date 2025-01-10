@@ -10,16 +10,16 @@ tags:
   - "Investigación"
 ---
 
-
-
 Los *Transformers* han revolucionado el campo del procesamiento del lenguaje natural (*NLP*), y en el corazón de su éxito está el **mecanismo de atención**. Este artículo desglosa cómo funciona, explicando los conceptos clave y las fórmulas que lo sustentan.
 
 ---
 
 ## Introducción a los Mecanismos de Atención
 
-El mecanismo de atención permite que un modelo enfoque dinámicamente en partes específicas de una entrada, en lugar de procesarla toda por igual. Esto se logra utilizando tres componentes fundamentales: **Q** (*query*), **K** (*key*) y **V** (*value*).  
+El mecanismo de atención permite que un modelo enfoque dinámicamente en partes específicas de una entrada, en lugar de procesarla toda por igual. Esto se logra utilizando tres componentes fundamentales: **Q** (*query*), **K** (*key*) y **V** (*value*).
+
 ### ¿Por qué es tan importante?
+
 En modelos modernos como *BERT* y *GPT*, este enfoque permite que el modelo:
 - Entienda contextos complejos.
 - Procese secuencias de manera más eficiente.
@@ -36,9 +36,11 @@ En modelos modernos como *BERT* y *GPT*, este enfoque permite que el modelo:
 
 ### Fórmula Fundamental
 La base matemática del mecanismo de atención se define como:
-\[
-Q = W_q \cdot x,\quad K = W_k \cdot x,\quad V = W_v \cdot x
-\]
+
+$$
+Q = W_q \cdot x, \quad K = W_k \cdot x, \quad V = W_v \cdot x
+$$
+
 Donde:
 - \( x \): Es la representación de entrada (por ejemplo, embeddings de palabras).
 - \( W_q, W_k, W_v \): Son matrices de pesos aprendibles que proyectan la entrada en los espacios de *query*, *key* y *value*.
@@ -54,45 +56,15 @@ El cálculo de la atención usa estas representaciones para determinar qué pala
 
 ---
 
-## Cuándo los Tokens Tienen Q, K, V Fijos
-
-En algunos casos, los valores de **Q**, **K** y **V** no cambian dinámicamente. Esto ocurre principalmente con embeddings estáticos como *Word2Vec* o *GloVe*.
-
-### Condiciones para Valores Fijos
-- Los embeddings están preentrenados y no se actualizan durante el entrenamiento del modelo.
-- No se usa información contextual, por lo que todos los tokens tienen valores fijos independientemente del resto de la oración.
-
-### Ejemplo
-En *Word2Vec*, el vector de *ratón* será el mismo sin importar si está en "El gato persigue al ratón" o en "El ratón estaba solo". Esto limita la capacidad del modelo para capturar significado contextual.
-
----
-
-## Cambios Dinámicos en Q, K, V
-
-Los modelos avanzados como *BERT* o *GPT* introducen **embeddings contextuales**, donde **Q**, **K**, y **V** cambian en función de la posición y contexto.
-
-### Efecto de los Embeddings Contextuales
-Cada palabra en una oración ahora tiene un significado que depende de las palabras circundantes. Esto permite que el modelo:
-- Diferencie entre múltiples significados de una misma palabra (*mouse* como "ratón" o como "dispositivo").
-- Capte relaciones complejas, como las que se dan en oraciones largas.
-
-### Transformaciones por Capas
-En cada capa del modelo Transformer, los valores de **Q**, **K**, y **V** se ajustan mediante nuevas matrices \( W_q, W_k, W_v \) y el uso de codificaciones posicionales para incorporar información sobre el orden de las palabras.
-
----
-
 ## Impacto de las Máscaras y los Pesos de Atención
-
-### Enmascaramiento en Atención
-El enmascaramiento es clave para:
-- Evitar que un token mire hacia adelante en tareas de predicción (*enmascaramiento causal*).
-- Ignorar ciertos tokens, como los de *padding*, que no aportan información útil.
 
 ### Fórmula para el Peso de Atención
 El peso de atención entre dos palabras \( i \) y \( j \) se calcula como:
-\[
+
+$$
 \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right) \cdot V
-\]
+$$
+
 Donde:
 - \( Q \cdot K^T \): Mide la similitud entre la consulta y las claves.
 - \( \sqrt{d_k} \): Escala el producto para evitar valores demasiado grandes.

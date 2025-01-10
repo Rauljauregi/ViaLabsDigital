@@ -1,32 +1,33 @@
-import { defineConfig } from 'astro/config'
-import mdx from '@astrojs/mdx'
-import sitemap from '@astrojs/sitemap'
-import tailwind from '@astrojs/tailwind'
-import { remarkReadingTime } from './src/utils/readTime.ts'
-import vercel from '@astrojs/vercel/serverless'
-import { fileURLToPath } from 'node:url'
-import * as path from 'path'
-import fs from 'node:fs'
-import partytown from '@astrojs/partytown'
+import { defineConfig } from 'astro/config';
+import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
+import tailwind from '@astrojs/tailwind';
+import { remarkReadingTime } from './src/utils/readTime.ts';
+import { vercel } from '@astrojs/vercel';
+import { fileURLToPath } from 'node:url';
+import * as path from 'path';
+import fs from 'node:fs';
+import partytown from '@astrojs/partytown';
+import rehypeKatex from 'rehype-katex';
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const directoryPath = path.join(__dirname, 'src', 'content', 'blog')
-const NewsletterDirectoryPath = path.join(__dirname, 'src', 'content', 'newsletter')
-const files = fs.readdirSync(directoryPath)
-const newsletterFiles = fs.readdirSync(NewsletterDirectoryPath)
-const blogUrl = 'https://mindfulml.vialabsdigital.com/post'
-const newsletterUrl = 'https://mindfulml.vialabsdigital.com/newsletter/post'
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const directoryPath = path.join(__dirname, 'src', 'content', 'blog');
+const NewsletterDirectoryPath = path.join(__dirname, 'src', 'content', 'newsletter');
+const files = fs.readdirSync(directoryPath);
+const newsletterFiles = fs.readdirSync(NewsletterDirectoryPath);
+const blogUrl = 'https://mindfulml.vialabsdigital.com/post';
+const newsletterUrl = 'https://mindfulml.vialabsdigital.com/newsletter/post';
 
 const blogUrls = files.map((file) => {
-	const fileName = file.split('.')[0]
-	return `${blogUrl}/${fileName}`
-})
+	const fileName = file.split('.')[0];
+	return `${blogUrl}/${fileName}`;
+});
 
 const newsletterUrls = newsletterFiles.map((file) => {
-	const newsletterfileName = file.split('.')[0]
-	return `${newsletterUrl}/${newsletterfileName}`
-})
+	const newsletterfileName = file.split('.')[0];
+	return `${newsletterUrl}/${newsletterfileName}`;
+});
 
 // https://astro.build/config
 export default defineConfig({
@@ -35,20 +36,22 @@ export default defineConfig({
 	site: 'https://mindfulml.vialabsdigital.com/', // Write here your website url
 	markdown: {
 		remarkPlugins: [remarkReadingTime],
+		rehypePlugins: [['rehype-katex', { throwOnError: true }]],
 		drafts: true,
 		shikiConfig: {
 			theme: 'material-theme-palenight',
-			wrap: true
-		}
+			wrap: true,
+		},
 	},
 	integrations: [
 		mdx({
 			syntaxHighlight: 'shiki',
+			rehypePlugins: [['rehype-katex', { throwOnError: true }]],
 			shikiConfig: {
 				theme: 'material-theme-palenight',
-				wrap: true
+				wrap: true,
 			},
-			drafts: true
+			drafts: true,
 		}),
 		sitemap({
 			customPages: [
@@ -56,16 +59,16 @@ export default defineConfig({
 				'https://mindfulml.vialabsdigital.com/newsletter',
 				'https://mindfulml.vialabsdigital.com/newsletter/Deep-Learning',
 				'https://mindfulml.vialabsdigital.com/newsletter/Inteligencia-Artificial',
-				'https://mindfulml.vialabsdigital.com/newsletter/Machine-Learning'
+				'https://mindfulml.vialabsdigital.com/newsletter/Machine-Learning',
 			].concat(blogUrls, newsletterUrls),
 			priority: 0.5,
-			changefreq: 'weekly'
+			changefreq: 'weekly',
 		}),
 		partytown({
 			config: {
-				forward: ['dataLayer.push']
-			}
+				forward: ['dataLayer.push'],
+			},
 		}),
-		tailwind()
-	]
-})
+		tailwind(),
+	],
+});
