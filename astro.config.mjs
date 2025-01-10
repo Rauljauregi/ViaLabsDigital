@@ -7,6 +7,7 @@ import vercel from '@astrojs/vercel';
 import { fileURLToPath } from 'node:url';
 import * as path from 'path';
 import partytown from '@astrojs/partytown';
+import rehypeKatex from 'rehype-katex';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,7 +19,7 @@ export default defineConfig({
 	site: 'https://mindfulml.vialabsdigital.com/', // URL base del sitio web
 	markdown: {
 		remarkPlugins: [remarkReadingTime],
-		rehypePlugins: [['rehype-katex', { throwOnError: true }]],
+		rehypePlugins: [rehypeKatex],
 		drafts: true,
 		shikiConfig: {
 			theme: 'material-theme-palenight',
