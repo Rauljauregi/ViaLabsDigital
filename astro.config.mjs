@@ -8,11 +8,8 @@ import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
     site: 'https://mindfulml.vialabsdigital.com/', // URL base del sitio web
-    output: 'hybrid', // Generación dinámica de rutas
+    output: 'server', // Generación dinámica de rutas
     adapter: vercel(),
-    experimental: {
-        hybridOutput: true,
-      },
     vite: {
         assetsInclude: ['**/*.fit'], // Archivos adicionales
     },
