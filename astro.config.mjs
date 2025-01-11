@@ -17,7 +17,7 @@ export default defineConfig({
     markdown: {
         remarkPlugins: [
             remarkReadingTime,
-            [remarkMath, { singleDollar: false }],
+            [remarkMath, { singleDollar: false }], // Matemáticas inline con $
         ],
         rehypePlugins: [
             [rehypeKatex, { throwOnError: false, strict: false }],
@@ -41,26 +41,11 @@ export default defineConfig({
             drafts: true,
         }),
         sitemap({
-            // Páginas estáticas adicionales
+            // Configuración predeterminada simplificada
             customPages: [
                 'https://mindfulml.vialabsdigital.com/inteligencia-artificial',
                 'https://mindfulml.vialabsdigital.com/newsletter',
             ],
-            // Ajustar prioridades
-            priority: (url) => {
-                if (url === 'https://mindfulml.vialabsdigital.com/') return 1.0; // Alta prioridad para la página principal
-                if (url.includes('/blog')) return 0.8; // Prioridad para posts del blog
-                if (url.includes('/newsletter')) return 0.6; // Prioridad para newsletters
-                return 0.5; // Prioridad predeterminada
-            },
-            // Ajustar frecuencia de cambio
-            changefreq: (url) => {
-                if (url.includes('/blog')) return 'weekly'; // Actualizaciones semanales para el blog
-                if (url.includes('/newsletter')) return 'monthly'; // Actualizaciones mensuales para newsletters
-                return 'yearly'; // Páginas estáticas actualizadas anualmente
-            },
-            // Filtrar para incluir solo URLs válidas
-            filter: (page) => !page.includes('draft'), // Excluye borradores
         }),
         tailwind(),
     ],
