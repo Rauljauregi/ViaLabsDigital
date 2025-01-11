@@ -9,8 +9,8 @@ import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
     site: 'https://mindfulml.vialabsdigital.com/', // URL base del sitio web
-    output: 'server', // Necesario para el adaptador de Vercel
-    adapter: vercel(),
+    output: 'server', // Necesario para rutas dinámicas en Vercel
+    adapter: vercel(), // Adaptador de Vercel
     vite: {
         assetsInclude: ['**/*.fit'], // Incluye tipos de archivos adicionales si es necesario
     },
@@ -41,10 +41,11 @@ export default defineConfig({
             drafts: true,
         }),
         sitemap({
-            // Configuración predeterminada simplificada
+            // Configuración optimizada para sitemap
             customPages: [
                 'https://mindfulml.vialabsdigital.com/inteligencia-artificial',
             ],
+            entryPoint: '/sitemap.xml', // Forzar la creación de un solo sitemap
         }),
         tailwind(),
     ],
