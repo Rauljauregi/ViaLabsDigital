@@ -2,7 +2,6 @@ import { getCollection } from 'astro:content';
 
 export async function get({ site }) {
     const posts = await getCollection('blog');
-    const newsletters = await getCollection('newsletter');
 
     const pages = [
         { url: `${site}/`, priority: 1.0, changefreq: 'yearly' },
@@ -10,11 +9,6 @@ export async function get({ site }) {
             url: `${site}/post/${post.slug}`,
             priority: 0.8,
             changefreq: 'weekly',
-        })),
-        ...newsletters.map((newsletter) => ({
-            url: `${site}/newsletter/post/${newsletter.slug}`,
-            priority: 0.6,
-            changefreq: 'monthly',
         })),
     ];
 

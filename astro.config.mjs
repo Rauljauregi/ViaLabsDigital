@@ -44,7 +44,6 @@ export default defineConfig({
             // Configuración predeterminada simplificada
             customPages: [
                 'https://mindfulml.vialabsdigital.com/inteligencia-artificial',
-                'https://mindfulml.vialabsdigital.com/newsletter',
             ],
         }),
         tailwind(),
