@@ -1,5 +1,32 @@
 {
   "rewrites": [
+    { "source": "/newsletter/ia-machine-learning-deep-learning", "destination": "https://mindfulml.vialabsdigital.com/post/ia-machine-learning-deep-learning" },
+    { "source": "/newsletter/interpretabilidad-vs-explicabilidad-desvelando-el-enigma-del-machine-learning", "destination": "https://mindfulml.vialabsdigital.com/post/interpretabilidad-vs-explicabilidad-desvelando-el-enigma-del-machine-learning" },
+    { "source": "/newsletter/fundamentos-redes-neuronales", "destination": "https://mindfulml.vialabsdigital.com/post/fundamentos-redes-neuronales" },
+    { "source": "/newsletter/el-ciclo-iterativo-de-los-proyectos-de-machine-learning", "destination": "https://mindfulml.vialabsdigital.com/post/el-ciclo-iterativo-de-los-proyectos-de-machine-learning" },
+    { "source": "/newsletter/descubre-el-tesoro-oculto-en-tu-empresa", "destination": "https://mindfulml.vialabsdigital.com/post/descubre-el-tesoro-oculto-en-tu-empresa" },
+    { "source": "/newsletter/software-2-0", "destination": "https://mindfulml.vialabsdigital.com/post/software-2-0" },
+    { "source": "/newsletter/regularizacin-en-machine-learning", "destination": "https://mindfulml.vialabsdigital.com/post/regularizacin-en-machine-learning" },
+    { "source": "/newsletter/interpretabilidad-explicabilidad-2", "destination": "https://mindfulml.vialabsdigital.com/post/interpretabilidad-explicabilidad-2" },
+    { "source": "/newsletter/-descubrimiento-monumental-con-ia--380000-nuevos-materiales-creados--", "destination": "https://mindfulml.vialabsdigital.com/post/-descubrimiento-monumental-con-ia--380000-nuevos-materiales-creados--" },
+    { "source": "/newsletter/el-sesgo-y-la-varianza-en-el-machine-learning", "destination": "https://mindfulml.vialabsdigital.com/post/el-sesgo-y-la-varianza-en-el-machine-learning" },
+    { "source": "/newsletter/ml-cultivos-india", "destination": "https://mindfulml.vialabsdigital.com/post/ml-cultivos-india" },
+    { "source": "/newsletter/tendencias-ciencia-de-datos", "destination": "https://mindfulml.vialabsdigital.com/post/tendencias-ciencia-de-datos" },
+    { "source": "/newsletter/llama3", "destination": "https://mindfulml.vialabsdigital.com/post/llama3" },
+    { "source": "/newsletter/en-vacaciones-fine-tuning-con-crewai-y-ollama", "destination": "https://mindfulml.vialabsdigital.com/post/en-vacaciones-fine-tuning-con-crewai-y-ollama" },
+    { "source": "/newsletter/agent-workflows", "destination": "https://mindfulml.vialabsdigital.com/post/agent-workflows" },
+    { "source": "/newsletter/como-aprenden-los-robots", "destination": "https://mindfulml.vialabsdigital.com/post/como-aprenden-los-robots" },
+    { "source": "/newsletter/interpretabilidad-explicabilidad-2", "destination": "https://mindfulml.vialabsdigital.com/post/interpretabilidad-explicabilidad-2" },
+    { "source": "/newsletter/futuro_del_ml_es_local", "destination": "https://mindfulml.vialabsdigital.com/post/futuro_del_ml_es_local" },
+    { "source": "/newsletter/competencia-entre-llm", "destination": "https://mindfulml.vialabsdigital.com/post/competencia-entre-llm" },
+    { "source": "/newsletter/machine-learning-american-airlines", "destination": "https://mindfulml.vialabsdigital.com/post/machine-learning-american-airlines" },
+    { "source": "/newsletter/gpts_personalizados", "destination": "https://mindfulml.vialabsdigital.com/post/gpts_personalizados" },
+    { "source": "/newsletter/google-cloud-next24-se-suma-a-la-carrera-de-los-agentes-ia", "destination": "https://mindfulml.vialabsdigital.com/post/google-cloud-next24-se-suma-a-la-carrera-de-los-agentes-ia" },
+    { "source": "/newsletter/redes-convolucionales-deteccion-intencion", "destination": "https://mindfulml.vialabsdigital.com/post/redes-convolucionales-deteccion-intencion" },
+    { "source": "/newsletter/lanzamiento-gemini-pro", "destination": "https://mindfulml.vialabsdigital.com/post/lanzamiento-gemini-pro" },
+    { "source": "/newsletter/prismnn-cancer-pancreas-machine-learning", "destination": "https://mindfulml.vialabsdigital.com/post/prismnn-cancer-pancreas-machine-learning" },
+    { "source": "/newsletter/final-de-superbacterias", "destination": "https://mindfulml.vialabsdigital.com/post/final-de-superbacterias" },
+    { "source": "/newsletter/competidor-chatgpt-gemini", "destination": "https://mindfulml.vialabsdigital.com/post/competidor-chatgpt-gemini" },
     { "source": "/sitemap.xml", "destination": "/sitemap.xml" }
   ]
 }

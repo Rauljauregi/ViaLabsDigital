@@ -1,6 +1,10 @@
 import { getCollection } from 'astro:content';
 
-export async function get({ site }) {
+interface Site {
+  site: string;
+}
+
+export async function get({ site }: Site) {
     const posts = await getCollection('blog');
 
     const pages = [
