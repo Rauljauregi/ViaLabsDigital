@@ -43,3 +43,57 @@ En modelos modernos como *BERT* y *GPT*, este enfoque permite que el modelo:
 Q = W_q \cdot x, \quad K = W_k \cdot x, \quad V = W_v \cdot x
 ```
 
+Donde:
+- \(x\): Es la representación de entrada (por ejemplo, embeddings de palabras).
+- \(W_q, W_k, W_v\): Son matrices de pesos aprendibles que proyectan la entrada en los espacios de *query*, *key* y *value*.
+
+### Ejemplo Práctico del Cálculo de Q, K y V
+
+Imagina una oración: *"El gato persigue al ratón"*.
+- \(Q\) de *gato*: Es una proyección que busca similitudes con otras palabras relacionadas con "gato".
+- \(K\) de *ratón*: Proporciona una "clave" para determinar su relevancia respecto a la consulta.
+- \(V\) de *ratón*: Contiene información semántica asociada, como "es perseguido".
+
+El cálculo de la atención usa estas representaciones para determinar qué palabras deben influir más en el resultado.
+
+---
+
+## Impacto de las Máscaras y los Pesos de Atención
+
+### Fórmula para el Peso de Atención
+
+El peso de atención entre dos palabras \(i\) y \(j\) se calcula como:
+
+```latex
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right) \cdot V
+```
+
+Donde:
+- \(Q \cdot K^T\): Mide la similitud entre la consulta y las claves.
+- \(\sqrt{d_k}\): Escala el producto para evitar valores demasiado grandes.
+- \(	ext{softmax}\): Convierte estas similitudes en probabilidades.
+
+### Ejemplo de Enmascaramiento Causal
+
+En una secuencia de entrada como *"El gato persigue al ratón"*:
+- El token "persigue" solo puede atender a "El" y "gato", pero no a "ratón" (que está más adelante).
+
+---
+
+## Resumen y Puntos Clave
+
+- **Q, K, V** son los elementos esenciales que permiten que el mecanismo de atención funcione.
+- En embeddings estáticos, estos valores no cambian, lo que limita el contexto.
+- En modelos avanzados, los valores de **Q, K, V** se actualizan dinámicamente para capturar mejor el significado contextual.
+- El enmascaramiento y los pesos de atención garantizan que el modelo procese la información correctamente, incluso en tareas secuenciales.
+
+---
+
+## Lecturas Adicionales y Referencias
+
+- **Artículos**:
+  - [Attention is All You Need](https://arxiv.org/abs/1706.03762) - El paper original del Transformer.
+  - [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805).
+- **Herramientas**:
+  - [TensorFlow](https://www.tensorflow.org/) y [PyTorch](https://pytorch.org/) para implementar modelos de atención.
+  - [Hugging Face Transformers](https://huggingface.co/) para experimentar con modelos preentrenados.
