@@ -42,7 +42,7 @@ export default defineConfig({
         }),
         sitemap({
             customPages: [
-                'https://mindfulml.vialabsdigital.com/ia',
+                'https://mindfulml.vialabsdigital.com/post',
             ],
         }),
         tailwind(),
