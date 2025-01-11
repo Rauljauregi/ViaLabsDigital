@@ -12,6 +12,12 @@ import { getAuth } from 'firebase-admin/auth';
 const auth = getAuth(app);
 let authentication = "false";
 
+// Verifica si la URL contiene "newsletter" y redirige
+if (Astro.url.pathname.includes('/newsletter/')) {
+  const newPath = Astro.url.pathname.replace('/newsletter/post/', '/post/');
+  return Astro.redirect(newPath, 301);
+}
+
 if (Astro.cookies.has("session")) {
   const sessionCookie = Astro.cookies.get("session")?.value;
   try {
@@ -168,4 +174,3 @@ try {
     });
   }
 </script>
-
