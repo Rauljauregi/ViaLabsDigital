@@ -9,15 +9,15 @@ import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
     site: 'https://mindfulml.vialabsdigital.com/', // URL base del sitio web
-    output: 'server', // Necesario para rutas dinámicas en Vercel
-    adapter: vercel(), // Adaptador de Vercel
+    output: 'server', // Generación dinámica de rutas
+    adapter: vercel(),
     vite: {
-        assetsInclude: ['**/*.fit'], // Incluye tipos de archivos adicionales si es necesario
+        assetsInclude: ['**/*.fit'], // Archivos adicionales
     },
     markdown: {
         remarkPlugins: [
             remarkReadingTime,
-            [remarkMath, { singleDollar: false }], // Matemáticas inline con $
+            [remarkMath, { singleDollar: false }],
         ],
         rehypePlugins: [
             [rehypeKatex, { throwOnError: false, strict: false }],
@@ -41,14 +41,12 @@ export default defineConfig({
             drafts: true,
         }),
         sitemap({
-            // Configuración básica del sitemap
             customPages: [
-                'https://mindfulml.vialabsdigital.com/post',
+                'https://mindfulml.vialabsdigital.com/ia',
             ],
-            // Generar el archivo `sitemap.xml` estático
-            entryPoint: '/sitemap.xml',
         }),
         tailwind(),
     ],
 });
+
 
