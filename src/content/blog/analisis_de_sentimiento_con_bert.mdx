@@ -15,7 +15,6 @@ tags:
 
 Desglosaremos el proceso paso a paso, desde la tokenización inicial hasta la clasificación final, explicando conceptos clave como los *Transformers* y por qué BERT usa solo el *encoder* (y no el *decoder*). ¡Vamos allá!
 
----
 
 ## **1. ¿Qué es BERT y por qué es especial?**  
 
@@ -25,7 +24,6 @@ BERT (*Bidirectional Encoder Representations from Transformers*) es un modelo cr
 
 ¿Cómo logra esto? Aquí entran los *Transformers*. 🚀
 
----
 
 ## **2. BERT y los Transformers**  
 
@@ -39,7 +37,6 @@ Sin embargo, hay algo interesante: **BERT usa solo la primera parte del Transfor
 
 Dado que BERT no genera texto, sino que analiza y comprende, **el *decoder* no es necesario.** Esto simplifica el modelo y lo hace más eficiente para tareas como el análisis de sentimientos.
 
----
 
 ## **3. Paso 1: Preparando el texto**  
 
@@ -58,7 +55,6 @@ La frase se convierte en algo como:
 
 Además, añadimos una **máscara de atención**, que ayuda a BERT a saber qué partes del texto son relevantes y cuáles son solo relleno (*padding*).
 
----
 
 ## **4. Paso 2: El trabajo del *encoder***  
 
@@ -76,10 +72,8 @@ Aquí:
 - $d_k$: Es un factor de normalización basado en la dimensión del vector.
 
 
-
 Después de varias capas, obtenemos una representación contextualizada del texto, donde cada palabra "sabe" qué papel juega en la frase.
 
----
 
 ## **5. Paso 3: Clasificando el sentimiento**  
 
@@ -100,7 +94,6 @@ Finalmente, el modelo predice la clase con mayor probabilidad. Por ejemplo:
 
 **Resultado:** ¡El modelo dice que el sentimiento es positivo! 🎉
 
----
 
 ## **6. ¿Por qué usar BERT en tu negocio?**  
 
@@ -111,7 +104,6 @@ El análisis de sentimiento basado en BERT tiene aplicaciones prácticas increí
 
 Lo más potente de BERT es que **entiende los matices del lenguaje**, lo que lo hace mucho más preciso que las herramientas tradicionales.
 
----
 
 ## **7. Conclusión**  
 
@@ -119,7 +111,6 @@ BERT es un modelo revolucionario porque combina lo mejor de los *Transformers* c
 
 ¿Tienes preguntas o quieres saber cómo implementarlo en tu empresa? ¡Escríbeme! Estoy trabajando en varios proyectos que podrían inspirarte. 😉
 
----
 
 **¿Te ha gustado este artículo?** Respóndeme con tus ideas o dudas.  
 
@@ -128,10 +119,9 @@ Raúl Jáuregui
 *Consultor en IA y Machine Learning*  
 [www.vialabsdigital.com](https://www.vialabsdigital.com){:target="_blank"}  
 
---- 
+
 
 ### **Referencias:**  
 - [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding (PDF)](https://arxiv.org/pdf/1810.04805.pdf){:target="_blank"}  
 - [Attention Is All You Need (PDF)](https://arxiv.org/pdf/1706.03762.pdf){:target="_blank"}  
 
----
