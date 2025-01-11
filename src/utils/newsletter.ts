@@ -1,15 +1,18 @@
-import { getCollection } from 'astro:content'
+import { getCollection } from 'astro:content';
 
-export const getNewsletterCategories = async() => {
-	const newsletters = await getCollection('newsletter');
-	const categories = new Set(newsletters.map((newsletter) => newsletter.data.category))
+export const getCategories = async () => {
+	const posts = await getCollection('blog');
+	const categories = new Set(posts.map((post) => post.data.category));
 	return Array.from(categories);
-}
+};
 
-export const getNewsletterPosts = async (max?: number) => {
-	return (await getCollection('newsletter'))
-		.filter((post) => !post.data.draft)
-		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()) // Nota la modifica qui
-		.slice(0, max);
-}
-
+export const getPosts = async () => {
+	const posts = await getCollection('blog');
+	return posts
+		.filter((post) => !post.data.draft) // Excluir borradores
+		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()) // Ordenar por fecha descendente
+		.map((post) => ({
+			...post,
+			url: `https://mindfulml.vialabsdigital.com/blog/${post.slug}`,
+		}));
+};

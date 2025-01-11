@@ -5,7 +5,8 @@ import Shape from '@/components/icons/Shape'
 import BaseLayout from '@/layouts/BaseLayout'
 import { getNewsletterPosts, getPosts } from '@/utils'
 
-const MAX_POSTS = 5 // max number of posts to show on the home page
+
+const MAX_POSTS = Infinity; // Show all posts
 const posts = await getPosts(MAX_POSTS);
 const newsletters = await getNewsletterPosts(MAX_POSTS);
 
