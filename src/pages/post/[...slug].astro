@@ -8,7 +8,7 @@ import PopUp from '@/components/article/PopUp';
 import { app } from '../../firebase/server';
 import { getAuth } from 'firebase-admin/auth';
 
-// Inicializa autenticación Firebase
+// Inicializa autenticación con Firebase
 const auth = getAuth(app);
 let authentication = "false";
 
@@ -23,16 +23,16 @@ if (Astro.cookies.has("session")) {
   }
 }
 
-// Obtén el post correspondiente al slug
-const posts = await getCollection('blog');
+// Obtén la colección de posts
+const posts = await getCollection('post');
 const post = posts.find((p) => p.slug === Astro.params.slug);
 
-// Maneja errores de slugs no encontrados
+// Redirige a la página 404 si el post no existe
 if (!post) {
-  return Astro.redirect('/404'); // Redirige a una página 404 si no se encuentra el post
+  return Astro.redirect('/404');
 }
 
-// Obtén los posts relacionados
+// Obtén los posts relacionados basados en etiquetas
 const getRelatedPosts = (post) => {
   return posts
     .filter((p) => p.slug !== post.slug && p.data.tags.some((t) => post.data.tags.includes(t)))
