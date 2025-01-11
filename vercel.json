@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/newsletter/post/:slug/*",
+      "source": "/newsletter/post/:slug(.*),*:date",
       "destination": "https://mindfulml.vialabsdigital.com/post/:slug"
     },
     {
