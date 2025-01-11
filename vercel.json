@@ -1,12 +1,14 @@
 {
-  "rewrites": [
-    {
-      "source": "/newsletter/post/:slug",
-      "destination": "https://mindfulml.vialabsdigital.com/post/:slug"
-    },
     {
       "source": "/sitemap.xml",
       "destination": "/sitemap.xml"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/newsletter/post/:slug",
+      "destination": "/post/:slug",
+      "permanent": true
     }
   ]
 }
