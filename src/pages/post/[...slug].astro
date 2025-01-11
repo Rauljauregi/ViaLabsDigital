@@ -27,21 +27,30 @@ if (Astro.cookies.has("session")) {
 const posts = await getCollection('post');
 const post = posts.find((p) => p.slug === Astro.params.slug);
 
-// Redirige a la página 404 si el post no existe
+// Redirige a una página 404 si el post no existe
 if (!post) {
+  console.error(`No se encontró ningún post con el slug: ${Astro.params.slug}`);
   return Astro.redirect('/404');
 }
 
-// Obtén los posts relacionados basados en etiquetas
+// Obtén los posts relacionados
 const getRelatedPosts = (post) => {
   return posts
-    .filter((p) => p.slug !== post.slug && p.data.tags.some((t) => post.data.tags.includes(t)))
+    .filter((p) => p.slug !== post.slug && p.data.tags?.some((t) => post.data.tags?.includes(t)))
     .slice(0, 3);
 };
 const relatedPosts = getRelatedPosts(post);
 
-// Renderiza el contenido del post
-const { Content, headings } = await post.render();
+// Renderiza el contenido del post con validación adicional
+let Content, headings;
+try {
+  const rendered = await post.render();
+  Content = rendered.Content;
+  headings = rendered.headings;
+} catch (error) {
+  console.error(`Error al renderizar el contenido del post: ${error.message}`);
+  return Astro.redirect('/404');
+}
 ---
 
 <BlogPost data={post.data} headings={headings}>
@@ -50,7 +59,7 @@ const { Content, headings } = await post.render();
     <!-- Barra lateral -->
     <aside class="hidden md:block">
       <Share />
-      {headings.length > 0 && <TableOfContents headings={headings} />}
+      {headings?.length > 0 && <TableOfContents headings={headings} />}
     </aside>
 
     <!-- Contenido principal -->
@@ -159,3 +168,4 @@ const { Content, headings } = await post.render();
     });
   }
 </script>
+
