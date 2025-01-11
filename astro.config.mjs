@@ -41,11 +41,9 @@ export default defineConfig({
             drafts: true,
         }),
         sitemap({
-            // Configuración optimizada para sitemap
             customPages: [
                 'https://mindfulml.vialabsdigital.com/inteligencia-artificial',
             ],
-            entryPoint: '/sitemap.xml', // Forzar la creación de un solo sitemap
         }),
         tailwind(),
     ],
