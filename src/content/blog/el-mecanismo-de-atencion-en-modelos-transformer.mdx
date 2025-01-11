@@ -12,53 +12,58 @@ tags:
   - Conceptos
   - Investigación
 ---
-import Math from '../components/Math.astro';
 
 Los *Transformers* han revolucionado el campo del procesamiento del lenguaje natural (*NLP*), y en el corazón de su éxito está el **mecanismo de atención**. Este artículo desglosa cómo funciona, explicando los conceptos clave y las fórmulas que lo sustentan.
 
-[... contenido anterior sin fórmulas ...]
+## Introducción a los Mecanismos de Atención
+
+El mecanismo de atención permite que un modelo enfoque dinámicamente en partes específicas de una entrada, en lugar de procesarla toda por igual. Esto se logra utilizando tres componentes fundamentales: **Q** (*query*), **K** (*key*) y **V** (*value*).
+
+### ¿Por qué es tan importante?
+
+En modelos modernos como *BERT* y *GPT*, este enfoque permite que el modelo:
+- Entienda contextos complejos.
+- Procese secuencias de manera más eficiente.
+- Aprenda relaciones largas en el texto, algo que era un desafío para modelos anteriores como los *RNNs*.
+
+## Conceptos Clave en los Mecanismos de Atención
+
+### Definiciones de Q, K y V
+- **Q (Query)**: Representa la consulta, o lo que queremos buscar en el contexto.
+- **K (Key)**: Es una representación de las "claves" que se comparan con la consulta.
+- **V (Value)**: Representa la información asociada a cada clave.
 
 ### Fórmula Fundamental
 
-<Math 
-  display={true}
-  formula="Q = W_q \cdot x, \quad K = W_k \cdot x, \quad V = W_v \cdot x"
-/>
+$$ Q = W_q \cdot x, \quad K = W_k \cdot x, \quad V = W_v \cdot x $$
 
 Donde:
-- <Math formula="x" />: Es la representación de entrada (por ejemplo, embeddings de palabras).
-- <Math formula="W_q, W_k, W_v" />: Son matrices de pesos aprendibles que proyectan la entrada en los espacios de *query*, *key* y *value*.
+- $x$: Es la representación de entrada (por ejemplo, embeddings de palabras).
+- $W_q, W_k, W_v$: Son matrices de pesos aprendibles que proyectan la entrada en los espacios de *query*, *key* y *value*.
 
 ### Ejemplo Práctico del Cálculo de Q, K y V
 
 Imagina una oración: *"El gato persigue al ratón"*.  
-Si <Math formula="x" /> representa los embeddings de las palabras individuales:
-- <Math formula="Q" /> de *gato*: Es una proyección que busca similitudes con otras palabras relacionadas con "gato".
-- <Math formula="K" /> de *ratón*: Proporciona una "clave" para determinar su relevancia respecto a la consulta.
-- <Math formula="V" /> de *ratón*: Contiene información semántica asociada, como "es perseguido".
+Si $x$ representa los embeddings de las palabras individuales:
+- $Q$ de *gato*: Es una proyección que busca similitudes con otras palabras relacionadas con "gato".
+- $K$ de *ratón*: Proporciona una "clave" para determinar su relevancia respecto a la consulta.
+- $V$ de *ratón*: Contiene información semántica asociada, como "es perseguido".
 
-[... contenido intermedio ...]
+## Impacto de las Máscaras y los Pesos de Atención
 
 ### Fórmula para el Peso de Atención
 
-El peso de atención entre dos palabras <Math formula="i" /> y <Math formula="j" /> se calcula como:
-
-<Math 
-  display={true}
-  formula="\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right) \cdot V"
-/>
+$$ \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right) \cdot V $$
 
 Donde:
-- <Math formula="Q \cdot K^T" />: Mide la similitud entre la consulta y las claves.
-- <Math formula="\sqrt{d_k}" />: Escala el producto para evitar valores demasiado grandes.
-- <Math formula="\text{softmax}" />: Convierte estas similitudes en probabilidades.
+- $Q \cdot K^T$: Mide la similitud entre la consulta y las claves.
+- $\sqrt{d_k}$: Escala el producto para evitar valores demasiado grandes.
+- $\text{softmax}$: Convierte estas similitudes en probabilidades.
 
 ### Ejemplo de Enmascaramiento Causal
 
 En una secuencia de entrada como "El gato persigue al ratón":
 - El token "persigue" solo puede atender a "El" y "gato", pero no a "ratón" (que está más adelante).
-
----
 
 ## Resumen y Puntos Clave
 
@@ -66,8 +71,6 @@ En una secuencia de entrada como "El gato persigue al ratón":
 - En embeddings estáticos, estos valores no cambian, lo que limita el contexto.
 - En modelos avanzados, los valores de **Q, K, V** se actualizan dinámicamente para capturar mejor el significado contextual.
 - El enmascaramiento y los pesos de atención garantizan que el modelo procese la información correctamente, incluso en tareas secuenciales.
-
----
 
 ## Lecturas Adicionales y Referencias
 
@@ -77,5 +80,3 @@ En una secuencia de entrada como "El gato persigue al ratón":
 - **Herramientas**:
   - [TensorFlow](https://www.tensorflow.org/) y [PyTorch](https://pytorch.org/) para implementar modelos de atención.
   - [Hugging Face Transformers](https://huggingface.co/) para experimentar con modelos preentrenados.
-
-
