@@ -43,7 +43,7 @@ Dado que BERT no genera texto, sino que analiza y comprende, **el *decoder* no e
 El primer paso para trabajar con BERT es **convertir el texto en un formato que pueda entender**. Esto implica:  
 
 1. **Tokenización:** Dividimos el texto en unidades más pequeñas llamadas *tokens*. Por ejemplo:  
-*"I love this product"* → `[I, love, this, product]`
+*"I love this product"* → [I, love, this, product]
 
 2. **Tokens especiales:**  
    - **[CLS]:** Marca el inicio del texto y actúa como resumen del contenido.  
@@ -51,7 +51,7 @@ El primer paso para trabajar con BERT es **convertir el texto en un formato que 
 
 ### Resultado  
 La frase se convierte en algo como:  
-`[CLS, I, love, this, product, SEP]`  
+[CLS, I, love, this, product, SEP]
 
 Además, añadimos una **máscara de atención**, que ayuda a BERT a saber qué partes del texto son relevantes y cuáles son solo relleno (*padding*).
 
@@ -61,7 +61,7 @@ Además, añadimos una **máscara de atención**, que ayuda a BERT a saber qué 
 Ahora que tenemos los *tokens*, BERT los procesa usando múltiples capas del *encoder*. Este es el corazón del modelo y utiliza el mecanismo de **atención multi-cabeza** para entender las relaciones entre las palabras.
 
 ### Atención multi-cabeza  
-La atención permite que el modelo enfoque su "atención" en las palabras más importantes para cada contexto. Por ejemplo, en la frase:  
+La atención ([*Multi-Head Attention*](https://www.elladodelmal.com/2024/01/attention-is-all-you-need-la_01380413382.html#:~:text=Multi%2DHead%20Attention%20(Atenci%C3%B3n%20de,cada%20'cabeza'%20de%20atenci%C3%B3n.){:target="_blank"})) permite que el modelo enfoque su "atención" en las palabras más importantes para cada contexto. Por ejemplo, en la frase:  
 *"El banco está al lado del río."*  
 El modelo sabrá que "banco" está relacionado con "río".
 
