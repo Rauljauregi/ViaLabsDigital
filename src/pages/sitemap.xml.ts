@@ -1,12 +1,13 @@
 import { getCollection } from 'astro:content';
 
-export async function getStaticPaths() {
+export const prerender = true;
+
+export async function GET() {
   const posts = await getCollection('blog');
   const pages = ['', 'about', 'contact'];
   const site = import.meta.env.SITE;
 
-  return {
-    body: `<?xml version="1.0" encoding="UTF-8"?>
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${pages.map((page) => `
     <url>
@@ -20,6 +21,12 @@ export async function getStaticPaths() {
       <lastmod>${post.data.updatedDate || post.data.publishDate}</lastmod>
     </url>
   `).join('')}
-</urlset>`,
-  };
+</urlset>`;
+
+  return new Response(xml, {
+    headers: {
+      'Content-Type': 'application/xml',
+      'Cache-Control': 'public, max-age=3600'
+    }
+  });
 }
