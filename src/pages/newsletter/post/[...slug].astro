@@ -1,18 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
-
 export const prerender = false;
 
-const { slug } = Astro.params;
+// Obtener el slug completo de la URL
+const fullSlug = Astro.params.slug;
 
-// Verificar si el post existe en la nueva ubicación
-const posts = await getCollection('post');
-const post = posts.find((p) => p.slug === slug);
-
-if (post) {
-  return Astro.redirect(`/post/${slug}`, 301);
-} else {
-  // Si el post no existe, redirigir a 404
-  return Astro.redirect('/404', 404);
-}
+// Redirigir directamente sin verificación
+return Astro.redirect(`/post/${fullSlug}`, 301);
 ---
