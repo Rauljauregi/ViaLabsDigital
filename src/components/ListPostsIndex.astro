@@ -12,36 +12,93 @@ type Props = {
 
 const { newsletters, posts, FirstBig = false } = Astro.props
 
-// Combine and sort all entries by publication date
-const allEntries: CollectionEntry<'blog' | 'newsletter'>[] = [
-  ...posts,
-  ...newsletters,
-].sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
----
-<article>
-  <h2 class="text-4xl font-medium tracking-wide text-start my-4">All Posts</h2>
-  <section
-    class={cn(
-      `grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-3`,
-      FirstBig && `md:[&>*:first-child]:col-span-2`
-    )}
-  >
-    {allEntries.map(async (entry) => {
-      const { remarkPluginFrontmatter } = await entry.render();
 
-      return entry.collection === 'blog' ? (
-        <PostCard
-          data={entry.data}
-          slug={entry.slug}
-          readTime={remarkPluginFrontmatter.minutesRead}
-        />
-      ) : (
-        <NewsletterPostCard
-          data={entry.data}
-          slug={entry.slug}
-          readTime={remarkPluginFrontmatter.minutesRead}
-        />
-      );
-    })}
-  </section>
-</article>
+const toRead: CollectionEntry<'blog' | 'newsletter'>[]  = [...posts, ...newsletters]
+---
+<>
+<hr>
+<h2 class='text-4xl font-medium tracking-wide text-start my-4'>Blog Posts</h2>
+<section
+	class={cn(
+		`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 mt-3`,
+		FirstBig && `md:[&>*:first-child]:col-span-2`
+	)}
+>
+	{
+		posts
+			.sort((a, b) => {
+				const dateA: Date = new Date(b.data.pubDate);
+				const dateB: Date = new Date(a.data.pubDate);
+				return dateA.getTime() - dateB.getTime();
+			}) // Ordina i post in base alla data di pubblicazione (dall'ultimo al primo)
+			.map(async (post) => {
+				const { remarkPluginFrontmatter } = await post.render()
+
+				return (
+					<PostCard
+						data={post.data}
+						slug={post.slug}
+						readTime={remarkPluginFrontmatter.minutesRead}
+					/>
+				)
+			})
+	}
+	<!-- 	{
+		posts.map(async (post) => {
+			const { remarkPluginFrontmatter } = await post.render()
+
+			return (
+				<PostCard
+					data={post.data}
+					slug={post.slug}
+					readTime={remarkPluginFrontmatter.minutesRead}
+				/>
+			)
+		})
+	} -->
+</section>
+<br>
+<hr>
+<br>
+<h2 class='text-4xl font-medium tracking-wide text-start my-4'>Newsletters Posts</h2>
+<section
+	class={cn(
+		`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 mt-3`,
+		FirstBig && `md:[&>*:first-child]:col-span-2`
+	)}
+>
+	{
+		newsletters
+			.sort((a, b) => {
+				const dateA: Date = new Date(b.data.pubDate);
+				const dateB: Date = new Date(a.data.pubDate);
+				return dateA.getTime() - dateB.getTime();
+			}) // Ordina i post in base alla data di pubblicazione (dall'ultimo al primo)
+			.map(async (post) => {
+				const { remarkPluginFrontmatter } = await post.render()
+
+				return (
+					<NewsletterPostCard
+						data={post.data}
+						slug={post.slug}
+						readTime={remarkPluginFrontmatter.minutesRead}
+					/>
+				)
+			})
+	}
+	<!-- 	{
+		posts.map(async (post) => {
+			const { remarkPluginFrontmatter } = await post.render()
+
+			return (
+				<PostCard
+					data={post.data}
+					slug={post.slug}
+					readTime={remarkPluginFrontmatter.minutesRead}
+				/>
+			)
+		})
+	} -->
+</section>
+<hr>
+</>
