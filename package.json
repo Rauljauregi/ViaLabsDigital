@@ -26,7 +26,6 @@
 		"build:optimized": "ASTRO_PREFETCH=true astro build",
 		"sync": "astro sync",
 		"preview": "astro preview",
-		"postbuild": "pagefind --source dist/ || echo 'Pagefind falló, ignorando error.'",
 		"format:check": "prettier --check .",
 		"format": "prettier --write .",
 		"lint": "eslint .",
