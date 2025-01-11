@@ -20,7 +20,7 @@ const allEntries: CollectionEntry<'blog' | 'newsletter'>[] = [
   .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
 ---
 <article>
-  <h2 class="text-4xl font-medium tracking-wide text-start my-4">All Posts</h2>
+  <h2 class="text-4xl font-medium tracking-wide text-start my-4">Todos los artículos</h2>
   <section
     class={cn(
       `grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-3`,
