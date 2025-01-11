@@ -3,10 +3,10 @@ import { getCollection } from 'astro:content';
 export const prerender = true;
 
 export async function GET() {
-  // URL base del sitio
+  // Define la URL base del sitio
   const site = 'https://mindfulml.vialabsdigital.com';
 
-  // Obtiene los posts de la colección 'blog'
+  // Obtiene las publicaciones desde la colección 'blog'
   const posts = await getCollection('blog');
 
   // Genera el contenido XML
@@ -17,18 +17,19 @@ export async function GET() {
     <lastmod>${new Date().toISOString()}</lastmod>
   </url>
   ${posts
-    .map(
-      (post) => `
+    .map((post) => {
+      const slug = post.slug.startsWith('/') ? post.slug.substring(1) : post.slug; // Elimina slash inicial si existe
+      return `
     <url>
-      <loc>${site}/post/${post.slug}</loc>
+      <loc>${site}/post/${slug}</loc>
       <lastmod>${post.data.updated || post.data.published || new Date().toISOString()}</lastmod>
     </url>
-  `
-    )
+  `;
+    })
     .join('')}
 </urlset>`;
 
-  // Devuelve la respuesta XML
+  // Devuelve el contenido XML con encabezados correctos
   return new Response(xml, {
     headers: {
       'Content-Type': 'application/xml',
