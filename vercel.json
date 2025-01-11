@@ -1,8 +1,10 @@
 {
+"rewrites": [
     {
       "source": "/sitemap.xml",
       "destination": "/sitemap.xml"
-    },
+    }
+  ],
   "redirects": [
     {
       "source": "/newsletter/post/:slug",
