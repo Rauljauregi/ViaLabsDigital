@@ -5,20 +5,14 @@
       "destination": "/sitemap.xml"
     }
   ],
-  "redirects": [
+"redirects": [
     {
       "source": "/newsletter/post/:slug*",
       "destination": "/post/:slug*",
       "permanent": true
     }
   ],
-  "functions": {
-    "api/**/*.js": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  },
-  "headers": [
+"headers": [
     {
       "source": "/(.*)",
       "headers": [
