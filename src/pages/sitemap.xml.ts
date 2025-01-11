@@ -18,7 +18,6 @@ export async function GET() {
   ${posts.map((post) => `
     <url>
       <loc>${site}/blog/${post.slug}</loc>
-      <lastmod>${post.data.updatedDate || post.data.publishDate}</lastmod>
     </url>
   `).join('')}
 </urlset>`;
