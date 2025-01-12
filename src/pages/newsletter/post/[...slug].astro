@@ -1,20 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
-
 export const prerender = false;
 
-// Obtener el slug completo de la URL
-const fullSlug = Astro.params.slug;
-console.log('Slug recibido:', fullSlug); // Para depuración
+// Obtener y limpiar el slug
+const slug = Astro.params.slug?.replace(/^\/+|\/+$/g, '');
+console.log('Redirigiendo desde newsletter/post/', slug); // Para depuración
 
-// Obtener todos los posts
-const posts = await getCollection('post');
-console.log('Posts encontrados:', posts.map(p => p.slug)); // Para depuración
-
-// Buscar el post
-const post = posts.find(p => p.slug === fullSlug);
-console.log('Post encontrado:', post?.slug); // Para depuración
-
-// Redirigir siempre a la nueva ruta
-return Astro.redirect(`/post/${fullSlug}`, 301);
+// Redirigir a la nueva ruta
+return Astro.redirect(`/post/${slug}`, 301);
 ---

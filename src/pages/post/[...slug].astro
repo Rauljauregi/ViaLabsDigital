@@ -12,11 +12,9 @@ import { getAuth } from 'firebase-admin/auth';
 const auth = getAuth(app);
 let authentication = "false";
 
-// Verifica si la URL contiene "newsletter" y redirige
-if (Astro.url.pathname.includes('/newsletter/')) {
-  const newPath = Astro.url.pathname.replace('/newsletter/post/', '/post/');
-  return Astro.redirect(newPath, 301);
-}
+// Obtén el slug de la URL y limpialo
+const currentSlug = Astro.params.slug?.replace(/^\/+|\/+$/g, '');
+console.log('Slug actual:', currentSlug); // Para depuración
 
 if (Astro.cookies.has("session")) {
   const sessionCookie = Astro.cookies.get("session")?.value;
@@ -29,13 +27,16 @@ if (Astro.cookies.has("session")) {
   }
 }
 
-// Obtén la colección de posts
-const posts = await getCollection('post');
-const post = posts.find((p) => p.slug === Astro.params.slug);
+// Obtén la colección de blog en lugar de post
+const posts = await getCollection('blog');
+console.log('Posts disponibles:', posts.map(p => p.slug)); // Para depuración
+
+const post = posts.find((p) => p.slug === currentSlug);
+console.log('Post encontrado:', post?.slug); // Para depuración
 
 // Redirige a una página 404 si el post no existe
 if (!post) {
-  console.error(`No se encontró ningún post con el slug: ${Astro.params.slug}`);
+  console.error(`No se encontró ningún post con el slug: ${currentSlug}`);
   return Astro.redirect('/404');
 }
 
