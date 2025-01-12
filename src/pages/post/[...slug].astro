@@ -85,7 +85,7 @@ try {
 }
 ---
 
-<BlogPost data={post.data} headings={headings}  readTime={readTime|| '5 min'}> 
+<BlogPost data={post.data} headings={headings}  readTime={post.data.readTime|| '5 min'}> 
   <PopUp />
   <div class="grid grid-cols-1 md:grid-cols-[20%_auto] gap-16 mt-8">
     <!-- Barra lateral -->
