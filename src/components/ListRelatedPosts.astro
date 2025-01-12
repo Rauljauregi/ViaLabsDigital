@@ -3,10 +3,13 @@ import type { CollectionEntry } from 'astro:content'
 import { cn } from '@/utils'
 import { Image } from 'astro:assets'
 
-type Props = {
-    posts: CollectionEntry<'blog'>[]
-}
 
+type Props = {
+    data: CollectionEntry<'blog'>['data']
+    headings: MarkdownHeading[]
+    readTime: string
+    relatedPosts?: CollectionEntry<'blog'>[]
+}
 const { posts } = Astro.props
 ---
 
