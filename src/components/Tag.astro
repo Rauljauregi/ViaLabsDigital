@@ -1,14 +1,17 @@
 ---
 export interface Props {
-	tag: string
+    tag: string
 }
 const { tag } = Astro.props
+
+// Validación de seguridad
+const safeTag = typeof tag === 'string' ? tag : '';
 ---
 
-<a href={`/tags/${tag.toLowerCase()}`} aria-label={tag}>
-	<span
-		class='bgvialabs font-semibold text-black dark:bgvialabs2 dark:text-black shadow text-sm w-fit px-2 py-1 md:px-5 md:py-2 rounded-full'
-	>
-		{tag ?? 'Blog Tag'}
-	</span>
+<a href={`/tags/${safeTag.toLowerCase()}`} aria-label={safeTag}>
+    <span
+        class='bgvialabs font-semibold text-black dark:bgvialabs2 dark:text-black shadow text-sm w-fit px-2 py-1 md:px-5 md:py-2 rounded-full'
+    >
+        {safeTag || 'Blog Tag'}
+    </span>
 </a>

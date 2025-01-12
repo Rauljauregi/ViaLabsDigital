@@ -2,23 +2,26 @@
 import BaseLayout from '@/layouts/BaseLayout'
 import ListPosts from '@/components/ListPosts'
 import TitlePage from '@/components/TitlePage'
-import { getTags, getPostByTag } from '@/utils'
+import { getTags, getPostByTag } from '@/utils/post'
 
 export async function getStaticPaths() {
-	const tags = await getTags()
-
-	return tags.map((tag) => ({
-		params: { tag },
-		props: { tag }
-	}))
+  const tags = await getTags()
+  
+  return tags.map((tag) => ({
+    params: { tag: tag.toLowerCase() },
+    props: { tag, posts: getPostByTag(tag) }
+  }))
 }
 
 const { tag } = Astro.props
-
 const posts = await getPostByTag(tag)
 ---
 
-<BaseLayout title={tag}>
-	<TitlePage title={tag} />
-	<ListPosts posts={posts} />
+<BaseLayout title={`Posts tagged with ${tag}`}>
+  <TitlePage title={`Posts tagged with #${tag}`} />
+  {posts.length > 0 ? (
+    <ListPosts posts={posts} />
+  ) : (
+    <p class="text-center">No posts found with this tag</p>
+  )}
 </BaseLayout>
