@@ -1,7 +1,8 @@
 ---
 import { getCategories } from '@/utils'
-import { getNewsletterCategories } from '@/utils';
 import Category from '@/components/Category'
+import TagIcon from './icons/TagIcon.astro'
+import HeaderLink from '@/components/HeaderLink'
 import { sluglify } from '@/utils'
 
 const categories = await getCategories()
@@ -17,4 +18,11 @@ const { activeCategory } = Astro.props
 		))
 	}
 	<div class='hidden sm:block absolute w-full bottom-0 border-b-2 -z-40 dark:border-gray-600'></div>
+	<div
+	class='flex flex-col gap-4 md:flex-row md:border-r-2 border-black pr-4 dark:border-white'
+>
+	<HeaderLink href='/tags' class='flex items-center gap-1 text-2xl md:text-base'>
+		<TagIcon /> Tags
+	</HeaderLink>
+</div>
 </div>
