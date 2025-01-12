@@ -84,8 +84,11 @@ try {
 
     Content = rendered.Content || null;
     headings = rendered.headings || [];
-    const contentText = rendered.content || '';
-    readTime = post.data.minutesRead || readingTime(contentText).text.replace('read', 'tiempo de lectura');
+
+    const contentText = rendered.content?.trim() || ' '; // Proveer un espacio si el contenido está vacío
+    readTime = post.data.minutesRead || readingTime(contentText).text.replace('read', 'tiempo de lectura') || '5 min tiempo de lectura';
+    console.log('Tiempo de lectura calculado:', readTime);
+
 
     console.log('Tiempo de lectura calculado:', readTime);
 } catch (error) {
