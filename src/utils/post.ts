@@ -13,7 +13,7 @@ export const getPosts = async () => {
 		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()) // Ordenar por fecha descendente
 		.map((post) => ({
 			...post,
-			url: `https://mindfulml.vialabsdigital.com/post/${post.slug}`,
+			url: `https://mindfulml.vialabsdigital.com/blog/${post.slug}`,
 		}));
 };
 export const getTags = async () => {

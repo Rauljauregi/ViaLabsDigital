@@ -12,7 +12,7 @@ const tags = await getTags()
 			tags.map((tag) => (
 				<a
 					href={`/tags/${tag}`}
-					class='inline-block bg-gray-200  rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'
+					class='flex flex-wrap justify-center items-center gap-2 gap-y-4 md:gap-5'
 				>
 					#{tag}
 				</a>
