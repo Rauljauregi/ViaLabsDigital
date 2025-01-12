@@ -29,3 +29,10 @@ export const getTags = async () => {
 
 	return Array.from(tags)
 }
+export const getPostByTag = async (tag: string) => {
+	const posts = await getPosts()
+	const lowercaseTag = tag.toLowerCase()
+	return posts.filter((post) => {
+		return post.data.tags.some((postTag) => postTag.toLowerCase() === lowercaseTag)
+	})
+}
