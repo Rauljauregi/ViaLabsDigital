@@ -16,3 +16,16 @@ export const getPosts = async () => {
 			url: `https://mindfulml.vialabsdigital.com/post/${post.slug}`,
 		}));
 };
+export const getTags = async () => {
+	// const posts = await getCollection('blog')
+	// const posts = await getAllCollection()
+	const posts = await getPosts()
+	const tags = new Set()
+	posts.forEach((post) => {
+		post.data.tags.forEach((tag) => {
+			tags.add(tag.toLowerCase())
+		})
+	})
+
+	return Array.from(tags)
+}
