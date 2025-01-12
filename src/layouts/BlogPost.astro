@@ -45,24 +45,24 @@ const articleDate = pubDate.toISOString()
             </div>
         </header>
 
-		<div class='relative'>
+		<div class='relative w-full aspect-[16/9] mb-8'> <!-- Contenedor con aspect ratio -->
 			{
 				heroImage && (
 					<Image
 						src={heroImage}
-						width={1000}
-						height={200}
+						width={1200}
+						height={675} // Proporción 16:9
 						quality={100}
 						format='jpg'
 						loading='eager'
-						class='rounded-md w-full max-h-2.5 my-20 object-cover opacity-0 transition-opacity duration-700 ease-in'
+						class='rounded-lg w-full h-full object-cover opacity-0 transition-opacity duration-700 ease-in shadow-lg hover:shadow-xl transition-shadow'
 						alt={`img of ${title}`}
 					/>
 				)
 			}
 			<div
 				style='backdrop-filter: blur(25px) saturate(180%);'
-				class='placeholder absolute inset-0 blur rounded-md transition-opacity duration-700 ease-out border-2 border-neutral-200 bg-gray-200 dark:border-neutral-900 dark:bg-zinc-900 bg-opacity-90'>
+				class='placeholder absolute inset-0 blur rounded-lg transition-opacity duration-700 ease-out border-2 border-neutral-200 bg-gray-200 dark:border-neutral-900 dark:bg-zinc-900 bg-opacity-90'>
 			</div>
 		</div>
 
