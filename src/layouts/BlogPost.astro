@@ -14,7 +14,6 @@ type Props = {
 
 const { data, readTime, headings } = Astro.props
 const { title, description, pubDate, updatedDate, heroImage, tags } = data
-
 const articleDate = pubDate.toISOString()
 ---
 
@@ -39,10 +38,12 @@ const articleDate = pubDate.toISOString()
 				</h1>
 			</div>
 
-			<div class='flex flex-wrap justify-center items-center gap-2 gap-y-4 md:gap-5'>
-				{tags.map((tag:any) => <Tag>{tag}</Tag>)}
-			</div>
-		</header>
+            <div class='flex flex-wrap justify-center items-center gap-2 gap-y-4 md:gap-5'>
+                {tags?.map((tag) => (
+                    <Tag tag={tag} />
+                ))}
+            </div>
+        </header>
 
 		<div class='relative'>
 			{
@@ -54,7 +55,7 @@ const articleDate = pubDate.toISOString()
 						quality={100}
 						format='jpg'
 						loading='eager'
-						class='rounded-md w-full max-h-2.5 my-8 object-cover opacity-0 transition-opacity duration-700 ease-in'
+						class='rounded-md w-full max-h-2.5 my-20 object-cover opacity-0 transition-opacity duration-700 ease-in'
 						alt={`img of ${title}`}
 					/>
 				)

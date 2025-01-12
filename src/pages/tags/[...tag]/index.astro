@@ -4,7 +4,7 @@ import ListPosts from '@/components/ListPosts'
 import TitlePage from '@/components/TitlePage'
 import { getTags, getPostByTag } from '@/utils'
 
-export const prerender = true; // Añadir esto
+export const prerender = true;
 
 export async function getStaticPaths() {
   const tags = await getTags()
@@ -19,11 +19,11 @@ const { tag } = Astro.props
 const posts = await getPostByTag(tag)
 ---
 
-<BaseLayout title={`Posts tagged with ${tag}`}>
-  <TitlePage title={`Posts tagged with #${tag}`} />
+<BaseLayout title={tag}>
+  <TitlePage title={`#${tag}`} />
   {posts.length > 0 ? (
     <ListPosts posts={posts} />
   ) : (
-    <p class="text-center">No posts found with this tag</p>
+    <p class="text-center">No hay artículos con esta etiqueta</p>
   )}
 </BaseLayout>
