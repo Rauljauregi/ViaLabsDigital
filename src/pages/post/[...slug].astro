@@ -90,16 +90,6 @@ const getRelatedPosts = (currentPost) => {
 };
 const relatedPosts = getRelatedPosts(post);
 
-// Renderiza el contenido del post con validación adicional
-let Content, headings;
-try {
-  const rendered = await post.render();
-  Content = rendered.Content;
-  headings = rendered.headings;
-} catch (error) {
-  console.error(`Error al renderizar el contenido del post: ${error.message}`);
-  return Astro.redirect('/404');
-}
 ---
 
 <BlogPost data={post.data} headings={headings}  readTime={readTime}> 
