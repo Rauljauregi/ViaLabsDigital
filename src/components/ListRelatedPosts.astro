@@ -11,7 +11,7 @@ const { posts } = Astro.props
 ---
 
 <div class="mt-16 pt-8 border-t dark:border-gray-800">
-    <h2 class="text-2xl font-bold mb-8">Artículos relacionados</h2>
+    <h3 class="text-2xl font-bold mb-8">Artículos relacionados</h3>
     <section class={cn('grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8')}>
         {
             posts.length > 0 ? (
@@ -32,9 +32,9 @@ const { posts } = Astro.props
                                 />
                             </div>
                             <div class="flex-1">
-                                <h3 class="font-medium text-sm sm:text-base group-hover:text-primary transition-colors">
+                                <h4 class="font-medium text-sm sm:text-base group-hover:text-primary transition-colors">
                                     {post.data.title}
-                                </h3>
+                                </h4>
                                 <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mt-1">
                                     {post.data.description}
                                 </p>
