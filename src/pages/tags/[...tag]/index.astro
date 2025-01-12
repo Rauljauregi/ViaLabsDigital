@@ -2,14 +2,16 @@
 import BaseLayout from '@/layouts/BaseLayout'
 import ListPosts from '@/components/ListPosts'
 import TitlePage from '@/components/TitlePage'
-import { getTags, getPostByTag } from '@/utils/post'
+import { getTags, getPostByTag } from '@/utils'
+
+export const prerender = true; // Añadir esto
 
 export async function getStaticPaths() {
   const tags = await getTags()
   
   return tags.map((tag) => ({
     params: { tag: tag.toLowerCase() },
-    props: { tag, posts: getPostByTag(tag) }
+    props: { tag }
   }))
 }
 

@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout'
 import TitlePage from '@/components/TitlePage'
-import { getTags } from '@/utils/post'
+import { getTags } from '@/utils'
+
+export const prerender = true; // Añadir esto
 
 const tags = await getTags()
 ---
