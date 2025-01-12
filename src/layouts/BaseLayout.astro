@@ -89,38 +89,44 @@ gtag('config', 'G-V3WC9QSH8J');
 
 	<body class='relative bg-white text-stone-950 dark:bg-[#0a0910] dark:text-white'>
 		<main
-			class='mx-auto max-w-xs sm:max-w-2xl sm:px-8 lg:px-0 antialiased md:max-w-6xl grid gap-12'
-		>
-			<Header isAuthenticated={isAuthenticated} />
-			{
-				confirm === 'not confirmed' && (
-					<div
-						class='w-full bg-yellow-300 dark:bg-yellow-600 text-center flex justify-center items-center rounded-lg py-2 px-2'
-						id='not-confirmed'
-					>
-						<p class='flex-grow text-sm'>Gracias pero todavía no hemos terminado. Hemos enviado un correo electrónico de confirmación. Por favor, revisa tu bandeja de entrada y haz clic en el botón para completar tu suscripción. ( Si no lo encuentras revisa la bandeja de spam )</p>
-						<button id='close-not-confirmed-pop-up'>
-							<CloseIcon />{' '}
-						</button>
-					</div>
-				)
-			}
-			{
-				confirm === 'confirmed' && (
-					<div
-						class='w-full bg-green-300 text-center flex justify-center items-center rounded-lg py-2 px-2'
-						id='confirmed'
-					>
-						<p class='flex-grow text-sm'>¡Correo electrónico confirmado correctamente!</p>
-						<button id='close-confirmed-pop-up'>
-							<CloseIcon />{' '}
-						</button>
-					</div>
-				)
-			}
-			<slot />
-			<Footer />
-		</main>
+		class="mx-auto max-w-xs sm:max-w-2xl sm:px-8 lg:px-12 xl:px-16 antialiased md:max-w-6xl grid gap-12"
+	>
+		<Header isAuthenticated={isAuthenticated} />
+		{
+			confirm === 'not confirmed' && (
+				<div
+					class="w-full bg-yellow-300 dark:bg-yellow-600 text-center flex justify-center items-center rounded-lg py-2 px-4"
+					id="not-confirmed"
+				>
+					<p class="flex-grow text-sm">
+						Gracias pero todavía no hemos terminado. Hemos enviado un correo electrónico de confirmación.
+						Por favor, revisa tu bandeja de entrada y haz clic en el botón para completar tu suscripción. 
+						(Si no lo encuentras revisa la bandeja de spam)
+					</p>
+					<button id="close-not-confirmed-pop-up">
+						<CloseIcon />{' '}
+					</button>
+				</div>
+			)
+		}
+		{
+			confirm === 'confirmed' && (
+				<div
+					class="w-full bg-green-300 text-center flex justify-center items-center rounded-lg py-2 px-4"
+					id="confirmed"
+				>
+					<p class="flex-grow text-sm">
+						¡Correo electrónico confirmado correctamente!
+					</p>
+					<button id="close-confirmed-pop-up">
+						<CloseIcon />{' '}
+					</button>
+				</div>
+			)
+		}
+		<slot />
+		<Footer />
+	</main>
 	</body>
 	
 	<script>
