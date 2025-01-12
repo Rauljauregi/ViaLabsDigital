@@ -77,14 +77,16 @@ const getRelatedPosts = (currentPost) => {
 };
 const relatedPosts = getRelatedPosts(post);
 
+// Validación y procesamiento del contenido del post
 let Content, headings, readTime;
 try {
     const rendered = await post.render();
-    Content = rendered.Content;
-    headings = rendered.headings;
 
-    // Calcula el tiempo de lectura dinámicamente si no está en los metadatos
-    readTime = post.data.minutesRead || readingTime(rendered.content).text.replace('read', 'tiempo de lectura');
+    Content = rendered.Content || null;
+    headings = rendered.headings || [];
+    const contentText = rendered.content || '';
+    readTime = post.data.minutesRead || readingTime(contentText).text.replace('read', 'tiempo de lectura');
+
     console.log('Tiempo de lectura calculado:', readTime);
 } catch (error) {
     console.error(`Error al renderizar el contenido del post: ${error.message}`);
@@ -92,26 +94,25 @@ try {
 }
 
 
+
 ---
 
-<BlogPost data={post.data} headings={headings}  readTime={readTime}> 
+<BlogPost data={post.data} headings={headings} readTime={readTime}>
   <PopUp />
   <div class="grid grid-cols-1 md:grid-cols-[20%_auto] gap-16 mt-8">
-    <!-- Barra lateral -->
     <aside class="hidden md:block">
       <Share />
-      {headings?.length > 0 && <TableOfContents headings={headings} />}
+      {Array.isArray(headings) && headings.length > 0 && <TableOfContents headings={headings} />}
     </aside>
-
-    <!-- Contenido principal -->
     <main>
       <article id="blog-container" class="prose dark:prose-invert mb-16" data-authentication={authentication}>
         <Content />
       </article>
-        <ListRelatedPosts posts={relatedPosts} />
+      <ListRelatedPosts posts={relatedPosts} />
     </main>
   </div>
 </BlogPost>
+
 
 <script>
   const article = document.getElementById('blog-container');
