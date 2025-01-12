@@ -14,7 +14,7 @@ let authentication = "false";
 
 // Obtén el slug de la URL y limpialo
 const currentSlug = Astro.params.slug?.replace(/^\/+|\/+$/g, '');
-console.log('Slug actual:', currentSlug);
+console.log('Slug actual:', currentSlug); // Para depuración
 
 if (Astro.cookies.has("session")) {
   const sessionCookie = Astro.cookies.get("session")?.value;
@@ -27,9 +27,12 @@ if (Astro.cookies.has("session")) {
   }
 }
 
-// Obtén la colección de blog
+// Obtén la colección de blog en lugar de post
 const posts = await getCollection('blog');
+console.log('Posts disponibles:', posts.map(p => p.slug)); // Para depuración
+
 const post = posts.find((p) => p.slug === currentSlug);
+console.log('Post encontrado:', post?.slug); // Para depuración
 
 // Redirige a una página 404 si el post no existe
 if (!post) {
@@ -66,7 +69,7 @@ const getRelatedPosts = (currentPost) => {
       const dateB = new Date(b.data.pubDate);
       return dateB.getTime() - dateA.getTime();
     })
-    .slice(0, 3);
+    .slice(0, 3); // Limitar a 3 posts
 };
 const relatedPosts = getRelatedPosts(post);
 
@@ -82,11 +85,7 @@ try {
 }
 ---
 
-<BlogPost 
-  data={post.data} 
-  headings={headings}
-  readTime="5 min"
->
+<BlogPost data={post.data} headings={headings} readTime={remarkPluginFrontmatter?.minutesRead || '5 min'}>
   <PopUp />
   <div class="grid grid-cols-1 md:grid-cols-[20%_auto] gap-16 mt-8">
     <!-- Barra lateral -->
