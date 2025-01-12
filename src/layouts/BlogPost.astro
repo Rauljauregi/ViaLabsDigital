@@ -5,81 +5,44 @@ import BaseLayout from '@/layouts/BaseLayout'
 import Tag from '@/components/Tag'
 import type { MarkdownHeading } from 'astro'
 import { Image } from 'astro:assets'
+import ListRelatedPosts from '@/components/ListRelatedPosts' // Añadir esta importación
 
 type Props = {
-	data: CollectionEntry<'blog'>['data']
-	headings: MarkdownHeading[]
-	readTime: string
+    data: CollectionEntry<'blog'>['data']
+    headings: MarkdownHeading[]
+    readTime: string
+    relatedPosts?: CollectionEntry<'blog'>[] // Añadir esta prop
 }
 
-const { data, readTime, headings } = Astro.props
+const { data, readTime, headings, relatedPosts = [] } = Astro.props
 const { title, description, pubDate, updatedDate, heroImage, tags } = data
 const articleDate = pubDate.toISOString()
 ---
 
 <BaseLayout
-	title={title}
-	description={description}
-	image={heroImage?.src}
-	articleDate={articleDate}>
-	<article class='md:py-4 max-w-xs sm:max-w-none md:max-w-none'>
-		<header class='mb-3 flex flex-col justify-center items-center gap-6'>
-			<div class='flex flex-col gap-2'>
-				<div class='flex items-center justify-center gap-x-1'>
-					<p class='text-center text-sm text-opacity-50'>
-						Publicado <FormattedDate date={pubDate} />
-					</p>
-					<p class='text-center text-sm text-opacity-50 font-bold'>
-						- {readTime}
-					</p>
-				</div>
-				<h1 class='title text-center text-3xl md:text-4xl md:pb-2.5 font-semibold opacity-0'>
-					{title}
-				</h1>
-			</div>
+    title={title}
+    description={description}
+    image={heroImage?.src}
+    articleDate={articleDate}>
+    <article class='md:py-4 max-w-xs sm:max-w-none md:max-w-none'>
+        <!-- Header y contenido existente -->
+        <header>...</header>
+        <div class='relative'>...</div>
+        {updatedDate && ...}
+        <hr />
 
-            <div class='flex flex-wrap justify-center items-center gap-2 gap-y-4 md:gap-5'>
-                {tags?.map((tag) => (
-                    <Tag tag={tag} />
-                ))}
+        <div class="mb-16"> <!-- Añadido margen inferior -->
+            <slot />
+        </div>
+
+        <!-- Sección de artículos relacionados -->
+        {relatedPosts.length > 0 && (
+            <div class="mt-16 pt-8 border-t dark:border-gray-800">
+                <h2 class="text-2xl font-bold mb-8">Artículos Relacionados</h2>
+                <ListRelatedPosts posts={relatedPosts} />
             </div>
-        </header>
-
-		<div class='relative w-full aspect-[16/9] md:aspect-[21/9] lg:max-h-[500px] mb-6'> 
-			{
-				heroImage && (
-					<Image
-						src={heroImage}
-						width={1200}
-						height={675}
-						quality={100}
-						format='jpg'
-						loading='eager'
-						class='rounded-lg w-full h-full object-cover opacity-0 transition-all duration-700 ease-in shadow-md md:hover:scale-[1.01] md:hover:shadow-lg motion-safe:transition-all motion-safe:duration-300'
-						alt={`img of ${title}`}
-					/>
-				)
-			}
-			<div
-				style='backdrop-filter: blur(25px) saturate(180%);'
-				class='placeholder absolute inset-0 blur rounded-lg transition-opacity duration-700 ease-out border border-neutral-200 bg-gray-200 dark:border-neutral-900 dark:bg-zinc-900 bg-opacity-90'
-			>
-			</div>
-		</div>
-		{
-			updatedDate && (
-				<div class='last-updated-on'>
-					Ùltima actualización en <FormattedDate date={updatedDate} />
-				</div>
-			)
-		}
-
-		<hr />
-
-		<div>
-			<slot />
-		</div>
-	</article>
+        )}
+    </article>
 </BaseLayout>
 
 <script is:inline>

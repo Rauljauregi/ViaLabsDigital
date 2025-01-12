@@ -1,43 +1,52 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-
 import { cn } from '@/utils'
 import { Image } from 'astro:assets'
 
 type Props = {
-	posts: CollectionEntry<'blog'>[]
+    posts: CollectionEntry<'blog'>[]
 }
 
 const { posts } = Astro.props
 ---
 
-<section class={cn('grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6')}>
-	{
-		posts.length > 0 ? (
-			posts.map((post) => {
-				return (
-					<div class="flex items-center gap-4">
-						<div class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24">
-							<Image
-								src={post.data.heroImage}
-								width={200}
-								height={200}
-								format="webp"
-								class="w-full h-full object-cover rounded-full"
-								alt={`img of ${post.data.title}`}
-							/>
-						</div>
-						<header class="flex-1">
-							<a class="font-medium text-sm sm:text-base hover:underline" href={`/post/${post.slug}/`}>
-								{post.data.title}
-							</a>
-						</header>
-					</div>
-				)
-			})
-		) : (
-			<span class="mt-1.5 text-gray-500">Todavía no hay artículos relacionados. 😢</span>
-		)
-	}
-</section>
-
+<div class="mt-16 pt-8 border-t dark:border-gray-800">
+    <h2 class="text-2xl font-bold mb-8">Artículos relacionados</h2>
+    <section class={cn('grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8')}>
+        {
+            posts.length > 0 ? (
+                posts.map((post) => {
+                    return (
+                        <a 
+                            href={`/post/${post.slug}/`}
+                            class="group flex items-center gap-4 hover:bg-gray-50 dark:hover:bg-gray-900 p-4 rounded-lg transition-colors"
+                        >
+                            <div class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 overflow-hidden">
+                                <Image
+                                    src={post.data.heroImage}
+                                    width={200}
+                                    height={200}
+                                    format="webp"
+                                    class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+                                    alt={`img of ${post.data.title}`}
+                                />
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-medium text-sm sm:text-base group-hover:text-primary transition-colors">
+                                    {post.data.title}
+                                </h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mt-1">
+                                    {post.data.description}
+                                </p>
+                            </div>
+                        </a>
+                    )
+                })
+            ) : (
+                <span class="text-gray-500 col-span-full text-center py-4">
+                    Todavía no hay artículos relacionados. 😢
+                </span>
+            )
+        }
+    </section>
+</div>

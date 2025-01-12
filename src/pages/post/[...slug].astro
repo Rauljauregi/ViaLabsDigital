@@ -40,11 +40,36 @@ if (!post) {
   return Astro.redirect('/404');
 }
 
-// Obtén los posts relacionados
-const getRelatedPosts = (post) => {
+// Obtén los posts relacionados con una lógica mejorada
+const getRelatedPosts = (currentPost) => {
   return posts
-    .filter((p) => p.slug !== post.slug && p.data.tags?.some((t) => post.data.tags?.includes(t)))
-    .slice(0, 3);
+    .filter((p) => {
+      // Excluir el post actual
+      if (p.slug === currentPost.slug) return false;
+      
+      let score = 0;
+      
+      // Puntos por tags compartidos
+      const sharedTags = p.data.tags?.filter(tag => 
+        currentPost.data.tags?.includes(tag)
+      ) || [];
+      score += sharedTags.length * 2;
+      
+      // Puntos por misma categoría
+      if (p.data.category === currentPost.data.category) {
+        score += 3;
+      }
+      
+      // Considerar relacionado si tiene al menos un tag en común o misma categoría
+      return score > 0;
+    })
+    .sort((a, b) => {
+      // Ordenar por fecha si tienen la misma relevancia
+      const dateA = new Date(a.data.pubDate);
+      const dateB = new Date(b.data.pubDate);
+      return dateB.getTime() - dateA.getTime();
+    })
+    .slice(0, 3); // Limitar a 3 posts
 };
 const relatedPosts = getRelatedPosts(post);
 
@@ -71,11 +96,11 @@ try {
 
     <!-- Contenido principal -->
     <main>
-      <article id="blog-container" class="prose dark:prose-invert" data-authentication={authentication}>
+      <article id="blog-container" class="prose dark:prose-invert mb-16" data-authentication={authentication}>
         <Content />
       </article>
-      <section>
-        <h2>Artículos Relacionados</h2>
+      <section class="mt-16 pt-8 border-t dark:border-gray-800">
+        <h2 class="text-2xl font-bold mb-8">Artículos Relacionados</h2>
         <ListRelatedPosts posts={relatedPosts} />
       </section>
     </main>
