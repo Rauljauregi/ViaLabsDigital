@@ -78,19 +78,17 @@ const getRelatedPosts = (currentPost) => {
 const relatedPosts = getRelatedPosts(post);
 
 // Validación y procesamiento del contenido del post
-let Content, headings, readTime;
+let Content, headings, remarkPluginFrontmatter;
 try {
     const rendered = await post.render();
+    Content = rendered.Content;
+    headings = rendered.headings;
+    remarkPluginFrontmatter = rendered.remarkPluginFrontmatter;
 
-    Content = rendered.Content || null;
-    headings = rendered.headings || [];
-
-    const contentText = rendered.content?.trim() || ' '; // Proveer un espacio si el contenido está vacío
-    readTime = post.data.minutesRead || readingTime(contentText).text.replace('read', 'tiempo de lectura') || '5 min tiempo de lectura';
+    // Asegurarnos de que tenemos un tiempo de lectura válido
+    const readTime = remarkPluginFrontmatter?.minutesRead || '5 min tiempo de lectura';
     console.log('Tiempo de lectura calculado:', readTime);
 
-
-    console.log('Tiempo de lectura calculado:', readTime);
 } catch (error) {
     console.error(`Error al renderizar el contenido del post: ${error.message}`);
     return Astro.redirect('/404');
@@ -100,7 +98,11 @@ try {
 
 ---
 
-<BlogPost data={post.data} headings={headings} readTime={'5 min tiempo de lectura'}>
+<BlogPost 
+    data={post.data} 
+    headings={headings}
+    readTime={remarkPluginFrontmatter?.minutesRead || '5 min tiempo de lectura'}
+>
   <PopUp />
   <div class="grid grid-cols-1 md:grid-cols-[20%_auto] gap-16 mt-8">
     <aside class="hidden md:block">

@@ -8,8 +8,10 @@ export function remarkReadingTime() {
   return function (tree: unknown, { data }: any) {
     const textOnPage = toString(tree);
     const readingTime = getReadingTime(textOnPage);
-    // Change "read" to "lectura" in the output string
-    const modifiedText = readingTime.text.replace('read', 'tiempo de lectura');
+  
+    // Asegurar un tiempo mínimo de lectura
+    const minutes = Math.max(1, Math.ceil(readingTime.minutes));
+    const modifiedText = `${minutes} min tiempo de lectura`;
     // Assign the modified string to the frontmatter
     data.astro.frontmatter.minutesRead = modifiedText;
   };
