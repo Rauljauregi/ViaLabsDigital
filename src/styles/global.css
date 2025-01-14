@@ -34,4 +34,12 @@
   .prose blockquote p {
     @apply text-gray-800 dark:text-gray-200 mb-0;
   }
+  
+  .bgvialabs {
+    background-color: #64D2E6;
+  }
+
+  .bgvialabs2 {
+    background-color: #64D2E6;
+  }
 }

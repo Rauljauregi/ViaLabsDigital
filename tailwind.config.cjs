@@ -10,6 +10,8 @@ body: ['Montserrat', ...defaultTheme.fontFamily.sans]
 },
 colors: {
 gray: colors.neutral,
+vialabsorange: '#ff9900',
+vialabsblue: '#64D2E6'
 },
 },
 },

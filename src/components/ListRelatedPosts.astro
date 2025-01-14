@@ -10,28 +10,28 @@ type Props = {
 const { posts } = Astro.props
 ---
 
-<div className="mt-16 pt-8 border-t dark:border-gray-800">
-    <h3 className="text-2xl font-extrabold mb-14">Artículos relacionados</h3>
-    <section className={cn('grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8')}>
+<div class="mt-16 pt-8 border-t dark:border-gray-800">
+    <h3 class="text-2xl font-extrabold mb-14">Artículos relacionados</h3>
+    <section class={cn('grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8')}>
         {posts.length > 0 ? (
             posts.map((post) => (
                 <a 
                     href={`/post/${post.slug}/`}
-                    className="group flex flex-col sm:flex-row items-center gap-4 hover:bg-gray-50 dark:hover:bg-gray-900 p-4 rounded-lg transition-colors shadow-md hover:shadow-lg"
+                    class="group flex flex-col sm:flex-row items-center gap-4 hover:bg-gray-50 dark:hover:bg-gray-900 p-4 rounded-lg transition-colors shadow-md hover:shadow-lg"
                 >
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 overflow-hidden flex-shrink-0">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 overflow-hidden flex-shrink-0">
                         <Image
                             src={post.data.heroImage}
                             width={200}
                             height={200}
                             format="webp"
-                            className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+                            class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
                             alt={`img of ${post.data.title}`}
                         />
                     </div>
-                    <div className="flex-1">
+                    <div class="flex-1">
                         <h4 
-                            className="font-medium text-sm sm:text-base group-hover:text-primary transition-colors line-clamp-2"
+                            class="font-medium text-sm sm:text-base group-hover:text-primary transition-colors line-clamp-2"
                             title={post.data.title} // Tooltip para títulos largos
                         >
                             {post.data.title}
@@ -40,7 +40,7 @@ const { posts } = Astro.props
                 </a>
             ))
         ) : (
-            <span className="text-gray-500 col-span-full text-center py-4">
+            <span class="text-gray-500 col-span-full text-center py-4">
                 Todavía no hay artículos relacionados. 😢
             </span>
         )}
