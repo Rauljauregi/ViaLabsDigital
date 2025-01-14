@@ -17,7 +17,7 @@ const { posts } = Astro.props
             posts.map((post) => (
                 <a 
                     href={`/post/${post.slug}/`}
-                    class="group flex flex-col sm:flex-row items-center gap-4 hover:bg-gray-50 dark:hover:bg-gray-900 p-4 rounded-lg transition-colors shadow-md hover:shadow-lg"
+                    class="group flex flex-col sm:flex-row items-center gap-4 hover:bg-gray-50 dark:hover:bg-gray-900 p-4 rounded-lg transition-colors shadow-md hover:shadow-lg" title={`${post.data.title}`}
                 >
                     <div class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 overflow-hidden flex-shrink-0">
                         <Image
@@ -26,7 +26,8 @@ const { posts } = Astro.props
                             height={200}
                             format="webp"
                             class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
-                            alt={`img of ${post.data.title}`}
+                            alt={`${post.data.title}`}
+                            title={`${post.data.title}`}
                         />
                     </div>
                     <div class="flex-1">
