@@ -59,7 +59,8 @@ const articleDate = pubDate.toISOString()
                         format='jpg'
                         loading='eager'
                         class='group-hover:scale-105 rounded-lg w-full h-full object-cover opacity-0 transition-all duration-700 ease-in shadow-md md:hover:scale-[1.01] md:hover:shadow-lg motion-safe:transition-all motion-safe:duration-300'
-                        alt={`img of ${title}`}
+                        alt={`${title}`}
+                        title={`${title}`}
                     />
                 )
             }
