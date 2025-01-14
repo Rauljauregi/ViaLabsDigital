@@ -65,7 +65,11 @@ La atención (<a href="https://www.elladodelmal.com/2024/01/attention-is-all-you
 *"El banco está al lado del río."*  
 El modelo sabrá que "banco" está relacionado con "río".
 
-$$ \text{Atención}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V $$
+$$
+\begin{equation}
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^{\text{T}}}{\sqrt{d_k}}\right)V
+\end{equation}
+$$
 
 Aquí:
 - $Q$, $K$, $V$: Son proyecciones del texto original (creadas por el modelo).
