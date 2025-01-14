@@ -1,6 +1,6 @@
 ---
 title: "Qué arquitectura de redes neuronales utiliza DALL·E"
-description: "Un empresario sentado frente a un ordenador en su oficina, utilizando herramientas de inteligencia artificial para generar imágenes en su negocio. La pantalla del ordenador muestra un modelo visual de redes neuronales. Fondo luminoso, con elementos tecnológicos en el ambiente."
+description: "cómo DALL·E utiliza redes neuronales basadas en Transformers y modelos de difusión para generar imágenes increíbles a partir de texto."
 category: Inteligencia Artificial
 pubDate: 2025-01-11T17:00:00.000Z
 heroImage: "/images/Qué arquitectura de redes neuronales utiliza dall·e.jpg"
@@ -40,6 +40,22 @@ DALL·E no utiliza un diseño *encoder-decoder* como en otras aplicaciones (por 
 
 Este enfoque permite que el modelo sea más eficiente en tareas de generación, ya que se centra únicamente en predecir la salida (los elementos visuales de la imagen) en lugar de transformar el texto a un formato intermedio.
 
+#####¿Qué es un Transformer?
+Un Transformer es un tipo de red neuronal diseñada para manejar datos secuenciales. Por ejemplo:
+
+- En el caso del texto, analiza cada palabra en una frase y cómo se relaciona con las demás.
+- En el caso de DALL·E, también analiza cómo las partes del texto se relacionan con las partes de una imagen.
+Los Transformers son la base de muchas tecnologías que probablemente ya usas, como ChatGPT o los sistemas de traducción automática.
+
+#####¿Qué significa autoregresivo?
+"Autoregresivo" es una forma elegante de decir que DALL·E genera imágenes paso a paso. Imagina que estás dibujando: comienzas con un borrador, agregas detalles poco a poco, y cada trazo depende del anterior. Así es como funciona este modelo.
+
+En términos técnicos:
+
+- DALL·E predice cada "pieza" de la imagen basándose en las piezas que ya ha generado y el texto que le diste.
+- Este enfoque permite que el modelo mantenga coherencia en la imagen final.
+
+
 #### **Fórmula clave del modelo autoregresivo**  
 $$
 P(\text{imagen} | \text{texto}) = \prod_{t=1}^{T} P(x_t | x_{<t}, \text{texto})
@@ -60,6 +76,13 @@ Las versiones más recientes, como DALL·E 2 y 3, introducen una mejora signific
   - Comienzan con ruido aleatorio (como una hoja llena de garabatos).  
   - Paso a paso, refinan ese ruido para que se convierta en una imagen coherente, guiados por el texto proporcionado.  
 
+#####¿Qué es un modelo de difusión?
+Un modelo de difusión funciona como si "limpiara" una hoja llena de ruido para revelar una imagen escondida.
+
+- El proceso comienza con una imagen completamente borrosa o ruidosa.
+- Paso a paso, la IA elimina el ruido, guiándose por el texto que escribiste, hasta crear una imagen clara y detallada.
+Es como cuando usas un lápiz para sombrear suavemente sobre una hoja con un dibujo oculto; poco a poco, el dibujo aparece.
+
 Este proceso mejora notablemente la calidad de las imágenes generadas, logrando resultados más detallados y fieles al texto original.
 
 ---
@@ -71,6 +94,10 @@ Otra pieza clave de la arquitectura es **CLIP** (*Contrastive Language-Image Pre
 - CLIP actúa como un "juez", asegurándose de que la salida final sea coherente y relevante.  
 - Si hay inconsistencias, CLIP ajusta el resultado para alinearlo mejor con la descripción proporcionada.
 
+##### Explicación de CLIP sencilla
+Imagina que pides una pizza y quieres que tenga exactamente los ingredientes que pediste: queso, tomate y pepperoni. CLIP es como un chef que revisa la pizza antes de entregártela para asegurarse de que cumple tus requisitos.
+
+Si encuentra algo fuera de lugar (por ejemplo, piña en lugar de pepperoni), ajusta la imagen para que se acerque más a lo que pediste.
 ---
 
 ### **Resumen técnico: cómo funciona DALL·E**
