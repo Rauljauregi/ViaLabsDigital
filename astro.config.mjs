@@ -7,19 +7,30 @@ import { remarkReadingTime } from './src/utils/readTime.ts';
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({
-    site: 'https://mindfulml.vialabsdigital.com/', // URL base del sitio web
-    output: 'server', // Generación dinámica de rutas
+    site: 'https://mindfulml.vialabsdigital.com/',
+    output: 'server',
     adapter: vercel(),
     vite: {
-        assetsInclude: ['**/*.fit'], // Archivos adicionales
+        assetsInclude: ['**/*.fit'],
     },
     markdown: {
         remarkPlugins: [
             remarkReadingTime,
-            [remarkMath, { singleDollar: false }],
+            [remarkMath, {
+                singleDollar: false,
+                strict: false
+            }],
         ],
         rehypePlugins: [
-            [rehypeKatex, { throwOnError: false, strict: false }],
+            [rehypeKatex, {
+                throwOnError: false,
+                strict: false,
+                output: 'html',
+                trust: true,
+                macros: {
+                    "\\eqref": "\\href{##1}{(\\text{#1})}",
+                }
+            }],
         ],
         drafts: true,
         shikiConfig: {
@@ -29,6 +40,21 @@ export default defineConfig({
     },
     integrations: [
         mdx({
+            remarkPlugins: [
+                remarkReadingTime,
+                [remarkMath, {
+                    singleDollar: false,
+                    strict: false
+                }],
+            ],
+            rehypePlugins: [
+                [rehypeKatex, {
+                    throwOnError: false,
+                    strict: false,
+                    output: 'html',
+                    trust: true
+                }],
+            ],
             syntaxHighlight: 'shiki',
             shikiConfig: {
                 experimentalThemes: {
