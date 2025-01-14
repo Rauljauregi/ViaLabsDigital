@@ -1,0 +1,10 @@
+---
+// src/components/SchemaMarkup.astro
+interface Props {
+  schema: object;
+}
+
+const { schema } = Astro.props;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>

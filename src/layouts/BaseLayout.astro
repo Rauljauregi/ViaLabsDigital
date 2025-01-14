@@ -9,6 +9,7 @@ import CloseIcon from '@/components/icons/CloseIcon'
 import { getAuth } from 'firebase-admin/auth'
 import MailerLite from '@mailerlite/mailerlite-nodejs'
 import getUserMail from '../utils/getUserMail.ts'
+import SchemaMarkup from '@/components/SchemaMarkup'
 
 const mailerlite = new MailerLite({
 	api_key: process.env.MAILERLITE_API || ''
@@ -62,6 +63,49 @@ if (confirmation === 'success') {
 	Astro.cookies.set('confirmed', 'true')
 	confirm = 'confirmed'
 }
+
+// Importa el componente SchemaMarkup al inicio del archivo
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Mindful ML",
+  "url": "https://mindfulml.vialabsdigital.com",
+  "description": "Blog sobre Machine Learning, Inteligencia Artificial y Deep Learning",
+  "publisher": {
+    "@type": "Organization",
+    "name": "ViaLabs Digital",
+    "url": "https://vialabsdigital.com"
+  }
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ViaLabs Digital",
+  "url": "https://vialabsdigital.com",
+  "sameAs": [
+    "https://x.com/Rauljauregui",
+    "https://www.linkedin.com/in/raúl-jáuregui-martínez-de-morentin-1b0732294/"
+  ],
+  "knowsAbout": [
+    "Machine Learning",
+    "Artificial Intelligence",
+    "Deep Learning",
+    "Technical SEO",
+    "Web Development"
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "Raúl Jáuregui",
+    "sameAs": [
+      "https://x.com/Rauljauregui",
+      "https://www.linkedin.com/in/raúl-jáuregui-martínez-de-morentin-1b0732294/"
+    ]
+  }
+};
+
+
 ---
 
 <html lang='es' class='scroll-smooth'>
@@ -70,11 +114,16 @@ if (confirmation === 'success') {
   		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+
+		<!-- En el head, después del Google Analytics -->
+        <SchemaMarkup schema={websiteSchema} />
+        <SchemaMarkup schema={organizationSchema} />
   
 		<BaseHead title={title} description={description} ogImage={image} articleDate={articleDate} />
 		<ProviderTheme />
 		<ProviderAnimations />
 		<!-- Google tag (gtag.js) -->
+
 
 <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-V3WC9QSH8J"></script>
 

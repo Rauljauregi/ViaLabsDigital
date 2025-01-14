@@ -8,6 +8,7 @@ import PopUp from '@/components/article/PopUp';
 import { app } from '../../firebase/server';
 import { getAuth } from 'firebase-admin/auth';
 import readingTime from 'reading-time';
+import SchemaMarkup from '@/components/SchemaMarkup';
 
 
 
@@ -94,7 +95,37 @@ try {
     return Astro.redirect('/404');
 }
 
-
+// schemarkup del artículo
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": post.data.title,
+  "description": post.data.description,
+  "image": post.data.heroImage ? `https://mindfulml.vialabsdigital.com${post.data.heroImage}` : null,
+  "datePublished": post.data.pubDate,
+  "dateModified": post.data.pubDate || post.data.pubDate,
+  "author": {
+    "@type": "Person",
+    "name": "Raúl Jáuregui",
+    "sameAs": [
+      "https://x.com/Rauljauregui",
+      "https://www.linkedin.com/in/raúl-jáuregui-martínez-de-morentin-1b0732294/"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ViaLabs Digital",
+    "url": "https://vialabsdigital.com"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": Astro.url.href
+  },
+  "keywords": post.data.tags?.join(", "),
+  "articleSection": post.data.category,
+  "wordCount": post.body.split(/\s+/).length,
+  "timeRequired": remarkPluginFrontmatter?.minutesRead || "5 min"
+};
 
 ---
 
@@ -103,6 +134,8 @@ try {
     headings={headings}
     readTime={remarkPluginFrontmatter?.minutesRead || '5 min tiempo de lectura'}
 >
+<!-- schemamarup -->
+<SchemaMarkup schema={articleSchema} />
   <PopUp />
   <div class="grid grid-cols-1 md:grid-cols-[20%_auto] gap-16 mt-8">
     <aside class="hidden md:block">
