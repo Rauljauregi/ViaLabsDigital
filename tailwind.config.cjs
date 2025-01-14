@@ -1,62 +1,57 @@
-/** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme')
-
+const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
 module.exports = {
-    darkMode: 'class',
-    content: ['./src/**/*.{astro,html,js,md,mdx,ts}'],
-    theme: {
-        extend: {
-            colors: {
-                white: '#f8f9fa'
-            },
-            fontFamily: {
-                body: ['Manrope', ...defaultTheme.fontFamily.sans]
-            },
-            gridTemplateColumns: {
-                list: 'repeat(auto-fill, minmax(400px, max-content))'
-            },
-            typography: {
-                DEFAULT: {
-                    css: {
-                        'math-display': {
-                            margin: '1em 0',
-                        },
-                        '.katex': {
-                            color: 'inherit',
-                            fontFamily: 'KaTeX_Main, serif',
-                        },
-                        '.katex-display': {
-                            margin: '1.5em 0',
-                            overflow: 'auto hidden',
-                            padding: '0.5em 0',
-                        },
-                        // Estilos para modo oscuro
-                        '.dark .katex': {
-                            color: '#f8f9fa',
-                        },
-                        // Ajustes para fórmulas inline
-                        '.math-inline': {
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                        },
-                        // Ajustes para scroll en fórmulas largas
-                        '.katex-display > .katex': {
-                            whiteSpace: 'nowrap',
-                        },
-                        // Estilos para elementos específicos de KaTeX
-                        '.katex .mord': {
-                            color: 'inherit',
-                        },
-                        '.katex .mrel': {
-                            color: 'inherit',
-                        },
-                        '.katex .mbin': {
-                            color: 'inherit',
-                        },
-                    },
-                },
-            },
-        },
-    },
-    plugins: [require('@tailwindcss/typography')],
-}
+content: ['./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}'],
+theme: {
+extend: {
+fontFamily: {
+sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
+body: ['Montserrat', ...defaultTheme.fontFamily.sans]
+},
+colors: {
+white: '#f8f9fa',
+primary: '#64D2E6',
+secondary: '#399AAC',
+gray: colors.neutral,
+},
+},
+},
+plugins: [
+require('@tailwindcss/typography'),
+require('@tailwindcss/forms'),
+require('@tailwindcss/aspect-ratio'),
+require('@tailwindcss/line-clamp'),
+],
+darkMode: 'class',
+typography: {
+DEFAULT: {
+css: {
+a: {
+color: '#3182ce',
+'&:hover': {
+color: '#2c5282',
+},
+},
+h1: {
+color: '#64D2E6',
+fontWeight: '700',
+},
+h2: {
+color: '#399AAC',
+fontWeight: '600',
+},
+h3: {
+color: '#399AAC',
+fontWeight: '500',
+},
+h4: {
+color: '#399AAC',
+fontWeight: '500',
+},
+'.dark h1, .dark h2, .dark h3, .dark h4': {
+color: '#f8f9fa',
+},
+},
+},
+},
+};

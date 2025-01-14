@@ -1,102 +1,56 @@
-@import url(../../node_modules/bootstrap-icons/font/bootstrap-icons.min.css);
-@import "katex/dist/katex.min.css";
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+:root {
+--accent: #2337ff;
+--accent-dark: #000d8a;
+--black: 15, 18, 25;
+--gray: 96, 115, 159;
+--gray-light: 229, 233, 240;
+--gray-dark: 34, 41, 57;
+--gray-gradient: rgba(var(--gray-light), 50%), #fff;
+--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
+0 16px 32px rgba(var(--gray), 33%);
+}
 @layer base {
-	body {
-		transition: background-color 0.5s ease;
-	}
-
-	.prose code {
-		@apply text-base;
-	}
-
-	@font-face {
-		font-family: 'Manrope';
-		src: url('../assets/fonts/Manrope-SemiBold.woff2') format('woff2');
-		font-weight: 600;
-		font-style: normal;
-	}
-
-	@font-face {
-		font-family: 'Manrope';
-		src: url('../assets/fonts/Manrope-Medium.woff2') format('woff2');
-		font-weight: 500;
-		font-style: normal;
-	}
-
-	@font-face {
-		font-family: 'Manrope';
-		src: url('../assets/fonts/Manrope-Light.woff2') format('woff2');
-		font-weight: 300;
-		font-style: normal;
-	}
-
-	@font-face {
-		font-family: 'Manrope';
-		src: url('../assets/fonts/Manrope-Regular.woff2') format('woff2');
-		font-weight: 400;
-		font-style: normal;
-	}
-
-	.prose h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		@apply text-zinc-800 dark:text-zinc-100 !important;
-	}
-	.katex-display {
-        @apply overflow-x-auto overflow-y-hidden py-4;
-    }
-
-    .katex {
-        @apply text-zinc-800 dark:text-zinc-100;
-    }
-
-    /* Estilos para fórmulas matemáticas en modo oscuro */
-    .dark .katex {
-        @apply text-zinc-100;
-    }
-
-    /* Ajustes para el contenedor de fórmulas */
-    .math-display {
-        @apply my-4 px-2;
-    }
+body {
+@apply font-sans text-base text-gray-900 dark:text-gray-100;
 }
-
-.moon-logo {
-	transform: translateY(0%) rotateZ(0deg);
 }
-
-.sun-logo {
-	transform: translateY(0) rotateZ(0deg);
+@layer components {
+.btn {
+@apply inline-block px-5 py-3 rounded-lg hover:bg-indigo-600 transition duration-300 shadow-lg bg-indigo-500 text-white capitalize tracking-wider font-semibold text-sm sm:text-xl focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 whitespace-nowrap;
 }
-
-.animate-sun {
-	transform: translateY(20%) rotateZ(100deg);
+.prose blockquote {
+@apply bg-indigo-50 dark:bg-indigo-900/30 border-l-4 border-indigo-300 dark:border-indigo-700 p-4 my-4 rounded-r-lg;
 }
-
-.animate-moon {
-	transform: translateY(20%) rotateZ(50deg);
+.prose blockquote p {
+@apply text-gray-800 dark:text-gray-200 mb-0;
 }
-
-.glass {
-	backdrop-filter: blur(10px) brightness(0.7);
-	-webkit-backdrop-filter: blur(10px) brightness(0.7);
-	background-color: rgba(0, 0, 0, 0.1);
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	z-index: -1;
 }
-
-.bgvialabs {
-	background: #64D2E6;
-}
-
-.bgvialabs2 {
-	background: #399AAC;
-}
+</modified_global_css>
+<modified_tailwind_config>
+const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
+module.exports = {
+content: ['./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}'],
+theme: {
+extend: {
+fontFamily: {
+sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
+body: ['Montserrat', ...defaultTheme.fontFamily.sans]
+},
+colors: {
+gray: colors.neutral,
+},
+},
+},
+plugins: [
+require('@tailwindcss/typography'),
+require('@tailwindcss/forms'),
+require('@tailwindcss/aspect-ratio'),
+require('@tailwindcss/line-clamp'),
+],
+darkMode: 'class',
+};
