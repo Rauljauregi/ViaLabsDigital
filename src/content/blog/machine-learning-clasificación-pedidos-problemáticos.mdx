@@ -27,7 +27,7 @@ Un pedido problemático es aquel que, por diversas razones, genera complicacione
 2. **Problemas logísticos y de inventario.**  
 3. **Insatisfacción del cliente.**  
 
-> **Cita clave:** "Predecir pedidos problemáticos permite a las empresas tomar decisiones preventivas, mejorando la eficiencia operativa y la experiencia del cliente."
+> **Cita clave:** Predecir pedidos problemáticos permite a las empresas tomar decisiones preventivas, mejorando la eficiencia operativa y la experiencia del cliente.
 
 
 ### **Sobre el Dataset y Kaggle**
@@ -51,7 +51,6 @@ Para ejecutarlo, presiona el botón de "Play" en cada celda o usa <kbd>Shift</kb
 
 ¡Vamos a mejorar ese punto para que quede claro en el artículo! Aquí tienes una versión más detallada y explicativa para el paso de análisis y distribución de datos:
 
----
 
 ## **2. Cargar y Procesar los Datos**
 
@@ -75,16 +74,13 @@ Esto genera un problema importante para los modelos de Machine Learning, porque:
 1. **Los modelos tienden a favorecer la clase mayoritaria.** Por ejemplo, un modelo podría predecir siempre "No problemático" para maximizar su precisión, ignorando completamente la clase minoritaria.  
 2. **Dificulta la detección de casos importantes.** Aunque los pedidos problemáticos son menos frecuentes, su identificación es crítica para las operaciones logísticas de la empresa.
 
-**Cita para entenderlo mejor:**  
-> "Un dataset desbalanceado no solo dificulta el aprendizaje del modelo, sino que puede generar decisiones ineficaces al ignorar los casos más importantes."
+>**Cita para entenderlo mejor:**  
+> Un dataset desbalanceado no solo dificulta el aprendizaje del modelo, sino que puede generar decisiones ineficaces al ignorar los casos más importantes.
 
 ### **Cómo abordamos este problema**
 Para solucionar el desbalance, aplicamos una técnica llamada **SMOTE (Synthetic Minority Oversampling Technique)**, que genera ejemplos sintéticos de la clase minoritaria (pedidos problemáticos) para equilibrar la proporción de clases. Esto nos permite entrenar un modelo que sea capaz de identificar ambas clases de manera efectiva.
 
-> **Nota:** "El desbalanceo es un problema común en datasets del mundo real. Por eso, técnicas como SMOTE son esenciales para mejorar la capacidad predictiva de los modelos."
-
-
-¡Perfecto! Vamos a enriquecer la explicación en este punto del artículo para describir de forma clara el balanceo de clases con **SMOTE** y por qué es importante. Aquí está la versión mejorada:
+> **Nota:** El desbalanceo es un problema común en datasets del mundo real. Por eso, técnicas como SMOTE son esenciales para mejorar la capacidad predictiva de los modelos.
 
 
 ## **3. Balancear las Clases**
@@ -105,7 +101,7 @@ donde:
 
 Esto tiene como resultado una distribución equilibrada entre las dos clases, lo que ayuda al modelo de Machine Learning a entrenarse de manera más efectiva.  
 
-> **Nota importante:** "El balanceo no altera los datos originales, sino que añade ejemplos sintéticos para mejorar la representatividad de la clase minoritaria."
+> **Nota importante:** El balanceo no altera los datos originales, sino que añade ejemplos sintéticos para mejorar la representatividad de la clase minoritaria.
 
 ### **Resultados del balanceo**
 Después de aplicar SMOTE, las clases quedaron perfectamente equilibradas, como se muestra en el gráfico:
@@ -119,11 +115,9 @@ Después de aplicar SMOTE, las clases quedaron perfectamente equilibradas, como 
 
 Esta nueva distribución asegura que el modelo pueda aprender de manera equitativa sobre ambas clases, mejorando significativamente su capacidad para identificar pedidos problemáticos.
 
-**Para entenderlo mejor:**
-> "El balanceo de clases es una técnica crítica para resolver problemas de clasificación desbalanceada, permitiendo que los modelos sean justos y efectivos al predecir casos de importancia operativa."
+> **Para entenderlo mejor:**
+> El balanceo de clases es una técnica crítica para resolver problemas de clasificación desbalanceada, permitiendo que los modelos sean justos y efectivos al predecir casos de importancia operativa.
 
-
-Claro, aquí está la mejora del punto **4. Entrenamiento del modelo con XGBoost**:
 
 
 ## **4. Entrenamiento del modelo con XGBoost**
@@ -178,7 +172,7 @@ $$
 ### **Reflexión sobre los resultados**
 El modelo alcanzó una precisión sobresaliente, siendo capaz de clasificar correctamente tanto los pedidos problemáticos como los no problemáticos. Esto demuestra que, gracias al balanceo de las clases y el uso de un modelo avanzado como XGBoost, logramos un excelente rendimiento en nuestro problema de clasificación.
 
-> **Nota clave:** "Una precisión del 99.16% significa que el modelo identifica con alta certeza los pedidos problemáticos, proporcionando insights valiosos para mejorar los procesos empresariales."
+> **Nota clave:** Una precisión del 99.16% significa que el modelo identifica con alta certeza los pedidos problemáticos, proporcionando insights valiosos para mejorar los procesos empresariales.
 
 ### **Pasos en el notebook**
 En el notebook, realizamos los siguientes pasos para entrenar el modelo:
@@ -223,7 +217,7 @@ Una vez entrenado el modelo, usamos **SHAP** (SHapley Additive exPlanations) par
 ### Resultados destacados:
 - **MONTH_ID:** Los pedidos realizados en ciertos meses tienen una mayor probabilidad de ser problemáticos.
 
->**Exploración adicional:** Al analizar los datos de entrada, encontramos que los meses de abril, mayo y junio, son más propensos a tener problemas, probablemente debido a picos de demanda o congestión logística.
+> **Exploración adicional:** Al analizar los datos de entrada, encontramos que los meses de abril, mayo y junio, son más propensos a tener problemas, probablemente debido a picos de demanda o congestión logística.
 
 - **COUNTRY:** Países como Suecia y USA tienen mayor incidencia en pedidos problemáticos, posiblemente por diferencias en regulaciones aduaneras, distancias de envío, o patrones de demanda.
 - **PRODUCTLINE:** Productos como barcos (Ships) y aviones (Planes) tienden a generar más problemas, quizás porque implican pedidos más grandes o más complejos de procesar.
@@ -262,11 +256,11 @@ plt.show()
 
 
 
->Reflexión sobre SHAP
+> **Reflexión sobre SHAP**
 >SHAP no solo nos dice qué pedidos tienen problemas, sino también por qué, permitiendo a las empresas tomar decisiones basadas en datos.
->
->Al identificar las características clave que contribuyen a los problemas en los pedidos, las empresas pueden:
 
+> Al identificar las características clave que contribuyen a los problemas en los pedidos, las empresas pueden:
+>
 > - Planificar mejor sus recursos logísticos en meses críticos.
 > - Ajustar los tiempos de envío o políticas para ciertos países.
 > - Revisar la cadena de suministro para productos propensos a problemas, como barcos o aviones.
