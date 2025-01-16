@@ -1,0 +1,350 @@
+
+---
+title: "Predecir Pedidos Problemáticos con Machine Learning: Un Caso para Empresas"
+description: >-
+    Aprende a predecir pedidos problemáticos con Machine Learning. Este artículo muestra cómo implementar XGBoost y SHAP para mejorar la logística, reducir costes y aumentar la satisfacción del cliente.
+category: Machine Learning
+pubDate: "2025-01-16T16:00:00.000Z"
+heroImage: '/images/clasificacion-pedidos-problematicos.webp'
+tags:
+  - Pyme
+  - Machine Learning
+  - Innovación
+  - Caso Práctico
+---
+
+En este artículo, vamos a abordar un problema común que afecta a empresas con operaciones logísticas complejas: **predecir pedidos problemáticos antes de que ocurran los problemas**. Aunque usamos como ejemplo una empresa que vende miniaturas coleccionables, el enfoque puede aplicarse a cualquier negocio que gestione pedidos en diferentes geografías, productos y tipos de clientes.
+
+## **¿Qué es un pedido problemático y por qué importa?**
+Un pedido problemático es aquel que, por diversas razones, genera complicaciones en su procesamiento o entrega. En nuestro caso, hemos identificado tres estados específicos como "problemáticos":  
+
+- **Cancelled (Cancelado):** El pedido es anulado antes de completarse, lo que representa una pérdida directa.  
+- **On Hold (En espera):** El pedido está temporalmente bloqueado, lo que afecta la logística y la experiencia del cliente.  
+- **Disputed (Disputado):** Existen conflictos relacionados con el pedido, como problemas de facturación o devoluciones.  
+
+### **Impacto en las empresas:**
+1. **Pérdidas económicas.**  
+2. **Problemas logísticos y de inventario.**  
+3. **Insatisfacción del cliente.**  
+
+> **Cita clave:** "Predecir pedidos problemáticos permite a las empresas tomar decisiones preventivas, mejorando la eficiencia operativa y la experiencia del cliente."
+
+
+### **Sobre el Dataset y Kaggle**
+Usamos un dataset de Kaggle titulado **Sample Sales Data**, diseñado para prácticas en analítica minorista. Este dataset incluye información sobre ventas, pedidos, clientes y envíos. Es ideal para problemas como la predicción, la segmentación de clientes y el análisis de patrones de ventas.
+
+**Créditos:** El dataset fue creado por María Carina Roldán, consultora de BI, y está licenciado bajo Creative Commons.  
+
+
+## **1. Contexto del negocio**
+La empresa vende miniaturas coleccionables, como coches clásicos y barcos, con operaciones en múltiples países. Sin embargo, un problema recurrente son los **pedidos problemáticos**, que afectan la logística y generan costes adicionales.  
+
+**Ejemplo de datos en el dataset:**
+- **QUANTITYORDERED:** Cantidad de artículos solicitados.  
+- **PRICEEACH:** Precio por unidad.  
+- **PRODUCTLINE:** Categoría del producto (e.g., barcos, coches).  
+- **DEALSIZE:** Tamaño del pedido (Small, Medium, Large).  
+
+<a href="https://colab.research.google.com/drive/1nIzVsnaOFTjICUl-eiKan8nlJcG71sDB" target="_blank" rel="noopener noreferrer">👉 Abre el notebook interactivo en Google Colab</a>  
+Para ejecutarlo, presiona el botón de "Play" en cada celda o usa <kbd>Shift</kbd> + <kbd>Enter</kbd>.  
+
+
+¡Vamos a mejorar ese punto para que quede claro en el artículo! Aquí tienes una versión más detallada y explicativa para el paso de análisis y distribución de datos:
+
+---
+
+## **2. Cargar y Procesar los Datos**
+
+Explorando el dataset, observamos un **desbalance significativo** entre las dos clases que queremos predecir:  
+- **Pedidos no problemáticos:** Representan la mayoría de los pedidos, completados sin incidentes.  
+- **Pedidos problemáticos:** Una minoría de pedidos, en estados como "Cancelado", "En espera" o "Disputado".  
+
+Esto se refleja en la **distribución inicial de clases**, que podemos ver en el gráfico a continuación:
+
+<img 
+  src="/images/desbalanceo-dataset.png" 
+  alt="Distribución inicial de pedidos: Problemáticos vs No problemáticos" 
+  title="Distribución inicial de pedidos: Problemáticos vs No problemáticos" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
+
+### **¿Qué significa que los datos estén desbalanceados?**
+Cuando los datos están **desbalanceados**, una de las clases (en este caso, los pedidos problemáticos) tiene una representación mucho menor en comparación con la otra clase (los no problemáticos). En nuestro caso, por cada pedido problemático, hay decenas de pedidos no problemáticos.  
+
+Esto genera un problema importante para los modelos de Machine Learning, porque:  
+1. **Los modelos tienden a favorecer la clase mayoritaria.** Por ejemplo, un modelo podría predecir siempre "No problemático" para maximizar su precisión, ignorando completamente la clase minoritaria.  
+2. **Dificulta la detección de casos importantes.** Aunque los pedidos problemáticos son menos frecuentes, su identificación es crítica para las operaciones logísticas de la empresa.
+
+**Cita para entenderlo mejor:**  
+> "Un dataset desbalanceado no solo dificulta el aprendizaje del modelo, sino que puede generar decisiones ineficaces al ignorar los casos más importantes."
+
+### **Cómo abordamos este problema**
+Para solucionar el desbalance, aplicamos una técnica llamada **SMOTE (Synthetic Minority Oversampling Technique)**, que genera ejemplos sintéticos de la clase minoritaria (pedidos problemáticos) para equilibrar la proporción de clases. Esto nos permite entrenar un modelo que sea capaz de identificar ambas clases de manera efectiva.
+
+> **Nota:** "El desbalanceo es un problema común en datasets del mundo real. Por eso, técnicas como SMOTE son esenciales para mejorar la capacidad predictiva de los modelos."
+
+
+¡Perfecto! Vamos a enriquecer la explicación en este punto del artículo para describir de forma clara el balanceo de clases con **SMOTE** y por qué es importante. Aquí está la versión mejorada:
+
+
+## **3. Balancear las Clases**
+En la etapa inicial, vimos que las clases estaban desbalanceadas, con una mayoría de pedidos no problemáticos y muy pocos pedidos problemáticos. Este desbalance afecta negativamente la capacidad del modelo para aprender a identificar correctamente ambas clases. 
+
+Para resolver este problema, aplicamos **SMOTE (Synthetic Minority Oversampling Technique)**, una técnica que genera ejemplos sintéticos de la clase minoritaria (pedidos problemáticos) interpolando entre puntos existentes de esta clase.
+
+### **¿Cómo funciona SMOTE?**
+SMOTE crea nuevos ejemplos de la clase minoritaria interpolando entre dos puntos cercanos de esta misma clase. La fórmula matemática de SMOTE es la siguiente:  
+
+$$
+x_{\text{nuevo}} = x_i + \lambda \cdot (x_j - x_i)
+$$
+
+donde:
+- $x_i$ y $x_j$ son puntos existentes en la clase minoritaria.
+- $\lambda \in [0, 1]$ es un valor aleatorio que determina cuánto nos acercamos o alejamos de $x_i$acia $x_j$.  
+
+Esto tiene como resultado una distribución equilibrada entre las dos clases, lo que ayuda al modelo de Machine Learning a entrenarse de manera más efectiva.  
+
+> **Nota importante:** "El balanceo no altera los datos originales, sino que añade ejemplos sintéticos para mejorar la representatividad de la clase minoritaria."
+
+### **Resultados del balanceo**
+Después de aplicar SMOTE, las clases quedaron perfectamente equilibradas, como se muestra en el gráfico:
+
+<img 
+  src="/images/balanceo-clases.png" 
+  alt="Distribución balanceada de pedidos: Problemáticos vs No problemáticos" 
+  title="Distribución balanceada de pedidos: Problemáticos vs No problemáticos" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
+
+Esta nueva distribución asegura que el modelo pueda aprender de manera equitativa sobre ambas clases, mejorando significativamente su capacidad para identificar pedidos problemáticos.
+
+**Para entenderlo mejor:**
+> "El balanceo de clases es una técnica crítica para resolver problemas de clasificación desbalanceada, permitiendo que los modelos sean justos y efectivos al predecir casos de importancia operativa."
+
+
+Claro, aquí está la mejora del punto **4. Entrenamiento del modelo con XGBoost**:
+
+
+## **4. Entrenamiento del modelo con XGBoost**
+
+En esta etapa, entrenamos un modelo **XGBoost**, un potente algoritmo basado en árboles de decisión. XGBoost es ampliamente utilizado debido a su capacidad para manejar grandes volúmenes de datos, su velocidad y su flexibilidad para ajustar hiperparámetros.
+
+### **Fórmula matemática de XGBoost**
+XGBoost utiliza un enfoque secuencial para construir árboles de decisión y minimizar el error objetivo en cada iteración. La predicción final para un dato $ x_i $ se calcula como:
+
+$$
+\hat{y} = \sum_{t=1}^{T} f_t(x_i) + \gamma
+$$
+
+Donde:
+- $ f_t(x_i) $: Predicción del árbol $ t $-ésimo.
+- $ T $: Número total de árboles.
+- $ \gamma $: Parámetro de regularización, que controla la complejidad del modelo para evitar sobreajuste.
+
+El objetivo de XGBoost es minimizar una función de pérdida \( L \) compuesta por dos términos: el error objetivo y la regularización. Matemáticamente:
+
+$$
+L = \sum_{i=1}^{n} \ell(y_i, \hat{y}_i) + \sum_{t=1}^{T} \Omega(f_t)
+$$
+
+Donde:
+- $ \ell(y_i, \hat{y}_i) $: Función de pérdida, como el logaritmo de pérdida (logloss).
+- $ \Omega(f_t) $: Regularización del árbol, que penaliza la complejidad del modelo.
+
+### **Hiperparámetros usados**
+En nuestro modelo, configuramos los siguientes hiperparámetros:
+- **n_estimators:** 100 (número de árboles).
+- **max_depth:** 5 (profundidad máxima de cada árbol, para controlar su complejidad).
+- **learning_rate:** 0.1 (cuánto ajustamos los pesos en cada iteración).
+- **subsample:** 0.8 (proporción de datos utilizados para entrenar cada árbol).
+
+### **Resultados del modelo**
+Después de entrenar el modelo con nuestros datos balanceados, obtuvimos los siguientes resultados:
+
+#### **Precisión general del modelo:**
+$$
+\text{Accuracy: } 99.16\%
+$$
+
+#### **Reporte de clasificación:**
+| Métrica      | No problemático | Problemático | Promedio general |
+|--------------|-----------------|--------------|------------------|
+| **Precisión**    | 0.99            | 0.99         | 0.99             |
+| **Recall**       | 0.99            | 0.99         | 0.99             |
+| **F1-Score**     | 0.99            | 0.99         | 0.99             |
+
+
+### **Reflexión sobre los resultados**
+El modelo alcanzó una precisión sobresaliente, siendo capaz de clasificar correctamente tanto los pedidos problemáticos como los no problemáticos. Esto demuestra que, gracias al balanceo de las clases y el uso de un modelo avanzado como XGBoost, logramos un excelente rendimiento en nuestro problema de clasificación.
+
+> **Nota clave:** "Una precisión del 99.16% significa que el modelo identifica con alta certeza los pedidos problemáticos, proporcionando insights valiosos para mejorar los procesos empresariales."
+
+### **Pasos en el notebook**
+En el notebook, realizamos los siguientes pasos para entrenar el modelo:
+
+```python
+# Dividir datos en entrenamiento y prueba
+X_train, X_test, y_train, y_test = train_test_split(X_balanced, y_balanced, test_size=0.2, random_state=42)
+
+# Entrenar modelo XGBoost
+xgb = XGBClassifier(random_state=42, eval_metric='logloss', n_estimators=100, max_depth=5, learning_rate=0.1, subsample=0.8)
+xgb.fit(X_train, y_train)
+
+# Predicciones
+y_pred = xgb.predict(X_test)
+
+# Evaluar el modelo
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nReporte de clasificación:")
+print(classification_report(y_test, y_pred))
+```
+
+**Resultados del notebook:**
+```
+Accuracy: 0.9916820702402958
+
+Reporte de clasificación:
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99       562
+           1       0.99      0.99      0.99       520
+
+    accuracy                           0.99      1082
+   macro avg       0.99      0.99      0.99      1082
+weighted avg       0.99      0.99      0.99      1082
+```
+
+
+## **5. Interpretación con SHAP**
+
+Una vez entrenado el modelo, usamos **SHAP** (SHapley Additive exPlanations) para comprender cómo cada característica afecta las predicciones del modelo. SHAP nos da un desglose claro del impacto de cada variable en las decisiones del modelo, lo que es fundamental para tomar medidas accionables.
+
+### Resultados destacados:
+- **MONTH_ID:** Los pedidos realizados en ciertos meses tienen una mayor probabilidad de ser problemáticos.
+
+>**Exploración adicional:** Al analizar los datos de entrada, encontramos que los meses de abril, mayo y junio, son más propensos a tener problemas, probablemente debido a picos de demanda o congestión logística.
+
+- **COUNTRY:** Países como Suecia y USA tienen mayor incidencia en pedidos problemáticos, posiblemente por diferencias en regulaciones aduaneras, distancias de envío, o patrones de demanda.
+- **PRODUCTLINE:** Productos como barcos (Ships) y aviones (Planes) tienden a generar más problemas, quizás porque implican pedidos más grandes o más complejos de procesar.
+
+### **Gráfico SHAP:** Importancia de las características
+El siguiente gráfico muestra las características más importantes según el modelo. La longitud de cada barra indica cuánto contribuye una característica, en promedio, a las predicciones del modelo.
+
+<img src="/images/shap.png" alt="SHAP Summary Plot: Impacto de las características" title="SHAP Summary Plot: Impacto de las características" style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;" />
+
+#### **Explicación del gráfico:**
+
+Las características en la parte superior, como MONTH_ID y COUNTRY_Sweden, tienen mayor impacto en el resultado del modelo.
+Por ejemplo, ciertos valores de MONTH_ID (representando meses específicos) incrementan la probabilidad de un pedido problemático.
+
+#### **¿Qué meses son los más problemáticos?**
+Analizamos los meses con mayor frecuencia de pedidos problemáticos. En el notebook, esto se puede hacer con el siguiente fragmento de código:
+
+```python
+Copy
+Edit
+# Combinar datos reales con etiquetas
+X_test['PROBLEMATIC'] = y_test.values
+
+# Agrupar por MONTH_ID para analizar tendencias
+problematic_by_month = X_test.groupby('MONTH_ID')['PROBLEMATIC'].mean()
+
+# Visualizar los resultados
+problematic_by_month.plot(kind='bar', color='skyblue', title='Porcentaje de pedidos problemáticos por mes')
+plt.ylabel('Porcentaje de pedidos problemáticos')
+plt.xlabel('Mes')
+plt.xticks(rotation=0)
+plt.show()
+```
+
+<img src="/images/meses-problematicos.png" alt="meses más problemáticos en el dataset" title="meses más problemáticos en el dataset" style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;" />
+
+
+
+>Reflexión sobre SHAP
+>SHAP no solo nos dice qué pedidos tienen problemas, sino también por qué, permitiendo a las empresas tomar decisiones basadas en datos.
+>
+>Al identificar las características clave que contribuyen a los problemas en los pedidos, las empresas pueden:
+
+> - Planificar mejor sus recursos logísticos en meses críticos.
+> - Ajustar los tiempos de envío o políticas para ciertos países.
+> - Revisar la cadena de suministro para productos propensos a problemas, como barcos o aviones.
+
+
+## **6. Simulación de predicciones individuales**
+
+Esta sección demuestra cómo utilizar el modelo entrenado para realizar predicciones sobre pedidos específicos, permitiendo evaluar en tiempo real si un nuevo pedido podría ser problemático.
+
+**Predicción para un pedido específico:**  
+- **Características:**  
+  - Cantidad pedida: 47.  
+  - Precio por unidad: $100.  
+  - Línea de producto: Motocicletas.  
+- **Predicción:** **No problemático.**
+
+<img src="/images/simulacion-datos.png" title="simulación con datos" alt="simulación con datos" style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;" />
+
+### **Resultado de la Predicción**
+El modelo predice que este pedido es **No problemático**, lo cual sugiere que:
+
+- La combinación de cantidad y precio está dentro de rangos normales
+- El historial de pedidos similares en esta ubicación es favorable
+- La línea de producto tiene un buen registro de entregas exitosas
+
+### **Interpretación Práctica**
+Esta funcionalidad permite:
+
+- **Evaluación Preventiva:** Identificar posibles problemas antes de procesar el pedido
+- **Gestión de Riesgos:** Tomar medidas proactivas para pedidos identificados como potencialmente problemáticos
+- **Optimización de Recursos:** Asignar recursos adicionales solo a pedidos que lo requieran
+
+### **Consideraciones Importantes**
+
+- Las predicciones se basan en patrones históricos identificados en los datos de entrenamiento
+- Es importante mantener el modelo actualizado con nuevos datos para mantener su precisión
+- Las predicciones deben usarse como una herramienta de apoyo, no como único criterio de decisión
+
+
+## **7. Visualización de impacto individual**
+
+### **Explicación del Gráfico SHAP (Force Plot)**
+Este gráfico de fuerza SHAP muestra cómo diferentes características contribuyen a la predicción final para un pedido específico.
+
+<img src="/images/visualizacion.png" title="visualización" alt="visualización" style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;" />
+
+#### **Elementos Clave del Gráfico:**
+
+- **Base value:** El valor central (0) representa la predicción promedio del modelo
+- ** $f(x)$  :** El valor -2.66 es la predicción final para este caso específico
+- **Colores:**
+
+  - **Rojo (higher):** Características que empujan la predicción hacia valores más altos (más probabilidad de ser problemático)
+  - **Azul (lower):** Características que empujan la predicción hacia valores más bajos (menos probabilidad de ser problemático)
+
+
+
+### **Interpretación de las Características:**
+
+#### **Impactos Positivos (Rojo):**
+
+- **COUNTRY_USA** = 1.0: Ser un pedido de Estados Unidos
+- **MONTH_ID** = 5.0: Pedidos realizados en mayo
+
+
+### **Impactos Negativos (Azul):**
+
+- **CITY_Madrid** = 0.0
+- **COUNTRY_Sweden** = 0.0
+- **CITY_Liverpool** = 0.0
+- **PRODUCTLINE_Ships** = 0.0
+- **QUANTITYORDERED**
+- **CITY_NYC** = 0.0
+- **CITY_Boston** = 0.0
+
+Con este modelo, las empresas pueden:  
+- 1. Detectar y prevenir problemas antes de que ocurran.  
+- 2. Mejorar la logística y reducir costes operativos.  
+- 3. Optimizar la experiencia del cliente.  
+
+¿Te gustaría implementar una solución similar en tu negocio? Contáctanos en [ViaLabs Digital](https://vialabsdigital.com).  
