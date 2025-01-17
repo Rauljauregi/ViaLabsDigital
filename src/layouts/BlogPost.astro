@@ -58,13 +58,28 @@ const articleDate = pubDate.toISOString()
                         quality={100}
                         format='jpg'
                         loading='eager'
-                        class='w-full h-full object-cover opacity-0 rounded-lg transform transition-all duration-300 ease-in-out group-hover:scale-105'
+                        class='w-full h-full object-cover rounded-lg transform transition-all duration-300 ease-in-out group-hover:scale-105 animate-fade-in'
                         alt={`${title}`}
                         title={`${title}`}
                     />
                 )
             }
         </div>
+        
+        <style>
+            .animate-fade-in {
+                animation: fadeIn 0.5s ease-in forwards;
+            }
+        
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+        </style>
 
         {
             updatedDate && (
