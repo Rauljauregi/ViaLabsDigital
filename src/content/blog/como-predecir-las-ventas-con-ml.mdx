@@ -1,7 +1,7 @@
 ---
 title: "Cómo predecir las ventas con machine learning"
 description: >-
-    Cómo predecir pedidos problemáticos en empresas de miniaturas coleccionables con Machine Learning. Aprende a usar XGBoost y SHAP para optimizar tus operaciones y mejorar la satisfacción del cliente. ¡Mejora la logística de tu negocio con datos!
+    "¿Cómo predecir las ventas con machine learning? Descubre cómo utilizar modelos de machine learning para anticipar tendencias, optimizar inventarios y tomar decisiones inteligentes basadas en datos. Aprende con un ejemplo práctico en Google Colab que te ayudará a transformar tus datos en estrategias ganadoras."
 category: Machine Learning
 pubDate: "2025-01-15T13:00:00.000Z"
 heroImage: '/images/machine-learning-prediccion-ventas.jpg'
@@ -9,7 +9,6 @@ tags:
   - Pyme
   - Machine Learning
   - Innovación
-  - Caso Práctico
 ---
 
 Predecir ventas es una de las tareas más importantes para cualquier negocio, especialmente para las PYMEs que buscan optimizar inventarios, evitar sobreproducción y aprovechar al máximo sus recursos. Aunque muchas empresas todavía confían en Excel o en la intuición para tomar estas decisiones, la realidad es que el **Machine Learning** ofrece una manera más precisa, escalable y adaptativa de predecir el futuro.
@@ -27,27 +26,25 @@ Es posible que pienses: _"¿Realmente necesito Machine Learning para predecir ve
 1. **Machine Learning maneja la complejidad mejor:**  
    Si bien Excel puede ayudarte con datos simples, cuando tienes muchas variables (como estacionalidad, promociones o categorías de productos), los modelos de Machine Learning destacan porque pueden encontrar patrones ocultos que no son evidentes a simple vista.
 
-2. **Adaptación automática:**  
-   Un modelo de Machine Learning puede aprender de nuevos datos y mejorar con el tiempo, algo que una hoja de cálculo simplemente no puede hacer.
-
-3. **Escalabilidad:**  
-   Mientras que Excel tiene límites en términos de tamaño y complejidad de datos, los modelos de Machine Learning pueden manejar grandes volúmenes sin problemas.
-
-En resumen: **Machine Learning no solo predice, aprende y mejora con el tiempo.**
 
 ---
 
 ## **Paso a paso: Explorando el notebook interactivo**
 
 Este es un ejemplo muy básico, pero te ayudará a dar tus primeros pasos con Machine Learning para predecir ventas. Puedes seguir el tutorial con nuestro notebook de Google Colab:  
-<a href="https://colab.research.google.com/drive/1WWjMnQMs91CdpV9MN69A2yuHY38Eqn51" target="_blank" rel="noopener">👉 Abrir el notebook aquí</a>
+<a href="https://colab.research.google.com/drive/1AFy-LujPZ1qMAe-GCi2LhsGizn29shcq" target="_blank" rel="noopener">👉 Abrir el notebook aquí</a>
 
 
 ### **1. Descarga del dataset**
 
 Utilizamos la herramienta `kagglehub` para descargar automáticamente un dataset minorista desde Kaggle. Este dataset contiene información como categorías de productos, ventas por cliente, y precios.
 
-![Descarga del dataset](/images/-warning+dataset_descargado.png)
+<img 
+  src="/images/-warning+dataset_descargado.png" 
+  alt="Descarga del dataset" 
+  title="Descarga del dataset" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
 
 > **Nota:** Si ves un mensaje de advertencia (_"Warning: Looks like you're using an outdated `kagglehub` version"_), no te preocupes. El dataset se descarga correctamente.
 
@@ -60,15 +57,33 @@ Antes de construir un modelo, exploramos los datos para entender su estructura. 
 - Género y edad del cliente.  
 - Categoría del producto, cantidad y monto total de la venta.  
 
-![Exploración de datos](/images/explorar_Datos.png)
+<img 
+  src="/images/explorar_Datos.png" 
+  alt="Exploración de datos" 
+  title="Exploración de datos" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
 
-También generamos gráficos que nos ayudan a visualizar tendencias:  
-- **Ventas por categoría de producto**: Un gráfico de barras muestra cuáles productos generan más ingresos.  
-- **Ventas mensuales**: Una línea muestra la estacionalidad en las ventas.  
-
-![Resultados del EDA](/images/resultado_EDA.png)
+El análisis de los gráficos proporciona una base sólida para evaluar si la regresión lineal es un buen modelo para este dataset y cómo comunicar los resultados. Aquí está el desglose:
 
 ---
+
+### **Mapa de calor de correlación**
+- **Interpretación:**
+  - La correlación entre `Price per Unit` y `Total Amount` es fuerte (0.85), lo que sugiere que es una variable clave para predecir las ventas totales.
+  - La correlación entre `Quantity` y `Total Amount` es moderada (0.37), por lo que también aporta información útil, aunque no tanto como el precio.
+  - La correlación entre `Quantity` y `Price per Unit` es insignificante (0.02), indicando que son variables independientes.
+
+- **Conclusión:**
+  La regresión lineal tiene sentido para este dataset, pero la predicción dependerá principalmente de `Price per Unit`. Si las predicciones futuras no capturan variaciones en `Price per Unit`, el modelo podría dar resultados planos.
+
+<img 
+  src="/images/mapa-calor.png" 
+  alt="Mapa de calor de correlación" 
+  title="Mapa de calor de correlación" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
+
 
 ### **3. Entrenamiento del modelo de Machine Learning**
 
@@ -97,31 +112,59 @@ Evaluamos el modelo utilizando:
 Aquí están los resultados del modelo:
 
 ```plaintext
-MAE: 174.05
-R²: 0.85
+MAE: 174.054
+R²: 0.856357
 ```
 
+### **4. Gráfico de residuales**
+**Interpretación:**
 
-### **4. Predicción y visualización de resultados**
-Finalmente, usamos el modelo para predecir ventas futuras y las comparamos con los datos reales.
-El gráfico de "Valores reales vs. predichos" muestra que el modelo puede capturar las tendencias generales bastante bien:
+La distribución de los residuales muestra que hay cierta variabilidad en los errores, pero están razonablemente centrados alrededor de 0.
+Sin embargo, hay algunos valores extremos, lo que indica que el modelo puede no estar capturando correctamente todos los patrones.
 
-![Gráficos de Resultados](/images/Graficos_resultados.png)
+**Conclusión:** La regresión lineal parece ser adecuada, pero un modelo más complejo (e.g., árboles de decisión o boosting) podría manejar mejor los valores extremos.
 
+<img 
+  src="/images/Graficos_resultados.png" 
+  alt="Gráficos de Residuales" 
+  title="Gráficos de Residuales" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
 
-### **5. Gráfico de ventas históricas y predicciones futuras**
+### **5. Tendencia de ventas mensuales**
+- **Interpretación:**
+  - Hay un patrón estacional claro, con picos en ciertas épocas del año (e.g., mayo y diciembre).
+  - Este patrón estacional no es algo que la regresión lineal capte de forma inherente, ya que no incorpora información temporal explícita.
 
-En lugar de comparar únicamente valores reales y predichos, mostramos un gráfico que combina las ventas históricas con las proyecciones futuras generadas por el modelo.
+- **Conclusión:**
+  Si el objetivo es capturar estacionalidad, un modelo de series temporales (como ARIMA o Prophet) podría ser más adecuado.
 
-1. **Línea de ventas históricas:** Muestra los datos reales de ventas en función del tiempo.
-2. **Línea de predicciones futuras:** Muestra las ventas previstas para periodos futuros (próximos meses), basándose en las tendencias aprendidas por el modelo.
+<img 
+  src="/images/tendencia-ventas-mensuales.png" 
+  alt="Tendencia de ventas mensuales" 
+  title="Tendencia de ventas mensuales" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
 
-Este gráfico es mucho más intuitivo, ya que permite visualizar cómo el modelo proyecta las ventas para periodos que no están en el dataset original.
+### **6. Gráfico de predicciones vs. valores reales**
+- **Interpretación:**
+  - La línea roja muestra la relación ideal entre predicciones y valores reales. La mayoría de los puntos están cerca de la línea, lo que indica que el modelo tiene un buen desempeño.
+  - Sin embargo, para valores altos, las predicciones son menos precisas, posiblemente debido a la simplicidad del modelo.
 
-Por ejemplo, si observas un aumento en los meses futuros, significa que el modelo está anticipando un crecimiento basado en patrones históricos.
+- **Conclusión:**
+  Este gráfico demuestra que el modelo funciona razonablemente bien, pero hay margen de mejora para casos extremos.
 
-![Gráfico de ventas temporales](/images/ventas-historicas-futuras.png)
+  <img 
+  src="/images/predicciones-vs-reales.png" 
+  alt="Gráfico de predicciones vs. valores reales" 
+  title="Gráfico de predicciones vs. valores reales" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
 
+### **Visiión general**
+La regresión lineal es un modelo razonable para este dataset reducido, especialmente porque `Price per Unit` tiene una fuerte correlación con `Total Amount`. Sin embargo, para mejorar:
+- Considera usar un modelo más avanzado, como Random Forest, si el objetivo es capturar valores extremos.
+- Si la estacionalidad es importante, explora modelos de series temporales.
 
 ### **Por qué Machine Learning es la mejor opción**
 Este ejemplo básico demuestra que incluso un modelo sencillo de Machine Learning supera lo que podrías lograr con Excel o intuición. Aunque no es perfecto, el modelo:
@@ -131,7 +174,6 @@ Encuentra patrones ocultos en los datos.
 - Es escalable y se adapta a negocios con grandes volúmenes de datos.
 
 ¿Estás listo para llevar tu negocio al siguiente nivel con Machine Learning? Si necesitas ayuda para implementar estas soluciones, visita:
-👉 <a href="https://vialabsdigital.com" title="Consultoría de Machine Learning para empresas" alt="ViaLabs Digital"  target="_blank" rel="noopener">ViaLabs Digital</a>.
-
+👉 <a href="https://vialabsdigital.com" title="Consultoría de Machine Learning para empresas" alt="ViaLabs Digital">ViaLabs Digital</a>.
 
 ¡No pierdas la oportunidad de transformar tus datos en decisiones inteligentes! 🚀
