@@ -21,13 +21,13 @@ Imagina que tienes un texto y necesitas entender cada palabra en función de las
 
 El alma de este modelo es el mecanismo de **self-attention**, que actúa como un detective que analiza cómo cada palabra se conecta con las demás en la secuencia. Matemáticamente, esto se ve así:
 
-$\$
+$$
 Q = XW_Q, \; K = XW_K, \; V = XW_V
-\$$
+$$
 
-$\$
+$$
 \text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
-\$$
+$$
 
 Aquí, $Q$, $K$ y $V$ son matrices que representan las palabras de entrada transformadas mediante pesos aprendidos ($W_Q$, $W_K$, $W_V$). Esto le permite al modelo asignar importancia relativa a cada palabra.
 
@@ -61,9 +61,9 @@ data = [
 
 Convertimos las palabras en índices numéricos usando un vocabulario sencillo. Esto permite que el modelo procese el texto de manera eficiente.
 
-$\$
+$$
 \text{Embedded vectors: } E = XW_E
-\$$
+$$
 
 ### 3. Definición del Modelo BERT Simplificado
 
@@ -81,9 +81,9 @@ Entrenamos el modelo durante varias épocas y monitoreamos la pérdida para aseg
 #### Embeddings
 Así se ven las palabras transformadas en vectores:
 
-$\$
+$$
 E = XW_E
-\$$
+$$
 
 ```html
 <img src="images/embeddings.png" alt="Visualización de Embeddings" width="600">
@@ -91,17 +91,17 @@ E = XW_E
 
 #### Matrices Q, K, V y Pesos de Atención
 
-$\$
+$$
 Q = EW_Q, \; K = EW_K, \; V = EW_V
-\$$
+$$
 
-$\$
+$$
 \text{Attention weights: } \text{Softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right)
-\$$
+$$
 
-```html
+
 <img src="images/attention_weights.png" alt="Pesos de Atención" width="600">
-```
+
 
 ### 6. Inferencia con Frases Nuevas
 
