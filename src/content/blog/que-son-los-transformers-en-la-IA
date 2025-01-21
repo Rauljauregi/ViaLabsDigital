@@ -1,0 +1,128 @@
+---
+title: "Qué son los Transformers en la IA"
+description: >-
+    "Explora cómo funcionan los transformers en el procesamiento de lenguaje natural con una guía clara y paso a paso. Entiende conceptos clave como self-attention y su aplicación en clasificación de texto."
+category: Deep Learning
+pubDate: "2025-01-21T20:00:00.000Z"
+heroImage: '/images/Qué son los Transformers en la IA.webp'
+tags:
+  - Transformers
+  - Bert
+  - Caso práctico
+---
+
+Si alguna vez te has preguntado cómo los modelos de inteligencia artificial logran entender el lenguaje humano con una precisión casi mágica, déjame decirte que los transformers son los magos detrás de todo esto. En el fascinante mundo del procesamiento del lenguaje natural (NLP), los transformers han cambiado las reglas del juego, y hoy quiero compartir contigo una guía sencilla y visual para entenderlos.
+
+En este artículo, te llevaré paso a paso a través de un transformer que utiliza únicamente un encoder. Además, te presentaré un notebook interactivo donde podrás experimentar de primera mano cómo este modelo transforma palabras de entrada en salidas útiles. ¡Prepárate para desentrañar el misterio!
+
+## ¿Qué es un Transformer que solo tiene Encoder?
+
+Imagina que tienes un texto y necesitas entender cada palabra en función de las demás. Un transformer con solo encoder hace justamente eso: analiza la secuencia de texto y genera representaciones que capturan las relaciones internas entre palabras. Este enfoque es perfecto para tareas como la clasificación de texto, la extracción de características o incluso el análisis de sentimientos.
+
+El alma de este modelo es el mecanismo de **self-attention**, que actúa como un detective que analiza cómo cada palabra se conecta con las demás en la secuencia. Matemáticamente, esto se ve así:
+
+$\$
+Q = XW_Q, \; K = XW_K, \; V = XW_V
+\$$
+
+$\$
+\text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\$$
+
+Aquí, $Q$, $K$ y $V$ son matrices que representan las palabras de entrada transformadas mediante pesos aprendidos ($W_Q$, $W_K$, $W_V$). Esto le permite al modelo asignar importancia relativa a cada palabra.
+
+## ¿Por qué utilizar un Transformer para Clasificación de Texto?
+
+Los transformers son como esos amigos que entienden todo el contexto de una conversación, no solo las palabras sueltas. Son ideales para tareas de clasificación porque crean representaciones contextuales de las palabras, entendiendo cada una en función de las demás.
+
+### Algunos ejemplos de su uso en la vida real:
+
+- **Análisis de sentimientos:** Determinar si una reseña es positiva o negativa.
+- **Detección de spam:** Identificar esos correos que no queremos ver.
+- **Clasificación de tickets de soporte:** Ordenar tickets según su urgencia.
+
+## El Notebook: Un Transformer Paso a Paso
+
+Para que no todo quede en teoría, he creado un [notebook interactivo en Google Colab](https://colab.research.google.com/drive/1zUpluuIwXAoKM0T6AFcQN9jYqvh4vTJc). Aquí te detallo los pasos clave para que lo explores a fondo:
+
+### 1. Introducción y Dataset para Clasificación de Texto
+
+Creamos un dataset simple con frases etiquetadas como positivas o negativas. Algo pequeño pero efectivo para entender cómo trabaja el modelo.
+
+```python
+# Ejemplo de dataset:
+data = [
+    ("I love this movie", 1),
+    ("This film was terrible", 0)
+]
+```
+
+### 2. Creación del Vocabulario y Representación de Texto como Índices
+
+Convertimos las palabras en índices numéricos usando un vocabulario sencillo. Esto permite que el modelo procese el texto de manera eficiente.
+
+$\$
+\text{Embedded vectors: } E = XW_E
+\$$
+
+### 3. Definición del Modelo BERT Simplificado
+
+Creamos un transformer simplificado con PyTorch, que incluye:
+- Embeddings para convertir palabras en vectores.
+- Una capa de self-attention para analizar relaciones entre palabras.
+- Una capa de clasificación para predecir si el texto es positivo o negativo.
+
+### 4. Entrenamiento del Modelo en un Dataset Pequeño
+
+Entrenamos el modelo durante varias épocas y monitoreamos la pérdida para asegurarnos de que aprende correctamente.
+
+### 5. Visualización de Transformaciones Internas del Modelo
+
+#### Embeddings
+Así se ven las palabras transformadas en vectores:
+
+$\$
+E = XW_E
+\$$
+
+```html
+<img src="images/embeddings.png" alt="Visualización de Embeddings" width="600">
+```
+
+#### Matrices Q, K, V y Pesos de Atención
+
+$\$
+Q = EW_Q, \; K = EW_K, \; V = EW_V
+\$$
+
+$\$
+\text{Attention weights: } \text{Softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right)
+\$$
+
+```html
+<img src="images/attention_weights.png" alt="Pesos de Atención" width="600">
+```
+
+### 6. Inferencia con Frases Nuevas
+
+Por último, usamos el modelo para predecir si nuevas frases son positivas o negativas. Por ejemplo:
+
+```python
+new_text = "Fantastic movie ever"
+prediction = model.predict(new_text)
+```
+
+El modelo clasificará la frase y mostrará las probabilidades asociadas a cada clase.
+
+## Visualización: Cómo Entender las Transformaciones del Transformer
+
+- **Embeddings:** Representan cada palabra como un vector en un espacio multidimensional.
+- **Pesos de atención:** Capturan cómo cada palabra influye en las demás.
+- **Proyección final:** Resume la información en un vector utilizado para la clasificación.
+
+
+
+Espero que este artículo y el notebook interactivo te hayan ayudado a entender mejor cómo funcionan los transformers paso a paso. Ahora es tu turno: experimenta con el [notebook](https://colab.research.google.com/drive/1zUpluuIwXAoKM0T6AFcQN9jYqvh4vTJc) y descubre nuevas aplicaciones para tus proyectos. ¡Estoy seguro de que te sorprenderás con todo lo que puedes lograr!
+
+¡Nos leemos pronto y que la curiosidad por aprender nunca falte!
+
