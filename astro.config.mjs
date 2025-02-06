@@ -5,6 +5,7 @@ import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import { remarkReadingTime } from './src/utils/readTime.ts';
 import vercel from '@astrojs/vercel';
+import partytown from '@astrojs/partytown'; // Añade esta línea
 
 export default defineConfig({
     site: 'https://mindfulml.vialabsdigital.com/',
@@ -66,5 +67,12 @@ export default defineConfig({
             drafts: true,
         }),
         tailwind(),
+        partytown({
+            // Configuración de Partytown
+            config: {
+                forward: ["dataLayer.push", "gtag"],
+                debug: false // Cambia a true si necesitas debuggear
+            }
+        })
     ],
 });
