@@ -31,7 +31,7 @@ $$
 \text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
 $$
 
-Donde \$Q\$, \$K\$ y \$V\$ son matrices que representan palabras transformadas mediante pesos aprendidos (\$W\_Q\$, \$W\_K\$, \$W\_V\$). Este mecanismo permite al modelo determinar la importancia relativa de cada palabra.
+Donde $Q$, $K$ y $V$ son matrices que representan palabras transformadas mediante pesos aprendidos ($W_Q$, $W_K$, $W_V$). Este mecanismo permite al modelo determinar la importancia relativa de cada palabra.
 
 ## ¿Por qué usar un Transformer para Clasificación de Texto?
 
@@ -79,6 +79,14 @@ $$
 \text{Embedded vectors: } E = XW_E
 $$
 
+<img 
+  src="/images/paso2-transformer.png" 
+  alt="paso 2 Transformer" 
+  title="paso 2 Transformer" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
+
+
 ### 3. Definición del Modelo Transformer
 
 El modelo incluye:
@@ -86,6 +94,14 @@ El modelo incluye:
 - **Embeddings** para convertir palabras en vectores.
 - **Capa de self-attention** para analizar relaciones entre palabras.
 - **Clasificador final** que predice si el texto es positivo o negativo.
+
+
+<img 
+  src="/images/paso3-transformer.png" 
+  alt="paso 3 Transformer" 
+  title="paso 3 Transformer" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
 
 ### 4. Entrenamiento del Modelo
 
@@ -95,6 +111,13 @@ Entrenamos el modelo durante varias épocas y monitoreamos la pérdida para veri
 Época 1/10, Pérdida: 0.7291
 Época 10/10, Pérdida: 0.5199
 ```
+
+<img 
+  src="/images/paso4-transformer.png" 
+  alt="paso 4 Transformer" 
+  title="paso 4 Transformer" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
 
 ### 5. Evaluación y Precisión del Modelo
 
@@ -106,25 +129,71 @@ Precisión en el conjunto de prueba: 75.00%
 
 ### 6. Visualización de Transformaciones del Modelo
 
+<img 
+  src="/images/paso6-1-transformer.png" 
+  alt="paso 6-1 Transformer" 
+  title="paso 6-1 Transformer" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
+
 #### **Embeddings**
 
 $$
 E = XW_E
 $$
 
+<img 
+  src="/images/paso6-2-transformer.png" 
+  alt="paso 6-2 Transformer" 
+  title="paso 6-2 Transformer" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
 
 
 #### **Matrices de Atención y Pesos de Atención**
+
+<img 
+  src="/images/paso6-3-transformer.png" 
+  alt="paso 6-3 Transformer" 
+  title="paso 6-3 Transformer" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
 
 $$
 \text{Attention weights: } \text{Softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right)
 $$
 
+<img 
+  src="/images/paso6-4-transformer.png" 
+  alt="paso 6-4 Transformer" 
+  title="paso 6-4 Transformer" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
 
+<img 
+  src="/images/paso6-5-transformer.png" 
+  alt="paso 6-5 Transformer" 
+  title="paso 6-5 Transformer" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
+
+<img 
+  src="/images/paso6-6-transformer.png" 
+  alt="paso 6-6 Transformer" 
+  title="paso 6-6 Transformer" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
 
 ### 7. Inferencia y Errores del Modelo
 
-Al probar con nuevas frases, observamos fallos en la predicción:
+<img 
+  src="/images/paso7-transformer.png" 
+  alt="paso 7 Transformer" 
+  title="paso 7 Transformer" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
+
+Al probar con nuevas frases, observamos un fallo en la predicción:
 
 ```python
 Frase: "Absolutely love this film"
