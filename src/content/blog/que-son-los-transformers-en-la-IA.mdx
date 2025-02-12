@@ -57,7 +57,11 @@ El dataset consiste en frases simples etiquetadas como positivas (1) o negativas
 # Ejemplo de dataset:
 data = [
     ("I love this movie", 1),
-    ("This film was terrible", 0)
+    ("This film was terrible", 0),
+    ("An excellent performance", 1),
+    ("Worst movie ever", 0),
+    ("Fantastic storyline", 1),
+    ("Not worth watching", 0)
 ]
 ```
 
@@ -70,10 +74,19 @@ Esto hace que el modelo **memorice los datos** en lugar de aprender patrones gen
 Convertimos palabras en índices numéricos para que el modelo pueda procesarlas.
 
 ```python
-vocab = {"love": 0, "movie": 1, "film": 2, "was": 3, "terrible": 4}
+vocabulario: 
+ {'An': 0, 'Fantastic': 1, 'I': 2, 'Not': 3,
+  'This': 4, 'Worst': 5, 'ever': 6, 'excellent': 7,
+  'film': 8, 'love': 9, 'movie': 10, 'performance': 11, 
+  'storyline': 12, 'terrible': 13, 'this': 14, 'was': 15, 
+  'watching': 16, 'worth': 17, '<UNK>': 18}
 ```
 
 Así, una frase como `"I love this movie"` se convierte en:
+
+```python
+[ 2,  9, 14, 10]
+```
 
 $$
 \text{Embedded vectors: } E = XW_E
