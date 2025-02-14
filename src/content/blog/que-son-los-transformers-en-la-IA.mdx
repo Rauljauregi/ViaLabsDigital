@@ -13,13 +13,33 @@ tags:
 
 Si alguna vez te has preguntado cómo los modelos de inteligencia artificial logran entender el lenguaje humano con una precisión casi mágica, los transformers son los responsables de esta revolución. Hoy vas a entender los Transformers en la IA.&#x20;
 
-En el fascinante mundo del procesamiento del lenguaje natural (NLP), los transformers han cambiado las reglas del juego. Hoy te guiaré paso a paso para entenderlos.
+En el fascinante mundo del procesamiento del lenguaje natural (NLP), los transformers han cambiado las reglas del juego. Hoy te guiaré paso a paso para entenderlos con un ejemplo muy sencillo.
 
-En este artículo, exploraremos un transformer que utiliza **únicamente un encoder** para la clasificación de texto. Además, te presentaré un **notebook interactivo** donde podrás experimentar cómo este modelo procesa y transforma palabras en predicciones.
+En este artículo, he creado un transformer que utiliza **únicamente un encoder** para la clasificación de texto. Además, puedes interactuar con él en un **notebook interactivo** donde podrás experimentar cómo este modelo procesa y transforma palabras en predicciones.
 
 ## ¿Qué es un Transformer que solo tiene Encoder?
 
 Un transformer con solo encoder analiza una secuencia de texto y genera representaciones internas que capturan las relaciones entre palabras. Esto es útil para tareas como **clasificación de texto**, **extracción de información** o **análisis de sentimientos**.
+
+Aquí tienes el texto de introducción para tu artículo:
+
+---
+
+### Los Transformers
+
+El modelo **Transformer**, presentado en el artículo <a href="https://es.wikipedia.org/wiki/Transformador_(modelo_de_aprendizaje_autom%C3%A1tico)" target="_blank" rel="noopener">Attention Is All You Need</a>, es la arquitectura base de modelos avanzados de procesamiento del lenguaje como GPT y BERT. En su diseño original, el Transformer consta de dos componentes principales: **el encoder y el decoder**.
+
+Sin embargo, más que una única arquitectura, los Transformers pueden entenderse como un conjunto de herramientas modulares. Para este artículo, nos centraremos únicamente en la implementación del **encoder**, dejando fuera tanto el **positional encoding** (que explicaremos en otro artículo) como el **decoder**, que utilizaremos más adelante para construir una versión simplificada de un modelo GPT.
+
+#### Esquema del Transformer
+A continuación, presentamos el esquema original del Transformer:
+
+<img 
+  src="/images/transformer-schema.png" 
+  alt="Esquema de un Transformer completo" 
+  title="Esquema de un Transformer completo" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
 
 El corazón del modelo es el mecanismo de **self-attention**, que evalúa cuánto influye cada palabra en el resto de la secuencia. Matemáticamente, se expresa así:
 
@@ -43,11 +63,11 @@ Los transformers entienden el **contexto** de una oración completa, a diferenci
 
 ## El Notebook: Un Transformer Paso a Paso
 
-Para entender mejor este proceso, hemos creado un **notebook en Google Colab**. Puedes explorarlo aquí:
+Para entender mejor este proceso, he creado un **notebook en Google Colab**. Puedes verlo aquí:
 
 <a href="https://colab.research.google.com/drive/1zUpluuIwXAoKM0T6AFcQN9jYqvh4vTJc" target="_blank" rel="noopener">👉 Abrir el notebook en Colab aquí</a>
 
-A continuación, resumimos los pasos principales del modelo:
+A continuación, están resumidos los pasos principales del modelo:
 
 ### 1. Creación del Dataset para Clasificación de Texto
 
@@ -66,7 +86,7 @@ data = [
 ```
 
 **⚠️ Nota importante:**
-Hemos utilizado **todo el dataset para entrenamiento**, lo cual **NO es correcto en un modelo real**.
+He utilizado **todo el dataset para entrenamiento**, lo cual **NO es correcto en un modelo real**.
 Esto hace que el modelo **memorice los datos** en lugar de aprender patrones generales. En un caso real, siempre debemos separar un conjunto de prueba.
 
 ### 2. Creación del Vocabulario y Representación del Texto
@@ -122,6 +142,7 @@ Entrenamos el modelo durante varias épocas y monitoreamos la pérdida para veri
 
 ```python
 Época 1/10, Pérdida: 0.7291
+...
 Época 10/10, Pérdida: 0.5199
 ```
 
@@ -226,6 +247,8 @@ Probabilidades: [0.6649, 0.3351]
 ✅ Aumentar `num_heads` en la autoatención.
 ✅ Entrenar por más épocas (`epochs=50`).
 
+Pero la propia simplicidad del modelo que hemos hecho permite entender muy bien cómo funciona un transformer.
+
 ---
 
 
@@ -233,3 +256,7 @@ Espero que este artículo y el notebook interactivo te hayan ayudado a entender 
 
 ¡Nos leemos pronto y que la curiosidad por aprender nunca falte!
 
+Raúl Jáuregui
+Consultor IA e I+D+i
+<a href="https://vialabsdigital.com" target="_blank" rel="noopener">ViaLabs digital</a>
+Si tienes un proyecto puedo ayudarte ha hacerlo realidad.
