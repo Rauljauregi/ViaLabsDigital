@@ -40,6 +40,8 @@ A continuación, presentamos el esquema original del Transformer:
 
 > En nuestro ejemplo además de 'The Encoder' vamos a implementar el bloque indicado como 'Input Embedding' pero no el 'Positional Encoding'.
 
+> Además no vamos a tokenizar las palabras para simplificar al máximo todo el proceso. <a href="https://mindfulml.vialabsdigital.com/post/tokenizacin-para-modelos-de-lenguaje/" target="_blank" rel="noopener">Para saber más sobre tokenizadores pulsa aquí</a>.
+
 
 El corazón del modelo es el mecanismo de **self-attention**, que evalúa cuánto influye cada palabra en el resto de la secuencia. Matemáticamente, se expresa así:
 
@@ -236,16 +238,16 @@ Probabilidades: [0.6649, 0.3351]
 ```
 
 **¿Por qué falló?**
-1️⃣ La palabra **"Absolutely"** no estaba en el dataset de entrenamiento.
-2️⃣ El modelo puede no haber aprendido la relación entre **"love"** y **"film"**.
-3️⃣ El dataset es pequeño, por lo que el modelo **no generaliza bien**.
+1️⃣ La palabra **"Absolutely"** no estaba en el dataset de entrenamiento.  
+2️⃣ El modelo puede no haber aprendido la relación entre **"love"** y **"film"**.  
+3️⃣ El dataset es pequeño, por lo que el modelo **no generaliza bien**.  
 
 ### **¿Cómo Mejorar el Modelo?**
 
-✅ Ampliar el dataset con más ejemplos.
-✅ Usar embeddings preentrenados (ej. Word2Vec, BERT).
-✅ Aumentar `num_heads` en la autoatención.
-✅ Entrenar por más épocas (`epochs=50`).
+✅ Ampliar el dataset con más ejemplos.  
+✅ Usar embeddings preentrenados (ej. Word2Vec, BERT).  
+✅ Aumentar `num_heads` en la autoatención.  
+✅ Entrenar por más épocas (`epochs=50`).  
 
 Pero la propia simplicidad del modelo que hemos hecho permite entender muy bien cómo funciona un transformer.
 
@@ -256,7 +258,8 @@ Espero que este artículo y el notebook interactivo te hayan ayudado a entender 
 
 ¡Nos leemos pronto y que la curiosidad por aprender nunca falte!
 
-Raúl Jáuregui
-Consultor IA e I+D+i
-<a href="https://vialabsdigital.com" target="_blank" rel="noopener">ViaLabs digital</a>
-Si tienes un proyecto puedo ayudarte ha hacerlo realidad.
+
+Raúl Jáuregui  
+Consultor IA e I+D+i  
+<a href="https://vialabsdigital.com" target="_blank" rel="noopener">ViaLabs digital</a>  
+Si tienes un proyecto puedo ayudarte a hacerlo realidad.  
