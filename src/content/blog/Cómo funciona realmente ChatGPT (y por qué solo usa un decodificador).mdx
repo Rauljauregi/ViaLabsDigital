@@ -135,16 +135,16 @@ Si introducimos este texto en el **notebook**:
 
 La matriz de atención de la última capa puede verse así:  
 
-\[
-\begin{bmatrix}
-1 & 0 & 0 & 0 & 0 & 0 \\
-1 & 1 & 0 & 0 & 0 & 0 \\
-1 & 1 & 1 & 0 & 0 & 0 \\
-1 & 1 & 1 & 1 & 0 & 0 \\
-1 & 1 & 1 & 1 & 1 & 0 \\
-1 & 1 & 1 & 1 & 1 & 1 \\
-\end{bmatrix}
-\]
+```python
+attention_mask = [
+    [1, 0, 0, 0, 0, 0],
+    [1, 1, 0, 0, 0, 0],
+    [1, 1, 1, 0, 0, 0],
+    [1, 1, 1, 1, 0, 0],
+    [1, 1, 1, 1, 1, 0],
+    [1, 1, 1, 1, 1, 1]
+]
+```
 
 Cada fila representa cómo un token (palabra) se relaciona con los anteriores. **El token "árbol" no puede atender a "subió"**, porque eso rompería la generación autoregresiva.  
 
