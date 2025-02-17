@@ -19,7 +19,7 @@ La clave está en su arquitectura. ChatGPT es un modelo basado en **GPT (Generat
 
 Sin embargo, a diferencia de otros modelos de IA como T5, que utilizan **codificadores y decodificadores**, **GPT solo usa la parte del decodificador**. ¿Por qué? Porque está diseñado exclusivamente para **generar texto** y no para analizarlo en profundidad como lo haría un buscador o una herramienta de análisis de texto.  
 
-Vamos a ver exactamente qué significa esto y cómo influye en lo que hace ChatGPT.  
+Vamos a ver exactamente qué significa esto y cómo influye en lo que hace ChatGPT. Porque hoy vas a entender cómo funciona ChatGpt.
 
 
 ## 2. **La arquitectura detrás de ChatGPT**  
@@ -81,9 +81,9 @@ Para entender mejor cómo funciona GPT, hemos hecho un **notebook interactivo** 
 ### 4.1. **Generación de Historias con GPT-2**
 En el notebook, usamos el modelo DeepESP/gpt2-spanish para generar historias. Esto nos permite experimentar directamente con la estructura del decoder en acción:
 
-- Ingresamos una frase inicial, y pulsamos ***enter** en tu teclado.
+- Ingresa una frase inicial, y pulsa ***enter** en tu teclado.
 - GPT-2 genera la continuación de la historia usando el contexto previo.
-- Podemos seguir añadiendo frases a la ventana de contexto o escribir **salir**.
+- Puedes seguir añadiendo frases a la ventana de contexto o escribir **salir**.
 
 Cuando has introducido **salir**, visualizarás la matriz de atención. Esta matriz muestra:
 Esta matriz muestra:
@@ -92,7 +92,7 @@ Esta matriz muestra:
 - Cuánta "atención" da el modelo a cada palabra previa.
 - Cómo la atención cambia en cada capa del decodificador.
 
-En términos simples, la matriz de atención indica cuáles palabras son más importantes en el contexto para predecir la siguiente.
+En términos simples, la matriz de atención indica qué palabras son más importantes en el contexto para predecir la siguiente.
 
 Al probar diferentes entradas y analizar las matrices de atención, podemos ver cómo el modelo asigna pesos a cada palabra según su relevancia en la oración generada.
 
@@ -111,7 +111,7 @@ En términos simples, la matriz de atención indica **cuáles palabras son más 
 
 ### 4.3. **Diferencia con Multi-Head Self-Attention en BERT**  
 
-Ya que hemos trabajado con **BERT**, sabemos que usa **multi-head self-attention** en su codificador. GPT también usa **multi-head self-attention**, pero hay diferencias clave:  
+Ya explicamos en el artículo como trabajaba <a href="https://mindfulml.vialabsdigital.com/post/que-son-los-transformers-en-la-ia/" target="_blank" rel="noopener">BERT</a> , y allí se explica el **multi-head self-attention** en el codificador. GPT también usa **multi-head self-attention**, pero hay diferencias muy importantes:  
 
 | Característica                  | BERT (Encoder) | GPT (Decoder-Only) |
 |----------------------------------|---------------|--------------------|
