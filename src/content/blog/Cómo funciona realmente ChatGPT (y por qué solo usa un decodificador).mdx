@@ -1,0 +1,175 @@
+---
+
+title: "Cómo funciona realmente ChatGPT (y por qué solo usa un decodificador)"
+description: "ChatGPT utiliza un modelo basado en la arquitectura Transformer, pero solo emplea la parte del decodificador. Aprende cómo genera texto de manera autoregresiva y en qué se diferencia de otros modelos de IA."
+category: Deep Learning
+pubDate: "2025-02-17T18:00:00.000Z"
+heroImage: '/images/como-funciona-chatgpt.jpg'
+tags:
+  - Transformers
+  - Gpt
+  - Caso práctico
+---
+
+## 1. **ChatGPT es más que un modelo de IA**  
+
+Cada vez que hablamos con ChatGPT, parece que "entiende" lo que decimos, que recuerda lo que hemos dicho antes e incluso que razona sobre sus respuestas. Pero ¿cómo lo hace realmente?  
+
+La clave está en su arquitectura. ChatGPT es un modelo basado en **GPT (Generative Pre-trained Transformer)**, que a su vez se basa en la arquitectura **Transformer**.  
+
+Sin embargo, a diferencia de otros modelos de IA como T5, que utilizan **codificadores y decodificadores**, **GPT solo usa la parte del decodificador**. ¿Por qué? Porque está diseñado exclusivamente para **generar texto** y no para analizarlo en profundidad como lo haría un buscador o una herramienta de análisis de texto.  
+
+Vamos a ver exactamente qué significa esto y cómo influye en lo que hace ChatGPT.  
+
+
+## 2. **La arquitectura detrás de ChatGPT**  
+
+### **GPT y la arquitectura Transformer**  
+
+GPT proviene de la arquitectura **Transformer**, introducida en el paper _"Attention Is All You Need"_ (2017). Esta arquitectura revolucionó el procesamiento del lenguaje porque usa un mecanismo llamado **self-attention**, que le permite procesar texto de manera más eficiente que los modelos anteriores.  
+
+Ahora bien, un Transformer completo tiene dos partes:  
+
+1. **El codificador (Encoder)**, que analiza el texto y lo comprende en ambas direcciones (de izquierda a derecha y de derecha a izquierda).  
+2. **El decodificador (Decoder)**, que genera nuevo texto basándose en lo que ya ha procesado.  
+
+GPT **solo usa la parte del decodificador**. Esto significa que no "lee" el texto en ambas direcciones, sino que **genera palabras de manera secuencial**, usando solo lo que ha visto antes en la conversación, (para entender la uttilidad de esto hay que pensar en la fase de entrenamiento no en la de inferencia).  
+
+¿Por qué funciona así? Porque su objetivo principal es **predecir la siguiente palabra** en función del contexto previo.  
+
+### **Diferencias entre un Transformer completo y GPT**  
+
+| Característica           | Transformer Completo | GPT (Solo Decodificador) |
+|-------------------------|----------------------|--------------------------|
+| **Usa Codificador**     | ✅ Sí                 | ❌ No                    |
+| **Usa Decodificador**   | ✅ Sí                 | ✅ Sí                    |
+| **Comprensión del Contexto** | Bidireccional        | Unidireccional            |
+| **Generación de Texto** | Limitada              | ✅ Optimizada para generación |
+
+GPT **sacrifica comprensión bidireccional** para ser más eficiente generando texto.  
+
+
+## 3. **¿Cómo genera texto ChatGPT?**  
+
+Lo que hace ChatGPT es bastante sencillo de describir (pero muy complejo de implementar):  
+
+1. Toma el texto que le hemos dado como entrada.  
+2. Predice cuál debería ser la siguiente palabra, basándose en el contexto previo.  
+3. Repite el proceso una y otra vez hasta completar la respuesta.  
+
+Este enfoque se llama **generación autoregresiva**, porque cada palabra se basa en las anteriores.  
+
+### **Self-attention causal: la clave de la generación de texto**  
+
+En un modelo Transformer tradicional, el **self-attention** le permite al modelo analizar todo el texto a la vez (<a href="https://mindfulml.vialabsdigital.com/post/que-son-los-transformers-en-la-ia/" target="_blank" rel="noopener">esto se explica en este artículo sobre BERT</a>). Pero en GPT esto no es posible porque solo usa el decodificador.  
+
+En su lugar, GPT en el entrenamiento usa un mecanismo llamado **self-attention causal**, que le impide mirar palabras futuras y solo le permite utilizar las palabras previas.  
+
+Esto es lo que hace que ChatGPT parezca que "escribe" en tiempo real, palabra por palabra.  
+
+
+## 4. **Juega con la arquitectura de ChatGPT**  
+
+Para entender mejor cómo funciona GPT, hemos hecho un **notebook interactivo** donde puedes:  
+
+- Ver cómo **predice las palabras** de manera autoregresiva.  
+- Explorar la **matriz de atención** y ver cómo selecciona la información más relevante en cada paso.  
+- Analizar cómo **procesa los tokens y embeddings** en tiempo real.  
+
+<a href="https://colab.research.google.com/drive/1E4qFs0g0upxM5mZoHBK-TRosTFvrvmHu?usp=sharing" target="_blank" rel="noopener">👉 Abrir el notebook en Colab aquí</a>
+
+### 4.1. **Generación de Historias con GPT-2**
+En el notebook, usamos el modelo DeepESP/gpt2-spanish para generar historias. Esto nos permite experimentar directamente con la estructura del decoder en acción:
+
+- Ingresamos una frase inicial, y pulsamos ***enter** en tu teclado.
+- GPT-2 genera la continuación de la historia usando el contexto previo.
+- Podemos seguir añadiendo frases a la ventana de contexto o escribir **salir**.
+
+Cuando has introducido **salir**, visualizarás la matriz de atención. Esta matriz muestra:
+Esta matriz muestra:
+
+- Qué tokens (palabras) están influenciando a otros tokens.
+- Cuánta "atención" da el modelo a cada palabra previa.
+- Cómo la atención cambia en cada capa del decodificador.
+
+En términos simples, la matriz de atención indica cuáles palabras son más importantes en el contexto para predecir la siguiente.
+
+Al probar diferentes entradas y analizar las matrices de atención, podemos ver cómo el modelo asigna pesos a cada palabra según su relevancia en la oración generada.
+
+### 4.2.  **La Matriz de Atención en Nuestro Notebook**  
+
+En nuestro **notebook**, la **matriz de atención** es la representación visual de **cómo el modelo asigna pesos a las palabras previas para generar la siguiente palabra**.  
+
+Cuando ejecutamos la función `visualizar_atencion(input_texto)`, extraemos la última matriz de atención del modelo **GPT-2 en español** y la graficamos con *seaborn*. Esta matriz muestra:  
+
+- **Qué tokens (palabras) están influenciando a otros tokens.**  
+- **Cuánta "atención" da el modelo a cada palabra previa.**  
+- **Cómo la atención cambia en cada capa del decodificador.**  
+
+En términos simples, la matriz de atención indica **cuáles palabras son más importantes en el contexto** para predecir la siguiente.  
+
+
+### 4.3. **Diferencia con Multi-Head Self-Attention en BERT**  
+
+Ya que hemos trabajado con **BERT**, sabemos que usa **multi-head self-attention** en su codificador. GPT también usa **multi-head self-attention**, pero hay diferencias clave:  
+
+| Característica                  | BERT (Encoder) | GPT (Decoder-Only) |
+|----------------------------------|---------------|--------------------|
+| **Direccionalidad**             | Bidireccional | Unidireccional (causal) |
+| **Self-Attention Mask**         | Ninguna (puede ver todo el texto) | Causal mask (bloquea tokens futuros) |
+| **Flujo de Atención**           | Cada token puede atender a cualquier otro (izq. y der.) | Cada token solo atiende a los anteriores |
+| **Uso del Multi-Head Attention** | Codifica contexto en profundidad | Predice texto paso a paso |
+
+🔹 **En BERT**, cada palabra puede atender a todas las demás, porque su objetivo es comprender el significado de una oración completa.  
+🔹 **En GPT**, cada palabra solo puede atender a las anteriores, porque su objetivo es generar texto de manera autoregresiva.  
+
+Cuando visualizamos la matriz de atención en el **notebook**, vemos que cada token solo está influenciado por los tokens anteriores, debido a la **self-attention causal** implementada con una **máscara triangular inferior**.  
+
+
+
+### 4.4. **Ejemplo Visual con la Matriz de Atención**  
+
+Si introducimos este texto en el **notebook**:  
+
+> "El gato se subió al árbol"  
+
+La matriz de atención de la última capa puede verse así:  
+
+\[
+\begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 \\
+1 & 1 & 0 & 0 & 0 & 0 \\
+1 & 1 & 1 & 0 & 0 & 0 \\
+1 & 1 & 1 & 1 & 0 & 0 \\
+1 & 1 & 1 & 1 & 1 & 0 \\
+1 & 1 & 1 & 1 & 1 & 1 \\
+\end{bmatrix}
+\]
+
+Cada fila representa cómo un token (palabra) se relaciona con los anteriores. **El token "árbol" no puede atender a "subió"**, porque eso rompería la generación autoregresiva.  
+
+En cambio, si viéramos la matriz de atención en **BERT**, todos los tokens podrían atender a todos los demás, porque su objetivo es comprensión, no generación.  
+
+
+## 5. **Preguntas Frecuentes**  
+
+### **¿Cómo funciona el algoritmo de ChatGPT?**  
+ChatGPT usa un **modelo GPT**, que genera texto **prediciendo la siguiente palabra** en función del contexto previo.  
+
+### **¿Cómo saber si un texto o código ha sido generado con ChatGPT?**  
+Hay herramientas que intentan detectar patrones en los textos generados por IA, pero todavía no son 100% precisas.  
+
+### **¿Qué diferencia hay entre GPT-3 y GPT-4?**  
+GPT-4 tiene una arquitectura más eficiente, maneja mejor el contexto y puede aceptar entradas más largas.  
+
+### **¿Todos los modelos de IA generan texto como ChatGPT?**  
+No. Algunos modelos como <a href="https://mindfulml.vialabsdigital.com/post/que-son-los-transformers-en-la-ia/" target="_blank" rel="noopener">BERT</a> están diseñados para comprender texto en lugar de generarlo.  
+
+
+
+ChatGPT funciona porque usa un **modelo solo de decodificación**, basado en la arquitectura Transformer. Esto lo hace muy eficiente para **generar texto**, pero también tiene limitaciones en la comprensión profunda del lenguaje.  
+
+Si te interesa entender mejor cómo funciona todo esto y cómo aplicarlo a tu negocio, te puedo ayudar <a href="https://vialabsdigital.com/contacto/" target="_blank" rel="noopener">pulsa aquí</a> . 
+
+Además te puedes suscribir a la newsletter y cada viernes te envío información práctica sobre Machine Learning e IA aplicada a empresas.  
+
