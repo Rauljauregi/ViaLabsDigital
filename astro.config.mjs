@@ -77,13 +77,18 @@ export default defineConfig({
         }),
         sitemap({
             filter: (page) => !page.includes("/drafts/"), // Excluye borradores si es necesario
-            serialize: ({ canonicalURL }) => ({
-                loc: canonicalURL.endsWith("/") ? canonicalURL : `${canonicalURL}/`, // 🔹 Forzar siempre "/" al final
-                console.log("✅ Generando URL en sitemap:", url); // 🔹 Verifica que la URL tenga "/"
-                lastmod: new Date().toISOString(),
-                changefreq: "weekly",
-                priority: 0.8,
-            }),
+            serialize: ({ canonicalURL }) => {
+                let url = canonicalURL.endsWith("/") ? canonicalURL : `${canonicalURL}/`;
+                
+                console.log("✅ Generando URL en sitemap:", url); // 🔹 Ahora sí está en el lugar correcto
+                
+                return {
+                    loc: url,
+                    lastmod: new Date().toISOString(),
+                    changefreq: "weekly",
+                    priority: 0.8,
+                };
+            },
         }),
     ],
 });
