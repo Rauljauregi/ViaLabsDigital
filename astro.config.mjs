@@ -12,6 +12,7 @@ export default defineConfig({
     site: 'https://mindfulml.vialabsdigital.com/', // Define tu dominio correctamente
     output: 'server',
     adapter: vercel(),
+    trailingSlash: 'always', // 🔹 Asegura que Astro genere rutas con "/"
     vite: {
         assetsInclude: ['**/*.fit'],
     },
@@ -74,14 +75,14 @@ export default defineConfig({
                 debug: false
             }
         }),
-        sitemap({ 
+        sitemap({
             filter: (page) => !page.includes('/drafts/'), // Excluye borradores si es necesario
-            customPages: [
-                'https://mindfulml.vialabsdigital.com/custom-page'
-            ], // Añade URLs manualmente si no están en Astro
-            entryLimit: 5000, // Límite de URLs por sitemap (para grandes sitios)
-            changefreq: 'weekly', // Frecuencia de actualización sugerida
-            priority: 0.8, // Prioridad en los motores de búsqueda
-        })
+            serialize: ({ canonicalURL }) => ({
+                loc: canonicalURL.endsWith('/') ? canonicalURL : `${canonicalURL}/`, // 🔹 Forzar barra al final
+                lastmod: new Date().toISOString(),
+                changefreq: 'weekly',
+                priority: 0.8,
+            }),
+        }) // 🔹 Cierre correcto del sitemap
     ],
 });
