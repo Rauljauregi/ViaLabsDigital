@@ -77,18 +77,12 @@ export default defineConfig({
         }),
         sitemap({
             filter: (page) => !page.includes("/drafts/"), // Excluye borradores si es necesario
-            serialize: ({ canonicalURL }) => {
-                let url = canonicalURL;
-                if (!url.endsWith("/")) {
-                    url += "/"; // 🔹 Forzar barra final en cada URL
-                }
-                return {
-                    loc: url,
-                    lastmod: new Date().toISOString(),
-                    changefreq: "weekly",
-                    priority: 0.8,
-                };
-            },
+            serialize: ({ canonicalURL }) => ({
+                loc: canonicalURL.replace(/\/?$/, "/"), // 🔹 Forzar siempre "/" al final
+                lastmod: new Date().toISOString(),
+                changefreq: "weekly",
+                priority: 0.8,
+            }),
         }),
     ],
 });
