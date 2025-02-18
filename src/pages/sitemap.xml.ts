@@ -9,7 +9,7 @@ export async function GET() {
   // Obtiene las publicaciones desde la colección 'blog'
   const posts = await getCollection('blog');
 
-  // Genera el contenido XML
+  // Genera el contenido XML con URLs forzadas a terminar en "/"
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -18,10 +18,11 @@ export async function GET() {
   </url>
   ${posts
     .map((post) => {
-      const slug = post.slug.startsWith('/') ? post.slug.substring(1) : post.slug; // Elimina slash inicial si existe
+      const slug = post.slug.startsWith('/') ? post.slug.substring(1) : post.slug; // Asegura que no tenga slash inicial
+      const url = `${site}/post/${slug}`.replace(/\/?$/, '/'); // 🔹 Forza "/" al final
       return `
     <url>
-      <loc>${site}/post/${slug}</loc>
+      <loc>${url}</loc>
       <lastmod>${post.data.updated || post.data.published || new Date().toISOString()}</lastmod>
     </url>
   `;
