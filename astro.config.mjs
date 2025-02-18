@@ -12,7 +12,7 @@ export default defineConfig({
     site: 'https://mindfulml.vialabsdigital.com/', // Define tu dominio correctamente
     output: 'server',
     adapter: vercel(),
-    trailingSlash: 'always', // 🔹 Asegura que Astro genere rutas con "/"
+    trailingSlash: 'ignore', // 🔹 Asegura que Astro genere rutas con "/"
     vite: {
         assetsInclude: ['**/*.fit'],
     },
@@ -76,13 +76,19 @@ export default defineConfig({
             }
         }),
         sitemap({
-            filter: (page) => !page.includes('/drafts/'), // Excluye borradores si es necesario
-            serialize: ({ canonicalURL }) => ({
-                loc: canonicalURL.endsWith('/') ? canonicalURL : `${canonicalURL}/`, // 🔹 Forzar barra al final
-                lastmod: new Date().toISOString(),
-                changefreq: 'weekly',
-                priority: 0.8,
-            }),
-        }) // 🔹 Cierre correcto del sitemap
+            filter: (page) => !page.includes("/drafts/"), // Excluye borradores si es necesario
+            serialize: ({ canonicalURL }) => {
+                let url = canonicalURL;
+                if (!url.endsWith("/")) {
+                    url += "/"; // 🔹 Forzar barra final en cada URL
+                }
+                return {
+                    loc: url,
+                    lastmod: new Date().toISOString(),
+                    changefreq: "weekly",
+                    priority: 0.8,
+                };
+            },
+        }),
     ],
 });
