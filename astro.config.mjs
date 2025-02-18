@@ -78,10 +78,7 @@ export default defineConfig({
         sitemap({
             filter: (page) => !page.includes("/drafts/"), // Excluye borradores si es necesario
             serialize: ({ canonicalURL }) => {
-                let url = canonicalURL.endsWith("/") ? canonicalURL : `${canonicalURL}/`;
-                
-                console.log("✅ Generando URL en sitemap:", url); // 🔹 Ahora sí está en el lugar correcto
-                
+                let url = canonicalURL.endsWith("/") ? canonicalURL : `${canonicalURL}/`;                
                 return {
                     loc: url,
                     lastmod: new Date().toISOString(),
