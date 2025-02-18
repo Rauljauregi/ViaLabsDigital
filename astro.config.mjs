@@ -78,7 +78,7 @@ export default defineConfig({
         sitemap({
             filter: (page) => !page.includes("/drafts/"), // Excluye borradores si es necesario
             serialize: ({ canonicalURL }) => ({
-                loc: canonicalURL.replace(/\/?$/, "/"), // 🔹 Forzar siempre "/" al final
+                loc: canonicalURL.endsWith("/") ? canonicalURL : `${canonicalURL}/`, // 🔹 Forzar siempre "/" al final
                 lastmod: new Date().toISOString(),
                 changefreq: "weekly",
                 priority: 0.8,
