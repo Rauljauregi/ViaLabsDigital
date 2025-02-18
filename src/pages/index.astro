@@ -3,12 +3,11 @@ import ListCategories from '@/components/ListCategories'
 import ListPostsIndex from '@/components/ListPostsIndex'
 import Shape from '@/components/icons/Shape'
 import BaseLayout from '@/layouts/BaseLayout'
-import { getNewsletterPosts, getPosts } from '@/utils'
+import { getPosts } from '@/utils'
 
 
 const MAX_POSTS = Infinity; // Show all posts
 const posts = await getPosts(MAX_POSTS);
-const newsletters = await getNewsletterPosts(MAX_POSTS);
 
 ---
 
@@ -28,9 +27,6 @@ const newsletters = await getNewsletterPosts(MAX_POSTS);
 </div>
 	<ListCategories />
 
-	<div>
-		<ListPostsIndex FirstBig={true} posts={posts} newsletters={newsletters}/>
-	</div>
 </BaseLayout>
 
 <script>
