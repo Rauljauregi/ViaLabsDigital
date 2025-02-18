@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/:path((?!.*\\.).*[^/])", 
+      "destination": "/:path/",
+      "permanent": true
+    },
+    {
       "source": "/newsletter/post/:slug(.*)",
       "destination": "/post/:slug",
       "permanent": true
