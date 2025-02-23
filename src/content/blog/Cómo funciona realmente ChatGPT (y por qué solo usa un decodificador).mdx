@@ -18,28 +18,89 @@ Cuando interactuamos con ChatGPT, parece que **entiende lo que decimos**, recuer
 
 GPT se basa en la arquitectura **Transformer**, introducida en el paper <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">*"Attention Is All You Need"* (2017)</a>. Sin embargo, el modelo **no usa un Transformer completo** (que incluye un **codificador** y un **decodificador**), sino que **solo emplea la parte del decodificador**.  
 
+
 ### **¿Por qué GPT solo usa el decodificador?**  
+
 La idea de usar **solo el decodificador** en modelos generativos fue introducida por OpenAI en 2018 con el paper <a href="https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf" target="_blank" rel="noopener">*"Improving Language Understanding by Generative Pre-Training"* (Radford et al., 2018)</a>.  
 
-Este trabajo revolucionó el aprendizaje del lenguaje al demostrar que un modelo podía entrenarse en grandes volúmenes de texto sin etiquetas (pre-entrenamiento) y luego ajustarse con ejemplos específicos (fine-tuning) para mejorar su rendimiento en tareas concretas.  
+Este trabajo marcó el inicio de la **era moderna de los modelos de lenguaje** al demostrar que una IA podía aprender sobre el lenguaje sin necesitar textos etiquetados.  
 
-La clave de este enfoque es que **el modelo aprende a predecir la siguiente palabra** en una secuencia, sin necesidad de comprender el texto en ambas direcciones como lo haría un codificador.  
+El truco es entrenar un modelo en dos fases:  
 
-Esto tiene varias ventajas:  
-✅ **Es más eficiente para generar texto**, ya que el modelo solo necesita conocer el contexto previo.  
-✅ **Se adapta mejor a la generación autoregresiva**, porque cada token generado se convierte en parte de la entrada para el siguiente paso.  
-✅ **Es escalable**, permitiendo entrenar modelos más grandes con menos restricciones de memoria que un Transformer completo.  
+1️⃣ **Pre-entrenamiento** (Unsupervised Learning)  
+   - Se entrena en una cantidad masiva de texto sin etiquetas (*BooksCorpus, Wikipedia, foros, etc.*).  
+   - Aprende a predecir **la siguiente palabra** en una secuencia.  
+   - No necesita intervención humana, solo descubre patrones en el lenguaje.  
+
+2️⃣ **Ajuste fino (Fine-Tuning) en tareas específicas**  
+   - Se entrena con ejemplos etiquetados en tareas como **preguntas y respuestas, clasificación de texto, etc.**  
+   - Se adapta el modelo sin cambiar su arquitectura.  
+
+Este enfoque revolucionó el aprendizaje del lenguaje porque:  
+✅ **Aprovecha mejor los datos no etiquetados** y reduce la necesidad de datasets supervisados.  
+✅ **Permite reentrenar un solo modelo para múltiples tareas** sin modificar su estructura.  
+✅ **Hace posible la escalabilidad**, entrenando modelos más grandes sin cambios arquitectónicos.  
+
+GPT **sacrifica la comprensión bidireccional** de modelos como *BERT* para optimizar la generación de texto.  
+
+### **La revolución de RLHF y el nacimiento de los chatbots útiles**  
+
+Hasta **GPT-3 (2020)**, los modelos de lenguaje eran impresionantes en generación de texto, pero aún tenían **tendencias problemáticas**:  
+❌ Generaban respuestas incoherentes o sin sentido.  
+❌ A menudo alucinaban información falsa.  
+❌ Podían producir contenido tóxico o sesgado.  
+
+Aquí es donde entra en juego **RLHF (Reinforcement Learning from Human Feedback)**, introducido en **GPT-3.5 (2022)** y perfeccionado en **GPT-4 (2023)**.  
+
+🔹 **¿Qué es RLHF?**  
+Es un sistema de aprendizaje por refuerzo donde **humanos califican respuestas generadas por la IA**. Luego, el modelo se reajusta para favorecer las respuestas mejor valoradas.  
+
+🔹 **¿Por qué fue un salto clave en ChatGPT?**  
+✅ Permitió **alinear las respuestas con las expectativas humanas**.  
+✅ Redujo **sesgos y respuestas dañinas**.  
+✅ Mejoró la **capacidad del modelo para seguir instrucciones** y generar contenido más útil.  
+
+En otras palabras, GPT-3.5 fue el primer modelo que realmente convirtió los **modelos de lenguaje en asistentes conversacionales eficientes**.  
+
+Antes, los modelos GPT eran solo generadores de texto avanzados. **Después de RLHF, se convirtieron en chatbots capaces de mantener conversaciones útiles y seguras**.  
+
+---
 
 ### **¿Cómo influye en el comportamiento de ChatGPT?**  
-El uso exclusivo del decodificador implica que **ChatGPT no analiza el significado del texto en profundidad**, sino que simplemente **predice la palabra más probable que debe venir a continuación**.  
 
-Este mecanismo hace que:  
+El uso exclusivo del decodificador, combinado con pre-entrenamiento y ajuste fino, implica que **ChatGPT no analiza el significado del texto en profundidad**, sino que simplemente **predice la palabra más probable que debe venir a continuación**.  
+
+Esto hace que:  
 - **Genere respuestas fluidas y coherentes**, ya que sigue patrones de lenguaje natural.  
 - **Sea capaz de mantener un contexto en la conversación**, aunque no con una memoria real, sino recordando los tokens anteriores dentro de su ventana de contexto.  
 - **No tenga una comprensión real del mundo**, pues solo basa sus respuestas en correlaciones aprendidas en los datos de entrenamiento.  
 
+A pesar de esto, RLHF ha mejorado su capacidad para **razonar de manera más estructurada y seguir instrucciones humanas**.  
+
+---
+
 ### **La diferencia clave con otros modelos**  
-GPT se diferencia de otros modelos como **T5 o BERT**, que utilizan **codificadores** para comprender el lenguaje en ambas direcciones. Mientras que T5 es un modelo **encoder-decoder** y <a href="https://mindfulml.vialabsdigital.com/post/que-son-los-transformers-en-la-ia/" target="_blank" rel="noopener">**BERT**</a> usa **solo codificador**, GPT se basa únicamente en el **decodificador**, optimizando su arquitectura para la generación de texto. **ChatGPT es un modelo de lenguaje generativo basado solo en el decodificador de un Transformer**, una idea que se estableció en 2018 y ha evolucionado hasta modelos más avanzados como GPT-4.  
+
+GPT se diferencia de modelos como **T5 o BERT**, que utilizan **codificadores** para comprender el lenguaje en ambas direcciones.  
+
+| Modelo        | Arquitectura       | Objetivo Principal |
+|--------------|--------------------|--------------------|
+| <a href="https://mindfulml.vialabsdigital.com/post/que-son-los-transformers-en-la-ia/" target="_blank" rel="noopener">**BERT**</a>     | Solo codificador   | Comprensión de lenguaje (bidireccional) |
+| **T5**       | Encoder-Decoder    | Traducción y transformación de texto |
+| **GPT**      | Solo decodificador | Generación de texto autoregresiva |
+
+ChatGPT es un **modelo de lenguaje generativo basado solo en el decodificador de un Transformer**, optimizado para generar respuestas coherentes y alineadas con preferencias humanas gracias a RLHF.  
+
+
+### **De modelos de lenguaje a asistentes inteligentes**  
+
+El *paper* de 2018 estableció la base de los modelos de lenguaje actuales, demostrando que un **modelo pre-entrenado podía generalizar a múltiples tareas con ajuste fino**.  
+
+Sin embargo, fue **RLHF en GPT-3.5** lo que transformó estos modelos en **asistentes conversacionales útiles, seguros y alineados con humanos**.  
+
+Gracias a estos avances, ahora tenemos **ChatGPT, Claude, Gemini y otros modelos que pueden interactuar como asistentes virtuales avanzados**.  
+
+Y esto es solo el principio. 🚀  
 
 
 ## 2. **La arquitectura detrás de ChatGPT**  
