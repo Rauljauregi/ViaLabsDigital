@@ -42,7 +42,7 @@ Funciona así:
 4️⃣ **Pasa el resultado por una función de activación.**  
    - Aquí es donde decide si la salida será "sí" o "no", "compra" o "no compra".  
 
-Matemáticamente, esto se ve así:  
+Matemáticamente, la fórmula es así:  
 
 $$
 y = f\left(\sum_{i=1}^{n} w_i x_i + b \right)
@@ -53,18 +53,36 @@ $$
 - $b$ es el sesgo.  
 - $f$ es la función de activación que decide el resultado.  
 
+En una **red neuronal**, cada neurona aplica una **función de activación**, que transforma la suma de los valores de entrada en una salida útil.  
+
+### **Las funciones de activación más comunes**  
+
+| **Función** | **Fórmula** | **¿Para qué se usa?** |
+|------------|------------|----------------------|
+| **Escalón (Step function)** | \( f(x) = \begin{cases} 1, & \text{si } x \geq 0 \\ 0, & \text{si } x < 0 \end{cases} \) | Usada en el perceptrón, pero limitada porque solo da valores binarios (0 o 1). |
+| **Sigmoide (\(\sigma\))** | \( f(x) = \frac{1}{1 + e^{-x}} \) | Convierte cualquier número en un valor entre 0 y 1, útil para probabilidades. |
+| **Tangente hiperbólica (tanh)** | \( f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \) | Similar a la sigmoide, pero su rango es de -1 a 1, lo que ayuda a que la red aprenda más rápido. |
+| **ReLU (Rectified Linear Unit)** | \( f(x) = \max(0, x) \) | Es la más usada hoy en día en redes profundas porque permite entrenarlas eficientemente. |
+| **Softmax** | \( f(x_i) = \frac{e^{x_i}}{\sum_{j} e^{x_j}} \) | Se usa en la última capa de redes que clasifican entre varias categorías. |
+
+#### **¿Por qué son necesarias estas funciones?**  
+Sin una función de activación, la red neuronal solo haría cálculos lineales simples. Estas funciones le permiten **aprender relaciones más complejas y no lineales** en los datos.  
+
+Si quieres que una IA haga algo más avanzado que una simple decisión "sí/no", necesita funciones de activación como ReLU o sigmoide.
+
+
 ## **El Perceptrón**
 
 Un **perceptrón** es un tipo específico de **neurona artificial**, pero no todas las neuronas artificiales son perceptrones. El **perceptrón** es el modelo más simple de neurona artificial y solo puede resolver problemas lineales (como clasificar datos en dos categorías). En cambio una **neurona artificial** es un concepto más amplio que incluye modelos más avanzados con funciones de activación más sofisticadas (como la sigmoide o ReLU), permitiendo redes neuronales profundas.  
-
-En realidad, **todo perceptrón es una neurona artificial, pero no toda neurona artificial es un perceptrón**.
 
 <img 
   src="/images/el-perceptron.jpeg" 
   alt="Neurona Artificial - El Perceptrón" 
   title="Neurona Artificial - El Perceptrón" 
-  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+  style="width: 60%; height: auto; margin: 20px 0; border-radius: 8px;"
 />
+
+En realidad, **todo perceptrón es una neurona artificial, pero no toda neurona artificial es un perceptrón**.
 
 
 ## **¿Y qué es una red neuronal?**  
