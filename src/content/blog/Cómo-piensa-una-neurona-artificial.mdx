@@ -1,0 +1,99 @@
+---
+
+title: "Cómo piensa una neurona artificial? (Y por qué esto importa para tu empresa)"
+description: "Cómo funcionan las neuronas artificiales y las redes neuronales en inteligencia artificial, y cómo pueden ayudarte a automatizar decisiones en tu empresa con agentes digitales."
+category: Maching Learning
+pubDate: "2025-02-26T11:00:00.000Z"
+heroImage: '/images/como-funciona-neurona-artificial.webp'
+tags:
+  - Conceptos
+  - Machine Learning
+  - Pyme
+---
+
+
+Imagina que tienes un negocio y quieres predecir si un cliente comprará o no un producto. Podrías contratar a un empleado con gran intuición comercial, pero... ¿qué pasaría si pudieras enseñarle a una **inteligencia artificial** a hacer lo mismo?  
+
+Para entender cómo funciona la IA en la toma de decisiones, primero debemos conocer a su unidad fundamental: **la neurona artificial**.  
+
+<img 
+  src="/images/decision-compra-neurona-artificial.png" 
+  alt="Neurona Artificial - Decisión de compra" 
+  title="Neurona Artificial - Decisión de compra" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
+
+
+## **¿Qué es una neurona artificial?**  
+
+Una **neurona artificial** es un modelo matemático inspirado en cómo funciona una neurona biológica en el cerebro. Su tarea principal es **recibir información, procesarla y tomar una decisión**.  
+
+Funciona así:  
+
+1️⃣ **Recibe datos de entrada.**  
+   - Ejemplo: ¿El cliente ha comprado antes? ¿Visitó la página web? ¿Abrió un email de oferta?  
+
+2️⃣ **Asigna pesos a cada dato.**  
+   - Algunos datos son más importantes que otros. Por ejemplo, si el cliente ha comprado antes, puede ser más relevante que si solo abrió un email.  
+
+3️⃣ **Suma los valores ponderados y añade un sesgo** (*bias*).  
+   - Esto ajusta la decisión para evitar errores sistemáticos.  
+
+4️⃣ **Pasa el resultado por una función de activación.**  
+   - Aquí es donde decide si la salida será "sí" o "no", "compra" o "no compra".  
+
+Matemáticamente, esto se ve así:  
+
+$$
+y = f\left(\sum_{i=1}^{n} w_i x_i + b \right)
+$$  
+
+- $x_i$ son los datos de entrada.  
+- $w_i$ son los pesos (la importancia de cada dato).  
+- $b$ es el sesgo.  
+- $f$ es la función de activación que decide el resultado.  
+
+## **El Perceptrón**
+
+Un **perceptrón** es un tipo específico de **neurona artificial**, pero no todas las neuronas artificiales son perceptrones. El **perceptrón** es el modelo más simple de neurona artificial y solo puede resolver problemas lineales (como clasificar datos en dos categorías). En cambio una **neurona artificial** es un concepto más amplio que incluye modelos más avanzados con funciones de activación más sofisticadas (como la sigmoide o ReLU), permitiendo redes neuronales profundas.  
+
+En realidad, **todo perceptrón es una neurona artificial, pero no toda neurona artificial es un perceptrón**.
+
+<img 
+  src="/images/el-perceptron.jpg" 
+  alt="Neurona Artificial - El Perceptrón" 
+  title="Neurona Artificial - El Perceptrón" 
+  style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;"
+/>
+
+
+## **¿Y qué es una red neuronal?**  
+
+Una **red neuronal** no es más que **muchas neuronas artificiales conectadas entre sí**. Cada capa de neuronas toma decisiones basadas en la información de la capa anterior.  
+
+📌 **Ejemplo: Predicción de compra en un e-commerce**  
+
+Supongamos que quieres predecir si un cliente comprará un producto. Tu **red neuronal** podría funcionar así:  
+
+1️⃣ **Capa de entrada:** recibe datos del cliente (edad, visitas, compras previas).  
+2️⃣ **Capa oculta:** combina esos datos de distintas formas y extrae patrones.  
+3️⃣ **Capa de salida:** dice si el cliente es probable comprador o no.  
+
+🔹 Si solo tiene una capa de neuronas, es una **red neuronal simple**.  
+🔹 Si tiene varias capas ocultas, es una **red neuronal profunda** (*deep learning*).  
+
+
+## **¿Cómo se conecta esto con un agente digital?**  
+
+Un **agente digital** es como una red neuronal entrenada para tomar decisiones en tu empresa. Puede:  
+
+✅ Clasificar correos en importantes o spam.  
+✅ Responder preguntas de clientes automáticamente.  
+✅ Analizar datos y predecir compras o cancelaciones.  
+✅ Detectar fraudes en transacciones.  
+
+La diferencia es que, mientras un **perceptrón** (la neurona artificial más simple) solo toma decisiones simples, una **red neuronal** puede aprender patrones complejos y mejorar con el tiempo.  
+
+Si automatizas decisiones con una red neuronal, puedes hacer que tu empresa sea más eficiente sin perder tiempo en tareas repetitivas.  
+
+👉 **¿Te gustaría implementar una IA en tu negocio?  <a href="https://vialabsdigital.com/contacto/" target="_blank" rel="noopener">pulsa aquí</a>. y hablemos.**
