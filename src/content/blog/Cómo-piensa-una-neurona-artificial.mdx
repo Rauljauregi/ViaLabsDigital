@@ -55,21 +55,22 @@ $$
 
 En una **red neuronal**, cada neurona aplica una **función de activación**, que transforma la suma de los valores de entrada en una salida útil.  
 
-### **Las funciones de activación más comunes**  
+### **Las funciones de activación más comunes**    
 
 | **Función** | **Fórmula** | **¿Para qué se usa?** |
 |------------|------------|----------------------|
-| **Escalón (Step function)** | \( f(x) = \begin{cases} 1, & \text{si } x \geq 0 \\ 0, & \text{si } x < 0 \end{cases} \) | Usada en el perceptrón, pero limitada porque solo da valores binarios (0 o 1). |
-| **Sigmoide (\(\sigma\))** | \( f(x) = \frac{1}{1 + e^{-x}} \) | Convierte cualquier número en un valor entre 0 y 1, útil para probabilidades. |
-| **Tangente hiperbólica (tanh)** | \( f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \) | Similar a la sigmoide, pero su rango es de -1 a 1, lo que ayuda a que la red aprenda más rápido. |
-| **ReLU (Rectified Linear Unit)** | \( f(x) = \max(0, x) \) | Es la más usada hoy en día en redes profundas porque permite entrenarlas eficientemente. |
-| **Softmax** | \( f(x_i) = \frac{e^{x_i}}{\sum_{j} e^{x_j}} \) | Se usa en la última capa de redes que clasifican entre varias categorías. |
+| **Escalón (Step function)** | $$ f(x) = \begin{cases} 1, & \text{si } x \geq 0 \\ 0, & \text{si } x < 0 \end{cases} $$ | Usada en el perceptrón, pero limitada porque solo da valores binarios (0 o 1). |
+| **Sigmoide (\(\sigma\))** | $$ f(x) = \frac{1}{1 + e^{-x}} $$ | Convierte cualquier número en un valor entre 0 y 1, útil para probabilidades. |
+| **Tangente hiperbólica (tanh)** | $$ f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} $$ | Similar a la sigmoide, pero su rango es de -1 a 1, lo que ayuda a que la red aprenda más rápido. |
+| **ReLU (Rectified Linear Unit)** | $$ f(x) = \max(0, x) $$ | Es la más usada hoy en día en redes profundas porque permite entrenarlas eficientemente. |
+| **Softmax** | $$ f(x_i) = \frac{e^{x_i}}{\sum_{j} e^{x_j}} $$ | Se usa en la última capa de redes que clasifican entre varias categorías. |
+
 
 #### **¿Por qué son necesarias estas funciones?**  
+
 Sin una función de activación, la red neuronal solo haría cálculos lineales simples. Estas funciones le permiten **aprender relaciones más complejas y no lineales** en los datos.  
 
 Si quieres que una IA haga algo más avanzado que una simple decisión "sí/no", necesita funciones de activación como ReLU o sigmoide.
-
 
 ## **El Perceptrón**
 
