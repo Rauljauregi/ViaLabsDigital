@@ -83,6 +83,9 @@
 	"engines": {
 	    "node": "18.x"
 	},
+	"husky": {
+  		"skipCI": true
+	},
 	"lint-staged": {
 		"src/pages/[...category].astro": [],
 		"src/pages/[...slug].astro": []
