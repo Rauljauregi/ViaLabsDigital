@@ -28,6 +28,83 @@ Lo más sorprendente de esta tecnología es su capacidad para adaptarse. Por eje
 * **Imágenes**: Dividen las imágenes en pequeños bloques (como piezas de un rompecabezas).
 * **Videos**: Analizan cada fotograma como si fuera una imagen separada.
 
+
+### **¿Cómo pueden los Transformers ser solo Encoder, solo Decoder o Encoder-Decoder?**  
+
+La arquitectura **Transformer**, es increíblemente flexible. Dependiendo de su propósito, un modelo Transformer puede adoptar tres configuraciones diferentes:  
+
+| Tipo de Modelo         | Ejemplo          | ¿Para qué se usa? |
+|------------------------|-----------------|--------------------|
+| **Solo Encoder**      | BERT            | Comprender texto |
+| **Solo Decoder**      | GPT             | Generar texto |
+| **Encoder-Decoder**   | Google Translate | Traducir o transformar texto |
+
+
+
+### **1.1. Solo Encoder: BERT (Bidirectional Encoder Representations from Transformers)**  
+
+Un **modelo solo de Encoder**, como <a href="https://mindfulml.vialabsdigital.com/post/que-son-los-transformers-en-la-ia/" target="_blank" rel="noopener">BERT</a>, se usa para tareas donde el objetivo es comprender el significado del texto.  
+
+### 🔹 **¿Cómo funciona?**  
+- Analiza el texto en **ambas direcciones** (izquierda y derecha).  
+- Cada palabra puede atender a todas las demás, sin restricciones.  
+- Extrae representaciones profundas del significado del texto.  
+
+### 🔹 **¿Para qué se usa?**  
+✅ Análisis de sentimientos  
+✅ Clasificación de texto  
+✅ Respuesta a preguntas  
+✅ Detección de entidades  
+
+**Ejemplo:** Si BERT lee la frase _"El banco está al lado del río"_, podrá entender que "banco" se refiere a un lugar para sentarse y no a una institución financiera.  
+
+
+### **1.2. Solo Decoder: GPT (Generative Pre-trained Transformer)**  
+
+Un **modelo solo de Decoder**, como <a href="https://mindfulml.vialabsdigital.com/post/c%C3%B3mo-funciona-realmente-chatgpt-y-por-qu%C3%A9-solo-usa-un-decodificador/" target="_blank" rel="noopener">GPT</a>, se usa para **generar texto** de manera secuencial.  
+
+### 🔹 **¿Cómo funciona?**  
+- Predice la siguiente palabra basándose solo en las anteriores (**self-attention causal**).  
+- No puede ver el futuro de la oración.  
+- Es entrenado en grandes volúmenes de texto para aprender a escribir con fluidez.  
+
+### 🔹 **¿Para qué se usa?**  
+✅ Chatbots y asistentes virtuales  
+✅ Creación de contenido automatizado  
+✅ Generación de código  
+✅ Completar textos  
+
+**Ejemplo:** Si GPT lee _"El cielo está"_, podría predecir que la siguiente palabra será _"azul"_ o _"nublado"_, según el contexto.  
+
+
+### **1.3. Encoder-Decoder: Google Translate (T5, BART, NLLB, etc.)**  
+
+Los modelos **Encoder-Decoder**, como los usados en **Google Translate**, combinan ambos enfoques.  
+
+### 🔹 **¿Cómo funciona?**  
+1. **El Encoder** lee y comprende la oración de entrada.  
+2. **El Decoder** genera la versión traducida o transformada.  
+3. Hay un mecanismo de **cross-attention**, que conecta lo aprendido en el encoder con lo que genera el decoder.  
+
+### 🔹 **¿Para qué se usa?**  
+✅ Traducción automática  
+✅ Resumen de textos  
+✅ Respuestas a preguntas complejas  
+
+ **Ejemplo:** Si el Encoder recibe _"Hello, how are you?"_, el Decoder generará _"Hola, ¿cómo estás?"_, manteniendo el significado original.  
+
+
+### **¿Qué tipo de Transformer es mejor?**  
+
+Depende de lo que quieras hacer:  
+
+- **Si se necesita entender texto**, usa un **encoder (BERT)**.  
+- **Si se quiere generar texto**, usa un **decoder (GPT)**.  
+- **Si se quiere transformar texto (traducción, resumen, etc.)**, usa un **encoder-decoder (Google Translate, T5)**.  
+
+Cada uno tiene su papel en la inteligencia artificial y, combinados, pueden crear modelos aún más potentes. 
+
+
 ## **2. La clave: el mecanismo de atención**
 
 El verdadero secreto de los Transformers está en su capacidad para "prestar atención" a los datos más relevantes. ¿Cómo lo hacen?
@@ -44,6 +121,7 @@ Un Transformer puede identificar que "gato" y "hambre" están conectados, ignora
 * **Value (V)**: Información asociada a cada palabra.
 
 Mediante este sistema, los Transformers analizan **relaciones entre palabras**, pero lo mejor es que esta lógica también se aplica a imágenes o videos.
+
 
 ## **3. Los Transformers en acción: Aplicaciones multimodales**
 

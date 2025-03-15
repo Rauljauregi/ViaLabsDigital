@@ -1,0 +1,292 @@
+---
+title: "Cómo aprende una red neuronal (y cómo automatizar tareas en tu empresa)"
+description: >-
+    Cómo funcionan las redes neuronales artificiales, el descenso de gradiente y la retropropagación. Aprende cómo entrenar una IA paso a paso y cómo aplicarla en la automatización de tareas en tu negocio.
+category: Machine Learning
+pubDate: 2025-03-14
+heroImage: "/images/como-aprende-red-neuronal.jpg"
+tags:
+  - Conceptos
+  - Redes neuronales
+  - Pyme
+---
+
+
+¿Sabes **qué pasa realmente dentro de una red neuronal cuando "aprende"?** Hoy te lo explico con **ejemplos reales**, un **notebook práctico**, y la **teoría matemática** que hace que la magia ocurra.
+
+Vamos a entrenar una **red neuronal sencilla** para clasificar correos de clientes en *quejas*, *preguntas* u *otros*. Pero no es solo código: quiero que entiendas el **proceso de aprendizaje paso a paso**, incluyendo cómo funciona el **descenso de gradiente** y la **retropropagación**.
+
+---
+
+## **1. ¿Qué es una red neuronal y cómo aprende?**
+
+Piensa en una **red neuronal artificial** como un conjunto de **neuronas simuladas** que toman decisiones en cadena. Cada *neurona* recibe información, la procesa y pasa el resultado a las siguientes.
+
+**¿Cómo aprende?**  
+Ajustando los **pesos** de cada conexión entre neuronas para que las decisiones sean mejores cada vez. Este ajuste se basa en **medir el error** (qué tan lejos estamos del resultado correcto) y corregirlo poco a poco. Ahí es donde entra el **descenso de gradiente** y la **retropropagación**.
+
+---
+
+## **2. El proceso de aprendizaje: teoría y práctica**
+
+Te lo explico como si fuera un entrenamiento en tu empresa:
+
+> **Piensa en un empleado nuevo** al que das tareas. Si se equivoca, le das feedback para que mejore. Cada vez que hace algo bien o mal, aprende y ajusta su forma de trabajar.  
+En IA, las **redes neuronales** hacen lo mismo. Solo que el "feedback" es una operación matemática llamada **retropropagación**, y los "ajustes" se hacen con el **descenso de gradiente**.
+
+---
+
+## **3. Las fórmulas detrás del aprendizaje**
+
+### **3.1. Forward Pass: el recorrido hacia la predicción**
+
+Cada *neurona* hace dos cosas:
+1. **Calcula una combinación lineal** de las entradas:
+$$
+z = w \cdot x + b
+$$
+- $w$: pesos
+- $x$: entrada
+- $b$: sesgo (bias)
+
+2. **Aplica una función de activación** para decidir si pasa la información:
+$$
+a = f(z)
+$$
+Donde $f$ puede ser, por ejemplo, una función **ReLU**:
+$$
+f(z) = \max(0, z)
+$$
+
+---
+
+### **3.2. Función de pérdida (Loss Function): medir el error**
+El modelo hace una predicción. ¿Cómo sabemos si es buena?  
+Usamos la **función de pérdida**. Para clasificación multiclase usamos **entropía cruzada**:
+$$
+L = - \sum_{i=1}^{C} y_i \cdot \log(\hat{y}_i)
+$$
+- $y_i$: valor real (0 o 1 según la clase correcta)
+- $\hat{y}_i$: probabilidad que predijo el modelo para la clase $i$
+- $C$: número de clases (en nuestro caso, 3)
+
+---
+
+### **3.3. Retropropagación (Backpropagation): el feedback**
+
+El **error** calculado vuelve hacia atrás por la red para ajustar los pesos.
+
+La **derivada de la pérdida** respecto a cada peso $w$ nos dice en qué dirección moverlo:
+$$
+\frac{\partial L}{\partial w}
+$$
+
+---
+
+### **3.4. Descenso de gradiente (Gradient Descent): actualizar los pesos**
+
+Una vez sabemos **cómo mover los pesos**, los ajustamos poco a poco:
+$$
+w = w - \eta \cdot \frac{\partial L}{\partial w}
+$$
+- $\eta$: tasa de aprendizaje (*learning rate*)
+- $\frac{\partial L}{\partial w}$: gradiente (pendiente del error respecto al peso)
+
+> **Imagínate bajar una montaña buscando el punto más bajo.** El gradiente te dice hacia dónde bajar, y $\eta$ es el tamaño del paso que das.
+
+---
+
+## **4. El notebook paso a paso (código + teoría)**
+
+Ahora que sabes **qué pasa por dentro**, veamos **cómo lo implementamos en Python**.
+Para eso hemos hecho un **notebook interactivo**:  
+ 
+
+<a href="https://colab.research.google.com/drive/1Oa8ok09oy4P6YFNlHvQzXuUma9mKD6x6?usp=sharing" target="_blank" rel="noopener">👉 Abrir el notebook en Colab aquí</a>
+
+
+---
+
+### **📌 Paso 1: Preparar el entorno**
+Instalamos las librerías que usaremos:
+```python
+!pip install tensorflow nltk scikit-learn pandas matplotlib seaborn
+```
+
+---
+
+### **📌 Paso 2: Dataset de correos**
+Creamos un dataset simple con ejemplos de *quejas*, *preguntas* y *otros* correos.
+
+```python
+data = {
+    "texto": [
+        "No estoy satisfecho con el servicio, me cobraron de más.",
+        "¿Cuánto cuesta el envío a Madrid?",
+        "Gracias por la atención, todo estuvo excelente.",
+        # ...
+    ],
+    "categoria": ["queja", "pregunta", "otro", ...]
+}
+
+df = pd.DataFrame(data)
+```
+
+> **Estos datos serán nuestro "conjunto de entrenamiento"**. Es como el curso que damos a un nuevo empleado.
+
+---
+
+### **📌 Paso 3: Limpiar y preparar los datos**
+Primero **limpiamos el texto**:
+```python
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+
+stop_words = set(stopwords.words("spanish"))
+
+def limpiar_texto(texto):
+    texto = texto.lower()
+    texto = re.sub(r'[^\w\s]', '', texto)
+    texto = " ".join([word for word in texto.split() if word not in stop_words])
+    return texto
+
+df["texto_limpio"] = df["texto"].apply(limpiar_texto)
+```
+
+Luego **tokenizamos y vectorizamos**:
+```python
+tokenizer = Tokenizer(num_words=1000, oov_token="<OOV>")
+tokenizer.fit_on_texts(df["texto_limpio"])
+sequences = tokenizer.texts_to_sequences(df["texto_limpio"])
+padded = pad_sequences(sequences, padding="post")
+```
+
+Y **codificamos las etiquetas**:
+```python
+categorias = {"queja": 0, "pregunta": 1, "otro": 2}
+df["categoria_num"] = df["categoria"].map(categorias)
+```
+
+---
+
+### **📌 Paso 4: Dividir en entrenamiento y prueba**
+Esto es clave para evitar que el modelo **memorice** en vez de aprender (overfitting).
+
+```python
+X_train, X_test, y_train, y_test = train_test_split(padded, df["categoria_num"], test_size=0.2, random_state=42)
+```
+
+---
+
+### **📌 Paso 5: La red neuronal (Forward Pass)**
+
+Nuestra red neuronal **aprende a través de capas**:
+```python
+modelo = tf.keras.Sequential([
+    tf.keras.layers.Embedding(1000, 16, input_length=padded.shape[1]),  # capa de embeddings
+    tf.keras.layers.GlobalAveragePooling1D(),  # reduce la dimensionalidad
+    tf.keras.layers.Dense(16, activation="relu"),  # capa oculta
+    tf.keras.layers.Dense(3, activation="softmax")  # salida con probabilidades
+])
+```
+
+**Función de pérdida**:
+$$
+L = - \sum_{i=1}^{C} y_i \cdot \log(\hat{y}_i)
+$$
+
+Compilamos:
+```python
+modelo.compile(loss="sparse_categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+```
+
+---
+
+### **📌 Paso 6: Entrenamiento (Backward Pass y descenso de gradiente)**
+
+```python
+historial = modelo.fit(X_train, y_train, epochs=30, validation_data=(X_test, y_test), verbose=2)
+```
+
+Aquí ocurre el ciclo:
+1. Predice → calcula el error con **entropía cruzada**
+2. Aplica **retropropagación**:
+$$
+\frac{\partial L}{\partial w}
+$$
+3. Ajusta los pesos con **descenso de gradiente**:
+$$
+w = w - \eta \cdot \frac{\partial L}{\partial w}
+$$
+
+---
+
+### **📌 Paso 7: Evaluación del modelo**
+
+Comprobamos si la red aprendió:
+```python
+y_pred = np.argmax(modelo.predict(X_test), axis=1)
+
+from sklearn.metrics import classification_report
+print(classification_report(y_test, y_pred, labels=[0,1,2], target_names=categorias.keys()))
+```
+
+Y visualizamos la **matriz de confusión**:
+```python
+sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, cmap="Blues", xticklabels=categorias.keys(), yticklabels=categorias.keys())
+```
+
+---
+
+### **📌 Paso 8: Prueba en un caso real**
+```python
+def predecir_correo(texto):
+    texto = limpiar_texto(texto)
+    secuencia = tokenizer.texts_to_sequences([texto])
+    secuencia_padded = pad_sequences(secuencia, maxlen=padded.shape[1])
+    prediccion = modelo.predict(secuencia_padded)
+    return list(categorias.keys())[np.argmax(prediccion)]
+
+correo_nuevo = "Me llegó un producto dañado, ¿qué hago?"
+print(predecir_correo(correo_nuevo))
+```
+
+---
+
+### **📌 Paso 9: Visualizamos cómo aprendió**
+```python
+plt.plot(historial.history["accuracy"], label="Precisión en entrenamiento")
+plt.plot(historial.history["val_accuracy"], label="Precisión en validación")
+plt.xlabel("Épocas")
+plt.ylabel("Precisión")
+plt.legend()
+plt.show()
+
+plt.plot(historial.history["loss"], label="Pérdida en entrenamiento")
+plt.plot(historial.history["val_loss"], label="Pérdida en validación")
+plt.xlabel("Épocas")
+plt.ylabel("Pérdida")
+plt.legend()
+plt.show()
+```
+
+---
+
+## **Resultado final**
+
+Hemos visto **cómo se entrena una red neuronal**, tanto en la **teoría matemática** como en la **práctica de negocio**.
+
+Hemos utilizado **aprendizaje supervisado**  
+✅ Entrenamiento con ejemplos  
+✅ Uso de **retropropagación** y **descenso de gradiente**  
+✅ Predicciones y mejoras con el tiempo
+
+---
+
+## **¿Quieres probarlo en tu empresa?**
+👉 Te puedo ayudar a implementar un modelo como este adaptado a tus **propios datos**.  
+---
+
+**Raúl Jáuregui**  
+*Consultor en IA & Machine Learning*  
+[Mindful ML](https://mindfulml.vialabsdigital.com)
