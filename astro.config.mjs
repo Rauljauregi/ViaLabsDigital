@@ -85,4 +85,17 @@ export default defineConfig({
             }),
           }),
     ],
+        wrap: true
+      },
+      drafts: true
+    }),
+    tailwind(),
+    partytown({
+      config: {
+        forward: ['dataLayer.push', 'gtag'],
+        debug: false
+      }
+    }),
+    sitemap()
+  ]
 });
