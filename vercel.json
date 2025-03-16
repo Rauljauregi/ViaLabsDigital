@@ -25,6 +25,7 @@
       ]
     }
   ],
-  "buildTimestamp": "2025-03-16T17:45:00Z",
-  "buildCommand": "npm run vercel-build"
+  "buildTimestamp": "2025-03-16T18:30:00Z",
+  "installCommand": "npm install --legacy-peer-deps --no-audit",
+  "buildCommand": "npm run build"
 }
