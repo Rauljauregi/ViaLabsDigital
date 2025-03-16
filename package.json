@@ -31,7 +31,8 @@
 		"lint": "eslint .",
 		"pre-commit": "lint-staged",
 		"prepare": "husky install",
-		"format:astro": "prettier --write 'src/pages/[...category].astro' 'src/pages/[...slug].astro'"
+		"format:astro": "prettier --write 'src/pages/[...category].astro' 'src/pages/[...slug].astro'",
+		"vercel-build": "rm -rf node_modules/.cache && npm run build"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.2.1",
