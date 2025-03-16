@@ -4,13 +4,14 @@ import tailwind from '@astrojs/tailwind';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import { remarkReadingTime } from './src/utils/readTime.ts';
-import vercel from '@astrojs/vercel';
+import vercel from '@astrojs/vercel/serverless';
 import partytown from '@astrojs/partytown'; // Añade esta línea
 
 export default defineConfig({
     site: 'https://mindfulml.vialabsdigital.com/',
     output: 'server',
     adapter: vercel(),
+    trailingSlash: 'always',
     vite: {
         assetsInclude: ['**/*.fit'],
     },
