@@ -10,6 +10,7 @@ import { getAuth } from 'firebase-admin/auth'
 import MailerLite from '@mailerlite/mailerlite-nodejs'
 import getUserMail from '../utils/getUserMail.ts'
 import SchemaMarkup from '@/components/SchemaMarkup'
+import '../styles/global.css';
 
 const mailerlite = new MailerLite({
 	api_key: process.env.MAILERLITE_API || ''

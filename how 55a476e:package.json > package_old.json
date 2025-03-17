@@ -1,0 +1,1221 @@
+[33mdf21b22[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Corrige schema de contenido en MDX
+[33m15a9d2b[m 17 de marzo de 2025
+[33mc85847f[m fix formulas
+[33m22765dc[m Fix: engines node 18
+[33mfb9bdb7[m Forzar deploy limpio en Vercel
+[33m3ca74c1[m Fix sitemap y build limpio
+[33m0864f28[m 15 marzo 2025
+[33m342e1b1[m Add package-lock.json to lock dependencies
+[33m73d9f27[m Add package-lock.json to lock dependencies
+[33m7176c50[m Fix: downgrade rehype/remark to stable versions
+[33m9e629b0[m Fix: downgrade rehype/remark to stable versions
+[33m9d3b6ea[m Fix: downgrade rehype/remark to stable versions
+[33mb1f04f6[m Fix: downgrade rehype/remark to stable versions
+[33m976f727[m 14-marzo-2025-2
+[33m957b8de[m 14-marzo-2025-2
+[33m256cbd0[m 14-marzo-2025
+[33m0ae192a[m 14-marzo-2025
+[33ma47c5b5[m 14-marzo-2025
+[33m3aa886a[m 14-marzo-2025
+[33m0254426[m 14-marzo-2025
+[33m1f76c76[m 14-marzo-2025
+[33m760c947[m 14-marzo-2025
+[33m4472e17[m 14-marzo-2025
+[33m5410f66[m 14-marzo-2025
+[33m55a476e[m 26 de febrero 2025-6
+[33mdb58a9d[m 26 de febrero 2025-5
+[33ma019d6a[m 26 de febrero 2025-4
+[33m8e25be5[m 26 de febrero 2025-3
+[33m0f1c91e[m 26 de febrero 2025-2
+[33m1255e38[m 26 de febrero 2025
+[33m0585545[m 23 febrero 2025-4
+[33m268402b[m 23 febrero 2025-3
+[33md643c41[m 23 febrero 2025-2
+[33m1c6f921[m 23 febrero 2025
+[33m07e11ff[m 22 febrero 2025-3
+[33m1dc8312[m 22 febrero 2025-2
+[33m9d3bd68[m 22 febrero 2025
+[33mc28688d[m Forzar / en sitemap URLs
+[33mbcda886[m Forzar redeploy en Vercel
+[33mb7ee4c9[m Forzar / al final de las URLs en el sitemap
+[33m5449353[m Forzar / al final de las URLs en el sitemap
+[33m306d1d4[m Forzar / al final de las URLs en el sitemap
+[33m01d656a[m Eliminar getNewsletterPosts de index.astro
+[33m2ea0cb4[m Eliminar getNewsletterPosts de index.astro
+[33mdc25f7d[m Eliminar referencias a newsletter en ListPostsIndex
+[33m97c240e[m Limpieza de dependencias y forzar build limpio
+[33m0e432ad[m Eliminar referencia a newsletter en utils
+[33m44bbb50[m Eliminar referencias a newsletter
+[33ma29ca63[m Corrección: Forzar / en sitemap y arreglar console.log
+[33m7205e09[m Debug: Verificar sitemap URL
+[33m97b1c5b[m Forzar barra final en el sitemap
+[33mbf30b0a[m 18 de febrero de 2025-4
+[33m83dca39[m 18 de febrero de 2025-3
+[33m5f35083[m 18 de febrero de 2025-2
+[33m7a09a29[m 18 de febrero de 2025
+[33mdad96d0[m 17-febrero-20255
+[33m54680bd[m 17-febrero-20254
+[33m46ca70e[m 17 de febrero 2025-3
+[33m1607ea1[m 17 de febrero 2025-2
+[33m87bcf07[m 17 de febrero 2025
+[33ma55ec92[m 14 de febrero 2025-7
+[33mb444dd5[m 14 de febrero 2025-
+[33m085e905[m 14 de febrero 2025-5
+[33m9e104a9[m 14 de febrero 2025-4
+[33mff1b037[m 14 de febrero 2025-4
+[33m297933e[m 14 de Febrebro de 2025-3
+[33m18fe7cf[m 14 de Febrero 2025-2
+[33m726ff0f[m 14 Febrero 2025
+[33mf2f8480[m 12-febrero-2025-2
+[33m6d907f8[m 12-febrero-2025
+[33mad95691[m 12-febrero-2025
+[33md394679[m 8-febrero-2025-1
+[33m418b8f5[m 8-febrero-2025
+[33m2f789bf[m GA4
+[33m0300d9c[m 21-enero-2025-4
+[33m989f3ee[m 21-enero-2025-3
+[33m33af9aa[m 21-enero-2025-2
+[33m403fa82[m 21-enero-2025-1
+[33me0dac98[m 21-enero-2025
+[33m6c18277[m revertir-1
+[33mc02f5ac[m 17-enero-2025-9
+[33m215dea0[m 17-enero-2025-8
+[33m86c6459[m 17-enero-2025-6
+[33m821d85b[m 17-enero-2025-5
+[33mba01670[m 17-enero-2025-4
+[33m18051ac[m 17-enero-2025-3
+[33me0eff4d[m 17-enero-2025-2
+[33m1a1a8a7[m 17-enero-2025
+[33mcca38a5[m 16-enero-2025-2
+[33m564635f[m 16-enero-2025-1
+[33me5890bd[m 16-enero-2025
+[33mc94fbe6[m 15-enero-2025-articulo-8
+[33m79f9d8f[m 15-enero-2025-articulo-7
+[33m841096f[m 15-enero-2025-articulo-6
+[33m60fc874[m 15-enero-2025-articulo-5
+[33m4d58dc8[m 15-enero-2025-articulo-4
+[33mad508f2[m 15-enero-2025-articulo-3
+[33m92c443e[m 15-enero-2025-articulo-2
+[33me275376[m 15-enero-2025-articulo-1
+[33m2321e64[m 15-enero-2025-6
+[33mc889ade[m 15-enero-2025-5
+[33ma651ef3[m 15-enero-2025-4
+[33mca1e1fe[m 15-enero-2025-3
+[33m03f3070[m 15-enero-2025-2
+[33m576feeb[m 15-enero-2025-1
+[33m7db0ad5[m seo-6
+[33m6056a10[m seo-5
+[33m54868f2[m seo-4
+[33m9ec5199[m seo-3
+[33mf434159[m seo-2
+[33ma3371ea[m seo-1
+[33m2520a21[m tags-ordenados-1
+[33m998d0d5[m schemamarup-1
+[33me43e1c7[m enero-14-2025-3
+[33m047df53[m enero-14-2025-2
+[33mf709f0d[m enero-14-2025-1
+[33m5023e9c[m Montserrat+Quotes format-5
+[33md63e413[m Montserrat+Quotes format-4
+[33m855eb73[m Montserrat+Quotes format-3
+[33m02294f6[m Montserrat+Quotes format-2
+[33m34cbbc8[m Montserrat+Quotes format-1
+[33mcb42983[m 14-enero-2025-3
+[33m4701e2d[m 14-enero-2025-2
+[33md0e8db1[m 14-enero-2025-1
+[33m07ac09c[m enero-11-2025-5
+[33mc85339b[m enero-11-2025-4
+[33m4845b0b[m enero-11-2025-3
+[33mc156b33[m enero-11-2025-2
+[33m4de8b83[m enero-11-2025
+[33m82f782c[m readtime arreglado 1
+[33mc2199eb[m readTime7
+[33ma0ee032[m readTime6
+[33m21c491e[m readTime5
+[33ma1af89a[m readTime4
+[33m64695a0[m readTime3
+[33m6077495[m readTime2
+[33me397278[m readTime1
+[33mc84d5ef[m articulos relacionados4
+[33m808dc1b[m articulos relacionados3
+[33m3f823b2[m articulos relacionados2
+[33mf265c02[m articulos relacionados1
+[33m278980b[m tags30
+[33m8dd1d38[m tags29
+[33ma2ef4aa[m tags28
+[33m99ceb76[m tags27
+[33mb8ef3ea[m tags26
+[33m1e33d48[m tags25
+[33ma2ecf86[m tags24
+[33mf0c13eb[m tags23
+[33mbdadf7d[m tags22
+[33m7d5320f[m tags21
+[33m73518dc[m tags20
+[33med0b6b1[m tags19
+[33m57da9c9[m tags17
+[33m7bcb6cd[m tags16
+[33m134dbdf[m tags15
+[33m217ea82[m tags14
+[33m8c8e31b[m tags13
+[33m930d852[m tags12
+[33m4f78f24[m tags11
+[33m379ac9f[m tags10
+[33m72fe086[m tags9
+[33m5ebdbec[m tags8
+[33ma43a83c[m tags7
+[33m6dce1a3[m tags6
+[33m9bf938e[m tags5
+[33md8df5ed[m tags4
+[33m5a55953[m tags3
+[33m60385fe[m tags1
+[33m7821cf4[m arreglado error 500
+[33md621866[m arreglado error 500
+[33m9614312[m arreglado error 500
+[33m4ec00e1[m arreglado error 500
+[33mb993b4d[m arreglado error 500
+[33me137088[m arreglado error 500
+[33m37d19ee[m arreglado error 500
+[33ma6415c0[m arreglado error 500
+[33m201a8af[m arreglado error 500
+[33m38c262e[m arreglado error 500
+[33m62ebbce[m arreglado error 500
+[33m2f93313[m arreglado error 500
+[33mf22183f[m arreglado error 500
+[33m0dd5866[m arreglado error 500
+[33m253ff1d[m sitemap arreglado
+[33m506a3e8[m sitemap arreglado
+[33m46ba97e[m sitemap arreglado
+[33m78c923d[m redirecciones arregladas de una vez
+[33m5a34789[m redirecciones arregladas
+[33ma0144ea[m redirecciones arregladas ya
+[33m7373ff4[m redirecciones arregladas
+[33ma241593[m sitemap arreglado
+[33m83679b0[m sitemap arreglado
+[33mfe93fc9[m sitemap arreglado-ya
+[33m8f72c72[m sitemap arreglado
+[33m39e0d7c[m sitemap arreglado
+[33m3ab30b4[m sitemap arreglado
+[33m117cccf[m sitemap arreglado
+[33mc4b92b6[m sitemap arreglado
+[33m5ec4cdc[m sitemap arreglado
+[33m8452228[m sitemap arreglado
+[33m3443a61[m sitemap arreglado
+[33m995f7ea[m sitemap mal
+[33m3be36f2[m sitemap arreglado
+[33mdc588dd[m sitemap arreglado
+[33m4501e6c[m sitemap arreglado
+[33m8e6f493[m sitemap arreglado
+[33mc5712f1[m eliminar newsletter
+[33mef61db5[m eliminar newsletter
+[33m9a4639d[m Fix sitemap.xml dynamic endpoint
+[33m6ebe609[m Fix sitemap.xml dynamic endpoint
+[33ma71a0c1[m Fix sitemap.xml dynamic endpoint
+[33m8d0a29e[m Fix sitemap.xml dynamic endpoint
+[33mb31fb4d[m Fix sitemap.xml dynamic endpoint
+[33m5c31a06[m 11-01-2025-d2
+[33mca7e4c2[m 11-01-2025-c2
+[33med13ecd[m 11-01-2025-b2
+[33mc426681[m 11-01-2025-a2
+[33me13cbab[m 11-01-2025-z
+[33mce6adef[m 11-01-2025-y
+[33m1f5aea8[m 11-01-2025-x
+[33mf93dda5[m 11-01-2025-w
+[33mc68084e[m 11-01-2025-v
+[33mb66dee1[m 11-01-2025-u
+[33mfde93ca[m 11-01-2025-t
+[33m4469ff4[m 11-01-2025-s
+[33m93bbf42[m 11-01-2025-r
+[33m60fd3a7[m 11-01-2025-q
+[33m08a9884[m 11-01-2025-p
+[33m751263a[m 11-01-2025-oç
+[33m4668584[m 11-01-2025-n
+[33m2213cd5[m 11-01-2025-m
+[33m80daec3[m 11-01-2025-l
+[33m3fd4a94[m 11-01-2025-k
+[33m62022f3[m 11-01-2025-j
+[33m9492ec2[m 11-01-2025-i
+[33m8f34843[m 11-01-2025-h
+[33m68c289c[m 11-01-2025-g
+[33mc42e53e[m 11-01-2025-f
+[33m7af938b[m 11-01-2025-e
+[33mcb11aac[m 11-01-2025-d
+[33mbc1fb76[m 11-01-2025-c
+[33m9e0cae1[m 11-01-2025-b
+[33mec2058a[m 11-01-2025-a
+[33md95bbb0[m 11-enero-2025
+[33m061d57f[m 10-enero-2025-u
+[33m94f3019[m 10-enero-2025-t
+[33ma5c2ab8[m 10-enero-2025-s
+[33m7d55fe1[m 10-enero-2025-r
+[33m922b98e[m 10-enero-2025-q
+[33md4723aa[m 10-enero-2025-p
+[33m82ba692[m 10-enero-2025-o
+[33m7476ca2[m 10-enero-2025-n
+[33m504ef91[m 10-enero-2025-m
+[33mf59da29[m 10-enero-2025-l
+[33mc9812c8[m 10-enero-2025-k
+[33m3cf63dd[m 10-enero-2025-j
+[33me6eef85[m 10-enero-2025-i
+[33mea6e3b9[m 10-enero-2025-h
+[33m913d583[m 10-enero-2025-g
+[33m981c3ce[m 10-enero-2025-f
+[33m969eb89[m 10-enero-2025-e
+[33m7f6500f[m 10-enero-2025-d
+[33ma2bf0e8[m 10-enero-2025-c
+[33m5bb1403[m 10-enero-2025-b
+[33ma929aa3[m 10-enero-2025
+[33m9da1f7a[m Merge branch 'actualizaciones-desde-upstream'
+[33m866aa91[m[33m ([m[1;31morigin/actualizaciones-desde-upstream[m[33m)[m imagen siempre en círculo artículos relacionados
+[33m159c8b2[m 9 enero 2025
+[33mbd937d2[m[33m ([m[1;31morigin/respaldo-actual[m[33m)[m Añade artículo 'El Futuro del Desarrollo de IA en 2025' y su imagen SEO
+[33m654c7ce[m Añade artículo 'El Futuro del Desarrollo de IA en 2025' y su imagen SEO
+[33ma3405fc[m Update dependencies and fix issues
+[33mc6aec12[m Update astro.config.mjs and package.json for build compatibility with Vercel and Pagefind
+[33m022135d[m Fix: Update embedded image paths from /src/assets/ to /images/
+[33m90a072d[m test images
+[33mbf2c2c9[m Updated image URL in los-transformers-estan-transformando-la-inteligencia-artificial.mdx
+[33mf7d360f[m Added sharp dependency
+[33mcb0db2b[m 🛠 Fix: Removed console log on astro.config
+[33mbd0ef57[m ✅ Feat: Install of sharp
+[33m536b108[m 🛠 Fix: Removed console log from post slug
+[33m001e974[m 🛠 Fix: Removing tina
+[33mb80d803[m TinaCMS content update
+[33mc319658[m TinaCMS content update
+[33m7af9d4d[m TinaCMS content update
+[33mab01de6[m TinaCMS content update
+[33m67b6ac4[m TinaCMS content update
+[33m68ffcbc[m TinaCMS content update
+[33m9c82bbb[m TinaCMS content update
+[33ma4773c4[m TinaCMS content update
+[33md82f25b[m TinaCMS content update
+[33m5c27c49[m TinaCMS content update
+[33mf752a50[m TinaCMS content update
+[33m560d24b[m TinaCMS content update
+[33m9d1976f[m TinaCMS content update
+[33m0ce8b8e[m TinaCMS content update
+[33m1caf965[m TinaCMS content update
+[33ma157a1e[m TinaCMS content update
+[33m8447b78[m TinaCMS content update
+[33mc37d952[m TinaCMS content update
+[33m8110861[m TinaCMS content update
+[33md745b80[m TinaCMS content update
+[33m91b6ef5[m TinaCMS content update
+[33m506cf52[m TinaCMS content update
+[33me975218[m TinaCMS content update
+[33m7e18f11[m TinaCMS content update
+[33m3f89bca[m TinaCMS content update
+[33ma58d1e0[m TinaCMS content update
+[33m486b9a6[m TinaCMS content update
+[33m5e51b64[m Update from TinaCMS
+[33mcb02610[m TinaCMS content update
+[33mf108ac7[m TinaCMS content update
+[33m0e27091[m TinaCMS content update
+[33m63b06fe[m TinaCMS content update
+[33m75adde7[m Update from TinaCMS
+[33m810e185[m ✅ Feat: Changed size of the prose on the posts layout
+[33m92b2e9f[m TinaCMS content update
+[33mc0dae28[m TinaCMS content update
+[33m77cd1ad[m TinaCMS content update
+[33mfbaf508[m TinaCMS content update
+[33m256a166[m TinaCMS content update
+[33m3078e86[m TinaCMS content update
+[33m5158d75[m TinaCMS content update
+[33m8bb5497[m TinaCMS content update
+[33m658cc54[m Update from TinaCMS
+[33m860684c[m ✏️ Refactoring: Changed size of text and headings
+[33m4219849[m ✅ Feat: Created new tags
+[33mc298805[m ✅ Feat: Changed Position of the Newsletter with Blog
+[33mb660d97[m TinaCMS content update
+[33m4d46e7d[m TinaCMS content update
+[33m526828f[m TinaCMS content update
+[33m128d699[m TinaCMS content update
+[33m85a5837[m TinaCMS content update
+[33m5acea13[m TinaCMS content update
+[33m81c2845[m TinaCMS content update
+[33mdbfdd60[m TinaCMS content update
+[33m276378c[m TinaCMS content update
+[33mac7422c[m TinaCMS content update
+[33m1b9576b[m TinaCMS content update
+[33mc0d137e[m TinaCMS content update
+[33mbcb7829[m TinaCMS content update
+[33m79a78d5[m TinaCMS content update
+[33ma245bc2[m Update from TinaCMS
+[33mee4ed66[m ✅ Feat: Added table to post
+[33m2464d66[m TinaCMS content update
+[33me1e710a[m TinaCMS content update
+[33md669615[m TinaCMS content update
+[33me5aa1d9[m TinaCMS content update
+[33mca16342[m TinaCMS content update
+[33m4fdebf1[m TinaCMS content update
+[33md93848f[m TinaCMS content update
+[33m37772ea[m TinaCMS content update
+[33me68d2a6[m TinaCMS content update
+[33mfb2ebae[m TinaCMS content update
+[33mc06b45c[m TinaCMS content update
+[33mc22c425[m TinaCMS content update
+[33mf91d802[m TinaCMS content update
+[33me6f8c02[m TinaCMS content update
+[33mecc45e2[m TinaCMS content update
+[33m30fb671[m TinaCMS content update
+[33m95b0677[m TinaCMS content update
+[33m93ca53d[m TinaCMS content update
+[33m2202bd9[m TinaCMS content update
+[33m3b36e73[m TinaCMS content update
+[33m1f2600d[m TinaCMS content update
+[33m41edbbd[m TinaCMS content update
+[33m5a64874[m TinaCMS content update
+[33m7bd39f3[m TinaCMS content update
+[33m41ebe14[m TinaCMS content update
+[33m97ef5cf[m TinaCMS content update
+[33ma416b65[m TinaCMS content update
+[33m851967e[m TinaCMS content update
+[33m3874825[m TinaCMS content update
+[33m8566c76[m TinaCMS content update
+[33m7141ebd[m TinaCMS content update
+[33ma9e8bd7[m TinaCMS content update
+[33mf548597[m TinaCMS content update
+[33m6b8e517[m TinaCMS content update
+[33m72f5458[m Update from TinaCMS
+[33mcc47f21[m TinaCMS content update
+[33m622ec9b[m Update from TinaCMS
+[33m9eff2c3[m 🛠 Fix: Fixing .mdx
+[33m8180fa1[m TinaCMS content update
+[33m9d7217c[m TinaCMS content update
+[33m2a93088[m Update from TinaCMS
+[33m629c66b[m Update from TinaCMS
+[33m9bb870a[m TinaCMS content update
+[33mbb6a6ea[m Update from TinaCMS
+[33mbf06821[m 🛠 Fix: Fixing images
+[33m73f6d89[m 🛠 Fix: Fixed last post
+[33mfd2e7c3[m 🛠 Fix: Fixing url parameter
+[33m7fad4df[m TinaCMS content update
+[33m94a31a3[m TinaCMS content update
+[33m7c85076[m TinaCMS content update
+[33m7a403f6[m TinaCMS content update
+[33m00847f6[m TinaCMS content update
+[33mba1f4fc[m TinaCMS content update
+[33mcf1dcb3[m TinaCMS content update
+[33m9080672[m TinaCMS content update
+[33m7ede72a[m TinaCMS content update
+[33mb73bcec[m TinaCMS content update
+[33mb5ce748[m TinaCMS content update
+[33m37ff1ec[m TinaCMS content update
+[33mde5df87[m TinaCMS content update
+[33m88a96dd[m Update from TinaCMS
+[33m78acfec[m TinaCMS content update
+[33m8b2e209[m Update from TinaCMS
+[33ma6b486e[m 🛠 Fix: Fixing post3
+[33m5ebb7ca[m 🛠 Fix: Fixing post2
+[33maf0c27a[m 🛠 Fix: Fixing post
+[33m09b147b[m TinaCMS content update
+[33mf49f495[m TinaCMS content update
+[33m98efe12[m TinaCMS content update
+[33m47c96a9[m TinaCMS content update
+[33m90a9f0d[m TinaCMS content update
+[33m8deaf12[m TinaCMS content update
+[33ma477a94[m Update from TinaCMS
+[33m4db649d[m TinaCMS content update
+[33m02af8ce[m TinaCMS content update
+[33md5ecd1a[m TinaCMS content update
+[33m0a1c9a3[m TinaCMS content update
+[33m8b02187[m TinaCMS content update
+[33m3220518[m TinaCMS content update
+[33mbad078f[m TinaCMS content update
+[33mf913835[m TinaCMS content update
+[33m1cdc52d[m TinaCMS content update
+[33m6d418bb[m TinaCMS content update
+[33md787c9a[m Update from TinaCMS
+[33m7bb1998[m Update from TinaCMS
+[33m655711e[m TinaCMS content update
+[33mf3b7da6[m TinaCMS content update
+[33m4adb765[m 🛠 Fix: Fixing tina schema for pics
+[33ma8046fc[m TinaCMS content update
+[33mffbb46f[m TinaCMS content update
+[33m8a8e913[m TinaCMS content update
+[33md862898[m TinaCMS content update
+[33mae5aeb9[m TinaCMS content update
+[33m729cc19[m TinaCMS content update
+[33m42bb7ce[m TinaCMS content update
+[33mfba2098[m Update from TinaCMS
+[33mb9a14d1[m TinaCMS content update
+[33m84870b5[m Update from TinaCMS
+[33mf9f0dda[m 🛠 Fix: Fixing images on newsletter and posts
+[33m67f1302[m ✏️ Refactoring: Changed categories of the blog
+[33mc8e2fc2[m TinaCMS content update
+[33me31593e[m TinaCMS content update
+[33m167e550[m TinaCMS content update
+[33m5fd95bb[m TinaCMS content update
+[33m8dc86fc[m TinaCMS content update
+[33m1637ec7[m TinaCMS content update
+[33m30cdd24[m TinaCMS content update
+[33maf61f51[m TinaCMS content update
+[33ma44faf9[m TinaCMS content update
+[33ma472bf7[m TinaCMS content update
+[33m52b591a[m TinaCMS content update
+[33m0bdc65c[m TinaCMS content update
+[33mab6f9d8[m TinaCMS content update
+[33m1023652[m TinaCMS content update
+[33m709370b[m TinaCMS content update
+[33m951c07b[m TinaCMS content update
+[33ma61d800[m TinaCMS content update
+[33md591d79[m Update from TinaCMS
+[33mefbc615[m Update from TinaCMS
+[33m24b79b7[m TinaCMS content update
+[33m49ee42b[m TinaCMS content update
+[33md5a9835[m TinaCMS content update
+[33m0d6db87[m Update from TinaCMS
+[33md99f0c3[m Update from TinaCMS
+[33m714f05d[m TinaCMS content update
+[33m227b16a[m TinaCMS content update
+[33m34263f6[m TinaCMS content update
+[33m485079b[m 🛠 Fix: trying to fix images 2
+[33mda27f0a[m 🛠 Fix: trying to fix images
+[33m8961367[m TinaCMS content update
+[33mb9b5e08[m TinaCMS content update
+[33m796bd9a[m TinaCMS content update
+[33m618058d[m TinaCMS content update
+[33m8bfee5f[m TinaCMS content update
+[33m7054908[m TinaCMS content update
+[33m137d79b[m TinaCMS content update
+[33m1878fcd[m TinaCMS content update
+[33m093d6be[m TinaCMS content update
+[33me210f45[m TinaCMS content update
+[33m723298b[m TinaCMS content update
+[33m15d7749[m TinaCMS content update
+[33m7a8db09[m TinaCMS content update
+[33mba665f1[m TinaCMS content update
+[33m5e9a74c[m TinaCMS content update
+[33mbcdc730[m TinaCMS content update
+[33ma2df9fe[m TinaCMS content update
+[33mb38f23e[m Update from TinaCMS
+[33m406cb2c[m TinaCMS content update
+[33m06cc41a[m TinaCMS content update
+[33mabf755f[m TinaCMS content update
+[33mbe9e1bc[m Update from TinaCMS
+[33m0a26134[m TinaCMS content update
+[33m7195fd1[m TinaCMS content update
+[33m910bb6d[m TinaCMS content update
+[33m343ee92[m TinaCMS content update
+[33mb387776[m TinaCMS content update
+[33mccf33a6[m TinaCMS content update
+[33m2db91b9[m TinaCMS content update
+[33m78d8857[m TinaCMS content update
+[33me4f5e39[m Update from TinaCMS
+[33mc0fc330[m TinaCMS content update
+[33m13abd9c[m TinaCMS content update
+[33m3e2dc4b[m TinaCMS content update
+[33mf260424[m TinaCMS content update
+[33m00bcd6c[m TinaCMS content update
+[33m07f461d[m TinaCMS content update
+[33m151d609[m TinaCMS content update
+[33m6188d3e[m TinaCMS content update
+[33m1d0d974[m TinaCMS content update
+[33m1e24395[m TinaCMS content update
+[33m26fb922[m TinaCMS content update
+[33mbef576c[m TinaCMS content update
+[33me24d10f[m TinaCMS content update
+[33mb83f30a[m TinaCMS content update
+[33m6c057e2[m TinaCMS content update
+[33m156304a[m TinaCMS content update
+[33m1d23780[m TinaCMS content update
+[33m752253e[m TinaCMS content update
+[33m5a3f9ed[m Update from TinaCMS
+[33m9950e99[m Update from TinaCMS
+[33m3de1d3f[m Update from TinaCMS
+[33mb4728fc[m TinaCMS content update
+[33ma3d4554[m TinaCMS content update
+[33m3e80da9[m Update from TinaCMS
+[33mf853b15[m TinaCMS content update
+[33m82e3171[m Update from TinaCMS
+[33m9520830[m TinaCMS content update
+[33m50c5fcf[m TinaCMS content update
+[33m936de5d[m TinaCMS content update
+[33m52b533e[m Update from TinaCMS
+[33m5cb5638[m 🛠 Fix: fixing image
+[33me4d9a6b[m 🛠 Fix: Fix of blog post
+[33me6c042d[m TinaCMS content update
+[33m91021f6[m TinaCMS content update
+[33m6244b58[m TinaCMS content update
+[33m29115c7[m Update from TinaCMS
+[33m5d8cb0e[m 🛠 Fix: fixing post img
+[33m72ac0aa[m TinaCMS content update
+[33m1c9377f[m TinaCMS content update
+[33m4667ee2[m TinaCMS content update
+[33meb9f2e5[m TinaCMS content update
+[33mcf2e36a[m TinaCMS content update
+[33m55a0676[m TinaCMS content update
+[33m47a693e[m TinaCMS content update
+[33me66b7f8[m TinaCMS content update
+[33mbcedc2c[m TinaCMS content update
+[33m1a460cb[m Update from TinaCMS
+[33m313b08d[m TinaCMS content update
+[33m80fc771[m TinaCMS content update
+[33mf82953a[m TinaCMS content update
+[33mb0e9a75[m TinaCMS content update
+[33m384b559[m 🛠 Fix: Fixing image path
+[33mcab7ac8[m TinaCMS content update
+[33me0f6e95[m TinaCMS content update
+[33mbd06ef6[m TinaCMS content update
+[33m6d7363c[m TinaCMS content update
+[33mf5857a7[m TinaCMS content update
+[33m9124f4a[m TinaCMS content update
+[33m79a85f2[m TinaCMS content update
+[33maf9297e[m TinaCMS content update
+[33m4dcfe30[m TinaCMS content update
+[33m96e3169[m TinaCMS content update
+[33m7261503[m TinaCMS content update
+[33m07ad267[m TinaCMS content update
+[33md4542eb[m TinaCMS content update
+[33ma3db4b8[m TinaCMS content update
+[33me1234c0[m Update from TinaCMS
+[33m7ed7a30[m TinaCMS content update
+[33m7722c59[m 🛠 Fix: fixed post
+[33m77c7eb9[m 🛠 Fix: Try fixes 2
+[33m640e9ba[m 🛠 Fix: Try fixes 2
+[33m00840c0[m 🛠 Fix: Try fixes
+[33m412011c[m 🛠 Fix: Changed route of images 2
+[33m3fb565c[m 🛠 Fix: Changed route of images
+[33m90e9590[m 🛠 Fix: fixing src path
+[33m59aadea[m 🛠 Fix: fixing content
+[33m932c040[m 🛠 Fix: Try to push and fix pic
+[33m62e5c4e[m TinaCMS content update
+[33mcfdd5b8[m TinaCMS content update
+[33m340fb95[m TinaCMS content update
+[33m6de8df8[m Update from TinaCMS
+[33m3ba4ca2[m Update from TinaCMS
+[33m632f835[m TinaCMS content update
+[33m8886303[m TinaCMS content update
+[33mf08461d[m Update from TinaCMS
+[33me035640[m TinaCMS content update
+[33mf2b0a8e[m Update from TinaCMS
+[33m8db9afa[m Update from TinaCMS
+[33m36df48d[m Update from TinaCMS
+[33ma102f22[m TinaCMS content update
+[33mfc6eff9[m TinaCMS content update
+[33m28ebf48[m TinaCMS content update
+[33m5ca732a[m TinaCMS content update
+[33m5d15f32[m TinaCMS content update
+[33m897dc20[m Update from TinaCMS
+[33m3b0f02b[m TinaCMS content update
+[33mee0230a[m TinaCMS content update
+[33m923db77[m Update from TinaCMS
+[33m34aceaf[m Update from TinaCMS
+[33me5a6093[m TinaCMS content update
+[33mb77ac2d[m TinaCMS content update
+[33mafb14f9[m Update from TinaCMS
+[33m2aa2618[m TinaCMS content update
+[33m8951201[m TinaCMS content update
+[33m4402938[m TinaCMS content update
+[33mac62266[m Update from TinaCMS
+[33m301e5ed[m 🛠 Fix: Fix of content
+[33m8bd5260[m TinaCMS content update
+[33m1a750a1[m TinaCMS content update
+[33m65920e5[m TinaCMS content update
+[33m9e39ae3[m TinaCMS content update
+[33m4db3561[m Update from TinaCMS
+[33m6879da2[m TinaCMS content update
+[33m78498ae[m TinaCMS content update
+[33mb799a91[m TinaCMS content update
+[33m6d5110e[m TinaCMS content update
+[33m7f5d855[m Update from TinaCMS
+[33m876385b[m Update from TinaCMS
+[33m99ae618[m Update from TinaCMS
+[33m3bcccc4[m TinaCMS content update
+[33m07c47c9[m TinaCMS content update
+[33m2790c95[m TinaCMS content update
+[33m0d4539b[m TinaCMS content update
+[33m4fd61cb[m TinaCMS content update
+[33m9ce88bf[m Update from TinaCMS
+[33m5dccec2[m TinaCMS content update
+[33m50d536f[m TinaCMS content update
+[33mdffa492[m Update from TinaCMS
+[33m2fdb637[m 🛠 Fix: Fix on posts
+[33m1334ad5[m TinaCMS content update
+[33m06c4b33[m TinaCMS content update
+[33m4af0711[m TinaCMS content update
+[33mea87b7b[m TinaCMS content update
+[33m265a262[m TinaCMS content update
+[33m864bb5d[m TinaCMS content update
+[33ma5be2bb[m TinaCMS content update
+[33m62806af[m TinaCMS content update
+[33m98281c8[m TinaCMS content update
+[33m73d02e2[m Update from TinaCMS
+[33mbb56756[m TinaCMS content update
+[33me1c0c8c[m TinaCMS content update
+[33mcb2b19b[m TinaCMS content update
+[33mb42126a[m TinaCMS content update
+[33m27b1e4f[m TinaCMS content update
+[33m3fcb90a[m TinaCMS content update
+[33m24064dc[m TinaCMS content update
+[33me7f1a61[m TinaCMS content update
+[33m08638cf[m TinaCMS content update
+[33m05e8793[m Update from TinaCMS
+[33mb128bd8[m TinaCMS content update
+[33meba4388[m TinaCMS content update
+[33m8d936b7[m TinaCMS content update
+[33m829586f[m TinaCMS content update
+[33mc511b7a[m TinaCMS content update
+[33m8f47f15[m TinaCMS content update
+[33m8fa7d0b[m Update from TinaCMS
+[33m569f129[m TinaCMS content update
+[33m9be85f7[m Update from TinaCMS
+[33m643cdda[m ✅ Feat: Added rounded to posts
+[33ma15e4c2[m ✅ Feat: Changed styling
+[33m88e8efe[m 🛠 Fix: Fixing newsletter post list on index
+[33m28aac01[m ✅ Feat: Changing Index
+[33mdfe968b[m 🛠 Fix: Fixing List Posts
+[33mb773c0d[m TinaCMS content update
+[33mcd4d430[m TinaCMS content update
+[33m868fec4[m Update from TinaCMS
+[33mbbcc12b[m ✅ Feat: Expanded articles on Todo
+[33m48ba4bd[m 🛠 Fix: Fixed length on title of articles
+[33m3def1fa[m TinaCMS content update
+[33m9f5bc2d[m Update from TinaCMS
+[33m0aac767[m TinaCMS content update
+[33m9944a3c[m Update from TinaCMS
+[33m78fcce5[m TinaCMS content update
+[33m2987e4b[m TinaCMS content update
+[33m9949fff[m TinaCMS content update
+[33mbe8b4c3[m TinaCMS content update
+[33mdf633a9[m TinaCMS content update
+[33m1ebe4f4[m TinaCMS content update
+[33m4909046[m TinaCMS content update
+[33ma19ae65[m TinaCMS content update
+[33m0198db0[m TinaCMS content update
+[33m1348c00[m Update from TinaCMS
+[33m579e87b[m TinaCMS content update
+[33m5192d12[m Update from TinaCMS
+[33mb4cf442[m 🛠 Fix: Fix of cookies, deleting session if session is outdated
+[33md571def[m ✏️ Refactoring: Removed console log
+[33md95c91a[m 🛠 Fix: Fixed categories show lists
+[33mba26f45[m TinaCMS content update
+[33m5b00256[m TinaCMS content update
+[33mfc3b4f7[m Update from TinaCMS
+[33m6d3808f[m ✅ Feat: Configured partytown and google tag manager on head
+[33mbeee70f[m TinaCMS content update
+[33m4319009[m TinaCMS content update
+[33m4c7743b[m TinaCMS content update
+[33mc3291c2[m TinaCMS content update
+[33m7ee0387[m TinaCMS content update
+[33m33462aa[m TinaCMS content update
+[33m2b4213a[m Update from TinaCMS
+[33m44fe024[m TinaCMS content update
+[33m6e6b04d[m TinaCMS content update
+[33m4a00ed6[m TinaCMS content update
+[33m6a83809[m TinaCMS content update
+[33m6eddf55[m TinaCMS content update
+[33me8ce2a3[m TinaCMS content update
+[33mcfcdfb7[m TinaCMS content update
+[33mf17b8fe[m TinaCMS content update
+[33ma2302e8[m TinaCMS content update
+[33mb6fd9f4[m TinaCMS content update
+[33m212f2ac[m TinaCMS content update
+[33mca74a10[m TinaCMS content update
+[33mfaaea31[m Update from TinaCMS
+[33m1a8631d[m TinaCMS content update
+[33m3a6e458[m TinaCMS content update
+[33m9e4b34c[m TinaCMS content update
+[33m2c57e50[m TinaCMS content update
+[33m9540a39[m TinaCMS content update
+[33m2cb03ee[m TinaCMS content update
+[33ma5aa6d6[m ✅ Feat: Adjust rss.xml
+[33m8df3a5a[m ✅ Feat: Sitemap 2
+[33m7128273[m ✅ Feat: Created script to get sitemap
+[33m9d657cf[m TinaCMS content update
+[33m104c89b[m TinaCMS content update
+[33m54868b9[m TinaCMS content update
+[33m31b5846[m Update from TinaCMS
+[33mc31dda1[m TinaCMS content update
+[33m218a8d4[m TinaCMS content update
+[33m40908bb[m TinaCMS content update
+[33m9929960[m TinaCMS content update
+[33m4196726[m TinaCMS content update
+[33ma1759c9[m TinaCMS content update
+[33m124b9f7[m TinaCMS content update
+[33mba53c28[m TinaCMS content update
+[33mcd20469[m TinaCMS content update
+[33mdfced69[m TinaCMS content update
+[33m4c6afb7[m TinaCMS content update
+[33m78c2f40[m TinaCMS content update
+[33mb3e73c5[m TinaCMS content update
+[33m2f6de0b[m TinaCMS content update
+[33mc80ec3d[m TinaCMS content update
+[33m43ce2cb[m Update from TinaCMS
+[33md2042b8[m ✅ Feat: Created script to change dynamically the tables
+[33mb46f700[m 🛠 Fix: Fixed category of newsletter
+[33md4a7387[m ✏️ Refactoring: Changed alert pop-up
+[33me2b8846[m ✅ Feat: Changed order based pub date
+[33m7685390[m TinaCMS content update
+[33m2e44336[m TinaCMS content update
+[33m9cc5192[m TinaCMS content update
+[33mb658255[m TinaCMS content update
+[33mcd3eee1[m TinaCMS content update
+[33m5c4e860[m TinaCMS content update
+[33m690a50e[m TinaCMS content update
+[33m38ba636[m TinaCMS content update
+[33m8d65269[m TinaCMS content update
+[33m3bec302[m TinaCMS content update
+[33mdf56fa2[m TinaCMS content update
+[33m1e1e678[m TinaCMS content update
+[33m9d17daa[m TinaCMS content update
+[33ma7945cd[m TinaCMS content update
+[33mc76696c[m TinaCMS content update
+[33m89a3bf7[m TinaCMS content update
+[33m7139d85[m TinaCMS content update
+[33m897ff20[m TinaCMS content update
+[33mefc1fb6[m TinaCMS content update
+[33m1c3aa1b[m TinaCMS content update
+[33m90fd0b2[m TinaCMS content update
+[33m6d8de45[m Update from TinaCMS
+[33m72d2d05[m TinaCMS content update
+[33mc65358f[m TinaCMS content update
+[33md4a5b2f[m TinaCMS content update
+[33m656044d[m TinaCMS content update
+[33mf2e3f93[m TinaCMS content update
+[33m582c79e[m ✏️ Refactoring: Created Last Post
+[33mc8ad3fe[m ✅ Feat: Created new tags
+[33m9dc4b5f[m ✏️ Refactoring: changed button to show form on newsletter posts
+[33m755b3fb[m ✏️ Refactoring: changed button to show form on blog posts
+[33m402239e[m TinaCMS content update
+[33mf07c4ed[m TinaCMS content update
+[33m1a4ffa2[m TinaCMS content update
+[33m9bfd525[m TinaCMS content update
+[33me4df1d6[m TinaCMS content update
+[33m05f2f7e[m TinaCMS content update
+[33ma9b8091[m TinaCMS content update
+[33m2a4f660[m TinaCMS content update
+[33m0c7645f[m TinaCMS content update
+[33m92d5d9a[m TinaCMS content update
+[33m72da128[m TinaCMS content update
+[33m76d7f41[m TinaCMS content update
+[33m0899569[m TinaCMS content update
+[33mc24ec5e[m TinaCMS content update
+[33m8264a96[m TinaCMS content update
+[33mef136e5[m TinaCMS content update
+[33m12433fe[m TinaCMS content update
+[33mf33e319[m TinaCMS content update
+[33mf8dd785[m TinaCMS content update
+[33md0338cd[m TinaCMS content update
+[33m4bf0b8a[m TinaCMS content update
+[33m49eb380[m TinaCMS content update
+[33md0eeeb3[m TinaCMS content update
+[33m68b5080[m TinaCMS content update
+[33m8f0e6e4[m TinaCMS content update
+[33mcf20ead[m TinaCMS content update
+[33mc179cdb[m TinaCMS content update
+[33m5492473[m TinaCMS content update
+[33m7c22e04[m TinaCMS content update
+[33mc5eeb9c[m TinaCMS content update
+[33mde12156[m TinaCMS content update
+[33m3d1f653[m TinaCMS content update
+[33mfd999bf[m TinaCMS content update
+[33m30a0b09[m TinaCMS content update
+[33m8b4e835[m TinaCMS content update
+[33m2e8d290[m TinaCMS content update
+[33m5f95e88[m TinaCMS content update
+[33m38a6d75[m TinaCMS content update
+[33mc33491f[m TinaCMS content update
+[33m4f61452[m TinaCMS content update
+[33m4975e70[m TinaCMS content update
+[33mc903569[m TinaCMS content update
+[33mf126b10[m TinaCMS content update
+[33m281828c[m TinaCMS content update
+[33m74eae54[m TinaCMS content update
+[33m5706259[m TinaCMS content update
+[33m2b97fa9[m TinaCMS content update
+[33m15b4778[m TinaCMS content update
+[33m419858f[m TinaCMS content update
+[33mf70920b[m TinaCMS content update
+[33mda5db5f[m TinaCMS content update
+[33m80e3ad9[m TinaCMS content update
+[33m904f2a4[m TinaCMS content update
+[33m65f4481[m TinaCMS content update
+[33m1d03639[m TinaCMS content update
+[33mb9cdf9c[m TinaCMS content update
+[33m81b9f84[m TinaCMS content update
+[33ma3cdedf[m TinaCMS content update
+[33m1e81ed1[m TinaCMS content update
+[33mae51541[m TinaCMS content update
+[33m97fa909[m TinaCMS content update
+[33mcf2d672[m TinaCMS content update
+[33mfba3c72[m TinaCMS content update
+[33m95828d5[m TinaCMS content update
+[33m2fdb439[m TinaCMS content update
+[33mf3bd165[m Update from TinaCMS
+[33m29a69cf[m Update from TinaCMS
+[33m74a2ab5[m TinaCMS content update
+[33m893af95[m 🛠 Fix: fixing auth
+[33m844d921[m TinaCMS content update
+[33m789feab[m TinaCMS content update
+[33m76eaa74[m 🛠 Fix: Fixing location
+[33m7c791b7[m TinaCMS content update
+[33m7a26ce3[m TinaCMS content update
+[33me6a5c74[m TinaCMS content update
+[33mbfed244[m TinaCMS content update
+[33mc0732f9[m TinaCMS content update
+[33m41e8ae1[m TinaCMS content update
+[33med2942e[m TinaCMS content update
+[33m552f482[m TinaCMS content update
+[33m4b39caa[m TinaCMS content update
+[33m962d538[m TinaCMS content update
+[33m74d2239[m TinaCMS content update
+[33mc7c06c0[m TinaCMS content update
+[33mabfa29b[m TinaCMS content update
+[33m1f204df[m TinaCMS content update
+[33m5456856[m TinaCMS content update
+[33m3ed2c9f[m TinaCMS content update
+[33m9c662fb[m TinaCMS content update
+[33macda56b[m TinaCMS content update
+[33m22a51f2[m TinaCMS content update
+[33m7bdc924[m TinaCMS content update
+[33m331d087[m TinaCMS content update
+[33m8a8570b[m TinaCMS content update
+[33m36f113f[m TinaCMS content update
+[33m3a7c0e9[m TinaCMS content update
+[33md7ae722[m TinaCMS content update
+[33m82176be[m TinaCMS content update
+[33mb220fd4[m TinaCMS content update
+[33md120f49[m TinaCMS content update
+[33mbcdd13a[m TinaCMS content update
+[33m17ba9f8[m TinaCMS content update
+[33mc891ce5[m TinaCMS content update
+[33mb6a77b3[m TinaCMS content update
+[33m8537d71[m TinaCMS content update
+[33m3a7e909[m TinaCMS content update
+[33me05bd0d[m TinaCMS content update
+[33m9a2e5b7[m TinaCMS content update
+[33m00688d1[m TinaCMS content update
+[33m6ae7bce[m TinaCMS content update
+[33m7e53ad5[m TinaCMS content update
+[33m3413037[m TinaCMS content update
+[33m2970ae3[m TinaCMS content update
+[33ma8279a5[m TinaCMS content update
+[33m9aec1ab[m TinaCMS content update
+[33m6722ba5[m TinaCMS content update
+[33mb1a76b5[m TinaCMS content update
+[33me7bd719[m TinaCMS content update
+[33m36095d8[m TinaCMS content update
+[33m21cc697[m TinaCMS content update
+[33m48a2fc8[m TinaCMS content update
+[33m42e8c8d[m TinaCMS content update
+[33m3eaec65[m TinaCMS content update
+[33m0a01245[m TinaCMS content update
+[33m6e1d098[m TinaCMS content update
+[33mde09c6a[m TinaCMS content update
+[33m98d7108[m Update from TinaCMS
+[33m0f5e529[m TinaCMS content update
+[33m058ecbe[m TinaCMS content update
+[33m153cb2e[m TinaCMS content update
+[33ma7c20d7[m TinaCMS content update
+[33m8e37adf[m TinaCMS content update
+[33m3a62e25[m TinaCMS content update
+[33m7938744[m TinaCMS content update
+[33m965a66e[m Update from TinaCMS
+[33md9d74c9[m TinaCMS content update
+[33m31ceae9[m 🛠 Fix: Fix missing newsletter
+[33m5203d90[m 🛠 Fix: fix categories
+[33mc5279ba[m ✅ Feat: Added new categories and tags
+[33m64dd301[m TinaCMS content update
+[33m4c095ee[m TinaCMS content update
+[33m16efa7b[m TinaCMS content update
+[33mf826ed4[m TinaCMS content update
+[33m5d554bd[m TinaCMS content update
+[33m5a4f7aa[m ✅ Feat: Added new categories and tags
+[33m6e7b6ee[m ✅ Feat: Push 2
+[33m54ef4cb[m test2
+[33md648e3c[m ✏️ Refactoring: changed style of title section on mobile
+[33m2e1efbf[m ✅ Feat: Changed reading time to spanish
+[33mba4b0b2[m ✏️ Refactoring: Changed color of aside hovering effects
+[33mb0f3e33[m 🛠 Fix: Changed to _blank redirect for sharing components
+[33m3b9ec6f[m ✏️ Refactoring: Changed blur on newsletter posts
+[33m80fb5ad[m ✅ Feat: General Changes
+[33m3a48ec3[m 🛠 Fix: Fixing styles on footer and on header
+[33mb59697e[m 🛠 Fix: Fixed error 500 on wrong cookie session
+[33m01180d9[m 🛠 Fix: Fixed error 500 on wrong cookie session
+[33mac320ce[m frontend update 1
+[33m9b2f787[m 🛠 Fix: Fixed post blur position
+[33m4551641[m 🤖 Automatic Commit: Register route
+[33m5739637[m TinaCMS content update by raúl Jáuregui
+[33mf7ba6ac[m TinaCMS content update by raúl Jáuregui
+[33m7a4251d[m TinaCMS content update by raúl Jáuregui
+[33m49b0177[m TinaCMS content update by raúl Jáuregui
+[33mbf1ac02[m TinaCMS content update by raúl Jáuregui
+[33m13398bd[m TinaCMS content update by raúl Jáuregui
+[33m3bffd2d[m TinaCMS content update by raúl Jáuregui
+[33m44026ae[m ✅ Feat: Removed Search Icon from header
+[33mebb7446[m TinaCMS content update by raúl Jáuregui
+[33me4e1022[m TinaCMS content update by raúl Jáuregui
+[33mbf65cc6[m TinaCMS content update by raúl Jáuregui
+[33m36fe798[m TinaCMS content update by raúl Jáuregui
+[33m5b7ee67[m TinaCMS content update by raúl Jáuregui
+[33m9c694c8[m TinaCMS content update by raúl Jáuregui
+[33m48bb15e[m TinaCMS content update by raúl Jáuregui
+[33mc39bce3[m TinaCMS content update by raúl Jáuregui
+[33m5515555[m TinaCMS content update by raúl Jáuregui
+[33m73843cb[m TinaCMS content update by raúl Jáuregui
+[33md907f85[m TinaCMS content update by raúl Jáuregui
+[33mcb99dbd[m TinaCMS content update by raúl Jáuregui
+[33m51eb4d7[m TinaCMS content update by raúl Jáuregui
+[33m64785f4[m TinaCMS content update by raúl Jáuregui
+[33m4abbd11[m TinaCMS content update by raúl Jáuregui
+[33m41d96b4[m TinaCMS content update by raúl Jáuregui
+[33m361b298[m TinaCMS content update by raúl Jáuregui
+[33m5140b88[m TinaCMS content update by raúl Jáuregui
+[33m5a55361[m TinaCMS content update by raúl Jáuregui
+[33mc3c8d05[m TinaCMS content update by raúl Jáuregui
+[33m6db8c02[m TinaCMS content update by raúl Jáuregui
+[33m98d1451[m TinaCMS content update by raúl Jáuregui
+[33mf061ab5[m TinaCMS content update by raúl Jáuregui
+[33m0b4ac28[m TinaCMS content update by raúl Jáuregui
+[33m26653b5[m TinaCMS content update by raúl Jáuregui
+[33md18c955[m TinaCMS content update by raúl Jáuregui
+[33mc331fb7[m TinaCMS content update by raúl Jáuregui
+[33md7ad1f0[m TinaCMS content update by raúl Jáuregui
+[33m6265352[m TinaCMS content update by raúl Jáuregui
+[33m9f9dd97[m TinaCMS content update by raúl Jáuregui
+[33m041fc47[m TinaCMS content update by raúl Jáuregui
+[33m97bee6f[m TinaCMS content update by raúl Jáuregui
+[33mabf1aa8[m TinaCMS content update by raúl Jáuregui
+[33m413599f[m TinaCMS content update by raúl Jáuregui
+[33m2f8fa03[m TinaCMS content update by raúl Jáuregui
+[33m6d35887[m TinaCMS content update by raúl Jáuregui
+[33m64c8e52[m TinaCMS content update by raúl Jáuregui
+[33m47cdca8[m TinaCMS content update by raúl Jáuregui
+[33macc22df[m TinaCMS content update by raúl Jáuregui
+[33m44c9fb5[m TinaCMS content update by raúl Jáuregui
+[33m0132ef5[m TinaCMS content update by raúl Jáuregui
+[33m07e0dcc[m TinaCMS content update by raúl Jáuregui
+[33med98318[m TinaCMS content update by raúl Jáuregui
+[33mbe01ef6[m TinaCMS content update by raúl Jáuregui
+[33m2bd4b0d[m TinaCMS content update by raúl Jáuregui
+[33mdcdb6e6[m TinaCMS content update by raúl Jáuregui
+[33m1d703e6[m TinaCMS content update by raúl Jáuregui
+[33mf49d63d[m 🛠 Fix: General Fixing
+[33m6bf2b0a[m 🛠 Fix: Trying to fix search
+[33m4feba2c[m TinaCMS content update by raúl Jáuregui
+[33m9ec64a5[m TinaCMS content update by raúl Jáuregui
+[33mca0a6bf[m TinaCMS content update by raúl Jáuregui
+[33mdd29297[m TinaCMS content update by raúl Jáuregui
+[33m59dc314[m TinaCMS content update by raúl Jáuregui
+[33m6172694[m TinaCMS content update by raúl Jáuregui
+[33mf890f5d[m TinaCMS content update by raúl Jáuregui
+[33m1ed7a25[m TinaCMS content update by raúl Jáuregui
+[33m630e22f[m TinaCMS content update by raúl Jáuregui
+[33m09db7a2[m TinaCMS content update by raúl Jáuregui
+[33m9ea4ee3[m TinaCMS content update by raúl Jáuregui
+[33m15b70d3[m TinaCMS content update by raúl Jáuregui
+[33me5c27f3[m TinaCMS content update by raúl Jáuregui
+[33m65db681[m TinaCMS content update by raúl Jáuregui
+[33mcd86436[m TinaCMS content update by raúl Jáuregui
+[33m5a33317[m TinaCMS content update by raúl Jáuregui
+[33m4a882ab[m TinaCMS content update by raúl Jáuregui
+[33m7677e3f[m TinaCMS content update by raúl Jáuregui
+[33m1f62ee1[m TinaCMS content update by raúl Jáuregui
+[33mdb9ecf1[m TinaCMS content update by raúl Jáuregui
+[33m65f6b28[m TinaCMS content update by raúl Jáuregui
+[33mda31e61[m Update from TinaCMS
+[33m8a27a3c[m TinaCMS content update by raúl Jáuregui
+[33maa3abf2[m Update from TinaCMS
+[33mdec11a0[m TinaCMS content update by raúl Jáuregui
+[33mfbc573a[m TinaCMS content update by raúl Jáuregui
+[33m7bad8ed[m TinaCMS content update by raúl Jáuregui
+[33m5919ff4[m 🛠 Fix: Try to fix import on pagefind
+[33m9df43a2[m 🛠 Fix: Changed dependencies 3
+[33m241ca2c[m 🛠 Fix: Changed dependencies 2
+[33ma2c76c2[m 🛠 Fix: Changed dependencies 2
+[33m8a86539[m 🛠 Fix: Changed dependencies 2
+[33m5318146[m 🛠 Fix: Changed dependencies
+[33me989c5e[m 🛠 Fix: Changed dependencies
+[33mca94c88[m 🛠 Fix: Changed dependencies
+[33m6d15230[m 🛠 Fix: Changed dependencies
+[33m98549c7[m 🛠 Fix: Changed dependencies
+[33m2113eec[m 🛠 Fix: Added try catch on import
+[33m276c5e9[m 🛠 Fix: Fixed size of logo on mobile
+[33m09bf558[m ✏️ Refactoring: changed text on pop-up
+[33m2ef6392[m ✅ Feat: Implemented use confirm on mailer lite
+[33mcb81942[m ✅ Feat: Get Verification on mailerlite
+[33mac01e05[m ✅ Feat: Added comments to the code
+[33m3e49295[m ✅ Feat: Changed the comments
+[33m1803514[m ✅ Feat: Removed .md
+[33md193e27[m ✅ Feat: Imported logo on the header
+[33m0089d4b[m ✅ Feat: Created Pop-Up
+[33m03c20ab[m TinaCMS content update by raúl Jáuregui
+[33m5f1beef[m TinaCMS content update by raúl Jáuregui
+[33m0943db3[m TinaCMS content update by raúl Jáuregui
+[33m367ad9a[m TinaCMS content update by raúl Jáuregui
+[33md8b101f[m TinaCMS content update by raúl Jáuregui
+[33m30112dd[m TinaCMS content update by raúl Jáuregui
+[33me3d01ee[m ✅ Feat: Changed Style of the form
+[33m1bc3030[m TinaCMS content update by raúl Jáuregui
+[33m8ebaf50[m ✅ Feat: Created redirect to the last route
+[33m8bdd7cd[m TinaCMS content update by raúl Jáuregui
+[33m1a91078[m TinaCMS content update by raúl Jáuregui
+[33m2e4b03a[m TinaCMS content update by raúl Jáuregui
+[33mb11293f[m TinaCMS content update by raúl Jáuregui
+[33m7d76c8b[m TinaCMS content update by raúl Jáuregui
+[33mec6f829[m ✅ Feat: Changed category
+[33m5af53ee[m ✏️ Refactoring: Changin title
+[33m35ddfab[m TinaCMS content update by raúl Jáuregui
+[33m06bce12[m TinaCMS content update by raúl Jáuregui
+[33m9f9aa9f[m TinaCMS content update by raúl Jáuregui
+[33mdb368c6[m TinaCMS content update by raúl Jáuregui
+[33mfdb5fa7[m TinaCMS content update by raúl Jáuregui
+[33m4ace5e5[m TinaCMS content update by raúl Jáuregui
+[33md79d3eb[m TinaCMS content update by raúl Jáuregui
+[33mabd4f78[m TinaCMS content update by raúl Jáuregui
+[33me2f7e77[m TinaCMS content update by raúl Jáuregui
+[33mf430a55[m ✅ Feat: Created pop-up
+[33m1a02970[m TinaCMS content update by raúl Jáuregui
+[33mdca16b9[m TinaCMS content update by raúl Jáuregui
+[33m2f6bd40[m TinaCMS content update by raúl Jáuregui
+[33m26f4720[m TinaCMS content update by raúl Jáuregui
+[33m8d2893b[m ✅ Feat: Added unconfirmed
+[33m86220f1[m ✏️ Refactoring: Removed console logs from register and edits on slug
+[33m4cf4f4f[m ✅ Feat: Implemented blurr to elements
+[33m849fbce[m ✏️ Refactoring: Changed style of register
+[33m9d91e63[m 🛠 Fix: Fixed preparing blog
+[33m728b29d[m ✏️ Refactoring: Changed Form
+[33mfc37dc5[m ✅ Feat: Created new layout for the newsletter
+[33mb8f26c1[m ✅ Feat: Implemented collection newsletter
+[33mba2b531[m ✅ Feat: Created new collection
+[33mf42ee42[m ✅ Feat: Changed canonical url
+[33mf4bb3a1[m TinaCMS content update by raúl Jáuregui
+[33md2971e1[m TinaCMS content update by raúl Jáuregui
+[33m10d35ee[m TinaCMS content update by raúl Jáuregui
+[33mf35ac43[m TinaCMS content update by raúl Jáuregui
+[33m89d5be5[m TinaCMS content update by raúl Jáuregui
+[33mb76b47b[m TinaCMS content update by raúl Jáuregui
+[33mb27cc4f[m TinaCMS content update by raúl Jáuregui
+[33m26a33c0[m TinaCMS content update by raúl Jáuregui
+[33m4396e15[m TinaCMS content update by raúl Jáuregui
+[33m67e65a0[m TinaCMS content update by raúl Jáuregui
+[33m63ec487[m TinaCMS content update by raúl Jáuregui
+[33m9bf79e4[m TinaCMS content update by raúl Jáuregui
+[33m75e022d[m ✅ Feat: Trying to fix theme on register
+[33m6aa653a[m ✅ Feat: Added MailerLite to vercel
+[33m31ce13f[m Update from TinaCMS
+[33m5cad25b[m Update from TinaCMS
+[33m310a9f0[m Update from TinaCMS
+[33m0baea3d[m ✅ Feat: Created connection to MailerLite and edits on register
+[33m9fb4689[m TinaCMS content update by raúl Jáuregui
+[33mff05b11[m TinaCMS content update by raúl Jáuregui
+[33m8b5d569[m TinaCMS content update by raúl Jáuregui
+[33m79a84cb[m TinaCMS content update by raúl Jáuregui
+[33mb42adc5[m TinaCMS content update by raúl Jáuregui
+[33m8020018[m TinaCMS content update by raúl Jáuregui
+[33m4cccdce[m TinaCMS content update by raúl Jáuregui
+[33maf90dec[m TinaCMS content update by raúl Jáuregui
+[33m20916d2[m TinaCMS content update by raúl Jáuregui
+[33mb4545b1[m TinaCMS content update by raúl Jáuregui
+[33m7570053[m TinaCMS content update by raúl Jáuregui
+[33m1ed2aa5[m TinaCMS content update by raúl Jáuregui
+[33m9bac377[m TinaCMS content update by raúl Jáuregui
+[33mf2aace0[m TinaCMS content update by raúl Jáuregui
+[33m4bdec77[m TinaCMS content update by raúl Jáuregui
+[33mda11226[m TinaCMS content update by raúl Jáuregui
+[33mc94a291[m TinaCMS content update by raúl Jáuregui
+[33mbbe2415[m TinaCMS content update by raúl Jáuregui
+[33m411519f[m ✅ Feat: Created register route to create new users
+[33m1bee789[m 🛠 Fix: Fixed [..slug]
+[33m9c4dc93[m 🛠 Fix: Removed getStaticPaths from slug and category
+[33m50ddd20[m 🛠 Fix: Removed getStaticPaths from slug and category
+[33m172d1d4[m 🛠 Fix: Removed getStaticPaths from slug and category
+[33m7cade05[m 🛠 Fix: Fixing prerender errors
+[33m77470bb[m 🛠 Fix: Removed prerender from main pages
+[33ma4e586b[m 🛠 Fix: Moved get cookies logic to Layouts
+[33m588eaee[m 🛠 Fix: Fix of addEventListener on form sign_in
+[33mfa6e109[m 🛠 Fix: Fixing forms
+[33mbf09ec9[m 🛠 Fix: Fixing astro cookies
+[33maf0f4a6[m 🛠 Fix: Fixing astro cookies
+[33m71193fa[m 🛠 Fix: Fixing astro cookies
+[33m2850baf[m 🛠 Fix: Fixing astro cookies
+[33m8ec02be[m 🛠 Fix: Fixing astro cookies
+[33ma9f524c[m ✏️ Refactoring: Changed logic to get cookie session
+[33ma26eb59[m TinaCMS content update by raúl Jáuregui
+[33m2ca21a9[m TinaCMS content update by raúl Jáuregui
+[33m18712d7[m TinaCMS content update by raúl Jáuregui
+[33m47b0aa1[m TinaCMS content update by raúl Jáuregui
+[33m10055e6[m TinaCMS content update by raúl Jáuregui
+[33m7508424[m TinaCMS content update by raúl Jáuregui
+[33m21d9ad5[m TinaCMS content update by raúl Jáuregui
+[33mfc8c724[m TinaCMS content update by raúl Jáuregui
+[33m79c044f[m TinaCMS content update by raúl Jáuregui
+[33m28c0e01[m TinaCMS content update by raúl Jáuregui
+[33m4319eba[m TinaCMS content update by raúl Jáuregui
+[33md84658b[m TinaCMS content update by raúl Jáuregui
+[33m3aceb78[m TinaCMS content update by raúl Jáuregui
+[33m94fab2c[m TinaCMS content update by raúl Jáuregui
+[33m0194714[m TinaCMS content update by raúl Jáuregui
+[33m7ef75ac[m TinaCMS content update by raúl Jáuregui
+[33m02b7463[m TinaCMS content update by raúl Jáuregui
+[33m2b5bf78[m TinaCMS content update by raúl Jáuregui
+[33m7a0fbf1[m TinaCMS content update by raúl Jáuregui
+[33maf6227d[m TinaCMS content update by raúl Jáuregui
+[33m0d61b99[m TinaCMS content update by raúl Jáuregui
+[33m367125d[m 🛠 Fix: Adding prerender to SignIn Component and to Layout
+[33m3ad5bea[m 🛠 Fix: Adding prerender to header
+[33mfb989f9[m 🛠 Fix: Fixing firebase sessionCookie
+[33m1d4bb3e[m 🛠 Fix: Fixing firebase sessionCookie
+[33mcdd9bf3[m 🛠 Fix: Fixing firebase idToken
+[33m4fec702[m 🛠 Fix: Fixing firebase getCustomToken
+[33m5a01e1b[m 🛠 Fix: Fixing Tinacms
+[33m1e9d74b[m 🛠 Fix: Added vercel to gitignore
+[33ma9c47a0[m ✏️ Refactoring: Image required
+[33mdbfda22[m ✏️ Refactoring: Image required
+[33mb207b8f[m ✏️ Refactoring: Image required
+[33me1c7a68[m 🛠 Fix: Fixed blog
+[33md233769[m TinaCMS content update by raúl Jáuregui
+[33m6789ac7[m TinaCMS content update by raúl Jáuregui
+[33mb4a885d[m TinaCMS content update by raúl Jáuregui
+[33mc9343b3[m TinaCMS content update by raúl Jáuregui
+[33me440d54[m TinaCMS content update by raúl Jáuregui
+[33md3b8c6b[m TinaCMS content update by raúl Jáuregui
+[33mdc486ea[m TinaCMS content update by raúl Jáuregui
+[33m0091d81[m TinaCMS content update by raúl Jáuregui
+[33m4e43911[m TinaCMS content update by raúl Jáuregui
+[33m1e5935a[m TinaCMS content update by raúl Jáuregui
+[33mdd92366[m TinaCMS content update by raúl Jáuregui
+[33mdf78813[m TinaCMS content update by raúl Jáuregui
+[33mad9c358[m TinaCMS content update by raúl Jáuregui
+[33m70cacbc[m TinaCMS content update by raúl Jáuregui
+[33m7d02608[m TinaCMS content update by raúl Jáuregui
+[33m7f1d848[m TinaCMS content update by raúl Jáuregui
+[33m435fb67[m TinaCMS content update by raúl Jáuregui
+[33mb57405d[m TinaCMS content update by raúl Jáuregui
+[33mab9f00b[m TinaCMS content update by raúl Jáuregui
+[33mb60b530[m TinaCMS content update by raúl Jáuregui
+[33m6e69f10[m TinaCMS content update by raúl Jáuregui
+[33m5748d30[m TinaCMS content update by raúl Jáuregui
+[33mec105e0[m TinaCMS content update by raúl Jáuregui
+[33mfe19c10[m TinaCMS content update by raúl Jáuregui
+[33mdf1ca0f[m 🛠 Fix: Fixed .mdx files
+[33m112040f[m TinaCMS content update by raúl Jáuregui
+[33m0aae1f8[m TinaCMS content update by raúl Jáuregui
+[33mfc407c4[m TinaCMS content update by raúl Jáuregui
+[33mcecd4ca[m TinaCMS content update by raúl Jáuregui
+[33mda19262[m Update from TinaCMS
+[33mcece951[m TinaCMS content update by raúl Jáuregui
+[33mf50c543[m TinaCMS content update by raúl Jáuregui
+[33m5104615[m 🛠 Fix: Fixed subheadings 2
+[33me799a61[m 🛠 Fix: Fixed subheadings
+[33m8b4013f[m 🛠 Fix: Fixed subheadings
+[33mba97d31[m TinaCMS content update by raúl Jáuregui
+[33m9827ad9[m TinaCMS content update by raúl Jáuregui
+[33mce0f3f9[m TinaCMS content update by raúl Jáuregui
+[33m0b73c78[m 🛠 Fix: removed vercel folder
+[33ma9d84c4[m 🛠 Fix: Fixed Tina env variables
+[33m9fdd65c[m 🛠 Fix: Fixed null on email
+[33m659e046[m 🛠 Fix: Fixed null on email
+[33me529917[m ✅ Feat: Created getUserFromFirestore on utils
+[33m09794af[m ✅ Feat: Created createUser route
+[33m9d81000[m ✏️ Refactoring: Updated @astrojs/tailwind
+[33m007c1e5[m ✅ Feat: Improved session to 14 days
+[33mc6c49be[m ✅ Feat: Created Authenication Session with email
+[33m0e9d1d4[m ✅ Feat: Implemented Firebase and get list
+[33m8cf63b3[m 🛠 Fix: Added .env variables to TinaCMS Config
+[33m41c7511[m ✅ Feat: Chande Tina config file to read .mdx and get images from assets folder
+[33m366d9db[m ✅ Feat: Implementation of TinaCMS, Vercel and SSR Adapter
+[33mf1d9647[m TinaCMS
+[33m81ae768[m MindfulML 1
+[33m89d871e[m Versión 2
+[33m5c85925[m Versión 1
+[33m4e10d24[m Initial commit

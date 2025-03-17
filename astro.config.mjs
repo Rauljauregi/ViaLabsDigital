@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
-import tailwind from '@astrojs/tailwind';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import { remarkReadingTime } from './src/utils/readTime.ts';
@@ -71,7 +70,6 @@ export default defineConfig({
       },
       drafts: true
     }),
-    tailwind(),
     partytown({
       config: {
         forward: ['dataLayer.push', 'gtag'],
