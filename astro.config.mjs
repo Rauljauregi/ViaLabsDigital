@@ -7,6 +7,8 @@ import { remarkReadingTime } from './src/utils/readTime.ts';
 import vercel from '@astrojs/vercel';
 import partytown from '@astrojs/partytown';
 
+import tailwindcss from '@tailwindcss/vite';
+
 export default defineConfig({
   site: 'https://mindfulml.vialabsdigital.com/',
   output: 'server',
@@ -15,6 +17,7 @@ export default defineConfig({
 
   vite: {
     assetsInclude: ['**/*.fit'],
+    plugins: [tailwindcss()]
   },
 
   markdown: {
