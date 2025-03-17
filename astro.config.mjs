@@ -4,7 +4,7 @@ import mdx from '@astrojs/mdx';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import { remarkReadingTime } from './src/utils/readTime.ts';
-import vercel from '@astrojs/vercel';
+import vercel from '@astrojs/vercel/serverless';
 import partytown from '@astrojs/partytown';
 
 import tailwindcss from '@tailwindcss/vite';
