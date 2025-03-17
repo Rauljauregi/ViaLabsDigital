@@ -16,7 +16,9 @@ vialabsblue: '#64D2E6'
 },
 },
 plugins: [
-require('@tailwindcss/typography'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
 ],
 darkMode: 'class',
 };
