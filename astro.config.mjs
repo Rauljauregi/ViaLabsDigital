@@ -1,13 +1,15 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
+import tailwind from '@astrojs/tailwind'; // Añade esta importación
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import { remarkReadingTime } from './src/utils/readTime.ts';
 import vercel from '@astrojs/vercel/serverless';
 import partytown from '@astrojs/partytown';
 
-import tailwindcss from '@tailwindcss/vite';
+// Elimina esta línea:
+// import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://mindfulml.vialabsdigital.com/',
@@ -17,7 +19,8 @@ export default defineConfig({
 
   vite: {
     assetsInclude: ['**/*.fit'],
-    plugins: [tailwindcss()]
+    // Elimina esta línea:
+    // plugins: [tailwindcss()]
   },
 
   markdown: {
@@ -47,6 +50,7 @@ export default defineConfig({
   },
 
   integrations: [
+    tailwind(), // Añade esta línea para activar la integración de Tailwind
     mdx({
       remarkPlugins: [
         remarkReadingTime,
