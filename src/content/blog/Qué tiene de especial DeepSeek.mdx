@@ -1,0 +1,213 @@
+---
+title: "Qué tiene de especial DeepSeek"
+description: >-
+    DeepSeek revoluciona la IA con menos consumo energético, arquitectura Mixture of Experts y modelos multimodales. Cómo impactará en el mundo de la IA.
+category: Deep Learning
+pubDate: 2025-03-23
+heroImage: "/images/deepseek.jpeg"
+tags:
+  - Transformers
+  - Redes neuronales
+  - llm
+---
+
+
+> Si piensas que ya lo has visto todo en inteligencia artificial, prepárate: **DeepSeek** acaba de subir el listón. Y no solo promete modelos más potentes, sino también **más rápidos, eficientes y accesibles**.
+
+En este artículo te cuento **qué trae de nuevo DeepSeek**, **cómo estas innovaciones están marcando tendencia** y **por qué van a cambiar la forma en que las empresas—grandes y pequeñas—usan la IA**.  
+Vamos al lío.
+
+
+## **¿Qué es DeepSeek y por qué deberías prestarle atención?**
+
+DeepSeek es un conjunto de **modelos de inteligencia artificial generativa** desarrollados por *DeepSeek AI*, una startup china que viene pisando fuerte. Han lanzado varios modelos de código abierto (*open-source*), diseñados para tareas de procesamiento de texto e imágenes, y están **rompiendo el equilibrio de poder** en el mundo de la IA.
+
+Mientras otros gigantes como OpenAI o Anthropic siguen apostando por modelos cerrados, DeepSeek abre la puerta a que **cualquiera pueda experimentar, integrar y mejorar sus sistemas de IA**, incluso sin ser una gran corporación. Recordemos que otras empresas como es el caso de Meta (Facebook) con sus modelos Llama, ya ofrecen modelos opensource cada vez más potentes.
+
+Pero lo que realmente llama la atención no es solo que son de código abierto. **DeepSeek introduce innovaciones que podrían marcar el futuro de toda la industria**.
+
+
+## **Las 5 innovaciones clave que trae DeepSeek (y cómo afectarán al sector)**
+
+Aquí va la lista con *chicha*:
+
+
+### **1. Arquitectura Mixture of Experts (MoE): solo trabajan los que saben**
+
+**¿Qué significa?**  
+DeepSeek implementa la **arquitectura Mixture of Experts (MoE)**, un sistema donde no todos los parámetros del modelo trabajan a la vez. Solo se activan los “expertos” más adecuados para cada tarea. Es como tener un equipo de especialistas donde solo los que realmente saben de un tema se levantan a trabajar.
+
+#### **¿Por qué es revolucionario?**
+- En lugar de activar los **236.000 millones de parámetros** de su modelo más grande, **DeepSeek MoE solo usa 39.000 millones de parámetros por inferencia**.
+- Esto reduce de forma drástica el **consumo energético**.  
+  Se estima una **reducción de hasta el 80% en consumo de recursos durante la inferencia**, comparado con modelos *dense* tradicionales.
+- Los MoE son nuevos por ejemplo la empresa francesa Mistral ya ofrece este tipo de modelos. Pero debido a su dificultad de implementar no son muchos los casos.
+
+$$
+\text{Output} = \sum_{i=1}^{N} G_i(x) \cdot E_i(x)
+$$
+
+Aquí:  
+- $G_i(x)$ es el *gate*, que selecciona qué expertos participan.  
+- $E_i(x)$ es la respuesta de cada experto.  
+- **Solo 2 expertos activos** de un total de 64 en cada operación.
+
+#### **Ventajas**  
+✅ **Inferencias más rápidas**  
+✅ **Menor gasto en computación**  
+✅ **Menor impacto ambiental**
+
+#### **Peligros y retos**  
+⚠️ **Fragmentación del conocimiento**: el modelo depende de que los “gates” seleccionen bien a los expertos.  
+⚠️ **Mayor complejidad en el entrenamiento**: aunque la inferencia es más barata, entrenar bien un MoE es un desafío.
+
+
+### **2. Multimodalidad real: texto, imágenes y pronto vídeo y audio**
+
+**¿Qué significa?**  
+DeepSeek es un modelo **multimodal**, capaz de procesar y razonar sobre **texto e imágenes al mismo tiempo**. Están preparando el soporte para **vídeo y audio**, lo que lo pondría al nivel de los sistemas *más avanzados* como **Gemini 1.5 y 2.* ** de Google.
+
+#### **Ventajas**  
+✅ Puedes **subir un documento escaneado** (imagen) y pedirle que **extraiga datos y los resuma**.  
+✅ Puedes **mezclar texto e imagen en la misma consulta**, ideal para procesos de soporte al cliente o auditorías visuales.
+
+#### **Peligros y retos**  
+⚠️ **Requiere datos multimodales bien etiquetados** para entrenar estos sistemas.  
+⚠️ **Puede abrir nuevas vías para el *deepfake* y la manipulación multimedia.**
+
+
+### **3. Open-source con licencias comerciales generosas**
+
+DeepSeek sigue el modelo de **código abierto**, algo que solo unos pocos están haciendo (como Mistral en Europa y Llama en USA).  
+Esto permite **acceso libre y gratuito** a los pesos del modelo y uso comercial **sin necesidad de pagar licencias**, al menos en los términos actuales.
+
+#### **Ventajas**  
+✅ Puedes **integrarlo en tus sistemas internos sin coste**.  
+✅ Accesible para **startups y PYMES** que antes no podían permitirse IAs de alto nivel.
+
+#### **Peligros y retos**  
+⚠️ **Dependencia de la comunidad**: si nadie contribuye, el desarrollo podría estancarse.  
+⚠️ **Riesgos de seguridad**: el open-source puede facilitar el acceso a malas prácticas si no se controla su uso.
+
+
+### **4. Eficiencia energética en entrenamiento e inferencias**
+
+Uno de los puntos fuertes de DeepSeek es que **reduce el consumo de energía** tanto en el entrenamiento como en la inferencia gracias a su arquitectura MoE.
+
+#### **Datos clave**  
+- Un modelo denso de 175B como GPT-3 consume **1287 MWh** durante el entrenamiento (estos datos los he extraído de las últimas estimaciones).  
+- Un MoE bien implementado puede **reducir este consumo en un 50-60%** en el entrenamiento y hasta **un 80% en la inferencia**.
+
+#### **Ventajas**  
+✅ **Menor huella de carbono**.  
+✅ **Abaratamiento de la IA**: menos energía significa **menos coste operativo**.
+
+#### **Peligros y retos**  
+⚠️ **Los ahorros dependen del uso eficiente del MoE**.  
+⚠️ **Las infraestructuras aún deben adaptarse a estos nuevos modelos**.
+
+
+### **5. Entrenamiento multilingüe**
+
+DeepSeek se ha entrenado desde cero con datos **multilingües**, incluyendo un **buen corpus en castellano**.  
+Esto lo coloca por delante de otros modelos que **traducen al vuelo** y terminan dando respuestas menos naturales.
+
+#### **Ventajas**  
+✅ Mejora la **comprensión y generación de contenido en castellano**.  
+✅ Ideal para **PYMES que venden en mercados donde no se habla inglés**.
+
+#### **Peligros y retos**  
+⚠️ **Calidad variable según el idioma**: aunque ha mejorado, el 100% de consistencia aún es difícil de lograr.
+
+
+## **¿Qué significa esto para el resto del sector?**
+
+Dado que los datos de entrenamiento e inferencia se han hecho público esto va a impulsar a todo el sector, que podrá implementar estas mejoras de manera inmediata. Además el éxito de DeepSeek en implementar estas tecnologías **obliga al resto de los gigantes a reaccionar**. Aquí te cuento lo que ya está pasando (o va a pasar sí o sí):
+
+| **Empresa**   | **Qué harán**                                                                 |
+|---------------|-------------------------------------------------------------------------------|
+| **OpenAI**    | Están explorando **MoE** para los próximos modelos GPT. La eficiencia energética es clave para su sostenibilidad. |
+| **Google (Gemini)** | Gemini 1.5 2.* ya son multimodales y está usando técnicas similares de *expert gating* para reducir costes. |
+| **Anthropic** | Claude 3 incorporará **arquitecturas híbridas**, y se espera que adopten estrategias MoE en su entrenamiento. |
+| **Meta**      | Meta AI está apostando por **modelos open-source** y también por **MoE**, como en LLaMA 3. |
+
+> La competencia **va a democratizar** aún más la IA, pero también generará una **carrera por la eficiencia** que beneficiará a los usuarios… y presionará los precios.
+
+
+## **Ventajas y peligros de este nuevo panorama**
+
+### **Ventajas**
+- **IA más accesible** para empresas pequeñas.  
+- **Costes operativos menores** por la reducción en consumo energético.  
+- **Mayor velocidad de respuesta y flexibilidad**.
+
+### **Peligros**
+- **Sobreoferta y confusión**: muchas opciones pueden hacer difícil elegir.  
+- **Riesgos de seguridad y privacidad** si se usan modelos open-source sin los controles adecuados.  
+- **Dependencia tecnológica**: cuanto más fácil es usar IA, más dependientes podemos volvernos de ella.
+
+
+¡Buena observación! Aquí te dejo cómo podríamos explicar esa **ventaja/peligro** que comentas, y aclarar la situación para que quede bien entendido en el artículo.
+
+
+## **¿Menos consumo significa menos inversiones? No exactamente.**
+
+Una de las **dudas** que está surgiendo en el sector es si estas nuevas arquitecturas eficientes, como la **Mixture of Experts (MoE)** de DeepSeek, harán que **las grandes empresas dejen de invertir en infraestructura de IA**. Y si eso ocurre, ¿qué pasa con empresas como **NVIDIA**, que vive de vender sus GPUs a centros de datos de IA?
+
+### **Este es el razonamiento que inquieta a algunos inversores sin conocimientos de IA:**
+> *Si los modelos consumen menos energía y requieren menos potencia de cómputo para entrenarse o realizar inferencias, quizá las empresas necesiten **comprar menos hardware** o gastarse menos dinero en computación.*
+
+Esto **podría parecer un riesgo** para el crecimiento de empresas tecnológicas que dependen de la **demanda masiva de GPUs** y chips específicos para IA.
+
+
+### **Pero la realidad es otra: estas inversiones serán más eficientes, no menores.**
+
+Aunque los modelos **sean más eficientes**, la **demanda de IA** está creciendo **exponencialmente**. Las **mejoras en eficiencia**, como las que ha introducido DeepSeek, lo que permiten es **hacer más con el mismo presupuesto**, no hacer menos.
+
+#### **Piensa en esto así:**
+> Antes, una empresa tenía que invertir una **barbaridad** para entrenar un modelo decente. Ahora, puede **invertir lo mismo o incluso más**, pero obteniendo **modelos mucho más potentes y complejos**.
+
+✅ **Más eficiencia no frena el gasto, lo multiplica hacia nuevas aplicaciones.**  
+✅ Empresas que antes no podían entrar en el juego de la IA ahora sí pueden, **aumentando el mercado total de IA**.
+
+#### **NVIDIA y el resto de tecnológicas se benefician porque:**
+1. La **demanda global de IA crece**: más empresas, más países, más sectores.
+2. **El uso de GPUs se diversifica**, no solo en entrenamientos bestiales, sino en **miles de modelos personalizados y aplicaciones concretas**.
+3. **La inversión no se reduce, se redistribuye** en soluciones **más escalables y extendidas**.
+
+
+### **La Paradoja de Jevons: cuando más eficiencia genera más consumo**
+
+Esta paradoja fue planteada por el economista británico **William Stanley Jevons** en el siglo XIX. Él observó que a medida que las máquinas de vapor se volvían **más eficientes** en el consumo de carbón, **no disminuyó el uso de carbón**. Al contrario: **el consumo total aumentó**, porque la eficiencia hacía que **más industrias y personas usaran esas máquinas**, y la **demanda general** de energía se disparó.
+
+#### **En el contexto de la IA, pasa algo parecido:**
+> A medida que los modelos de inteligencia artificial se vuelven **más eficientes** (gracias a arquitecturas como **Mixture of Experts**), **no es que disminuya el uso de recursos**; lo que ocurre es que **muchas más empresas empiezan a usar IA**, se entrenan **más modelos** y se crean **más aplicaciones**.
+
+Este fenómeno explica por qué, aunque DeepSeek y otros modelos consumen **menos energía por operación**, **la demanda total de cómputo e inversión en IA seguirá creciendo**.
+
+
+### **Cómo afecta la Paradoja de Jevons a la IA (y a tu negocio)**
+
+✅ Las **mejoras en eficiencia** harán que la IA esté al alcance de **más empresas**, incluso PYMES que antes ni lo consideraban.  
+✅ **Más uso** de IA significa **más datos, más servicios inteligentes** y **más competencia en todos los sectores**.  
+✅ Para los grandes fabricantes como **NVIDIA**, lejos de significar un frenazo, es una **oportunidad para vender más GPUs**, pero **a un mercado mucho más amplio**.
+
+
+> **La eficiencia no frena el progreso, lo acelera.**  
+> Con DeepSeek y su arquitectura eficiente, lo que veremos es una **explosión de adopción** de IA. Esto generará **más consumo global de recursos**, aunque **de manera más inteligente y optimizada**.
+
+
+## **DeepSeek no es una moda, es un adelanto del futuro**
+
+DeepSeek marca un antes y un después en la carrera de la inteligencia artificial. Sus avances en eficiencia energética, multimodalidad y accesibilidad **ya están inspirando a los grandes del sector** a cambiar de rumbo.
+
+> Si tienes un negocio y quieres aprovechar la IA sin complicaciones ni grandes inversiones, **este es el momento**.
+
+---
+
+## **¿Hablamos de cómo aplicar DeepSeek en tu empresa?**
+
+En *Vialabs Digital* ya estamos probando estas tecnologías en proyectos reales.  
+👉 Escríbeme en [www.vialabsdigital.com](http://www.vialabsdigital.com) y vemos cómo adaptarlas a tu negocio.
+
+
