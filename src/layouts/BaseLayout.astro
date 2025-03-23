@@ -4,69 +4,26 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ProviderTheme from '@/components/ProviderTheme'
 import ProviderAnimations from '@/components/ProviderAnimations'
-import { app } from '../firebase/server'
 import CloseIcon from '@/components/icons/CloseIcon'
-import { getAuth } from 'firebase-admin/auth'
-import MailerLite from '@mailerlite/mailerlite-nodejs'
-import getUserMail from '../utils/getUserMail.ts'
 import SchemaMarkup from '@/components/SchemaMarkup'
-import '../styles/global.css';
-
-const mailerlite = new MailerLite({
-	api_key: process.env.MAILERLITE_API || ''
-})
+import '../styles/global.css'
 
 const { title, description, image, articleDate } = Astro.props
 
+// Esto controla los estados de confirmación de suscripción que llegan por la URL
 const confirmation = Astro.url.searchParams.get('confirmation')
 let confirm = ''
 
-/* console.log("ER COOKIE:",Astro.cookies.get("session")?.value); */
-const auth = getAuth(app)
-let isAuthenticated = false
-if (Astro.cookies.has('session')) {
-		try {
-		const sessionCookie = Astro.cookies.get('session')?.value
-		const decodedCookie = await auth.verifySessionCookie(sessionCookie!)
-		const user = await auth.getUser(decodedCookie.uid)
-		if (user) {
-			const email = await getUserMail(user.uid)
-			await mailerlite.subscribers
-				.find(email.get('email'))
-				.then((response) => {
-					console.log(response.data)
-					if(response.data.data.status === 'unconfirmed'){
-						confirm = 'not confirmed'
-					}
-				})
-				.catch((error) => {
-					if (error.response) console.log(error.response.data)
-				})
-		}
-		if (decodedCookie) {
-			isAuthenticated = true
-		}
-	}
-	catch (error) {
-		console.log("error is:",error);
-		await Astro.cookies.delete('session', {
-		path: '/'
-	})
-		isAuthenticated = false
-	}
-}
-
 if (confirmation === 'needed') {
-	confirm = 'not confirmed'
+  confirm = 'not confirmed'
 }
 
 if (confirmation === 'success') {
-	Astro.cookies.set('confirmed', 'true')
-	confirm = 'confirmed'
+  Astro.cookies.set('confirmed', 'true')
+  confirm = 'confirmed'
 }
 
-// Importa el componente SchemaMarkup al inicio del archivo
-
+// Tus datos de Schema.org para SEO estructurado
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -78,7 +35,7 @@ const websiteSchema = {
     "name": "ViaLabs Digital",
     "url": "https://vialabsdigital.com"
   }
-};
+}
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -104,108 +61,130 @@ const organizationSchema = {
       "https://www.linkedin.com/in/raúl-jáuregui-martínez-de-morentin-1b0732294/"
     ]
   }
-};
-
+}
 
 ---
+<html lang="es" class="scroll-smooth">
+  <head>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX Stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
 
-<html lang='es' class='scroll-smooth'>
-	<head>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-  		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+    <!-- Google Analytics (Partytown for better performance) -->
+    <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-V3WC9QSH8J"></script>
+    <script type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-V3WC9QSH8J');
+    </script>
 
-	
-		<script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-V3WC9QSH8J"></script>
+    <!-- Schema.org structured data -->
+    <SchemaMarkup schema={websiteSchema} />
+    <SchemaMarkup schema={organizationSchema} />
 
-		<script type="text/partytown">
-		
-		window.dataLayer = window.dataLayer || [];
-		
-		function gtag(){dataLayer.push(arguments);}
-		
-		gtag('js', new Date());
-		
-		gtag('config', 'G-V3WC9QSH8J');
-		
-		</script>
+    <!-- Base Meta Tags -->
+    <BaseHead title={title} description={description} ogImage={image} articleDate={articleDate} />
 
-		<!-- En el head, después del Google Analytics -->
-        <SchemaMarkup schema={websiteSchema} />
-        <SchemaMarkup schema={organizationSchema} />
-  
-		<BaseHead title={title} description={description} ogImage={image} articleDate={articleDate} />
-		<ProviderTheme />
-		<ProviderAnimations />
-		<!-- Google tag (gtag.js) -->
+    <!-- Providers for Theme and Animations -->
+    <ProviderTheme />
+    <ProviderAnimations />
+  </head>
 
+  <body class="relative bg-white text-stone-950 dark:bg-[#0a0910] dark:text-white">
+    <main class="mx-auto max-w-xs sm:max-w-2xl sm:px-8 lg:px-12 xl:px-16 antialiased md:max-w-6xl grid gap-12">
+      
+      <!-- Header (el estado de autenticación lo manejas en el cliente) -->
+      <Header />
 
+      <!-- Popups de confirmación o no confirmación del email -->
+      {
+        confirm === 'not confirmed' && (
+          <div class="w-full bg-yellow-300 dark:bg-yellow-600 text-center flex justify-center items-center rounded-lg py-2 px-4" id="not-confirmed">
+            <p class="flex-grow text-sm">
+              Gracias pero todavía no hemos terminado. Hemos enviado un correo electrónico de confirmación.
+              Por favor, revisa tu bandeja de entrada y haz clic en el botón para completar tu suscripción.
+              (Si no lo encuentras revisa la bandeja de spam)
+            </p>
+            <button id="close-not-confirmed-pop-up">
+              <CloseIcon />
+            </button>
+          </div>
+        )
+      }
 
-		
-	</head>
+      {
+        confirm === 'confirmed' && (
+          <div class="w-full bg-green-300 text-center flex justify-center items-center rounded-lg py-2 px-4" id="confirmed">
+            <p class="flex-grow text-sm">
+              ¡Correo electrónico confirmado correctamente!
+            </p>
+            <button id="close-confirmed-pop-up">
+              <CloseIcon />
+            </button>
+          </div>
+        )
+      }
 
-	<body class='relative bg-white text-stone-950 dark:bg-[#0a0910] dark:text-white'>
-		<main
-		class="mx-auto max-w-xs sm:max-w-2xl sm:px-8 lg:px-12 xl:px-16 antialiased md:max-w-6xl grid gap-12"
-	>
-		<Header isAuthenticated={isAuthenticated} />
-		{
-			confirm === 'not confirmed' && (
-				<div
-					class="w-full bg-yellow-300 dark:bg-yellow-600 text-center flex justify-center items-center rounded-lg py-2 px-4"
-					id="not-confirmed"
-				>
-					<p class="flex-grow text-sm">
-						Gracias pero todavía no hemos terminado. Hemos enviado un correo electrónico de confirmación.
-						Por favor, revisa tu bandeja de entrada y haz clic en el botón para completar tu suscripción. 
-						(Si no lo encuentras revisa la bandeja de spam)
-					</p>
-					<button id="close-not-confirmed-pop-up">
-						<CloseIcon />{' '}
-					</button>
-				</div>
-			)
-		}
-		{
-			confirm === 'confirmed' && (
-				<div
-					class="w-full bg-green-300 text-center flex justify-center items-center rounded-lg py-2 px-4"
-					id="confirmed"
-				>
-					<p class="flex-grow text-sm">
-						¡Correo electrónico confirmado correctamente!
-					</p>
-					<button id="close-confirmed-pop-up">
-						<CloseIcon />{' '}
-					</button>
-				</div>
-			)
-		}
-		<slot />
-		<Footer />
-	</main>
-	</body>
-	
-	<script>
-		document.addEventListener('DOMContentLoaded', (event) => {
-			const closeNotConfirmedPopup = document.getElementById('close-not-confirmed-pop-up')
-			const notConfirmedPopup = document.getElementById('not-confirmed')
+      <!-- Aquí se inyecta el contenido de las páginas -->
+      <slot />
 
-			if (closeNotConfirmedPopup && notConfirmedPopup) {
-				closeNotConfirmedPopup.addEventListener('click', function () {
-					notConfirmedPopup.style.display = 'none'
-				})
-			}
+      <!-- Footer -->
+      <Footer />
 
-			const closeConfirmedPopup = document.getElementById('close-confirmed-pop-up')
-			const confirmedPopup = document.getElementById('confirmed')
+    </main>
 
-			if (closeConfirmedPopup && confirmedPopup) {
-				closeConfirmedPopup.addEventListener('click', function () {
-					confirmedPopup.style.display = 'none'
-				})
-			}
-		})
-	</script>
+    <!-- Lógica de UI para cerrar los popups -->
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        const closeNotConfirmedPopup = document.getElementById('close-not-confirmed-pop-up');
+        const notConfirmedPopup = document.getElementById('not-confirmed');
+
+        if (closeNotConfirmedPopup && notConfirmedPopup) {
+          closeNotConfirmedPopup.addEventListener('click', function () {
+            notConfirmedPopup.style.display = 'none';
+          });
+        }
+
+        const closeConfirmedPopup = document.getElementById('close-confirmed-pop-up');
+        const confirmedPopup = document.getElementById('confirmed');
+
+        if (closeConfirmedPopup && confirmedPopup) {
+          closeConfirmedPopup.addEventListener('click', function () {
+            confirmedPopup.style.display = 'none';
+          });
+        }
+
+        // Comprobación de sesión de usuario (en el navegador)
+        async function checkSession() {
+          try {
+            const res = await fetch('/api/check-session');
+            const data = await res.json();
+            
+            if (data.authenticated) {
+              console.log('Estás autenticado como:', data.email);
+              // Aquí podrías mostrar un botón de logout o algo más
+              const authStatus = document.getElementById('auth-status');
+              if (authStatus) {
+                authStatus.textContent = 'Estás logueado';
+              }
+            } else {
+              const authStatus = document.getElementById('auth-status');
+              if (authStatus) {
+                authStatus.textContent = 'No has iniciado sesión';
+              }
+            }
+          } catch (error) {
+            console.error('Error al comprobar sesión:', error);
+          }
+        }
+
+        checkSession();
+      });
+    </script>
+  </body>
 </html>
