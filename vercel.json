@@ -2,7 +2,7 @@
   "version": 2,
   "framework": "astro",
   "buildCommand": "npm run build",
-  "installCommand": "npm install --legacy-peer-deps", // o npm ci si puedes
+  "installCommand": "npm install --legacy-peer-deps",
   "redirects": [
     {
       "source": "/:path((?!.*\\.).*[^/])",
