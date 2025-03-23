@@ -1,10 +1,11 @@
 {
-  "buildCommand": "npm run build",
-  "installCommand": "npm install --legacy-peer-deps",
+  "version": 2,
   "framework": "astro",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install --legacy-peer-deps", // o npm ci si puedes
   "redirects": [
     {
-      "source": "/:path((?!.*\\.).*[^/])", 
+      "source": "/:path((?!.*\\.).*[^/])",
       "destination": "/:path/",
       "permanent": true
     },
@@ -52,6 +53,5 @@
   },
   "buildEnvironment": {
     "VERCEL_FORCE_NO_BUILD_CACHE": "1"
-  },
-  "buildTimestamp": "2025-03-17T10:00:00Z"
+  }
 }
