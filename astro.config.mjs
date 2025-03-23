@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
+//import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import tailwind from '@astrojs/tailwind'; // Añade esta importación
 import rehypeKatex from 'rehype-katex';
@@ -83,15 +83,6 @@ export default defineConfig({
         forward: ['dataLayer.push', 'gtag'],
         debug: false
       }
-    }),
-    sitemap({
-      filter: (page) => !page.includes('/drafts/'),
-      serialize: ({ canonicalURL }) => ({
-        loc: canonicalURL.endsWith('/') ? canonicalURL : `${canonicalURL}/`,
-        lastmod: new Date().toISOString(),
-        changefreq: 'weekly',
-        priority: 0.8
-      })
     })
   ]
 });
