@@ -5,7 +5,8 @@ import tailwind from '@astrojs/tailwind'; // Añade esta importación
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import { remarkReadingTime } from './src/utils/readTime.ts';
-import vercel from '@astrojs/vercel/serverless';
+//import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 import partytown from '@astrojs/partytown';
 
 // Elimina esta línea:
