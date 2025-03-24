@@ -1,17 +1,20 @@
 import { getAuth } from 'firebase-admin/auth';
-import { getApps, initializeApp, cert } from 'firebase-admin/app';
+import { getApps, initializeApp, cert, getApp } from 'firebase-admin/app';
+import MailerLite from '@mailerlite/mailerlite-nodejs';
 
-// Inicializamos Firebase si no está hecho
-if (!getApps().length) {
-  const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY!);
-  initializeApp({
-    credential: cert(serviceAccount),
-  });
-}
-
-export async function GET({ cookies }: { cookies: { get: (name: string) => { value?: string } | undefined } }) {
+export async function GET({ cookies }) {
   try {
-    const auth = getAuth();
+    // Inicializamos Firebase SOLO si no hay apps inicializadas
+    if (!getApps().length) {
+      const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY!);
+
+      initializeApp({
+        credential: cert(serviceAccount),
+      });
+      console.log('✅ Firebase inicializado');
+    }
+
+    const auth = getAuth(); // Usamos el app inicializado por defecto
     const sessionCookie = cookies.get('session')?.value;
 
     if (!sessionCookie) {
@@ -27,37 +30,23 @@ export async function GET({ cookies }: { cookies: { get: (name: string) => { val
       return new Response(JSON.stringify({ authenticated: false }), { status: 401 });
     }
 
-    console.log('✅ Usuario autenticado:', user.email);
+    console.log('✅ Email del usuario autenticado:', user.email);
 
-    // Aquí llamamos a la API REST de MailerLite manualmente porque el SDK no tiene el método que queremos
-    const mailerliteApiKey = process.env.MAILERLITE_API;
-
-    const apiUrl = `https://api.mailerlite.com/api/v2/subscribers/${encodeURIComponent(user.email)}`;
-
-    const mailerResponse = await fetch(apiUrl, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-MailerLite-ApiKey': mailerliteApiKey || ''
-      }
+    const mailerlite = new MailerLite({
+      api_key: process.env.MAILERLITE_API || '',
     });
 
-    if (!mailerResponse.ok) {
-      console.log(`❌ No se encontró el suscriptor en MailerLite (${mailerResponse.status})`);
-      return new Response(JSON.stringify({
-        authenticated: true,
-        subscriber: null
-      }), { status: 200 });
-    }
+    // Busca al suscriptor en MailerLite
+    const response = await mailerlite.subscribers.get({
+      email: user.email,
+    });
 
-    const subscriberData = await mailerResponse.json();
-
-    console.log('✅ Suscriptor encontrado en MailerLite:', subscriberData);
+    console.log('✅ Respuesta de MailerLite:', response.data);
 
     return new Response(
       JSON.stringify({
         authenticated: true,
-        subscriber: subscriberData
+        subscriber: response.data,
       }),
       { status: 200 }
     );
