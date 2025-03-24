@@ -41,7 +41,7 @@ DeepSeek implementa la **arquitectura Mixture of Experts (MoE)**, un sistema don
 - En lugar de activar los **236.000 millones de parámetros** de su modelo más grande, **DeepSeek MoE solo usa 39.000 millones de parámetros por inferencia**.
 - Esto reduce de forma drástica el **consumo energético**.  
   Se estima una **reducción de hasta el 80% en consumo de recursos durante la inferencia**, comparado con modelos *dense* tradicionales.
-- Los MoE son nuevos por ejemplo la empresa francesa Mistral ya ofrece este tipo de modelos. Pero debido a su dificultad de implementar no son muchos los casos.
+- Los MoE no son nuevos por ejemplo la empresa francesa Mistral ya ofrece este tipo de modelos. Pero debido a su dificultad de implementar no son muchos los casos.
 
 $$
 \text{Output} = \sum_{i=1}^{N} G_i(x) \cdot E_i(x)
