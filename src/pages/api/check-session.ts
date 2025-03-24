@@ -2,7 +2,7 @@ import { getAuth } from 'firebase-admin/auth';
 import { getApps, initializeApp, cert } from 'firebase-admin/app';
 
 if (!getApps().length) {
-  const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY!);
+  const serviceAccount = JSON.parse(process.env.FIREBASE_PRIVATE_KEY!);
   initializeApp({
     credential: cert(serviceAccount),
   });
