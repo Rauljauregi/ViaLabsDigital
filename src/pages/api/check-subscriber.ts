@@ -5,7 +5,7 @@ import { getApps, initializeApp, cert } from 'firebase-admin/app'
 import MailerLite from '@mailerlite/mailerlite-nodejs'
 
 if (!getApps().length) {
-  const serviceAccount = JSON.parse(process.env.FIREBASE_PRIVATE_KEY!)
+  const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY!)
   initializeApp({
     credential: cert(serviceAccount),
   })
