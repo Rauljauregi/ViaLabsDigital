@@ -1,9 +1,8 @@
 import { getAuth } from 'firebase-admin/auth';
 import { getApps, initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
-import MailerLite from '@mailerlite/mailerlite-nodejs';
 
-// Inicializar Firebase Admin solo si no está ya inicializado
+// ✅ Inicializar Firebase Admin solo si no está ya inicializado
 if (!getApps().length) {
   const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY!);
   initializeApp({
@@ -11,16 +10,16 @@ if (!getApps().length) {
   });
 }
 
-// Inicializar MailerLite
-const mailerlite = new MailerLite({
-  api_key: process.env.MAILERLITE_API || '',
-});
+// ✅ MailerLite Connect API Key (debería ser algo como `mlc_...`)
+const MAILERLITE_API_KEY = process.env.MAILERLITE_CONNECT_API_KEY!;
+const MAILERLITE_BASE_URL = 'https://connect.mailerlite.com/api/subscribers';
 
-export async function GET({ cookies }) {
+export async function GET({ cookies }: { cookies: { get: (name: string) => { value?: string } | undefined } }) {
   try {
     const auth = getAuth();
     const db = getFirestore();
 
+    // ✅ 1. Recuperar la session cookie
     const sessionCookie = cookies.get('session')?.value;
 
     if (!sessionCookie) {
@@ -28,52 +27,69 @@ export async function GET({ cookies }) {
       return new Response(JSON.stringify({ authenticated: false }), { status: 401 });
     }
 
-    // ✅ Verificamos la session cookie
+    // ✅ 2. Verificar la cookie y obtener el UID
     const decodedCookie = await auth.verifySessionCookie(sessionCookie);
+    console.log('✅ Session verificada. UID:', decodedCookie.uid);
 
-    console.log('✅ Session verificada:', decodedCookie);
-
-    // ✅ Buscamos al usuario en Firestore (en lugar de Firebase Auth)
+    // ✅ 3. Consultar Firestore para obtener el email del usuario
     const userRef = db.collection('users').doc(decodedCookie.uid);
     const userSnap = await userRef.get();
 
     if (!userSnap.exists) {
-      console.log('❌ No user found in Firestore con UID:', decodedCookie.uid);
+      console.log(`❌ Usuario con UID ${decodedCookie.uid} no encontrado en Firestore`);
       return new Response(JSON.stringify({ authenticated: false }), { status: 401 });
     }
 
     const userData = userSnap.data();
 
-    if (!userData || !userData.email) {
-      console.log('❌ No email encontrado en Firestore para UID:', decodedCookie.uid);
+    if (!userData?.email) {
+      console.log(`❌ El usuario con UID ${decodedCookie.uid} no tiene email en Firestore`);
       return new Response(JSON.stringify({ authenticated: false }), { status: 401 });
     }
 
     const userEmail = userData.email;
+    console.log('✅ Email obtenido de Firestore:', userEmail);
 
-    console.log('✅ Email del usuario autenticado desde Firestore:', userEmail);
-
-    // ✅ Buscamos el usuario en MailerLite
-    let response;
+    // ✅ 4. Buscar el suscriptor en MailerLite usando el email
+    let subscriberResponse;
     try {
-      response = await mailerlite.subscribers.get({ email: userEmail });
-      console.log('✅ Respuesta de MailerLite:', response.data);
+      const res = await fetch(`${MAILERLITE_BASE_URL}/${encodeURIComponent(userEmail)}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${MAILERLITE_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (res.status === 404) {
+        console.log(`⚠️ El suscriptor ${userEmail} no está en MailerLite`);
+        return new Response(
+          JSON.stringify({
+            authenticated: true,
+            subscriber: null
+          }),
+          { status: 200 }
+        );
+      }
+
+      if (!res.ok) {
+        console.error(`❌ Error al consultar MailerLite: ${res.statusText}`);
+        return new Response(JSON.stringify({ authenticated: false }), { status: 500 });
+      }
+
+      subscriberResponse = await res.json();
+      console.log('✅ Suscriptor encontrado en MailerLite:', subscriberResponse.data);
+
     } catch (error) {
-      console.error('⚠️ No se encontró el suscriptor en MailerLite:', error);
-      return new Response(
-        JSON.stringify({
-          authenticated: true,
-          subscriber: null
-        }),
-        { status: 200 }
-      );
+      console.error('❌ Error consultando MailerLite:', error);
+      return new Response(JSON.stringify({ authenticated: false }), { status: 500 });
     }
 
-    // ✅ Devolvemos la respuesta exitosa
+    // ✅ 5. Devolvemos el suscriptor encontrado
     return new Response(
       JSON.stringify({
         authenticated: true,
-        subscriber: response.data
+        subscriber: subscriberResponse.data
       }),
       { status: 200 }
     );
