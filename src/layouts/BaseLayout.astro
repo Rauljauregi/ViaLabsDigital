@@ -10,7 +10,7 @@ import '../styles/global.css'
 
 const { title, description, image, articleDate } = Astro.props
 
-// Confirmación de suscripción desde query param
+// Controlamos la confirmación desde parámetros en la URL
 const confirmation = Astro.url.searchParams.get('confirmation')
 let confirm = ''
 
@@ -23,7 +23,7 @@ if (confirmation === 'success') {
   confirm = 'confirmed'
 }
 
-// Schema.org SEO
+// SEO: Schema.org data
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -67,12 +67,12 @@ const organizationSchema = {
 <html lang="es" class="scroll-smooth">
   <head>
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
     <!-- KaTeX -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous" />
 
     <!-- Google Analytics (Partytown para mejor rendimiento) -->
     <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-V3WC9QSH8J"></script>
@@ -83,68 +83,61 @@ const organizationSchema = {
       gtag('config', 'G-V3WC9QSH8J');
     </script>
 
-    <!-- Schema.org -->
+    <!-- Schema.org structured data -->
     <SchemaMarkup schema={websiteSchema} />
     <SchemaMarkup schema={organizationSchema} />
 
-    <!-- SEO y providers -->
+    <!-- SEO Meta Tags -->
     <BaseHead title={title} description={description} ogImage={image} articleDate={articleDate} />
+
+    <!-- Providers (Theme y Animaciones) -->
     <ProviderTheme />
     <ProviderAnimations />
   </head>
 
   <body class="relative bg-white text-stone-950 dark:bg-[#0a0910] dark:text-white">
     <main class="mx-auto max-w-xs sm:max-w-2xl sm:px-8 lg:px-12 xl:px-16 antialiased md:max-w-6xl grid gap-12">
-
-      <!-- Header principal -->
+      
+      <!-- Header -->
       <Header />
 
-      <!-- Indicador de estado de autenticación (inicializa como 'Comprobando...') -->
-      <div id="auth-status" class="text-sm text-right text-gray-500">
-        Comprobando sesión...
+      <!-- Mensajes de confirmación de suscripción (se gestionan por JS en cliente) -->
+      <div
+        class="hidden w-full bg-yellow-300 dark:bg-yellow-600 text-center flex justify-center items-center rounded-lg py-2 px-4"
+        id="not-confirmed"
+      >
+        <p class="flex-grow text-sm">
+          Gracias, pero todavía no hemos terminado. Hemos enviado un correo electrónico de confirmación. Por favor, revisa tu bandeja de entrada y haz clic en el botón para completar tu suscripción. (Si no lo encuentras, revisa la bandeja de spam)
+        </p>
+        <button id="close-not-confirmed-pop-up">
+          <CloseIcon />
+        </button>
       </div>
 
-      <!-- Popups de confirmación de suscripción -->
-      {
-        confirm === 'not confirmed' && (
-          <div class="w-full bg-yellow-300 dark:bg-yellow-600 text-center flex justify-center items-center rounded-lg py-2 px-4" id="not-confirmed">
-            <p class="flex-grow text-sm">
-              Gracias pero todavía no hemos terminado. Hemos enviado un correo electrónico de confirmación.
-              Por favor, revisa tu bandeja de entrada y haz clic en el botón para completar tu suscripción.
-              (Si no lo encuentras revisa la bandeja de spam)
-            </p>
-            <button id="close-not-confirmed-pop-up">
-              <CloseIcon />
-            </button>
-          </div>
-        )
-      }
+      <div
+        class="hidden w-full bg-green-300 text-center flex justify-center items-center rounded-lg py-2 px-4"
+        id="confirmed"
+      >
+        <p class="flex-grow text-sm">
+          ¡Correo electrónico confirmado correctamente!
+        </p>
+        <button id="close-confirmed-pop-up">
+          <CloseIcon />
+        </button>
+      </div>
 
-      {
-        confirm === 'confirmed' && (
-          <div class="w-full bg-green-300 text-center flex justify-center items-center rounded-lg py-2 px-4" id="confirmed">
-            <p class="flex-grow text-sm">
-              ¡Correo electrónico confirmado correctamente!
-            </p>
-            <button id="close-confirmed-pop-up">
-              <CloseIcon />
-            </button>
-          </div>
-        )
-      }
-
-      <!-- Slot donde se inyecta el contenido de la página -->
+      <!-- Contenido dinámico -->
       <slot />
 
-      <!-- Footer principal -->
+      <!-- Footer -->
       <Footer />
 
     </main>
 
-    <!-- Script cliente: manejar popups y autenticación -->
+    <!-- JS para cerrar popups y comprobar sesión/subscripción -->
     <script>
       document.addEventListener('DOMContentLoaded', async () => {
-        // Manejadores para cerrar los popups de confirmación
+        // Cierre de los popups
         const closeNotConfirmedPopup = document.getElementById('close-not-confirmed-pop-up');
         const notConfirmedPopup = document.getElementById('not-confirmed');
 
@@ -163,44 +156,37 @@ const organizationSchema = {
           });
         }
 
-        // Comprobación del estado de sesión (cliente)
-        try {
-          const res = await fetch('/api/check-session');
-          const data = await res.json();
+        // Comprobación del estado de suscripción usando el nuevo endpoint
+        async function checkSubscriber() {
+          try {
+            const res = await fetch('/api/check-subscriber');
+            const data = await res.json();
 
-          const authStatus = document.getElementById('auth-status');
+            console.log('Respuesta check-subscriber:', data);
 
-          if (data.authenticated) {
-            console.log('Usuario autenticado:', data.email);
+            const confirmBar = document.getElementById('not-confirmed');
+            const confirmedBar = document.getElementById('confirmed');
 
-            // Actualiza el texto de estado
-            if (authStatus) {
-              authStatus.textContent = `Estás logueado como ${data.email}`;
+            if (!data.authenticated) {
+              console.log('Usuario no autenticado');
+              return;
             }
 
-            // Si tienes botones o iconos en el Header que deban cambiar, puedes disparar un evento aquí
-            document.dispatchEvent(new CustomEvent('user-authenticated', {
-              detail: { email: data.email }
-            }));
-
-          } else {
-            console.log('Usuario no autenticado');
-
-            if (authStatus) {
-              authStatus.textContent = 'No has iniciado sesión';
+            if (data.subscriptionStatus === 'unconfirmed') {
+              if (confirmBar) confirmBar.style.display = 'flex';
+            } else if (data.subscriptionStatus === 'active') {
+              if (confirmedBar) confirmedBar.style.display = 'flex';
+            } else {
+              console.log('Estado de suscripción desconocido:', data.subscriptionStatus);
             }
 
-            document.dispatchEvent(new CustomEvent('user-unauthenticated'));
-          }
-
-        } catch (error) {
-          console.error('Error al comprobar sesión:', error);
-
-          const authStatus = document.getElementById('auth-status');
-          if (authStatus) {
-            authStatus.textContent = 'Error al verificar sesión';
+          } catch (error) {
+            console.error('Error al comprobar el estado del suscriptor:', error);
           }
         }
+
+        // Llamamos a la función al cargar
+        checkSubscriber();
       });
     </script>
   </body>
