@@ -8,7 +8,7 @@ if (!getApps().length) {
   });
 }
 
-export async function GET({ cookies }) {
+export async function GET({ cookies }: { cookies: { get: (name: string) => { value?: string } | undefined } }) {
   try {
     const auth = getAuth();
     const sessionCookie = cookies.get('session')?.value;
