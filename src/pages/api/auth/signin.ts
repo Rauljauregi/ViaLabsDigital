@@ -32,7 +32,7 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
     path: '/',
     httpOnly: true,
     secure: true, // IMPORTANTE en producción (HTTPS)
-    sameSite: 'Strict',
+    sameSite: 'strict',
     maxAge: fiveDays / 1000, // en segundos
   });
 
