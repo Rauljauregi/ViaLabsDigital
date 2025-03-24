@@ -74,7 +74,7 @@ const organizationSchema = {
     <!-- KaTeX -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
 
-    <!-- Google Analytics (Partytown for better rendimiento) -->
+    <!-- Google Analytics (Partytown para mejor rendimiento) -->
     <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-V3WC9QSH8J"></script>
     <script type="text/partytown">
       window.dataLayer = window.dataLayer || [];
@@ -87,10 +87,8 @@ const organizationSchema = {
     <SchemaMarkup schema={websiteSchema} />
     <SchemaMarkup schema={organizationSchema} />
 
-    <!-- SEO -->
+    <!-- SEO y providers -->
     <BaseHead title={title} description={description} ogImage={image} articleDate={articleDate} />
-
-    <!-- Providers -->
     <ProviderTheme />
     <ProviderAnimations />
   </head>
@@ -98,10 +96,15 @@ const organizationSchema = {
   <body class="relative bg-white text-stone-950 dark:bg-[#0a0910] dark:text-white">
     <main class="mx-auto max-w-xs sm:max-w-2xl sm:px-8 lg:px-12 xl:px-16 antialiased md:max-w-6xl grid gap-12">
 
-      <!-- Header: el estado se gestiona en el cliente -->
+      <!-- Header principal -->
       <Header />
 
-      <!-- Confirmación de suscripción por URL -->
+      <!-- Indicador de estado de autenticación (inicializa como 'Comprobando...') -->
+      <div id="auth-status" class="text-sm text-right text-gray-500">
+        Comprobando sesión...
+      </div>
+
+      <!-- Popups de confirmación de suscripción -->
       {
         confirm === 'not confirmed' && (
           <div class="w-full bg-yellow-300 dark:bg-yellow-600 text-center flex justify-center items-center rounded-lg py-2 px-4" id="not-confirmed">
@@ -130,17 +133,18 @@ const organizationSchema = {
         )
       }
 
-      <!-- Contenido de la página -->
+      <!-- Slot donde se inyecta el contenido de la página -->
       <slot />
 
-      <!-- Footer -->
+      <!-- Footer principal -->
       <Footer />
 
     </main>
 
-    <!-- Lógica cliente para cerrar popups y comprobar sesión -->
+    <!-- Script cliente: manejar popups y autenticación -->
     <script>
       document.addEventListener('DOMContentLoaded', async () => {
+        // Manejadores para cerrar los popups de confirmación
         const closeNotConfirmedPopup = document.getElementById('close-not-confirmed-pop-up');
         const notConfirmedPopup = document.getElementById('not-confirmed');
 
@@ -159,21 +163,43 @@ const organizationSchema = {
           });
         }
 
-        // Comprobación del estado de sesión en cliente
+        // Comprobación del estado de sesión (cliente)
         try {
           const res = await fetch('/api/check-session');
           const data = await res.json();
 
           const authStatus = document.getElementById('auth-status');
+
           if (data.authenticated) {
             console.log('Usuario autenticado:', data.email);
-            if (authStatus) authStatus.textContent = `Estás logueado como ${data.email}`;
+
+            // Actualiza el texto de estado
+            if (authStatus) {
+              authStatus.textContent = `Estás logueado como ${data.email}`;
+            }
+
+            // Si tienes botones o iconos en el Header que deban cambiar, puedes disparar un evento aquí
+            document.dispatchEvent(new CustomEvent('user-authenticated', {
+              detail: { email: data.email }
+            }));
+
           } else {
             console.log('Usuario no autenticado');
-            if (authStatus) authStatus.textContent = 'No has iniciado sesión';
+
+            if (authStatus) {
+              authStatus.textContent = 'No has iniciado sesión';
+            }
+
+            document.dispatchEvent(new CustomEvent('user-unauthenticated'));
           }
+
         } catch (error) {
           console.error('Error al comprobar sesión:', error);
+
+          const authStatus = document.getElementById('auth-status');
+          if (authStatus) {
+            authStatus.textContent = 'Error al verificar sesión';
+          }
         }
       });
     </script>
