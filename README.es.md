@@ -103,3 +103,78 @@ pnpm dev
   <img src="https://contrib.rocks/image?repo=danielcgilibert/blog-template" />
 </a>
  -->
+
+
+---
+
+## ✅ **Instrucciones para hacer un `pull` limpio y descartar cambios locales**
+
+### 1. **Comprueba en qué rama estás (por si acaso):**
+```bash
+git branch
+```
+Asegúrate de estar en `main` (o la rama que uses).
+
+---
+
+### 2. **Descartar todos los cambios locales no comprometidos:**
+Esto borra **todo lo que no has hecho commit** (archivos modificados o no añadidos):
+
+```bash
+git reset --hard
+git clean -fd
+```
+
+#### Explicación:
+- `git reset --hard` descarta cambios en los archivos **ya versionados**.
+- `git clean -fd` elimina **archivos sin seguimiento** y **directorios sin seguimiento** (por ejemplo, archivos nuevos que nunca hiciste `git add`).
+
+---
+
+### 3. **Haz `pull` desde el repositorio remoto:**
+Esto trae la última versión de `origin/main` (o tu rama principal):
+
+```bash
+git pull origin main
+```
+
+#### Si Git te pide forzar porque las historias han divergido:
+```bash
+git fetch origin
+git reset --hard origin/main
+```
+
+---
+
+## ✅ **Resumiendo el comando completo (sin pensarlo mucho):**
+```bash
+git fetch origin
+git reset --hard origin/main
+git clean -fd
+```
+
+---
+
+## 🔥 **Resultado después de esto:**
+- Todo el código local quedará exactamente igual al repo en GitHub.
+- Cualquier cambio o archivo local que no estaba en el repo será eliminado.
+
+---
+
+## ⚠️ **Precaución rápida antes de hacer esto**  
+Asegúrate de que **NO tienes cambios que quieras guardar**, porque los perderás después de `reset --hard` y `clean -fd`.
+
+---
+
+## 🚀 **Después del pull**
+Para verificar que todo está actualizado y limpio:
+```bash
+git status
+```
+Debería mostrar:
+```
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+```
