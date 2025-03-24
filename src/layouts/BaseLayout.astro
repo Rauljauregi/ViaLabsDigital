@@ -10,7 +10,7 @@ import '../styles/global.css'
 
 const { title, description, image, articleDate } = Astro.props
 
-// Esto controla los estados de confirmación de suscripción que llegan por la URL
+// Confirmación de suscripción desde query param
 const confirmation = Astro.url.searchParams.get('confirmation')
 let confirm = ''
 
@@ -23,7 +23,7 @@ if (confirmation === 'success') {
   confirm = 'confirmed'
 }
 
-// Tus datos de Schema.org para SEO estructurado
+// Schema.org SEO
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -62,19 +62,19 @@ const organizationSchema = {
     ]
   }
 }
-
 ---
+
 <html lang="es" class="scroll-smooth">
   <head>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- KaTeX Stylesheet -->
+
+    <!-- KaTeX -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
 
-    <!-- Google Analytics (Partytown for better performance) -->
+    <!-- Google Analytics (Partytown for better rendimiento) -->
     <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-V3WC9QSH8J"></script>
     <script type="text/partytown">
       window.dataLayer = window.dataLayer || [];
@@ -83,25 +83,25 @@ const organizationSchema = {
       gtag('config', 'G-V3WC9QSH8J');
     </script>
 
-    <!-- Schema.org structured data -->
+    <!-- Schema.org -->
     <SchemaMarkup schema={websiteSchema} />
     <SchemaMarkup schema={organizationSchema} />
 
-    <!-- Base Meta Tags -->
+    <!-- SEO -->
     <BaseHead title={title} description={description} ogImage={image} articleDate={articleDate} />
 
-    <!-- Providers for Theme and Animations -->
+    <!-- Providers -->
     <ProviderTheme />
     <ProviderAnimations />
   </head>
 
   <body class="relative bg-white text-stone-950 dark:bg-[#0a0910] dark:text-white">
     <main class="mx-auto max-w-xs sm:max-w-2xl sm:px-8 lg:px-12 xl:px-16 antialiased md:max-w-6xl grid gap-12">
-      
-      <!-- Header (el estado de autenticación lo manejas en el cliente) -->
+
+      <!-- Header: el estado se gestiona en el cliente -->
       <Header />
 
-      <!-- Popups de confirmación o no confirmación del email -->
+      <!-- Confirmación de suscripción por URL -->
       {
         confirm === 'not confirmed' && (
           <div class="w-full bg-yellow-300 dark:bg-yellow-600 text-center flex justify-center items-center rounded-lg py-2 px-4" id="not-confirmed">
@@ -130,7 +130,7 @@ const organizationSchema = {
         )
       }
 
-      <!-- Aquí se inyecta el contenido de las páginas -->
+      <!-- Contenido de la página -->
       <slot />
 
       <!-- Footer -->
@@ -138,14 +138,14 @@ const organizationSchema = {
 
     </main>
 
-    <!-- Lógica de UI para cerrar los popups -->
+    <!-- Lógica cliente para cerrar popups y comprobar sesión -->
     <script>
-      document.addEventListener('DOMContentLoaded', (event) => {
+      document.addEventListener('DOMContentLoaded', async () => {
         const closeNotConfirmedPopup = document.getElementById('close-not-confirmed-pop-up');
         const notConfirmedPopup = document.getElementById('not-confirmed');
 
         if (closeNotConfirmedPopup && notConfirmedPopup) {
-          closeNotConfirmedPopup.addEventListener('click', function () {
+          closeNotConfirmedPopup.addEventListener('click', () => {
             notConfirmedPopup.style.display = 'none';
           });
         }
@@ -154,36 +154,27 @@ const organizationSchema = {
         const confirmedPopup = document.getElementById('confirmed');
 
         if (closeConfirmedPopup && confirmedPopup) {
-          closeConfirmedPopup.addEventListener('click', function () {
+          closeConfirmedPopup.addEventListener('click', () => {
             confirmedPopup.style.display = 'none';
           });
         }
 
-        // Comprobación de sesión de usuario (en el navegador)
-        async function checkSession() {
-          try {
-            const res = await fetch('/api/check-session');
-            const data = await res.json();
-            
-            if (data.authenticated) {
-              console.log('Estás autenticado como:', data.email);
-              // Aquí podrías mostrar un botón de logout o algo más
-              const authStatus = document.getElementById('auth-status');
-              if (authStatus) {
-                authStatus.textContent = 'Estás logueado';
-              }
-            } else {
-              const authStatus = document.getElementById('auth-status');
-              if (authStatus) {
-                authStatus.textContent = 'No has iniciado sesión';
-              }
-            }
-          } catch (error) {
-            console.error('Error al comprobar sesión:', error);
-          }
-        }
+        // Comprobación del estado de sesión en cliente
+        try {
+          const res = await fetch('/api/check-session');
+          const data = await res.json();
 
-        checkSession();
+          const authStatus = document.getElementById('auth-status');
+          if (data.authenticated) {
+            console.log('Usuario autenticado:', data.email);
+            if (authStatus) authStatus.textContent = `Estás logueado como ${data.email}`;
+          } else {
+            console.log('Usuario no autenticado');
+            if (authStatus) authStatus.textContent = 'No has iniciado sesión';
+          }
+        } catch (error) {
+          console.error('Error al comprobar sesión:', error);
+        }
       });
     </script>
   </body>
