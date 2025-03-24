@@ -1,43 +1,51 @@
-import type { APIRoute } from 'astro'
-import { app } from '../../../firebase/server'
-import { getAuth } from 'firebase-admin/auth'
+import type { APIRoute } from 'astro';
+import { app } from '../../../firebase/server';
+import { getAuth } from 'firebase-admin/auth';
 
 export const GET: APIRoute = async ({ request, cookies, redirect }) => {
-	const auth = getAuth(app)
-	const confirmation = request.headers.get('Confirmation');
-	const location = request.headers.get('Location') || '/'
+  const auth = getAuth(app);
+  const confirmation = request.headers.get('Confirmation');
+  const location = request.headers.get('Location') || '/';
 
-	/* Get token from request headers */
-	const idToken = request.headers.get('Authorization')?.split('Bearer ')[1]
-	if (!idToken) {
-		return new Response('No token found', { status: 401 })
-	}
+  /* Obtener el token desde los headers */
+  const idToken = request.headers.get('Authorization')?.split('Bearer ')[1];
 
-	/* Verify id token */
-	try {
-		await auth.verifyIdToken(idToken);
-	} catch (error) {
-		return new Response('Invalid token', { status: 401 })
-	}
+  if (!idToken) {
+    return new Response('No token found', { status: 401 });
+  }
 
-	/* Create and set session cookie */
-	const fiveDays = 60 * 60 * 24 * 14 * 1000
-	const sessionCookie = await auth.createSessionCookie(idToken, {
-		expiresIn: fiveDays
-	})
+  /* Verificar el idToken */
+  try {
+    await auth.verifyIdToken(idToken);
+  } catch (error) {
+    console.error('Token inválido:', error);
+    return new Response('Invalid token', { status: 401 });
+  }
 
-	cookies.set('session', sessionCookie, {
-		path: '/'
-	})
+  /* Crear y setear la cookie de sesión */
+  const fiveDays = 60 * 60 * 24 * 5 * 1000; // 5 días en milisegundos
+  const sessionCookie = await auth.createSessionCookie(idToken, {
+    expiresIn: fiveDays,
+  });
 
-	if(location){
-		if(confirmation === 'needed') {
-			return redirect(`${location}?confirmation=needed`)
-		} else if (confirmation === 'success') {
-			return redirect(`${location}?confirmation=success`)
-		}
-		return redirect(location)
-	}
-	return redirect('/')
+  cookies.set('session', sessionCookie, {
+    path: '/',
+    httpOnly: true,
+    secure: true, // IMPORTANTE en producción (HTTPS)
+    sameSite: 'Strict',
+    maxAge: fiveDays / 1000, // en segundos
+  });
 
-}
+  console.log('✅ Session cookie seteada correctamente');
+
+  if (location) {
+    if (confirmation === 'needed') {
+      return redirect(`${location}?confirmation=needed`);
+    } else if (confirmation === 'success') {
+      return redirect(`${location}?confirmation=success`);
+    }
+    return redirect(location);
+  }
+
+  return redirect('/');
+};
