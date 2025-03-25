@@ -1,9 +1,10 @@
 import type { APIRoute } from 'astro';
-import { getApps, initializeApp, cert } from 'firebase-admin/app';
+import { getApps, initializeApp, cert, getApp } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 import { getFirestore } from 'firebase-admin/firestore';
-import MailerLite from '@mailerlite/mailerlite-nodejs';
+import { getUserFromFirestore } from '../../../utils/getUserFromFirestore';
 
+// Firebase initialization safeguard
 if (!getApps().length) {
   const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY!);
   initializeApp({
@@ -11,80 +12,80 @@ if (!getApps().length) {
   });
 }
 
-const mailerlite = new MailerLite({
-  api_key: process.env.MAILERLITE_API || '',
-});
-
-function getCurrentDateTime(): string {
-  const now = new Date();
-  const format = (n: number) => String(n).padStart(2, '0');
-  return `${now.getFullYear()}-${format(now.getMonth() + 1)}-${format(now.getDate())} ${format(now.getHours())}:${format(now.getMinutes())}:${format(now.getSeconds())}`;
-}
-
-async function createSubscriberOnMailerLite(email: string) {
-  const formattedDate = getCurrentDateTime();
-  const params = {
-    email,
-    status: 'unconfirmed',
-    groups: ['101178350423246269'],
-    subscribed_at: formattedDate,
-  };
-
-  try {
-    const res = await mailerlite.subscribers.createOrUpdate(params);
-    console.log('✅ Suscriptor creado en MailerLite:', res.data);
-    return res.data;
-  } catch (error: any) {
-    console.error('❌ Error al crear suscriptor en MailerLite:', error?.response?.data || error);
-    return null;
-  }
-}
-
-export const POST: APIRoute = async ({ request, redirect }) => {
-  const auth = getAuth();
+export const GET: APIRoute = async ({ request }) => {
+  const auth = getAuth(getApp());
   const db = getFirestore();
   const usersRef = db.collection('users');
 
-  const formData = await request.formData();
-  const email = formData.get('email')?.toString();
-  const location = formData.get('location')?.toString() || '/';
+  const email = request.headers.get('Authorization');
 
-  if (!email) return new Response('Missing email', { status: 400 });
-
-  let uid = '';
+  if (!email) {
+    console.error('❌ No email provided in Authorization header');
+    return new Response('No email provided', { status: 400 });
+  }
 
   try {
-    // ¿Usuario ya existe?
-    const snapshot = await usersRef.where('email', '==', email).get();
+    const querySnapshot = await getUserFromFirestore(email);
+    let token = '';
 
-    if (snapshot.empty) {
-      const newUserRef = usersRef.doc();
-      await newUserRef.set({ email });
-      uid = newUserRef.id;
-      console.log('✅ Nuevo usuario creado en Firestore con UID:', uid);
+    if (querySnapshot.empty) {
+      console.log(`⚠️ No user found with email: ${email}. Creating new user.`);
 
-      // Crear también en Firebase Auth
+      const newUserRef = await usersRef.add({ email });
+      console.log('✅ User registered in Firestore with ID:', newUserRef.id);
+
       try {
-        await auth.createUser({ uid, email });
-        console.log('✅ Usuario creado en Firebase Auth');
-      } catch (err) {
-        console.warn('⚠️ Usuario ya existía en Auth o error al crear:', err);
-      }
+        const newAuthUser = await auth.createUser({
+          uid: newUserRef.id,
+          email,
+        });
+        console.log('✅ User registered in Firebase Auth:', newAuthUser.uid);
 
-      // Añadir a MailerLite
-      await createSubscriberOnMailerLite(email);
+        token = await auth.createCustomToken(newAuthUser.uid);
+      } catch (authError) {
+        console.error('❌ Error creating user in Firebase Auth:', authError);
+        return new Response('Error creating user in Auth', { status: 500 });
+      }
     } else {
-      uid = snapshot.docs[0].id;
-      console.log('ℹ️ Usuario ya existe en Firestore con UID:', uid);
+      const userDoc = querySnapshot.docs[0];
+      console.log('✅ User found in Firestore with ID:', userDoc.id);
+
+      try {
+        const firebaseUser = await auth.getUser(userDoc.id);
+        console.log('✅ User found in Firebase Auth:', firebaseUser.uid);
+
+        token = await auth.createCustomToken(firebaseUser.uid);
+      } catch (getUserError) {
+        console.error('❌ User not found in Firebase Auth. Attempting to create.', getUserError);
+
+        try {
+          const newAuthUser = await auth.createUser({
+            uid: userDoc.id,
+            email,
+          });
+          console.log('✅ User created in Firebase Auth:', newAuthUser.uid);
+
+          token = await auth.createCustomToken(newAuthUser.uid);
+        } catch (authError) {
+          console.error('❌ Failed to create user in Firebase Auth:', authError);
+          return new Response('Error creating user in Auth', { status: 500 });
+        }
+      }
     }
 
-    // Generar token personalizado
-    const token = await auth.createCustomToken(uid);
-    console.log('✅ Token generado');
-    return redirect(`/register?customToken=${token}&location=${location}`);
+    console.log('✅ Custom token generated:', token);
+    return new Response(JSON.stringify({ token }), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+      }
+    });
 
-  } catch (err) {
-    console.error('❌ Error en POST /api/users:', err);
-    return new Response('Internal server error', { status: 500 });
+  } catch (error) {
+    console.error('❌ Unexpected error in getCustomToken:', error);
+    return new Response('Unexpected error', { status: 500 });
   }
 };
