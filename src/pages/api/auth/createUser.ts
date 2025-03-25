@@ -4,15 +4,11 @@ import { getAuth } from 'firebase-admin/auth';
 import { getFirestore } from 'firebase-admin/firestore';
 import { getUserFromFirestore } from '../../../utils/getUserFromFirestore';
 
-// Firebase initialization safeguard
-let appInstance;
 if (!getApps().length) {
   const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY!);
-  appInstance = initializeApp({
+  initializeApp({
     credential: cert(serviceAccount),
   });
-} else {
-  appInstance = getApp();
 }
 
 async function createSubscriberOnMailerLite(email: string) {
@@ -20,36 +16,40 @@ async function createSubscriberOnMailerLite(email: string) {
   const format = (n: number) => String(n).padStart(2, '0');
   const formattedDate = `${now.getFullYear()}-${format(now.getMonth() + 1)}-${format(now.getDate())} ${format(now.getHours())}:${format(now.getMinutes())}:${format(now.getSeconds())}`;
 
+  const payload = {
+    email,
+    status: 'unconfirmed', // ← esto debe disparar el doble opt-in si está activado en tu cuenta
+    subscribed_at: formattedDate,
+    groups: ['101178350423246269'],
+    fields: {
+      name: email.split('@')[0],
+    },
+  };
+
+  console.log('📤 Enviando suscriptor a MailerLite:', JSON.stringify(payload, null, 2));
+
   const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${process.env.MAILERLITE_CONNECT_API_KEY}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      email,
-      status: 'unconfirmed',
-      subscribed_at: formattedDate,
-      groups: ['101178350423246269'], // Reemplaza con tu ID de grupo real
-      fields: {
-        name: email.split('@')[0],
-      },
-    }),
+    body: JSON.stringify(payload),
   });
 
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({}));
-    console.error('❌ Error al crear suscriptor en MailerLite:', error);
-    return null;
+  const result = await response.json().catch(() => ({}));
+
+  if (response.status === 201 || response.status === 200) {
+    console.log('✅ Suscriptor creado/actualizado en MailerLite:', result.data);
+    return result.data;
   }
 
-  const result = await response.json();
-  console.log('✅ Suscriptor creado/actualizado en MailerLite:', result.data);
-  return result.data;
+  console.error('❌ MailerLite rechazó la solicitud:', result);
+  return null;
 }
 
 export const GET: APIRoute = async ({ request }) => {
-  const auth = getAuth(appInstance);
+  const auth = getAuth(getApp());
   const db = getFirestore();
   const usersRef = db.collection('users');
 
@@ -70,7 +70,11 @@ export const GET: APIRoute = async ({ request }) => {
       const newUserRef = await usersRef.add({ email });
       console.log('✅ User registered in Firestore with ID:', newUserRef.id);
 
-      await createSubscriberOnMailerLite(email);
+      const subscriber = await createSubscriberOnMailerLite(email);
+
+      if (!subscriber) {
+        return new Response('Error creating subscriber in MailerLite', { status: 500 });
+      }
 
       try {
         const newAuthUser = await auth.createUser({
@@ -94,7 +98,7 @@ export const GET: APIRoute = async ({ request }) => {
 
         token = await auth.createCustomToken(firebaseUser.uid);
       } catch (getUserError) {
-        console.error('❌ User not found in Firebase Auth. Attempting to create.', getUserError);
+        console.warn('⚠️ User not in Firebase Auth, creating...', getUserError);
 
         try {
           const newAuthUser = await auth.createUser({
@@ -118,8 +122,8 @@ export const GET: APIRoute = async ({ request }) => {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-      }
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      },
     });
 
   } catch (error) {
