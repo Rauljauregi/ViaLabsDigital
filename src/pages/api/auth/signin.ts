@@ -5,16 +5,19 @@ import { getAuth } from 'firebase-admin/auth';
 export const GET: APIRoute = async ({ request, cookies, redirect }) => {
   const auth = getAuth(app);
   const confirmation = request.headers.get('Confirmation');
-  const location = request.headers.get('Location') || '/';
+  let location = request.headers.get('Location') || '/';
 
-  /* Obtener el token desde los headers */
-  const idToken = request.headers.get('Authorization')?.split('Bearer ')[1];
-
-  if (!idToken) {
-    return new Response('No token found', { status: 401 });
+  // Sanitizamos la URL para prevenir errores por caracteres no ASCII
+  try {
+    location = decodeURIComponent(encodeURI(location));
+  } catch {
+    location = '/';
   }
 
-  /* Verificar el idToken */
+  const idToken = request.headers.get('Authorization')?.split('Bearer ')[1];
+
+  if (!idToken) return new Response('No token found', { status: 401 });
+
   try {
     await auth.verifyIdToken(idToken);
   } catch (error) {
@@ -22,30 +25,21 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
     return new Response('Invalid token', { status: 401 });
   }
 
-  /* Crear y setear la cookie de sesión */
-  const fiveDays = 60 * 60 * 24 * 5 * 1000; // 5 días en milisegundos
-  const sessionCookie = await auth.createSessionCookie(idToken, {
-    expiresIn: fiveDays,
-  });
+  const fiveDays = 60 * 60 * 24 * 5 * 1000;
+  const sessionCookie = await auth.createSessionCookie(idToken, { expiresIn: fiveDays });
 
   cookies.set('session', sessionCookie, {
     path: '/',
     httpOnly: true,
-    secure: true, // IMPORTANTE en producción (HTTPS)
+    secure: true,
     sameSite: 'strict',
-    maxAge: fiveDays / 1000, // en segundos
+    maxAge: fiveDays / 1000,
   });
 
   console.log('✅ Session cookie seteada correctamente');
 
-  if (location) {
-    if (confirmation === 'needed') {
-      return redirect(`${location}?confirmation=needed`);
-    } else if (confirmation === 'success') {
-      return redirect(`${location}?confirmation=success`);
-    }
-    return redirect(location);
-  }
+  if (confirmation === 'needed') return redirect(`${location}?confirmation=needed`);
+  if (confirmation === 'success') return redirect(`${location}?confirmation=success`);
 
-  return redirect('/');
+  return redirect(location);
 };
