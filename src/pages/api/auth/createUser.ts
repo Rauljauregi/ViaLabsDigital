@@ -12,6 +12,39 @@ if (!getApps().length) {
   });
 }
 
+async function createSubscriberOnMailerLite(email: string) {
+  const now = new Date();
+  const format = (n: number) => String(n).padStart(2, '0');
+  const formattedDate = `${now.getFullYear()}-${format(now.getMonth() + 1)}-${format(now.getDate())} ${format(now.getHours())}:${format(now.getMinutes())}:${format(now.getSeconds())}`;
+
+  const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.MAILERLITE_CONNECT_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email,
+      status: 'unconfirmed',
+      subscribed_at: formattedDate,
+      groups: ['101178350423246269'], // Reemplaza con tu ID de grupo real
+      fields: {
+        name: email.split('@')[0],
+      },
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}));
+    console.error('❌ Error al crear suscriptor en MailerLite:', error);
+    return null;
+  }
+
+  const result = await response.json();
+  console.log('✅ Suscriptor creado/actualizado en MailerLite:', result.data);
+  return result.data;
+}
+
 export const GET: APIRoute = async ({ request }) => {
   const auth = getAuth(getApp());
   const db = getFirestore();
@@ -33,6 +66,8 @@ export const GET: APIRoute = async ({ request }) => {
 
       const newUserRef = await usersRef.add({ email });
       console.log('✅ User registered in Firestore with ID:', newUserRef.id);
+
+      await createSubscriberOnMailerLite(email);
 
       try {
         const newAuthUser = await auth.createUser({
