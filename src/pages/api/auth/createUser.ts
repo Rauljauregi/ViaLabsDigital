@@ -48,26 +48,24 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   }
 
   try {
-    // Comprobar si el usuario ya existe
+    let uid: string
     const querySnapshot = await usersRef.where('email', '==', email).get()
-    let uid = ''
 
     if (querySnapshot.empty) {
-      // Crear nuevo usuario
+      // Crear nuevo documento
       const newUserRef = usersRef.doc()
-      await newUserRef.set({ email })
       uid = newUserRef.id
+      await newUserRef.set({ email })
 
       const subscriber = await createSubscriberOnMailerLite(email)
       if (!subscriber) {
-        return new Response('Error al registrar en MailerLite', { status: 500 })
+        console.warn('⚠️ Usuario creado pero MailerLite falló para:', email)
       }
     } else {
-      // Usuario ya existente
       uid = querySnapshot.docs[0].id
     }
 
-    // Crear custom token para autenticación
+    // Crear token personalizado
     const customToken = await auth.createCustomToken(uid)
     return redirect(`/register?customToken=${customToken}&location=${location}`)
 
