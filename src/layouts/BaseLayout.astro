@@ -172,12 +172,14 @@ const organizationSchema = {
               return;
             }
 
-            if (data.subscriptionStatus === 'unconfirmed') {
+            const status = data.subscriber?.status;
+
+            if (status === 'unconfirmed') {
               if (confirmBar) confirmBar.style.display = 'flex';
-            } else if (data.subscriptionStatus === 'active') {
+            } else if (status === 'active') {
               if (confirmedBar) confirmedBar.style.display = 'flex';
             } else {
-              console.log('Estado de suscripción desconocido:', data.subscriptionStatus);
+              console.log('Estado de suscripción desconocido:', status);
             }
 
           } catch (error) {
