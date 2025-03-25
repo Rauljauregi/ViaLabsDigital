@@ -1,27 +1,20 @@
 import { defineConfig } from 'astro/config';
-//import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
-import tailwind from '@astrojs/tailwind'; // Añade esta importación
+import tailwind from '@astrojs/tailwind';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import { remarkReadingTime } from './src/utils/readTime.ts';
-//import vercel from '@astrojs/vercel/serverless';
-import vercel from '@astrojs/vercel';
+import vercel from '@astrojs/vercel/serverless'; // 👈 ADAPTADOR CORRECTO
 import partytown from '@astrojs/partytown';
-
-// Elimina esta línea:
-// import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://mindfulml.vialabsdigital.com/',
   output: 'server',
-  adapter: vercel(),
+  adapter: vercel(), // 👈 YA USANDO SERVERLESS
   trailingSlash: 'always',
 
   vite: {
     assetsInclude: ['**/*.fit'],
-    // Elimina esta línea:
-    // plugins: [tailwindcss()]
   },
 
   markdown: {
@@ -51,7 +44,7 @@ export default defineConfig({
   },
 
   integrations: [
-    tailwind(), // Añade esta línea para activar la integración de Tailwind
+    tailwind(),
     mdx({
       remarkPlugins: [
         remarkReadingTime,
