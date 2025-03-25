@@ -140,40 +140,46 @@ const organizationSchema = {
         // Cierre de los popups
         const closeNotConfirmedPopup = document.getElementById('close-not-confirmed-pop-up');
         const notConfirmedPopup = document.getElementById('not-confirmed');
-
+    
         if (closeNotConfirmedPopup && notConfirmedPopup) {
           closeNotConfirmedPopup.addEventListener('click', () => {
             notConfirmedPopup.style.display = 'none';
           });
         }
-
+    
         const closeConfirmedPopup = document.getElementById('close-confirmed-pop-up');
         const confirmedPopup = document.getElementById('confirmed');
-
+    
         if (closeConfirmedPopup && confirmedPopup) {
           closeConfirmedPopup.addEventListener('click', () => {
             confirmedPopup.style.display = 'none';
           });
         }
-
+    
         // Comprobación del estado de suscripción usando el nuevo endpoint
         async function checkSubscriber() {
           try {
             const res = await fetch('/api/check-subscriber');
             const data = await res.json();
-
+    
             console.log('Respuesta check-subscriber:', data);
-
+    
             const confirmBar = document.getElementById('not-confirmed');
             const confirmedBar = document.getElementById('confirmed');
-
+            const formContainer = document.getElementById('sign_in');
+    
             if (!data.authenticated) {
               console.log('Usuario no autenticado');
               return;
             }
-
+    
+            // Ocultar formulario de login si el usuario ya está logueado
+            if (formContainer) {
+              formContainer.style.display = 'none';
+            }
+    
             const status = data.subscriber?.status;
-
+    
             if (status === 'unconfirmed') {
               if (confirmBar) confirmBar.style.display = 'flex';
             } else if (status === 'active') {
@@ -181,15 +187,15 @@ const organizationSchema = {
             } else {
               console.log('Estado de suscripción desconocido:', status);
             }
-
+    
           } catch (error) {
             console.error('Error al comprobar el estado del suscriptor:', error);
           }
         }
-
-        // Llamamos a la función al cargar
+    
         checkSubscriber();
       });
     </script>
+    
   </body>
 </html>

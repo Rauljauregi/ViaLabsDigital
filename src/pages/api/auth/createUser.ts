@@ -1,4 +1,3 @@
-// src/pages/api/users/index.ts
 import type { APIRoute } from 'astro'
 import { app } from '../../../firebase/server'
 import { getAuth } from 'firebase-admin/auth'
@@ -16,11 +15,13 @@ function getCurrentDateTime(): string {
 }
 
 async function createSubscriberOnMailerLite(email: string) {
+  const formattedDate = getCurrentDateTime()
+
   const params = {
     email,
     status: 'unconfirmed',
     groups: ['101178350423246269'],
-    subscribed_at: getCurrentDateTime(),
+    subscribed_at: formattedDate
   }
 
   try {
@@ -47,22 +48,29 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   }
 
   try {
-    // ¿Usuario ya existe?
+    // Comprobar si el usuario ya existe
     const querySnapshot = await usersRef.where('email', '==', email).get()
-
     let uid = ''
 
     if (querySnapshot.empty) {
+      // Crear nuevo usuario
       const newUserRef = usersRef.doc()
       await newUserRef.set({ email })
       uid = newUserRef.id
-      await createSubscriberOnMailerLite(email)
+
+      const subscriber = await createSubscriberOnMailerLite(email)
+      if (!subscriber) {
+        return new Response('Error al registrar en MailerLite', { status: 500 })
+      }
     } else {
+      // Usuario ya existente
       uid = querySnapshot.docs[0].id
     }
 
+    // Crear custom token para autenticación
     const customToken = await auth.createCustomToken(uid)
     return redirect(`/register?customToken=${customToken}&location=${location}`)
+
   } catch (error) {
     console.error('❌ Error general en createUser:', error)
     return new Response('Internal server error', { status: 500 })
