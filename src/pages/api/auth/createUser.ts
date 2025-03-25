@@ -13,37 +13,42 @@ if (!getApps().length) {
 }
 
 async function createSubscriberOnMailerLite(email: string) {
-  const now = new Date();
-  const format = (n: number) => String(n).padStart(2, '0');
-  const formattedDate = `${now.getFullYear()}-${format(now.getMonth() + 1)}-${format(now.getDate())} ${format(now.getHours())}:${format(now.getMinutes())}:${format(now.getSeconds())}`;
-
-  const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${process.env.MAILERLITE_CONNECT_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      email,
-      status: 'unconfirmed',
-      subscribed_at: formattedDate,
-      groups: ['101178350423246269'], // Reemplaza con tu ID de grupo real
-      fields: {
-        name: email.split('@')[0],
-      },
-    }),
-  });
-
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({}));
-    console.error('❌ Error al crear suscriptor en MailerLite:', error);
-    return null;
+	const now = new Date();
+	const format = (n: number) => String(n).padStart(2, '0');
+	const formattedDate = `${now.getFullYear()}-${format(now.getMonth() + 1)}-${format(now.getDate())} ${format(now.getHours())}:${format(now.getMinutes())}:${format(now.getSeconds())}`;
+  
+	const payload = {
+	  email,
+	  status: 'unconfirmed',
+	  subscribed_at: formattedDate,
+	  groups: ['101178350423246269'], // <- asegúrate de que este es el ID correcto
+	  fields: {
+		name: email.split('@')[0],
+	  },
+	};
+  
+	console.log('📤 Enviando nuevo suscriptor a MailerLite con payload:', payload);
+  
+	const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
+	  method: 'POST',
+	  headers: {
+		Authorization: `Bearer ${process.env.MAILERLITE_CONNECT_API_KEY}`,
+		'Content-Type': 'application/json',
+	  },
+	  body: JSON.stringify(payload),
+	});
+  
+	if (!response.ok) {
+	  const error = await response.json().catch(() => ({}));
+	  console.error('❌ Error al crear suscriptor en MailerLite:', error);
+	  return null;
+	}
+  
+	const result = await response.json();
+	console.log('✅ Suscriptor creado/actualizado en MailerLite:', result.data);
+	return result.data;
   }
-
-  const result = await response.json();
-  console.log('✅ Suscriptor creado/actualizado en MailerLite:', result.data);
-  return result.data;
-}
+  
 
 export const GET: APIRoute = async ({ request }) => {
   const auth = getAuth(getApp());

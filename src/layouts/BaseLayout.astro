@@ -178,14 +178,13 @@ const organizationSchema = {
               formContainer.style.display = 'none';
             }
     
-            const status = data.subscriber?.status;
-    
-            if (status === 'unconfirmed') {
+            // Mostrar barra según el estado o si aún no está en MailerLite
+            if (!data.subscriber || data.subscriber.status === 'unconfirmed') {
               if (confirmBar) confirmBar.style.display = 'flex';
-            } else if (status === 'active') {
+            } else if (data.subscriber.status === 'active') {
               if (confirmedBar) confirmedBar.style.display = 'flex';
             } else {
-              console.log('Estado de suscripción desconocido:', status);
+              console.log('Estado de suscripción desconocido o nulo:', data.subscriber?.status);
             }
     
           } catch (error) {
@@ -196,6 +195,7 @@ const organizationSchema = {
         checkSubscriber();
       });
     </script>
+    
     
   </body>
 </html>
