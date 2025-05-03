@@ -227,9 +227,11 @@ attention_mask = [
 ]
 ```
 
-Cada fila representa cómo un token (palabra) se relaciona con los anteriores. **El token "árbol" no puede atender a "subió"**, porque eso rompería la generación autoregresiva.  
+Cada fila representa un token y por simplificar para que se entienda la expicación una palabra. Y este token se relaciona con los anteriores. **El token "subió" no puede atender a "árbol"**, porque eso rompería la generación autoregresiva.  
 
-En cambio, si viéramos la matriz de atención en **BERT**, todos los tokens podrían atender a todos los demás, porque su objetivo es comprensión, no generación.  
+En cambio, si viéramos la matriz de atención en **BERT**, todos los tokens podrían atender a todos los demás, porque su objetivo es comprensión, no generación. 
+
+Es muy interesante entender que el toke que corresponde a 'árbol' es el que tiene toda la información semántica de la frase, ya que es el último. Este hecho se usa para utilizar un decoder-only como codificador para ofrrecer la información de toda la frase de manera enriquecida. Pero eso es otra historia que contaré en otra ocasión.
 
 
 ## 5. **Preguntas Frecuentes**  
