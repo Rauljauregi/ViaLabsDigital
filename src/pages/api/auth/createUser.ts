@@ -54,12 +54,17 @@ export const GET: APIRoute = async ({ request }) => {
 	const db = getFirestore()
 	const usersRef = db.collection('users')
 
-	const email = request.headers.get('Authorization')
+        let email = request.headers.get('Authorization')
 
-	if (!email) {
-		console.error('❌ No email provided in Authorization header')
-		return new Response('No email provided', { status: 400 })
-	}
+        if (!email) {
+                const url = new URL(request.url)
+                email = url.searchParams.get('email') || undefined
+        }
+
+        if (!email) {
+                console.error('❌ No email provided')
+                return new Response('No email provided', { status: 400 })
+        }
 
 	try {
 		const querySnapshot = await getUserFromFirestore(email)
