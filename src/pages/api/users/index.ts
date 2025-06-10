@@ -34,6 +34,7 @@ async function checkSubscriberOnMailerLite(email: string) {
 	}
 }
 
+
 async function createCustomToken(userId: string): Promise<string> {
 	const auth = getAuth(app)
 	try {
@@ -88,6 +89,7 @@ async function createSubscriberOnMailerLite(email: string) {
 		}
 		return null
 	}
+
 }
 
 export const POST: APIRoute = async ({ request, redirect }) => {
