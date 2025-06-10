@@ -2,12 +2,37 @@ import type { APIRoute } from 'astro'
 import { app } from '../../../firebase/server'
 import { getAuth } from 'firebase-admin/auth'
 import { getFirestore } from 'firebase-admin/firestore'
-import MailerLite from '@mailerlite/mailerlite-nodejs'
 import { getUserFromFirestore } from 'src/utils/getUserFromFirestore'
 
-const mailerLiteApiKey =
-  process.env.MAILERLITE_API || process.env.MAILERLITE_CONNECT_API_KEY || ''
-const mailerlite = new MailerLite({ api_key: mailerLiteApiKey })
+const MAILERLITE_API_KEY =
+	process.env.MAILERLITE_CONNECT_API_KEY || process.env.MAILERLITE_API || ''
+
+async function checkSubscriberOnMailerLite(email: string) {
+	const apiKey = process.env.MAILERLITE_CONNECT_API_KEY || process.env.MAILERLITE_API
+	try {
+		const res = await fetch(
+			`https://connect.mailerlite.com/api/subscribers/${encodeURIComponent(email)}`,
+			{
+				headers: {
+					Authorization: `Bearer ${apiKey}`,
+					'Content-Type': 'application/json'
+				}
+			}
+		)
+
+		if (res.status === 404) return null
+		if (!res.ok) {
+			console.error('❌ Error checking subscriber in MailerLite:', await res.text())
+			return null
+		}
+		const data = await res.json()
+		return data?.data || null
+	} catch (err) {
+		console.error('❌ Error connecting to MailerLite:', err)
+		return null
+	}
+}
+
 
 async function createCustomToken(userId: string): Promise<string> {
 	const auth = getAuth(app)
@@ -20,20 +45,29 @@ async function createCustomToken(userId: string): Promise<string> {
 	}
 }
 
-async function getCustomToken(email: string): Promise<string> {
-	const querySnapshot = await getUserFromFirestore(email)
-	if (querySnapshot.empty) {
-		throw new Error('User not found')
-	}
-	const userDoc = querySnapshot.docs[0]
-	const customToken = await createCustomToken(userDoc.id)
-	return customToken
-}
+	const payload = {
+		status: 'unconfirmed',
+		groups: ['101178350423246269'],
+		fields: { name: email.split('@')[0] }
+	console.log('📤 Enviando suscriptor a MailerLite:', JSON.stringify(payload, null, 2))
 
-function getCurrentDateTime(): string {
-	const now = new Date()
-	const year = now.getFullYear()
-	const month = String(now.getMonth() + 1).padStart(2, '0')
+	const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${MAILERLITE_API_KEY}`,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(payload)
+	})
+
+	const result = await response.json().catch(() => ({}))
+
+	if (response.status === 201 || response.status === 200) {
+		console.log('✅ Suscriptor creado/actualizado en MailerLite:', result.data)
+		return result.data
+
+	console.error('❌ MailerLite rechazó la solicitud:', result)
+	return null
 	const day = String(now.getDate()).padStart(2, '0')
 	const hours = String(now.getHours()).padStart(2, '0')
 	const minutes = String(now.getMinutes()).padStart(2, '0')
@@ -42,27 +76,28 @@ function getCurrentDateTime(): string {
 }
 
 async function createSubscriberOnMailerLite(email: string) {
-        const formattedDate: string = getCurrentDateTime()
+	const formattedDate: string = getCurrentDateTime()
 
-        const params = {
-                email,
-                status: 'unconfirmed' as const,
-                subscribed_at: formattedDate,
-                groups: ['101178350423246269']
-        }
+	const params = {
+		email,
+		status: 'unconfirmed' as const,
+		subscribed_at: formattedDate,
+		groups: ['101178350423246269']
+	}
 
-        try {
-                const response = await mailerlite.subscribers.createOrUpdate(params)
-                console.log('✅ Suscriptor creado/actualizado en MailerLite:', response.data)
-                return response.data
-        } catch (error: any) {
-                if (error?.response) {
-                        console.error('❌ MailerLite rechazó la solicitud:', error.response.data)
-                } else {
-                        console.error('❌ Error al contactar con MailerLite:', error)
-                }
-                return null
-        }
+	try {
+		const response = await mailerlite.subscribers.createOrUpdate(params)
+		console.log('✅ Suscriptor creado/actualizado en MailerLite:', response.data)
+		return response.data
+	} catch (error: any) {
+		if (error?.response) {
+			console.error('❌ MailerLite rechazó la solicitud:', error.response.data)
+		} else {
+			console.error('❌ Error al contactar con MailerLite:', error)
+		}
+		return null
+	}
+
 }
 
 export const POST: APIRoute = async ({ request, redirect }) => {
@@ -93,7 +128,12 @@ export const POST: APIRoute = async ({ request, redirect }) => {
             */
 				try {
 					const customToken = await getCustomToken(email)
-					await createSubscriberOnMailerLite(email)
+
+					const existingSubscriber = await checkSubscriberOnMailerLite(email)
+					if (!existingSubscriber) {
+						await createSubscriberOnMailerLite(email)
+					}
+
 					return redirect(`/register?customToken=${customToken}&location=${location}`)
 				} catch (err) {
 					console.log('Error to Sign in with custom token :', err)

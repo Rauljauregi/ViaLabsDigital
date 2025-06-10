@@ -2,12 +2,36 @@ import type { APIRoute } from 'astro'
 import { getApps, initializeApp, cert, getApp } from 'firebase-admin/app'
 import { getAuth } from 'firebase-admin/auth'
 import { getFirestore } from 'firebase-admin/firestore'
-import MailerLite from '@mailerlite/mailerlite-nodejs'
 import { getUserFromFirestore } from '../../../utils/getUserFromFirestore'
 
-const mailerLiteApiKey =
-  process.env.MAILERLITE_API || process.env.MAILERLITE_CONNECT_API_KEY || ''
-const mailerlite = new MailerLite({ api_key: mailerLiteApiKey })
+const MAILERLITE_API_KEY =
+	process.env.MAILERLITE_CONNECT_API_KEY || process.env.MAILERLITE_API || ''
+
+async function checkSubscriberOnMailerLite(email: string) {
+	const apiKey = process.env.MAILERLITE_CONNECT_API_KEY || process.env.MAILERLITE_API
+	try {
+		const res = await fetch(
+			`https://connect.mailerlite.com/api/subscribers/${encodeURIComponent(email)}`,
+			{
+				headers: {
+					Authorization: `Bearer ${apiKey}`,
+					'Content-Type': 'application/json'
+				}
+			}
+		)
+
+		if (res.status === 404) return null
+		if (!res.ok) {
+			console.error('❌ Error checking subscriber in MailerLite:', await res.text())
+			return null
+		}
+		const data = await res.json()
+		return data?.data || null
+	} catch (err) {
+		console.error('❌ Error connecting to MailerLite:', err)
+		return null
+	}
+}
 
 if (!getApps().length) {
 	const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY!)
@@ -17,29 +41,38 @@ if (!getApps().length) {
 }
 
 async function createSubscriberOnMailerLite(email: string) {
-  const now = new Date()
-  const format = (n: number) => String(n).padStart(2, '0')
-  const formattedDate = `${now.getFullYear()}-${format(now.getMonth() + 1)}-${format(now.getDate())} ${format(now.getHours())}:${format(now.getMinutes())}:${format(now.getSeconds())}`
+	const now = new Date()
+	const format = (n: number) => String(n).padStart(2, '0')
+	const formattedDate = `${now.getFullYear()}-${format(now.getMonth() + 1)}-${format(now.getDate())} ${format(now.getHours())}:${format(now.getMinutes())}:${format(now.getSeconds())}`
 
-  const params = {
-    email,
-    status: 'unconfirmed' as const,
-    groups: ['101178350423246269'],
-    subscribed_at: formattedDate
-  }
+	const payload = {
+		email,
+		status: 'unconfirmed',
+		subscribed_at: formattedDate,
+		groups: ['101178350423246269'],
+		fields: { name: email.split('@')[0] }
+	}
 
-  try {
-    const response = await mailerlite.subscribers.createOrUpdate(params)
-    console.log('✅ Suscriptor creado/actualizado en MailerLite:', response.data)
-    return response.data
-  } catch (error: any) {
-    if (error?.response) {
-      console.error('❌ MailerLite rechazó la solicitud:', error.response.data)
-    } else {
-      console.error('❌ Error al contactar con MailerLite:', error)
-    }
-    return null
-  }
+	console.log('📤 Enviando suscriptor a MailerLite:', JSON.stringify(payload, null, 2))
+
+	const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${MAILERLITE_API_KEY}`,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(payload)
+	})
+
+	const result = await response.json().catch(() => ({}))
+
+	if (response.status === 201 || response.status === 200) {
+		console.log('✅ Suscriptor creado/actualizado en MailerLite:', result.data)
+		return result.data
+	}
+
+	console.error('❌ MailerLite rechazó la solicitud:', result)
+	return null
 }
 
 export const GET: APIRoute = async ({ request }) => {
@@ -47,33 +80,35 @@ export const GET: APIRoute = async ({ request }) => {
 	const db = getFirestore()
 	const usersRef = db.collection('users')
 
-        let email = request.headers.get('Authorization')
+	let email = request.headers.get('Authorization')
 
-        if (!email) {
-                const url = new URL(request.url)
-                email = url.searchParams.get('email') || undefined
-        }
+	if (!email) {
+		const url = new URL(request.url)
+		email = url.searchParams.get('email') || undefined
+	}
 
-        if (!email) {
-                console.error('❌ No email provided')
-                return new Response('No email provided', { status: 400 })
-        }
+	if (!email) {
+		console.error('❌ No email provided')
+		return new Response('No email provided', { status: 400 })
+	}
 
 	try {
 		const querySnapshot = await getUserFromFirestore(email)
 		let token = ''
+
+		const existingSubscriber = await checkSubscriberOnMailerLite(email)
+		if (!existingSubscriber) {
+			const created = await createSubscriberOnMailerLite(email)
+			if (!created) {
+				return new Response('Error creating subscriber in MailerLite', { status: 500 })
+			}
+		}
 
 		if (querySnapshot.empty) {
 			console.log(`⚠️ No user found with email: ${email}. Creating new user.`)
 
 			const newUserRef = await usersRef.add({ email })
 			console.log('✅ User registered in Firestore with ID:', newUserRef.id)
-
-			const subscriber = await createSubscriberOnMailerLite(email)
-
-			if (!subscriber) {
-				return new Response('Error creating subscriber in MailerLite', { status: 500 })
-			}
 
 			try {
 				const newAuthUser = await auth.createUser({
