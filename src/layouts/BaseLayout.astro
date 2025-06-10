@@ -4,7 +4,6 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ProviderTheme from '@/components/ProviderTheme'
 import ProviderAnimations from '@/components/ProviderAnimations'
-import CloseIcon from '@/components/icons/CloseIcon'
 import SchemaMarkup from '@/components/SchemaMarkup'
 import '../styles/global.css'
 
@@ -101,31 +100,6 @@ const organizationSchema = {
       <!-- Header -->
       <Header />
 
-      <!-- Mensajes de confirmación de suscripción (se gestionan por JS en cliente) -->
-      <div
-        class="hidden w-full bg-yellow-300 dark:bg-yellow-600 text-center flex justify-center items-center rounded-lg py-2 px-4"
-        id="not-confirmed"
-      >
-        <p class="flex-grow text-sm">
-          Gracias, pero todavía no hemos terminado. Hemos enviado un correo electrónico de confirmación. Por favor, revisa tu bandeja de entrada y haz clic en el botón para completar tu suscripción. (Si no lo encuentras, revisa la bandeja de spam)
-        </p>
-        <button id="close-not-confirmed-pop-up">
-          <CloseIcon />
-        </button>
-      </div>
-
-      <div
-        class="hidden w-full bg-green-300 text-center flex justify-center items-center rounded-lg py-2 px-4"
-        id="confirmed"
-      >
-        <p class="flex-grow text-sm">
-          ¡Correo electrónico confirmado correctamente!
-        </p>
-        <button id="close-confirmed-pop-up">
-          <CloseIcon />
-        </button>
-      </div>
-
       <!-- Contenido dinámico -->
       <slot />
 
@@ -134,67 +108,6 @@ const organizationSchema = {
 
     </main>
 
-    <!-- JS para cerrar popups y comprobar sesión/subscripción -->
-    <script>
-      document.addEventListener('DOMContentLoaded', async () => {
-        // Cierre de los popups
-        const closeNotConfirmedPopup = document.getElementById('close-not-confirmed-pop-up');
-        const notConfirmedPopup = document.getElementById('not-confirmed');
-    
-        if (closeNotConfirmedPopup && notConfirmedPopup) {
-          closeNotConfirmedPopup.addEventListener('click', () => {
-            notConfirmedPopup.style.display = 'none';
-          });
-        }
-    
-        const closeConfirmedPopup = document.getElementById('close-confirmed-pop-up');
-        const confirmedPopup = document.getElementById('confirmed');
-    
-        if (closeConfirmedPopup && confirmedPopup) {
-          closeConfirmedPopup.addEventListener('click', () => {
-            confirmedPopup.style.display = 'none';
-          });
-        }
-    
-        // Comprobación del estado de suscripción usando el nuevo endpoint
-        async function checkSubscriber() {
-          try {
-            const res = await fetch('/api/check-subscriber');
-            const data = await res.json();
-    
-            console.log('Respuesta check-subscriber:', data);
-    
-            const confirmBar = document.getElementById('not-confirmed');
-            const confirmedBar = document.getElementById('confirmed');
-            const formContainer = document.getElementById('sign_in');
-    
-            if (!data.authenticated) {
-              console.log('Usuario no autenticado');
-              return;
-            }
-    
-            // Ocultar formulario de login si el usuario ya está logueado
-            if (formContainer) {
-              formContainer.style.display = 'none';
-            }
-    
-            // Mostrar barra según el estado o si aún no está en MailerLite
-            if (!data.subscriber || data.subscriber.status === 'unconfirmed') {
-              if (confirmBar) confirmBar.style.display = 'flex';
-            } else if (data.subscriber.status === 'active') {
-              if (confirmedBar) confirmedBar.style.display = 'flex';
-            } else {
-              console.log('Estado de suscripción desconocido o nulo:', data.subscriber?.status);
-            }
-    
-          } catch (error) {
-            console.error('Error al comprobar el estado del suscriptor:', error);
-          }
-        }
-    
-        checkSubscriber();
-      });
-    </script>
     
     
   </body>
