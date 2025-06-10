@@ -5,26 +5,25 @@ import Shape from '@/components/icons/Shape'
 import BaseLayout from '@/layouts/BaseLayout'
 import { getPosts } from '@/utils'
 
-
-const MAX_POSTS = Infinity; // Show all posts
-const posts = await getPosts(MAX_POSTS);
-
+const MAX_POSTS = Infinity // Show all posts
+const posts = await getPosts(MAX_POSTS)
 ---
 
 <BaseLayout
 	title='Mindful ML - Cada viernes un email sobre IA'
 	description='ViaLabs Digital - Consultoría Tecnológica | Machine Learning | SEO | Diseño web'
 >
-
-
-<div class='flex flex-col md:flex-row justify-start items-center gap-2 title'>
-    <div class="flex flex-col gap-2 w-[90%] md:w-3/4"> <!-- Cambiado de w-3/4 a w-[90%] en móvil -->
-        <h1 class='text-3xl lg:text-5xl font-semibold tracking-wide text-center md:text-left'>
-            Transforma tu PYME con Inteligencia Artificial y Machine Learning
-        </h1>
-        <p class="text-lg text-center md:text-left">Un email sobre machine learning cada viernes</p>
-    </div>
-</div>
+	<div class='flex flex-col md:flex-row justify-start items-center gap-2 title'>
+		<div class='flex flex-col gap-2 w-[90%] md:w-3/4'>
+			<!-- Cambiado de w-3/4 a w-[90%] en móvil -->
+			<h1 class='text-3xl lg:text-5xl font-semibold tracking-wide text-center md:text-left'>
+				IA al servicio de tu PyME
+			</h1>
+			<p class='text-lg text-center md:text-left'>
+				Estrategias y casos de éxito en machine learning
+			</p>
+		</div>
+	</div>
 	<ListCategories />
 
 	<div>
@@ -33,7 +32,7 @@ const posts = await getPosts(MAX_POSTS);
 </BaseLayout>
 
 <script>
-	import { animate } from 'motion';
+	import { animate } from 'motion'
 
 	const showAnimations = localStorage.getItem('animations') === 'true'
 
@@ -49,5 +48,4 @@ const posts = await getPosts(MAX_POSTS);
 			}
 		)
 	}
-
 </script>
