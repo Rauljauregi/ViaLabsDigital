@@ -4,6 +4,35 @@ import { getAuth } from 'firebase-admin/auth'
 import { getFirestore } from 'firebase-admin/firestore'
 import { getUserFromFirestore } from 'src/utils/getUserFromFirestore'
 
+const MAILERLITE_API_KEY =
+	process.env.MAILERLITE_CONNECT_API_KEY || process.env.MAILERLITE_API || ''
+
+async function checkSubscriberOnMailerLite(email: string) {
+	const apiKey = process.env.MAILERLITE_CONNECT_API_KEY || process.env.MAILERLITE_API
+	try {
+		const res = await fetch(
+			`https://connect.mailerlite.com/api/subscribers/${encodeURIComponent(email)}`,
+			{
+				headers: {
+					Authorization: `Bearer ${apiKey}`,
+					'Content-Type': 'application/json'
+				}
+			}
+		)
+
+		if (res.status === 404) return null
+		if (!res.ok) {
+			console.error('❌ Error checking subscriber in MailerLite:', await res.text())
+			return null
+		}
+		const data = await res.json()
+		return data?.data || null
+	} catch (err) {
+		console.error('❌ Error connecting to MailerLite:', err)
+		return null
+	}
+}
+
 async function createCustomToken(userId: string): Promise<string> {
 	const auth = getAuth(app)
 	try {
@@ -49,11 +78,10 @@ async function createSubscriberOnMailerLite(email: string) {
 
 	console.log('📤 Enviando suscriptor a MailerLite:', JSON.stringify(payload, null, 2))
 
-	const apiKey = process.env.MAILERLITE_CONNECT_API_KEY || process.env.MAILERLITE_API
 	const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
 		method: 'POST',
 		headers: {
-			Authorization: `Bearer ${apiKey}`,
+			Authorization: `Bearer ${MAILERLITE_API_KEY}`,
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(payload)
@@ -98,7 +126,12 @@ export const POST: APIRoute = async ({ request, redirect }) => {
             */
 				try {
 					const customToken = await getCustomToken(email)
-					await createSubscriberOnMailerLite(email)
+
+					const existingSubscriber = await checkSubscriberOnMailerLite(email)
+					if (!existingSubscriber) {
+						await createSubscriberOnMailerLite(email)
+					}
+
 					return redirect(`/register?customToken=${customToken}&location=${location}`)
 				} catch (err) {
 					console.log('Error to Sign in with custom token :', err)

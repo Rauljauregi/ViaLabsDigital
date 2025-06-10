@@ -1,16 +1,10 @@
 import type { APIRoute } from 'astro';
-import { getApps, initializeApp, cert, getApp } from 'firebase-admin/app';
+import { app } from '../../../firebase/server';
 import { getAuth } from 'firebase-admin/auth';
 
-if (!getApps().length) {
-  const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY!);
-  initializeApp({
-    credential: cert(serviceAccount),
-  });
-}
 
 export const GET: APIRoute = async ({ request, cookies, redirect }) => {
-  const auth = getAuth(getApp());
+  const auth = getAuth(app);
   const confirmation = request.headers.get('Confirmation');
   let location = request.headers.get('Location') || '/';
 

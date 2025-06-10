@@ -1,13 +1,7 @@
+import { app } from '../../firebase/server'
 import { getAuth } from 'firebase-admin/auth'
-import { getApp, getApps, initializeApp, cert } from 'firebase-admin/app'
 import { getFirestore } from 'firebase-admin/firestore'
 
-if (!getApps().length) {
-	const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY!)
-	initializeApp({
-		credential: cert(serviceAccount)
-	})
-}
 
 const MAILERLITE_API_KEY = process.env.MAILERLITE_CONNECT_API_KEY || process.env.MAILERLITE_API!
 const MAILERLITE_BASE_URL = 'https://connect.mailerlite.com/api/subscribers'
@@ -17,9 +11,9 @@ export async function GET({
 }: {
 	cookies: { get: (name: string) => { value?: string } | undefined }
 }) {
-	try {
-		const auth = getAuth(getApp())
-		const db = getFirestore()
+        try {
+                const auth = getAuth(app)
+                const db = getFirestore(app)
 
 		const sessionCookie = cookies.get('session')?.value
 
