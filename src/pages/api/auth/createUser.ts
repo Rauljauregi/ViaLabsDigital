@@ -2,11 +2,10 @@ import type { APIRoute } from 'astro'
 import { getApps, initializeApp, cert, getApp } from 'firebase-admin/app'
 import { getAuth } from 'firebase-admin/auth'
 import { getFirestore } from 'firebase-admin/firestore'
-import MailerLite from '@mailerlite/mailerlite-nodejs'
 import { getUserFromFirestore } from '../../../utils/getUserFromFirestore'
 
-const mailerLiteApiKey = process.env.MAILERLITE_API || process.env.MAILERLITE_CONNECT_API_KEY || ''
-const mailerlite = new MailerLite({ api_key: mailerLiteApiKey })
+const MAILERLITE_API_KEY =
+	process.env.MAILERLITE_CONNECT_API_KEY || process.env.MAILERLITE_API || ''
 
 async function checkSubscriberOnMailerLite(email: string) {
 	const apiKey = process.env.MAILERLITE_CONNECT_API_KEY || process.env.MAILERLITE_API
@@ -46,25 +45,34 @@ async function createSubscriberOnMailerLite(email: string) {
 	const format = (n: number) => String(n).padStart(2, '0')
 	const formattedDate = `${now.getFullYear()}-${format(now.getMonth() + 1)}-${format(now.getDate())} ${format(now.getHours())}:${format(now.getMinutes())}:${format(now.getSeconds())}`
 
-	const params = {
+	const payload = {
 		email,
-		status: 'unconfirmed' as const,
+		status: 'unconfirmed',
+		subscribed_at: formattedDate,
 		groups: ['101178350423246269'],
-		subscribed_at: formattedDate
+		fields: { name: email.split('@')[0] }
 	}
 
-	try {
-		const response = await mailerlite.subscribers.createOrUpdate(params)
-		console.log('✅ Suscriptor creado/actualizado en MailerLite:', response.data)
-		return response.data
-	} catch (error: any) {
-		if (error?.response) {
-			console.error('❌ MailerLite rechazó la solicitud:', error.response.data)
-		} else {
-			console.error('❌ Error al contactar con MailerLite:', error)
-		}
-		return null
+	console.log('📤 Enviando suscriptor a MailerLite:', JSON.stringify(payload, null, 2))
+
+	const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${MAILERLITE_API_KEY}`,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(payload)
+	})
+
+	const result = await response.json().catch(() => ({}))
+
+	if (response.status === 201 || response.status === 200) {
+		console.log('✅ Suscriptor creado/actualizado en MailerLite:', result.data)
+		return result.data
 	}
+
+	console.error('❌ MailerLite rechazó la solicitud:', result)
+	return null
 }
 
 export const GET: APIRoute = async ({ request }) => {

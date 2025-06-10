@@ -2,11 +2,10 @@ import type { APIRoute } from 'astro'
 import { app } from '../../../firebase/server'
 import { getAuth } from 'firebase-admin/auth'
 import { getFirestore } from 'firebase-admin/firestore'
-import MailerLite from '@mailerlite/mailerlite-nodejs'
 import { getUserFromFirestore } from 'src/utils/getUserFromFirestore'
 
-const mailerLiteApiKey = process.env.MAILERLITE_API || process.env.MAILERLITE_CONNECT_API_KEY || ''
-const mailerlite = new MailerLite({ api_key: mailerLiteApiKey })
+const MAILERLITE_API_KEY =
+	process.env.MAILERLITE_CONNECT_API_KEY || process.env.MAILERLITE_API || ''
 
 async function checkSubscriberOnMailerLite(email: string) {
 	const apiKey = process.env.MAILERLITE_CONNECT_API_KEY || process.env.MAILERLITE_API
@@ -46,20 +45,29 @@ async function createCustomToken(userId: string): Promise<string> {
 	}
 }
 
-async function getCustomToken(email: string): Promise<string> {
-	const querySnapshot = await getUserFromFirestore(email)
-	if (querySnapshot.empty) {
-		throw new Error('User not found')
-	}
-	const userDoc = querySnapshot.docs[0]
-	const customToken = await createCustomToken(userDoc.id)
-	return customToken
-}
+	const payload = {
+		status: 'unconfirmed',
+		groups: ['101178350423246269'],
+		fields: { name: email.split('@')[0] }
+	console.log('📤 Enviando suscriptor a MailerLite:', JSON.stringify(payload, null, 2))
 
-function getCurrentDateTime(): string {
-	const now = new Date()
-	const year = now.getFullYear()
-	const month = String(now.getMonth() + 1).padStart(2, '0')
+	const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${MAILERLITE_API_KEY}`,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(payload)
+	})
+
+	const result = await response.json().catch(() => ({}))
+
+	if (response.status === 201 || response.status === 200) {
+		console.log('✅ Suscriptor creado/actualizado en MailerLite:', result.data)
+		return result.data
+
+	console.error('❌ MailerLite rechazó la solicitud:', result)
+	return null
 	const day = String(now.getDate()).padStart(2, '0')
 	const hours = String(now.getHours()).padStart(2, '0')
 	const minutes = String(now.getMinutes()).padStart(2, '0')
