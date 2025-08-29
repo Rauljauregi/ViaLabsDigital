@@ -2,28 +2,46 @@
 import BaseLayout from '@/layouts/BaseLayout'
 import ListPosts from '@/components/ListPosts'
 import TitlePage from '@/components/TitlePage'
+import TagHero from '@/components/TagHero'          // cajita reutilizable
 import { getTags, getPostByTag } from '@/utils'
+import { tagsMeta } from '@/data/tagsMeta'
+import { normalize } from '@/utils/normalize'        // helper de normalización
 
 export const prerender = true;
 
+// Genera rutas usando el slug normalizado, pero pasa el tag “original” como prop
 export async function getStaticPaths() {
-  const tags = await getTags()
-  
-  return tags.map((tag) => ({
-    params: { tag: tag.toLowerCase() },
-    props: { tag }
-  }))
+  const tags = await getTags();
+  return tags.map((t) => ({
+    params: { tag: normalize(t) },
+    props: { tag: t },
+  }));
 }
 
-const { tag } = Astro.props
-const posts = await getPostByTag(tag)
+const { tag } = Astro.props as { tag: string };
+const posts = await getPostByTag(tag);
+
+// Busca metadatos por clave normalizada (sin acentos, minúsculas)
+const meta = tagsMeta[normalize(tag)] ?? null;
+const pageTitle = meta ? meta.title : `#${tag}`;
 ---
 
-<BaseLayout title={tag}>
-  <TitlePage title={`#${tag}`} />
+<BaseLayout title={pageTitle}>
+  <TitlePage title={pageTitle} />
+
+  {meta && (
+    <TagHero
+      title={meta.title}
+      description={meta.description}
+      link={meta.link}
+      schemaOrg={meta.schemaOrg}
+      ctaText={meta.ctaText ?? 'Ver servicio'}
+    />
+  )}
+
   {posts.length > 0 ? (
     <ListPosts posts={posts} />
   ) : (
-    <p class="text-center">No hay artículos con esta etiqueta</p>
+    <p class="text-center text-slate-500">No hay artículos con esta etiqueta</p>
   )}
 </BaseLayout>
