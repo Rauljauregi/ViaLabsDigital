@@ -1,0 +1,38 @@
+---
+import BaseLayout from '@/layouts/BaseLayout'
+import TitlePage from '@/components/TitlePage'
+import { getTags } from '@/utils'
+import { tagsMeta } from '@/data/tagsMeta'
+import Tag from '@/components/Tag'
+
+export const prerender = true;
+
+const tags = await getTags()
+
+// Normalizar para lookup en tagsMeta
+const normalize = (s: string) =>
+  s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+---
+
+<BaseLayout title="Tags">
+  <TitlePage title="Tags" />
+  
+  <div class="flex flex-wrap gap-4 justify-center items-center my-8">
+    {
+      tags.map((tag) => {
+        const meta = tagsMeta[normalize(tag)] ?? null
+
+        return meta ? (
+          <a
+            href={`/tags/${tag.toLowerCase()}/`}
+            class="px-4 py-2 rounded-full text-sm font-medium bg-amber-400 text-slate-900 hover:bg-amber-300 transition"
+          >
+            {meta.title}
+          </a>
+        ) : (
+          <Tag tag={tag} />
+        )
+      })
+    }
+  </div>
+</BaseLayout>
