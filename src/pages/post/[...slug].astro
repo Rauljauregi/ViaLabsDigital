@@ -1,134 +1,112 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
-import BlogPost from '@/layouts/BlogPost';
-import ListRelatedPosts from '@/components/ListRelatedPosts';
-import Share from '@/components/Share';
-import TableOfContents from '@/components/TableOfContents';
+import {
+  type CollectionEntry,
+  getCollection,
+  getEntryBySlug,
+} from 'astro:content'
+import BlogPost from '@/layouts/BlogPost'
+import Share from '@/components/Share'
+import TableOfContents from '@/components/TableOfContents'
+import SchemaMarkup from '@/components/SchemaMarkup'
+import RelatedCluster from '@/components/RelatedCluster.astro'
+import readingTime from 'reading-time'
 
-import readingTime from 'reading-time';
-import SchemaMarkup from '@/components/SchemaMarkup';
+const slug = Astro.params.slug?.replace(/^\/+|\/+$/g, '') || ''
 
-
-
-
-// Obtén el slug de la URL y limpialo
-const currentSlug = Astro.params.slug?.replace(/^\/+|\/+$/g, '');
-console.log('Slug actual:', currentSlug); // Para depuración
-
-// Obtén la colección de blog en lugar de post
-const posts = await getCollection('blog');
-console.log('Posts disponibles:', posts.map(p => p.slug)); // Para depuración
-
-const post = posts.find((p) => p.slug === currentSlug);
-console.log('Post encontrado:', post?.slug); // Para depuración
-
-// Redirige a una página 404 si el post no existe
+// 1) Cargar post y manejar 404
+const post = await getEntryBySlug('blog', slug)
 if (!post) {
-  console.error(`No se encontró ningún post con el slug: ${currentSlug}`);
-  return Astro.redirect('/404');
+  console.error(`No se encontró ningún post con el slug: ${slug}`)
+  return Astro.redirect('/404')
 }
 
-// Obtén los posts relacionados con una lógica mejorada
-const getRelatedPosts = (currentPost) => {
-  return posts
-    .filter((p) => {
-      // Excluir el post actual
-      if (p.slug === currentPost.slug) return false;
-      
-      let score = 0;
-      
-      // Puntos por tags compartidos
-      const sharedTags = p.data.tags?.filter(tag => 
-        currentPost.data.tags?.includes(tag)
-      ) || [];
-      score += sharedTags.length * 2;
-      
-      // Puntos por misma categoría
-      if (p.data.category === currentPost.data.category) {
-        score += 3;
-      }
-      
-      // Considerar relacionado si tiene al menos un tag en común o misma categoría
-      return score > 0;
-    })
-    .sort((a, b) => {
-      // Ordenar por fecha si tienen la misma relevancia
-      const dateA = new Date(a.data.pubDate);
-      const dateB = new Date(b.data.pubDate);
-      return dateB.getTime() - dateA.getTime();
-    })
-    .slice(0, 3); // Limitar a 3 posts
-};
-const relatedPosts = getRelatedPosts(post);
-
-// Validación y procesamiento del contenido del post
-let Content, headings, remarkPluginFrontmatter;
+// 2) Render del contenido
+let Content, headings, remarkPluginFrontmatter
 try {
-    const rendered = await post.render();
-    Content = rendered.Content;
-    headings = rendered.headings;
-    remarkPluginFrontmatter = rendered.remarkPluginFrontmatter;
-
-    // Asegurarnos de que tenemos un tiempo de lectura válido
-    const readTime = remarkPluginFrontmatter?.minutesRead || '5 min tiempo de lectura';
-    console.log('Tiempo de lectura calculado:', readTime);
-
+  const rendered = await post.render()
+  Content = rendered.Content
+  headings = rendered.headings
+  remarkPluginFrontmatter = rendered.remarkPluginFrontmatter
 } catch (error) {
-    console.error(`Error al renderizar el contenido del post: ${error.message}`);
-    return Astro.redirect('/404');
+  console.error(`Error al renderizar el post ${slug}: ${error instanceof Error ? error.message : error}`)
+  return Astro.redirect('/404')
 }
 
-// schemarkup del artículo
-const articleSchema = {
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": post.data.title,
-  "description": post.data.description,
-  "image": post.data.heroImage ? `https://mindfulml.vialabsdigital.com${post.data.heroImage}` : null,
-  "datePublished": post.data.pubDate,
-  "dateModified": post.data.pubDate || post.data.pubDate,
-  "author": {
-    "@type": "Person",
-    "name": "Raúl Jáuregui",
-    "sameAs": [
-      "https://x.com/Rauljauregui",
-      "https://www.linkedin.com/in/raúl-jáuregui-martínez-de-morentin-1b0732294/"
-    ]
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "ViaLabs Digital",
-    "url": "https://vialabsdigital.com"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": Astro.url.href
-  },
-  "keywords": post.data.tags?.join(", "),
-  "articleSection": post.data.category,
-  "wordCount": post.body.split(/\s+/).length,
-  "timeRequired": remarkPluginFrontmatter?.minutesRead || "5 min"
-};
+// 3) Calcular meta (tiempo lectura, palabras, etc.)
+const rawBody = post.body ?? ''
+const stats = readingTime(rawBody)
+const minutes = Math.max(1, Math.round(stats.minutes)) // al menos 1
+const isoDuration = `PT${minutes}M`
+const wordCount = rawBody ? rawBody.trim().split(/\s+/).length : undefined
 
+// 4) Construir imagen absoluta (host del blog)
+const host = 'https://mindfulml.vialabsdigital.com'
+const imageAbs = post.data.heroImage
+  ? (post.data.heroImage.startsWith('http')
+      ? post.data.heroImage
+      : `${host}${post.data.heroImage}`)
+  : undefined
+
+// 5) TechArticle schema mejorado
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: post.data.title,
+  description: post.data.description,
+  image: imageAbs,
+  datePublished: post.data.pubDate,
+  dateModified: post.data.updatedAt ?? post.data.pubDate,
+  author: {
+    '@type': 'Person',
+    name: 'Raúl Jáuregui',
+    sameAs: [
+      'https://x.com/Rauljauregui',
+      'https://www.linkedin.com/in/raúl-jáuregui-martínez-de-morentin-1b0732294/',
+    ],
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'ViaLabs Digital',
+    url: 'https://vialabsdigital.com',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://vialabsdigital.com/wp-content/uploads/ViaLabsDigital-1.png',
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': Astro.url.href,
+  },
+  keywords: Array.isArray(post.data.tags) ? post.data.tags.join(', ') : undefined,
+  articleSection: post.data.category,
+  wordCount,
+  timeRequired: isoDuration, // ISO 8601 duration
+}
 ---
 
-<BlogPost 
-    data={post.data} 
-    headings={headings}
-    readTime={remarkPluginFrontmatter?.minutesRead || '5 min tiempo de lectura'}
+<BlogPost
+  data={post.data}
+  headings={headings}
+  readTime={`${minutes} min tiempo de lectura`}
 >
-<!-- schemamarup -->
-<SchemaMarkup schema={articleSchema} />
+  <!-- Schema.org -->
+  <SchemaMarkup schema={articleSchema} />
+
   <div class="grid grid-cols-1 md:grid-cols-[20%_auto] gap-16 mt-8">
     <aside class="hidden md:block">
       <Share />
-      {Array.isArray(headings) && headings.length > 0 && <TableOfContents headings={headings} />}
+      {Array.isArray(headings) && headings.length > 0 && (
+        <TableOfContents headings={headings} />
+      )}
     </aside>
+
     <main>
       <article class="prose dark:prose-invert mb-16">
         <Content />
       </article>
-      <ListRelatedPosts posts={relatedPosts} />
+
+      <!-- Clúster relacionado por money tag / categoría -->
+      <RelatedCluster current={post as CollectionEntry<'blog'>} limitInitial={3} />
     </main>
   </div>
 </BlogPost>

@@ -1,0 +1,176 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
+import { Image } from 'astro:assets'
+
+type Props = {
+  current: CollectionEntry<'blog'>
+  limitInitial?: number
+}
+
+const { current, limitInitial = 3 } = Astro.props
+
+const normalize = (s?: string) =>
+  s?.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim() ?? ''
+
+const SERVICE_TAGS = new Set([
+  'consultoria-ia',
+  'chatbots-agentes-ia',
+  'seo-desarrollo-web',
+  'ayudas-id',
+  'machine-learning-aplicado',
+])
+
+const currentTags = (current.data.tags ?? []).map(normalize)
+const primaryTag = currentTags.find((t) => SERVICE_TAGS.has(t))
+const currentCategory = normalize(current.data.category)
+
+const allPosts = await getCollection('blog')
+
+let clusterPosts = allPosts
+  .filter((p) => p.slug !== current.slug)
+  .filter((p) => {
+    const ptags = (p.data.tags ?? []).map(normalize)
+    const pcat = normalize(p.data.category)
+    if (primaryTag) return ptags.includes(primaryTag)
+    // Fallback por categoría si no hay money tag
+    return currentCategory && pcat === currentCategory
+  })
+  .sort(
+    (a, b) =>
+      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+  )
+
+const visible = clusterPosts.slice(0, limitInitial)
+const rest = clusterPosts.slice(limitInitial)
+
+const CLUSTER_META: Record<
+  string,
+  { title: string; url: string; tagUrl?: string }
+> = {
+  'consultoria-ia': {
+    title: 'Consultoría en IA',
+    url: '/consultoria-ia-pamplona/',
+    tagUrl: '/tags/consultoria-ia/',
+  },
+  'chatbots-agentes-ia': {
+    title: 'Chatbots y Agentes de IA',
+    url: '/chatbots-y-agentes-de-ia/',
+    tagUrl: '/tags/chatbots-agentes-ia/',
+  },
+  'seo-desarrollo-web': {
+    title: 'SEO y Desarrollo Web',
+    url: '/seo-y-desarrollo-web/',
+    tagUrl: '/tags/seo-desarrollo-web/',
+  },
+  'ayudas-id': {
+    title: 'Ayudas y Subvenciones I+D',
+    url: '/ayudas-y-subvenciones-id/',
+    tagUrl: '/tags/ayudas-id/',
+  },
+  'machine-learning-aplicado': {
+    title: 'Machine Learning aplicado',
+    url: '/machine-learning-aplicado/',
+    tagUrl: '/tags/machine-learning-aplicado/',
+  },
+}
+
+const meta = primaryTag ? CLUSTER_META[primaryTag] : undefined
+
+// Para schema.org ItemList (máx. 6 para no pasarnos)
+const itemList = clusterPosts.slice(0, 6).map((p, idx) => ({
+  '@type': 'ListItem',
+  position: idx + 1,
+  url: `/post/${p.slug}/`,
+  name: p.data.title,
+}))
+---
+
+<div class="mt-16 pt-8 border-t dark:border-gray-800">
+  <h3 class="text-2xl font-extrabold mb-6">
+    {meta ? `Más sobre ${meta.title}` : 'Artículos relacionados'}
+  </h3>
+
+  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    {visible.length ? (
+      visible.map((post) => (
+        <a
+          href={`/post/${post.slug}/`}
+          class="group flex flex-col sm:flex-row items-center gap-4 hover:bg-gray-50 dark:hover:bg-gray-900 p-4 rounded-lg transition-colors shadow hover:shadow-lg"
+          title={post.data.title}
+        >
+          <div class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 overflow-hidden flex-shrink-0">
+            <Image
+              src={post.data.heroImage}
+              width={200}
+              height={200}
+              format="webp"
+              alt={post.data.title}
+              title={post.data.title}
+              class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+          <div class="flex-1">
+            <h4
+              class="font-medium text-sm sm:text-base group-hover:text-amber-500 transition-colors line-clamp-2"
+              title={post.data.title}
+            >
+              {post.data.title}
+            </h4>
+          </div>
+        </a>
+      ))
+    ) : (
+      <span class="text-gray-500 col-span-full text-center py-4">
+        Todavía no hay artículos en este cluster.
+      </span>
+    )}
+  </section>
+
+  {rest.length > 0 && (
+    <details class="mt-6">
+      <summary class="cursor-pointer select-none text-sm text-slate-600 dark:text-slate-300 hover:underline">
+        Ver {rest.length} artículos más
+      </summary>
+      <ul class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+        {rest.map((p) => (
+          <li>
+            <a
+              href={`/post/${p.slug}/`}
+              class="text-sm hover:text-amber-500"
+            >
+              {p.data.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </details>
+  )}
+
+  <div class="mt-8 flex flex-wrap gap-3">
+    {meta && (
+      <a
+        href={meta.url}
+        class="inline-flex items-center gap-2 rounded-md bg-amber-400 px-4 py-2 font-semibold text-slate-900 transition hover:bg-amber-300"
+      >
+        Ver servicio →
+      </a>
+    )}
+    {primaryTag && (
+      <a
+        href={`/tags/${primaryTag}/`}
+        class="inline-flex items-center gap-2 rounded-md border border-slate-300 px-4 py-2 hover:bg-slate-50 dark:border-slate-600 dark:hover:bg-slate-800"
+      >
+        Ver todos los artículos del cluster →
+      </a>
+    )}
+  </div>
+
+  {itemList.length >= 2 && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      'itemListElement': itemList
+    })} />
+  )}
+</div>
