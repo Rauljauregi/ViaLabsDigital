@@ -1,53 +1,40 @@
 ---
-import type { CollectionEntry } from 'astro:content'
-import { getCollection } from 'astro:content'
-import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import { ensureMain } from '@/config';
 
 type Props = {
-  current: CollectionEntry<'blog'>
-  limitInitial?: number
-}
+  current: CollectionEntry<'blog'>;
+  limitInitial?: number;
+};
 
-const { current, limitInitial = 3 } = Astro.props
+const { current, limitInitial = 3 } = Astro.props;
 
+/* Normalizador (acentos/minúsculas) */
 const normalize = (s?: string) =>
-  s?.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim() ?? ''
+  s?.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim() ?? '';
 
+/* Money tags (clusters por servicio) */
 const SERVICE_TAGS = new Set([
   'consultoria-ia',
   'chatbots-agentes-ia',
   'seo-desarrollo-web',
   'ayudas-id',
   'machine-learning-aplicado',
-])
+]);
 
-const currentTags = (current.data.tags ?? []).map(normalize)
-const primaryTag = currentTags.find((t) => SERVICE_TAGS.has(t))
-const currentCategory = normalize(current.data.category)
+/* Mapa de categoría → URL absoluta del servicio (fallback) */
+const SERVICE_LINKS: Record<string, string> = {
+  'consultoría en inteligencia artificial': 'https://vialabsdigital.com/consultoria-ia-pamplona/',
+  'chatbots y agentes de ia': 'https://vialabsdigital.com/chatbots-y-agentes-de-ia/',
+  'seo y desarrollo web': 'https://vialabsdigital.com/seo-y-desarrollo-web/',
+  'ayudas y subvenciones i+d': 'https://vialabsdigital.com/ayudas-y-subvenciones-id/',
+  'machine learning aplicado': 'https://vialabsdigital.com/machine-learning-aplicado/',
+};
 
-const allPosts = await getCollection('blog')
-
-let clusterPosts = allPosts
-  .filter((p) => p.slug !== current.slug)
-  .filter((p) => {
-    const ptags = (p.data.tags ?? []).map(normalize)
-    const pcat = normalize(p.data.category)
-    if (primaryTag) return ptags.includes(primaryTag)
-    // Fallback por categoría si no hay money tag
-    return currentCategory && pcat === currentCategory
-  })
-  .sort(
-    (a, b) =>
-      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
-  )
-
-const visible = clusterPosts.slice(0, limitInitial)
-const rest = clusterPosts.slice(limitInitial)
-
-const CLUSTER_META: Record<
-  string,
-  { title: string; url: string; tagUrl?: string }
-> = {
+/* Metadatos del cluster para CTA y link al tag */
+const CLUSTER_META: Record<string, { title: string; url: string; tagUrl?: string }> = {
   'consultoria-ia': {
     title: 'Consultoría en IA',
     url: '/consultoria-ia-pamplona/',
@@ -60,7 +47,7 @@ const CLUSTER_META: Record<
   },
   'seo-desarrollo-web': {
     title: 'SEO y Desarrollo Web',
-    url: '/seo-y-desarrollo-web/',
+    url: '/seo-desarrollo-web/',
     tagUrl: '/tags/seo-desarrollo-web/',
   },
   'ayudas-id': {
@@ -73,17 +60,52 @@ const CLUSTER_META: Record<
     url: '/machine-learning-aplicado/',
     tagUrl: '/tags/machine-learning-aplicado/',
   },
+};
+
+/* Datos del post actual */
+const currentTags = (current.data.tags ?? []).map(normalize);
+const primaryTag = currentTags.find((t) => SERVICE_TAGS.has(t));
+const currentCategory = normalize(current.data.category);
+
+/* URL del servicio (prioriza meta del cluster; fallback a categoría o a frontmatter serviceUrl) */
+let serviceUrlAbs: string | null = null;
+if (primaryTag && CLUSTER_META[primaryTag]?.url) {
+  serviceUrlAbs = ensureMain(CLUSTER_META[primaryTag].url);
+} else {
+  const cat = currentCategory;
+  const fallback = cat ? SERVICE_LINKS[cat] : undefined;
+  const fromFrontmatter = (current.data as any).serviceUrl as string | undefined;
+  serviceUrlAbs = ensureMain(fromFrontmatter ?? fallback ?? '/');
 }
 
-const meta = primaryTag ? CLUSTER_META[primaryTag] : undefined
+/* Obtener todos los posts para construir el cluster */
+const allPosts = await getCollection('blog');
 
-// Para schema.org ItemList (máx. 6 para no pasarnos)
+/* Cluster: por money tag; si no, por categoría (excluye el actual) */
+let clusterPosts = allPosts
+  .filter((p) => p.slug !== current.slug)
+  .filter((p) => {
+    const ptags = (p.data.tags ?? []).map(normalize);
+    const pcat = normalize(p.data.category);
+    if (primaryTag) return ptags.includes(primaryTag);
+    return currentCategory && pcat === currentCategory;
+  })
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
+
+/* Partición: visibles y colapsados */
+const visible = clusterPosts.slice(0, limitInitial);
+const rest = clusterPosts.slice(limitInitial);
+
+/* Meta del cluster (título + link al tag del cluster) */
+const meta = primaryTag ? CLUSTER_META[primaryTag] : undefined;
+
+/* Schema.org ItemList (máx. 6 ítems) */
 const itemList = clusterPosts.slice(0, 6).map((p, idx) => ({
   '@type': 'ListItem',
   position: idx + 1,
   url: `/post/${p.slug}/`,
   name: p.data.title,
-}))
+}));
 ---
 
 <div class="mt-16 pt-8 border-t dark:border-gray-800">
@@ -135,10 +157,7 @@ const itemList = clusterPosts.slice(0, 6).map((p, idx) => ({
       <ul class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
         {rest.map((p) => (
           <li>
-            <a
-              href={`/post/${p.slug}/`}
-              class="text-sm hover:text-amber-500"
-            >
+            <a href={`/post/${p.slug}/`} class="text-sm hover:text-amber-500">
               {p.data.title}
             </a>
           </li>
@@ -148,17 +167,17 @@ const itemList = clusterPosts.slice(0, 6).map((p, idx) => ({
   )}
 
   <div class="mt-8 flex flex-wrap gap-3">
-    {meta && (
+    {serviceUrlAbs && (
       <a
-        href={meta.url}
+        href={serviceUrlAbs}
         class="inline-flex items-center gap-2 rounded-md bg-amber-400 px-4 py-2 font-semibold text-slate-900 transition hover:bg-amber-300"
       >
         Ver servicio →
       </a>
     )}
-    {primaryTag && (
+    {meta?.tagUrl && (
       <a
-        href={`/tags/${primaryTag}/`}
+        href={meta.tagUrl}
         class="inline-flex items-center gap-2 rounded-md border border-slate-300 px-4 py-2 hover:bg-slate-50 dark:border-slate-600 dark:hover:bg-slate-800"
       >
         Ver todos los artículos del cluster →
@@ -167,10 +186,13 @@ const itemList = clusterPosts.slice(0, 6).map((p, idx) => ({
   </div>
 
   {itemList.length >= 2 && (
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'ItemList',
-      'itemListElement': itemList
-    })} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        itemListElement: itemList,
+      })}
+    />
   )}
 </div>
