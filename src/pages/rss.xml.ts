@@ -1,56 +1,89 @@
-import rss from '@astrojs/rss'
-import { getCollection } from 'astro:content'
-import { siteConfig } from '@/site-config'
+// src/pages/rss.xml.ts
+import rss, { type RSSFeedItem } from '@astrojs/rss';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '@/site-config';
+
+export const prerender = true;
+
+function abs(site: string, path: string) {
+  const cleaned = path.startsWith('/') ? path : `/${path}`;
+  return new URL(cleaned, site).toString();
+}
 
 export async function GET() {
-	const posts = await getCollection('blog')
-	const newsletter = await getCollection('newsletter');
+  const site = (import.meta.env.SITE || 'https://mindfulml.vialabsdigital.com').replace(/\/$/, '') + '/';
 
-	const combinedItems = [
-		{
-			title: 'Inteligencia Artificial',
-			description: 'Artículos sobre inteligencia artificial.',
-			pubDate: new Date(2023, 11, 1),
-			link: 'https://mindfulml.vialabsdigital.com/inteligencia-artificial',
-		},
-		{
-			title: 'Newsletter',
-			description: 'Artículos de la Newsletter',
-			pubDate: new Date(2023, 11, 1),
-			link: 'https://mindfulml.vialabsdigital.com/newsletter',
-		},
-		{
-			title: 'Deep Learning - Newsletter',
-			description: 'Artículos Newsletter sobre Deep Learning.',
-			pubDate: new Date(2023, 11, 1),
-			link: 'https://mindfulml.vialabsdigital.com/newsletter/Deep-Learning',
-		},
-		{
-			title: 'Inteligencia Artificial - Newsletter',
-			description: 'Artículos Newsletter sobre Inteligencia Artificial.',
-			pubDate: new Date(2023, 11, 1),
-			link: 'https://mindfulml.vialabsdigital.com/newsletter/Deep-Learning',
-		},
-		{
-			title: 'Machine Learning - Newsletter',
-			description: 'Artículos Newsletter sobre Machine Learning.',
-			pubDate: new Date(2023, 11, 1),
-			link: 'https://mindfulml.vialabsdigital.com/newsletter/Machine-Learning',
-		},
-		...posts.map((post) => ({
-		  ...post.data,
-		  link: `/post/${post.slug}/`,
-		})),
-		...newsletter.map((item) => ({
-		  ...item.data,
-		  link: `/newsletter/post/${item.slug}/`,
-		})),
-	 ];
-	 
-	return rss({
-		title: siteConfig.title,
-		description: siteConfig.description,
-		site: import.meta.env.SITE,
-		items: combinedItems
-	})
+  // Colecciones
+  const blog = await getCollection('blog', (p) => !p.data.draft);
+  const newsletter = await getCollection('newsletter', (p) => !p.data.draft);
+
+  // Mapear a items RSS
+  const blogItems: RSSFeedItem[] = blog.map((post) => {
+    const link = abs(site, `/post/${post.slug}/`);
+    const pub = new Date(post.data.lastmod || post.data.pubDate);
+    const title = post.data.title;
+    const description = post.data.description;
+    const categories = [
+      ...(post.data.category ? [String(post.data.category)] : []),
+      ...((post.data.tags || []).map((t: string) => String(t))),
+    ];
+
+    // Media: imagen principal si existe
+    const media = post.data.heroImage
+      ? `<media:content xmlns:media="http://search.yahoo.com/mrss/" url="${abs(site, post.data.heroImage)}" medium="image"/>`
+      : '';
+
+    return {
+      title,
+      description,
+      pubDate: pub,
+      link,
+      categories,
+      customData: media,
+    };
+  });
+
+  const nlItems: RSSFeedItem[] = newsletter.map((item) => {
+    const link = abs(site, `/newsletter/post/${item.slug}/`);
+    const pub = new Date(item.data.lastmod || item.data.pubDate);
+    const title = item.data.title;
+    const description = item.data.description;
+    const categories = [
+      'Newsletter',
+      ...(item.data.tags || []).map((t: string) => String(t)),
+    ];
+
+    const media = item.data.heroImage
+      ? `<media:content xmlns:media="http://search.yahoo.com/mrss/" url="${abs(site, item.data.heroImage)}" medium="image"/>`
+      : '';
+
+    return {
+      title,
+      description,
+      pubDate: pub,
+      link,
+      categories,
+      customData: media,
+    };
+  });
+
+  // Combinar y ordenar por fecha desc
+  const items = [...blogItems, ...nlItems].sort(
+    (a, b) => (b.pubDate?.getTime() || 0) - (a.pubDate?.getTime() || 0)
+  );
+
+  // Datos extra para el canal (language, lastBuildDate)
+  const nowRfc822 = new Date().toUTCString();
+  const channelExtra = `
+    <language>es</language>
+    <lastBuildDate>${nowRfc822}</lastBuildDate>
+  `;
+
+  return rss({
+    title: siteConfig.title,
+    description: siteConfig.description,
+    site,
+    items,
+    customData: channelExtra,
+  });
 }
