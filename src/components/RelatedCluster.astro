@@ -15,15 +15,6 @@ const { current, limitInitial = 3 } = Astro.props;
 const normalize = (s?: string) =>
   s?.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim() ?? '';
 
-/* Money tags (clusters por servicio) */
-const SERVICE_TAGS = new Set([
-  'consultoria-ia',
-  'chatbots-agentes-ia',
-  'seo-desarrollo-web',
-  'ayudas-id',
-  'machine-learning-aplicado',
-]);
-
 /* Mapa de categoría → URL absoluta del servicio (fallback) */
 const SERVICE_LINKS: Record<string, string> = {
   'consultoría en inteligencia artificial': 'https://vialabsdigital.com/consultoria-ia-pamplona/',
@@ -60,36 +51,34 @@ const CLUSTER_META: Record<string, { title: string; url: string; tagUrl?: string
     url: '/machine-learning-aplicado/',
     tagUrl: '/tags/machine-learning-aplicado/',
   },
+  'digital-agentic-ia': {
+    title: 'Digital Agentic IA',
+    url: '/digital-agentic-ia/',
+    tagUrl: '/tags/digital-agentic-ia/',
+  },
 };
 
 /* Datos del post actual */
 const currentTags = (current.data.tags ?? []).map(normalize);
-let primaryTag: string | undefined = currentTags.find((t) =>
-  SERVICE_TAGS.has(t)
-);
-if (!primaryTag) {
-  const fromFrontmatter = (current.data as any).serviceUrl as string | undefined;
-  if (fromFrontmatter && currentTags.includes("digital-agentic-ia")) {
-    primaryTag = "digital-agentic-ia";
-  }
-}
+const primaryTag = currentTags[0]; // 👈 siempre el primer tag
 const currentCategory = normalize(current.data.category);
+const fromFrontmatter = (current.data as any).serviceUrl as string | undefined;
 
-/* URL del servicio (prioriza meta del cluster; fallback a categoría o a frontmatter serviceUrl) */
+/* URL del servicio: manda serviceUrl, si no, fallback */
 let serviceUrlAbs: string | null = null;
-if (primaryTag && CLUSTER_META[primaryTag]?.url) {
+if (fromFrontmatter) {
+  serviceUrlAbs = ensureMain(fromFrontmatter);
+} else if (primaryTag && CLUSTER_META[primaryTag]?.url) {
   serviceUrlAbs = ensureMain(CLUSTER_META[primaryTag].url);
 } else {
-  const cat = currentCategory;
-  const fallback = cat ? SERVICE_LINKS[cat] : undefined;
-  const fromFrontmatter = (current.data as any).serviceUrl as string | undefined;
-  serviceUrlAbs = ensureMain(fromFrontmatter ?? fallback ?? '/');
+  const fallback = currentCategory ? SERVICE_LINKS[currentCategory] : undefined;
+  serviceUrlAbs = ensureMain(fallback ?? '/');
 }
 
 /* Obtener todos los posts para construir el cluster */
 const allPosts = await getCollection('blog');
 
-/* Cluster: por money tag; si no, por categoría (excluye el actual) */
+/* Cluster: por primaryTag si existe, si no por categoría */
 let clusterPosts = allPosts
   .filter((p) => p.slug !== current.slug)
   .filter((p) => {
@@ -105,14 +94,7 @@ const visible = clusterPosts.slice(0, limitInitial);
 const rest = clusterPosts.slice(limitInitial);
 
 /* Meta del cluster (título + link al tag del cluster) */
-let meta = primaryTag ? CLUSTER_META[primaryTag] : undefined;
-if (!meta && currentTags.includes("digital-agentic-ia")) {
-  meta = {
-    title: "Digital Agentic IA",
-    url: "/digital-agentic-ia/",
-    tagUrl: "/tags/digital-agentic-ia/",
-  };
-}
+const meta = primaryTag ? CLUSTER_META[primaryTag] : undefined;
 
 /* Schema.org ItemList (máx. 6 ítems) */
 const itemList = clusterPosts.slice(0, 6).map((p, idx) => ({
