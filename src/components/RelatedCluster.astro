@@ -64,7 +64,15 @@ const CLUSTER_META: Record<string, { title: string; url: string; tagUrl?: string
 
 /* Datos del post actual */
 const currentTags = (current.data.tags ?? []).map(normalize);
-const primaryTag = currentTags.find((t) => SERVICE_TAGS.has(t));
+let primaryTag: string | undefined = currentTags.find((t) =>
+  SERVICE_TAGS.has(t)
+);
+if (!primaryTag) {
+  const fromFrontmatter = (current.data as any).serviceUrl as string | undefined;
+  if (fromFrontmatter && currentTags.includes("digital-agentic-ia")) {
+    primaryTag = "digital-agentic-ia";
+  }
+}
 const currentCategory = normalize(current.data.category);
 
 /* URL del servicio (prioriza meta del cluster; fallback a categoría o a frontmatter serviceUrl) */
@@ -97,7 +105,14 @@ const visible = clusterPosts.slice(0, limitInitial);
 const rest = clusterPosts.slice(limitInitial);
 
 /* Meta del cluster (título + link al tag del cluster) */
-const meta = primaryTag ? CLUSTER_META[primaryTag] : undefined;
+let meta = primaryTag ? CLUSTER_META[primaryTag] : undefined;
+if (!meta && currentTags.includes("digital-agentic-ia")) {
+  meta = {
+    title: "Digital Agentic IA",
+    url: "/digital-agentic-ia/",
+    tagUrl: "/tags/digital-agentic-ia/",
+  };
+}
 
 /* Schema.org ItemList (máx. 6 ítems) */
 const itemList = clusterPosts.slice(0, 6).map((p, idx) => ({
