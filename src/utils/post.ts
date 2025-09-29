@@ -1,5 +1,6 @@
 // src/utils/post.ts
 import { getCollection } from 'astro:content';
+import { normalize } from './normalize';
 
 export const getCategories = async () => {
   const posts = await getCollection('blog');
@@ -26,7 +27,7 @@ export const getTags = async () => {
     if (Array.isArray(post.data.tags)) {
       post.data.tags.forEach((tag) => {
         if (tag) {
-          tags.add(tag.toLowerCase())
+          tags.add(normalize(tag)); 
         }
       })
     }
@@ -38,13 +39,13 @@ export const getTags = async () => {
 export const getPostByTag = async (tag: string) => {
   if (!tag) return []
   
-  const posts = await getPosts()
-  const lowercaseTag = tag.toLowerCase()
+  const posts = await getPosts();
+  const normalizedTag = normalize(tag);
   
   return posts.filter((post) => {
     return Array.isArray(post.data.tags) && 
       post.data.tags.some(postTag => 
-        postTag && postTag.toLowerCase() === lowercaseTag
+        (postTag) => postTag && normalize(postTag) === normalizedTag
       )
   })
 }
