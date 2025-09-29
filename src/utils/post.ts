@@ -15,37 +15,37 @@ export const getPosts = async () => {
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()) // Ordenar por fecha descendente
     .map((post) => ({
       ...post,
-      url: `https://mindfulml.vialabsdigital.com/post/${post.slug}`, // Corregido a /post/
+      url: `https://mindfulml.vialabsdigital.com/post/${post.slug}`, // URL consistente
     }));
 };
 
 export const getTags = async () => {
-  const posts = await getPosts()
-  const tags = new Set()
+  const posts = await getPosts();
+  const tags = new Set<string>();
   
   posts.forEach((post) => {
     if (Array.isArray(post.data.tags)) {
       post.data.tags.forEach((tag) => {
         if (tag) {
-          tags.add(normalize(tag)); 
+          tags.add(normalize(tag)); // siempre normalizado
         }
-      })
+      });
     }
-  })
+  });
 
-  return Array.from(tags) as string[]
-}
+  return Array.from(tags);
+};
 
 export const getPostByTag = async (tag: string) => {
-  if (!tag) return []
-  
+  if (!tag) return [];
+
   const posts = await getPosts();
   const normalizedTag = normalize(tag);
-  
-  return posts.filter((post) => {
-    return Array.isArray(post.data.tags) && 
-      post.data.tags.some(postTag => 
-        (postTag) => postTag && normalize(postTag) === normalizedTag
-      )
-  })
-}
+
+  return posts.filter((post) =>
+    Array.isArray(post.data.tags) &&
+    post.data.tags.some(
+      (postTag) => postTag && normalize(postTag) === normalizedTag
+    )
+  );
+};
