@@ -1,11 +1,13 @@
 ---
+import { normalize } from '@/utils/normalize'
+
 export interface Props {
     tag: string
 }
 const { tag } = Astro.props
 ---
 
-<a href={`/tags/${tag.toLowerCase()}`} aria-label={tag}>
+<a href={`/tags/${normalize(tag)}`} aria-label={tag}>
     <span
         class='bgvialabs font-semibold text-black dark:bgvialabs2 dark:text-black shadow text-sm w-fit px-2 py-1 md:px-5 md:py-2 rounded-full'
     >

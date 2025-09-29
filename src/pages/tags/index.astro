@@ -4,6 +4,8 @@ import TitlePage from '@/components/TitlePage'
 import { getTags } from '@/utils'
 import { tagsMeta } from '@/data/tagsMeta'
 import Tag from '@/components/Tag'
+import { normalize } from '@/utils/normalize'
+
 
 export const prerender = true;
 
@@ -24,7 +26,7 @@ const normalize = (s: string) =>
 
         return meta ? (
           <a
-            href={`/tags/${tag.toLowerCase()}/`}
+            hhref={`/tags/${normalize(tag)}/`}
             class="px-4 py-2 rounded-full text-sm font-medium bg-amber-400 text-slate-900 hover:bg-amber-300 transition"
           >
             {meta.title}
