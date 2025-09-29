@@ -6,14 +6,9 @@ import { tagsMeta } from '@/data/tagsMeta'
 import Tag from '@/components/Tag'
 import { normalize } from '@/utils/normalize'
 
-
 export const prerender = true;
 
 const tags = await getTags()
-
-// Normalizar para lookup en tagsMeta
-const normalize = (s: string) =>
-  s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 ---
 
 <BaseLayout title="Tags">
@@ -26,7 +21,7 @@ const normalize = (s: string) =>
 
         return meta ? (
           <a
-            hhref={`/tags/${normalize(tag)}/`}
+            href={`/tags/${normalize(tag)}/`}
             class="px-4 py-2 rounded-full text-sm font-medium bg-amber-400 text-slate-900 hover:bg-amber-300 transition"
           >
             {meta.title}
