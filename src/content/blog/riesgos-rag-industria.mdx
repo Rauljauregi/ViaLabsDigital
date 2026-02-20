@@ -33,12 +33,16 @@ Desde fuera, el proceso parece razonable: el sistema busca fragmentos (*chunks*)
 > ### 💡 Explicación para principiantes: ¿Qué es el RAG?
 > Imagina que tienes un examen de historia pero no has estudiado. Sin embargo, el profesor te deja tener el libro abierto. Cuando te hacen una pregunta, tú buscas rápidamente la página adecuada (esto es el *Retrieval*) y luego escribes la respuesta con tus propias palabras basándote en lo que has leído (esto es la *Generation*). El problema en la industria es: ¿qué pasa si el libro tiene una errata o tú interpretas mal un esquema técnico?
 
-<img 
-  src="/images/RAG-esquema-1.png" 
-  alt="Esquema RAG estándar"
-  class="w-full max-w-2xl mx-auto my-10"
-/>
-*Figura 1. Flujo típico de un sistema RAG estándar: recuperación semántica de fragmentos documentales y síntesis posterior por parte del modelo de lenguaje, sin validación estructural explícita.*
+<figure className="my-10">
+  <img
+    src="/images/RAG-esquema-1.png"
+    alt="Flujo RAG estándar"
+    className="w-full max-w-2xl mx-auto"
+  />
+  <figcaption className="text-sm text-gray-500 text-center mt-4">
+    Figura 1. Flujo típico de un sistema RAG estándar: recuperación semántica de fragmentos documentales y síntesis posterior por parte del modelo de lenguaje, sin validación estructural explícita.
+  </figcaption>
+</figure>
 
 ---
 
@@ -54,12 +58,18 @@ Cuando aplicamos esta arquitectura a manuales técnicos o procedimientos eléctr
 4. **Falta de diferenciación de consultas:** No es lo mismo localizar un elemento que verificar un valor de seguridad. Tratar todas las consultas como equivalentes diluye la precisión.
 5. **Optimización para responder vs. Bloqueo:** La mayoría de sistemas están diseñados para dar una respuesta siempre. En entornos técnicos, la respuesta correcta suele ser: **"No existe evidencia documental suficiente"**.
 
-<img 
-  src="/images/RAG-esquema-2.png" 
-  alt="Esquema RAG estándar"
-  class="w-full max-w-2xl mx-auto my-10"
-/>
-*Figura 2. Puntos críticos en un RAG convencional: ausencia de jerarquía documental, mezcla de fuentes heterogéneas e inferencia implícita durante la generación de la respuesta.*
+
+<figure className="my-10">
+  <img
+    src="/images/RAG-esquema-2.png"
+    alt="Flujo RAG estándar"
+    className="w-full max-w-2xl mx-auto"
+  />
+  <figcaption className="text-sm text-gray-500 text-center mt-4">
+    Figura 2. Puntos críticos en un RAG convencional: ausencia de jerarquía documental, mezcla de fuentes heterogéneas e inferencia implícita durante la generación de la respuesta.
+  </figcaption>
+</figure>
+
 ---
 
 ## Utilidad vs. Verificabilidad
@@ -74,11 +84,23 @@ Muchos sistemas RAG actuales se sitúan en un cuadrante peligroso: **alta utilid
 
 ![](/images/){class="max-w-xl mx-auto my-8"}
 <img 
-  src="/images/utilidad-verificabilidad.png" 
+  src="/images/" 
   alt="Esquema RAG estándar"
   class="w-full max-w-2xl mx-auto my-10"
 />
-*Figura 3. Relación entre utilidad y verificabilidad en sistemas RAG: una alta capacidad de respuesta no garantiza evidencia documental estructurada ni trazabilidad técnica suficiente.*
+**
+
+<figure className="my-10">
+  <img
+    src="/images/utilidad-verificabilidad.png"
+    alt="Flujo RAG estándar"
+    className="w-full max-w-2xl mx-auto"
+  />
+  <figcaption className="text-sm text-gray-500 text-center mt-4">
+    Figura 3. Relación entre utilidad y verificabilidad en sistemas RAG: una alta capacidad de respuesta no garantiza evidencia documental estructurada ni trazabilidad técnica suficiente.
+  </figcaption>
+</figure>
+
 
 Para medir la fiabilidad, se evalúa la **fidelidad documental** ($F$) como la relación entre las afirmaciones de la respuesta ($a$) que tienen sustento directo en la fuente ($s$):
 
