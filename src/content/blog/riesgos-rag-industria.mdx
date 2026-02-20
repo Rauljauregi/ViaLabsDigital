@@ -6,7 +6,7 @@ description: >
   requisitos debería cumplir una arquitectura RAG verificable en producción.
 category: Inteligencia Artificial
 pubDate: 2026-02-21T08:00:00.000Z
-heroImage: "/images/riesgos-rag-industrial.png"
+heroImage: "/images/riesgos-rag-industrial.jpg"
 tags:
   - RAG
   - RAG industrial
@@ -33,7 +33,7 @@ Desde fuera, el proceso parece razonable: el sistema busca fragmentos (*chunks*)
 > ### 💡 Explicación para principiantes: ¿Qué es el RAG?
 > Imagina que tienes un examen de historia pero no has estudiado. Sin embargo, el profesor te deja tener el libro abierto. Cuando te hacen una pregunta, tú buscas rápidamente la página adecuada (esto es el *Retrieval*) y luego escribes la respuesta con tus propias palabras basándote en lo que has leído (esto es la *Generation*). El problema en la industria es: ¿qué pasa si el libro tiene una errata o tú interpretas mal un esquema técnico?
 
-![](/images/RAG-esquema-1.png)
+![](/images/RAG-esquema-1.png){class="max-w-xl mx-auto my-8"}
 
 ---
 
@@ -49,7 +49,7 @@ Cuando aplicamos esta arquitectura a manuales técnicos o procedimientos eléctr
 4. **Falta de diferenciación de consultas:** No es lo mismo localizar un elemento que verificar un valor de seguridad. Tratar todas las consultas como equivalentes diluye la precisión.
 5. **Optimización para responder vs. Bloqueo:** La mayoría de sistemas están diseñados para dar una respuesta siempre. En entornos técnicos, la respuesta correcta suele ser: **"No existe evidencia documental suficiente"**.
 
-![](/images/RAG-esquema-2.png)
+![](/images/RAG-esquema-2.png){class="max-w-xl mx-auto my-8"}
 
 ---
 
@@ -63,7 +63,7 @@ Muchos sistemas RAG actuales se sitúan en un cuadrante peligroso: **alta utilid
 | **Manejo de duda** | Tiende a alucinar sutilmente. | Bloqueo epistemológico (no sabe/no contesta). |
 | **Fuentes** | Mezcla de fragmentos aleatorios. | Jerarquía de autoridad explícita. |
 
-![](/images/utilidad-verificabilidad.png)
+![](/images/utilidad-verificabilidad.png){class="max-w-xl mx-auto my-8"}
 
 Para medir la fiabilidad, en [Vialabs Digital](https://www.vialabsdigital.com) evaluamos la **fidelidad documental** ($F$) como la relación entre las afirmaciones de la respuesta ($a$) que tienen sustento directo en la fuente ($s$):
 
