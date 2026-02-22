@@ -7,6 +7,8 @@ import type { MarkdownHeading } from 'astro'
 import { Image } from 'astro:assets'
 import ListRelatedPosts from '@/components/ListRelatedPosts'
 import '../styles/global.css';
+import GlobalAuthorCTA from '@/components/GlobalAuthorCTA'
+
 
 type Props = {
     data: CollectionEntry<'blog'>['data']
@@ -17,6 +19,7 @@ type Props = {
 
 const { data, readTime, headings, relatedPosts = [] } = Astro.props
 const { title, description, pubDate, updatedDate, heroImage, tags } = data
+const { category } = data
 const articleDate = pubDate.toISOString()
 ---
 
@@ -95,6 +98,7 @@ const articleDate = pubDate.toISOString()
         <div class="mb-16">
             <slot />
         </div>
+        <GlobalAuthorCTA category={category} tags={tags} />
 
         {relatedPosts.length > 0 && (
             <div class="mt-16 pt-8 border-t dark:border-gray-800">
