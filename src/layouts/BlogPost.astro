@@ -21,12 +21,13 @@ const { data, readTime, headings, relatedPosts = [] } = Astro.props
 const { title, description, pubDate, updatedDate, heroImage, tags } = data
 const { category } = data
 const articleDate = pubDate.toISOString()
+const socialImage = typeof heroImage === 'string' ? heroImage : heroImage?.src
 ---
 
 <BaseLayout
     title={title}
     description={description}
-    image={heroImage?.src}
+    image={socialImage}
     articleDate={articleDate}>
     <article class='md:py-4 max-w-xs sm:max-w-none md:max-w-none'>
         <header class='mb-3 flex flex-col justify-center items-center gap-6'>

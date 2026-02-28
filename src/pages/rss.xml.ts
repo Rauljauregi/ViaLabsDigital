@@ -15,7 +15,6 @@ export async function GET() {
 
   // Colecciones
   const blog = await getCollection('blog', (p) => !p.data.draft);
-  const newsletter = await getCollection('newsletter', (p) => !p.data.draft);
 
   // Mapear a items RSS
   const blogItems: RSSFeedItem[] = blog.map((post) => {
@@ -43,32 +42,8 @@ export async function GET() {
     };
   });
 
-  const nlItems: RSSFeedItem[] = newsletter.map((item) => {
-    const link = abs(site, `/newsletter/post/${item.slug}/`);
-    const pub = new Date(item.data.lastmod || item.data.pubDate);
-    const title = item.data.title;
-    const description = item.data.description;
-    const categories = [
-      'Newsletter',
-      ...(item.data.tags || []).map((t: string) => String(t)),
-    ];
-
-    const media = item.data.heroImage
-      ? `<media:content xmlns:media="http://search.yahoo.com/mrss/" url="${abs(site, item.data.heroImage)}" medium="image"/>`
-      : '';
-
-    return {
-      title,
-      description,
-      pubDate: pub,
-      link,
-      categories,
-      customData: media,
-    };
-  });
-
-  // Combinar y ordenar por fecha desc
-  const items = [...blogItems, ...nlItems].sort(
+  // Ordenar por fecha desc
+  const items = [...blogItems].sort(
     (a, b) => (b.pubDate?.getTime() || 0) - (a.pubDate?.getTime() || 0)
   );
 
