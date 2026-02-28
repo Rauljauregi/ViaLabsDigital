@@ -36,6 +36,12 @@
   .prose blockquote p {
     @apply text-gray-800 dark:text-gray-200 mb-0;
   }
+
+  .blog-prose-tight p,
+  .blog-prose-tight li,
+  .blog-prose-tight blockquote {
+    line-height: 1.55;
+  }
   
   .bgvialabs {
     background-color: #64D2E6;
