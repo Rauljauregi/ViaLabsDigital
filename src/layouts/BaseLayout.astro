@@ -9,104 +9,114 @@ import '../styles/global.css'
 
 const { title, description, image, articleDate } = Astro.props
 
-// SEO: Schema.org data
+// SEO: blog personal (Person) + publisher corporativo (Organization)
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': 'https://mindfulml.vialabsdigital.com/#author',
+  name: 'Raul Jauregui',
+  url: 'https://mindfulml.vialabsdigital.com',
+  sameAs: [
+    'https://x.com/Rauljauregui',
+    'https://www.linkedin.com/in/raul-jauregui-martinez-de-morentin-1b0732294/'
+  ]
+}
+
 const websiteSchema = {
-	'@context': 'https://schema.org',
-	'@type': 'WebSite',
-	name: 'Mindful ML',
-	url: 'https://mindfulml.vialabsdigital.com',
-	description: 'Blog sobre Machine Learning, Inteligencia Artificial y Deep Learning',
-	publisher: {
-		'@type': 'Organization',
-		name: 'ViaLabs Digital',
-		url: 'https://vialabsdigital.com'
-	}
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': 'https://mindfulml.vialabsdigital.com/#website',
+  name: 'Mindful ML',
+  url: 'https://mindfulml.vialabsdigital.com',
+  description: 'Blog sobre Machine Learning, Inteligencia Artificial y Deep Learning',
+  creator: {
+    '@id': 'https://mindfulml.vialabsdigital.com/#author'
+  },
+  publisher: {
+    '@id': 'https://vialabsdigital.com/#organization'
+  }
 }
 
 const organizationSchema = {
-	'@context': 'https://schema.org',
-	'@type': 'Organization',
-	name: 'ViaLabs Digital',
-	url: 'https://vialabsdigital.com',
-	sameAs: [
-		'https://x.com/Rauljauregui',
-		'https://www.linkedin.com/in/raúl-jáuregui-martínez-de-morentin-1b0732294/'
-	],
-	knowsAbout: [
-		'Machine Learning',
-		'Artificial Intelligence',
-		'Deep Learning',
-		'Technical SEO',
-		'Web Development'
-	],
-	founder: {
-		'@type': 'Person',
-		name: 'Raúl Jáuregui',
-		sameAs: [
-			'https://x.com/Rauljauregui',
-			'https://www.linkedin.com/in/raúl-jáuregui-martínez-de-morentin-1b0732294/'
-		]
-	}
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': 'https://vialabsdigital.com/#organization',
+  name: 'ViaLabs Digital',
+  url: 'https://vialabsdigital.com',
+  logo: {
+    '@type': 'ImageObject',
+    url: 'https://vialabsdigital.com/wp-content/uploads/ViaLabsDigital-1.png'
+  },
+  knowsAbout: [
+    'Machine Learning',
+    'Artificial Intelligence',
+    'Deep Learning',
+    'Technical SEO',
+    'Web Development'
+  ],
+  founder: {
+    '@id': 'https://mindfulml.vialabsdigital.com/#author'
+  }
 }
 ---
 
 <html lang='es' class='scroll-smooth'>
-	<head>
-		<!-- Google Fonts -->
-		<link rel='preconnect' href='https://fonts.googleapis.com' />
-		<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
-		<link
-			href='https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap'
-			rel='stylesheet'
-		/>
-		<link rel="alternate" type="application/rss+xml" title="mindfulML RSS" href="/rss.xml" />
+  <head>
+    <!-- Google Fonts -->
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap'
+      rel='stylesheet'
+    />
+    <link rel='alternate' type='application/rss+xml' title='mindfulML RSS' href='/rss.xml' />
 
+    <!-- KaTeX -->
+    <link
+      rel='stylesheet'
+      href='https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css'
+      crossorigin='anonymous'
+    />
 
-		<!-- KaTeX -->
-		<link
-			rel='stylesheet'
-			href='https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css'
-			crossorigin='anonymous'
-		/>
+    <!-- Google Analytics (Partytown para mejor rendimiento) -->
+    <script
+      type='text/partytown'
+      async
+      src='https://www.googletagmanager.com/gtag/js?id=G-V3WC9QSH8J'></script>
+    <script type='text/partytown'>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', 'G-V3WC9QSH8J')
+    </script>
 
-		<!-- Google Analytics (Partytown para mejor rendimiento) -->
-		<script
-			type='text/partytown'
-			async
-			src='https://www.googletagmanager.com/gtag/js?id=G-V3WC9QSH8J'></script>
-		<script type='text/partytown'>
-			window.dataLayer = window.dataLayer || []
-			function gtag() {
-				dataLayer.push(arguments)
-			}
-			gtag('js', new Date())
-			gtag('config', 'G-V3WC9QSH8J')
-		</script>
+    <!-- Schema.org structured data -->
+    <SchemaMarkup schema={personSchema} />
+    <SchemaMarkup schema={websiteSchema} />
+    <SchemaMarkup schema={organizationSchema} />
 
-		<!-- Schema.org structured data -->
-		<SchemaMarkup schema={websiteSchema} />
-		<SchemaMarkup schema={organizationSchema} />
+    <!-- SEO Meta Tags -->
+    <BaseHead title={title} description={description} ogImage={image} articleDate={articleDate} />
 
-		<!-- SEO Meta Tags -->
-		<BaseHead title={title} description={description} ogImage={image} articleDate={articleDate} />
+    <!-- Providers (Theme y Animaciones) -->
+    <ProviderTheme />
+    <ProviderAnimations />
+  </head>
 
-		<!-- Providers (Theme y Animaciones) -->
-		<ProviderTheme />
-		<ProviderAnimations />
-	</head>
+  <body class='relative bg-white text-stone-950 dark:bg-[#0a0910] dark:text-white'>
+    <main
+      class='mx-auto max-w-xs sm:max-w-2xl sm:px-8 lg:px-12 xl:px-16 antialiased md:max-w-6xl grid gap-12'
+    >
+      <!-- Header -->
+      <Header />
 
-	<body class='relative bg-white text-stone-950 dark:bg-[#0a0910] dark:text-white'>
-		<main
-			class='mx-auto max-w-xs sm:max-w-2xl sm:px-8 lg:px-12 xl:px-16 antialiased md:max-w-6xl grid gap-12'
-		>
-			<!-- Header -->
-			<Header />
+      <!-- Contenido dinamico -->
+      <slot />
 
-			<!-- Contenido dinámico -->
-			<slot />
-
-			<!-- Footer -->
-			<Footer />
-		</main>
-	</body>
+      <!-- Footer -->
+      <Footer />
+    </main>
+  </body>
 </html>

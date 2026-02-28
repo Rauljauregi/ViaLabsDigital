@@ -1,7 +1,6 @@
 ---
 import {
   type CollectionEntry,
-  getCollection,
   getEntryBySlug,
 } from 'astro:content'
 import BlogPost from '@/layouts/BlogPost'
@@ -16,17 +15,16 @@ const slug = Astro.params.slug?.replace(/^\/+|\/+$/g, '') || ''
 // 1) Cargar post y manejar 404
 const post = await getEntryBySlug('blog', slug)
 if (!post) {
-  console.error(`No se encontró ningún post con el slug: ${slug}`)
+  console.error(`No se encontro ningun post con el slug: ${slug}`)
   return Astro.redirect('/404')
 }
 
 // 2) Render del contenido
-let Content, headings, remarkPluginFrontmatter
+let Content, headings
 try {
   const rendered = await post.render()
   Content = rendered.Content
   headings = rendered.headings
-  remarkPluginFrontmatter = rendered.remarkPluginFrontmatter
 } catch (error) {
   console.error(`Error al renderizar el post ${slug}: ${error instanceof Error ? error.message : error}`)
   return Astro.redirect('/404')
@@ -47,31 +45,21 @@ const imageAbs = post.data.heroImage
       : `${host}${post.data.heroImage}`)
   : undefined
 
-// 5) TechArticle schema mejorado
+// 5) TechArticle schema: autor personal + publisher corporativo
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'TechArticle',
+  '@id': `${Astro.url.href}#article`,
   headline: post.data.title,
   description: post.data.description,
   image: imageAbs,
   datePublished: post.data.pubDate,
   dateModified: post.data.updatedAt ?? post.data.pubDate,
   author: {
-    '@type': 'Person',
-    name: 'Raúl Jáuregui',
-    sameAs: [
-      'https://x.com/Rauljauregui',
-      'https://www.linkedin.com/in/raúl-jáuregui-martínez-de-morentin-1b0732294/',
-    ],
+    '@id': 'https://mindfulml.vialabsdigital.com/#author',
   },
   publisher: {
-    '@type': 'Organization',
-    name: 'ViaLabs Digital',
-    url: 'https://vialabsdigital.com',
-    logo: {
-      '@type': 'ImageObject',
-      url: 'https://vialabsdigital.com/wp-content/uploads/ViaLabsDigital-1.png',
-    },
+    '@id': 'https://vialabsdigital.com/#organization',
   },
   mainEntityOfPage: {
     '@type': 'WebPage',
@@ -92,8 +80,8 @@ const articleSchema = {
   <!-- Schema.org -->
   <SchemaMarkup schema={articleSchema} />
 
-  <div class="grid grid-cols-1 md:grid-cols-[20%_auto] gap-16 mt-8">
-    <aside class="hidden md:block">
+  <div class='grid grid-cols-1 md:grid-cols-[20%_auto] gap-16 mt-8'>
+    <aside class='hidden md:block'>
       <Share />
       {Array.isArray(headings) && headings.length > 0 && (
         <TableOfContents headings={headings} />
@@ -101,11 +89,11 @@ const articleSchema = {
     </aside>
 
     <main>
-      <article class="prose blog-prose-tight dark:prose-invert mb-16">
+      <article class='prose blog-prose-tight dark:prose-invert mb-16'>
         <Content />
       </article>
 
-      <!-- Clúster relacionado por money tag / categoría -->
+      <!-- Cluster relacionado por money tag / categoria -->
       <RelatedCluster current={post as CollectionEntry<'blog'>} limitInitial={3} />
     </main>
   </div>
