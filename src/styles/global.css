@@ -24,6 +24,10 @@
   margin: 2rem 0;
 }
 
+.mermaid svg {
+  max-width: 700px;
+}
+
 @layer base {
   body {
     @apply font-sans text-base text-gray-900 dark:text-gray-100;
