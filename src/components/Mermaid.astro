@@ -3,14 +3,15 @@ const { chart } = Astro.props;
 ---
 
 <div class="mermaid">
-{chart}
+  {chart}
 </div>
 
 <script type="module" client:load>
 import mermaid from "mermaid";
 
 mermaid.initialize({
-  startOnLoad: false,
-  theme: "neutral"
+  startOnLoad: true,
+  theme: "neutral",
+  securityLevel: "loose"
 });
 </script>
