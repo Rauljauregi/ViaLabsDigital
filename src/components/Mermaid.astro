@@ -6,11 +6,11 @@ const { chart } = Astro.props;
 {chart}
 </div>
 
-<script type="module">
+<script type="module" client:load>
 import mermaid from "mermaid";
 
 mermaid.initialize({
-  startOnLoad: true,
-  theme: "default"
+  startOnLoad: false,
+  theme: "neutral"
 });
 </script>
