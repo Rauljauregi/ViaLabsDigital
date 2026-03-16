@@ -6,12 +6,15 @@ const { chart } = Astro.props;
   {chart}
 </div>
 
-<script type="module" client:load>
-import mermaid from "mermaid";
+<script client:load>
+  import("https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs")
+    .then((mermaid) => {
+      mermaid.default.initialize({
+        startOnLoad: true,
+        theme: "neutral",
+        securityLevel: "loose"
+      });
 
-mermaid.initialize({
-  startOnLoad: true,
-  theme: "neutral",
-  securityLevel: "loose"
-});
+      mermaid.default.run();
+    });
 </script>
