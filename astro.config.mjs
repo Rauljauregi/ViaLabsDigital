@@ -53,6 +53,7 @@ export default defineConfig({
           strict: false
         }]
       ],
+      rehypePlugins: [
         [rehypeKatex, {
           throwOnError: false,
           strict: false,
