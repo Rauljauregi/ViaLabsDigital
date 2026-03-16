@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import tailwind from '@astrojs/tailwind';
-import rehypeMermaid from 'rehype-mermaid'
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import { remarkReadingTime } from './src/utils/readTime.ts';
@@ -27,7 +26,6 @@ export default defineConfig({
       }]
     ],
     rehypePlugins: [
-      rehypeMermaid,
       [rehypeKatex, {
         throwOnError: false,
         strict: false,
@@ -55,8 +53,6 @@ export default defineConfig({
           strict: false
         }]
       ],
-      rehypePlugins: [
-        rehypeMermaid,
         [rehypeKatex, {
           throwOnError: false,
           strict: false,
