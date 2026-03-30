@@ -16,58 +16,132 @@ Un modelo de lenguaje se puede entender de muchas formas, pero hay una que se me
 
 Sin embargo, hay otra forma de verlo que, a primera vista, parece completamente distinta: como una función (sobre esta analogía sí hay multitud de referencias). Le das una entrada y te devuelve una salida. Si lo piensas con calma, ambas ideas no están tan lejos entre sí. De hecho, describen el mismo fenómeno desde dos perspectivas diferentes.
 
-Desde un punto de vista técnico, un modelo de lenguaje no es más que una función extremadamente compleja. Recibe texto como entrada y genera texto como salida, prediciendo cómo debería continuar una secuencia en función de todo lo que ha aprendido previamente. No tiene intención propia, ni objetivos, ni comprensión en el sentido humano. Simplemente transforma una entrada en una salida.
 
-Pero aquí aparece algo interesante. No es una función cualquiera.
+## Un LLM es una función
 
-En una función matemática clásica, pequeñas variaciones en la entrada suelen producir cambios relativamente predecibles en la salida. En un modelo de lenguaje, en cambio, la forma en la que escribes cambia completamente el resultado. Una pregunta vaga tiende a generar una respuesta vaga. Una pregunta estructurada produce una respuesta más ordenada. Y una pregunta profunda, bien planteada, suele abrir respuestas mucho más interesantes.
+Desde un punto de vista técnico, un modelo de lenguaje no es más que una función extremadamente compleja. Recibe texto como entrada y genera texto como salida, prediciendo cómo debería continuar una secuencia en función de todo lo que ha aprendido previamente.
 
-Es en ese punto donde aparece la intuición del espejo.
+No tiene intención propia ni objetivos, y tampoco “piensa” como lo hacemos nosotros. Lo que hace es algo mucho más simple —y a la vez más potente—: transformar una entrada en una salida.
 
-Un LLM no devuelve simplemente información. Devuelve una respuesta condicionada por la forma en la que has planteado la pregunta. En el prompt no solo hay contenido; también hay estructura, contexto y forma de pensar. El modelo no responde únicamente a lo que dices, sino a cómo lo dices.
+Pero aquí aparece algo importante. **No es una función cualquiera.**
 
-Por eso no es un espejo en el sentido literal. No refleja exactamente lo mismo. Refleja, más bien, una versión amplificada de cómo estás pensando.
+En una función matemática clásica, pequeñas variaciones en la entrada suelen producir cambios relativamente predecibles en la salida. En un modelo de lenguaje, en cambio, ocurre algo distinto:
 
-Esto nos lleva a una pregunta que suele aparecer de forma natural: si el modelo puede generar una respuesta, ¿esa respuesta ya existía dentro de él? La intuición habitual es pensar que sí, que el modelo tiene almacenadas millones de respuestas y simplemente selecciona una.
+- una pregunta vaga → respuesta vaga  
+- una pregunta estructurada → respuesta más clara  
+- una pregunta profunda → respuestas más interesantes  
+
+Y ahí es donde aparece la intuición del espejo.
+
+
+## El espejo no refleja lo que dices, sino cómo piensas
+
+Un LLM no devuelve simplemente información. Devuelve una respuesta condicionada por la forma en la que has planteado la pregunta.
+
+En el prompt no solo hay contenido, también hay estructura, contexto y forma de pensar. En realidad, cuando escribes una pregunta, estás dejando implícitas muchas más cosas de las que parece:
+
+- tu nivel de claridad  
+- tu contexto  
+- tu forma de estructurar ideas  
+- incluso tu forma de razonar  
+
+El modelo responde a todo eso.
+
+> No es un espejo porque refleje lo mismo.  
+> Es un espejo porque refleja *cómo estás pensando*.
+
+
+## ¿La respuesta ya existía?
+
+Esta es una de las preguntas más interesantes. Si el modelo puede generar una respuesta, ¿significa que esa respuesta ya estaba dentro de él?
+
+La intuición habitual es pensar que sí. Que el modelo “tiene” respuestas y simplemente las devuelve.
 
 Pero no funciona así.
 
-Un modelo de lenguaje no guarda respuestas como tal. Lo que tiene es un espacio enorme de posibles continuaciones de texto. Antes de que hagas una pregunta, no hay una respuesta concreta esperando. Hay muchas posibilidades. Cuando escribes un prompt, reduces ese espacio y fuerzas una trayectoria específica. Provocas una respuesta que, sin esa pregunta, no existiría.
+Un modelo de lenguaje no guarda respuestas. Lo que tiene es un **espacio enorme de posibilidades** sobre cómo continuar un texto. Antes del prompt, no hay una respuesta esperando, sino múltiples posibles caminos.
 
-Hasta aquí, la analogía del espejo encaja bastante bien. Pero sigue siendo incompleta.
+Cuando haces una pregunta, ocurre algo clave: reduces ese espacio y fuerzas una trayectoria concreta. En cierto modo, eliges qué tipo de respuesta puede aparecer.
 
-Porque hay un detalle importante que muchas veces se pasa por alto: el espejo no es neutro.
+> No estás recuperando una respuesta.  
+> Estás provocando una.
 
-Un modelo de lenguaje no se entrena en una sola fase. Primero aprende patrones del lenguaje a gran escala, absorbiendo estructuras, relaciones y formas de expresión. Pero después pasa por un proceso de ajuste en el que se le enseña a comportarse como asistente. Se le entrena para responder de forma clara, útil, segura y coherente, evitando ciertos errores y siguiendo determinados criterios.
 
-Este proceso cambia profundamente su comportamiento.
+## El problema: el espejo no es neutro
 
-El modelo ya no se limita a transformar texto. También interpreta, filtra y moldea la respuesta. Decide qué enfatizar, qué suavizar y qué evitar. En ese sentido, deja de ser un espejo plano para convertirse en algo más parecido a un espejo con criterio.
+Hasta aquí, la analogía del espejo funciona bastante bien. Pero hay un detalle importante que cambia completamente la historia.
 
-Quizá una forma más precisa de verlo es esta: un LLM es un espejo que alguien ha pulido antes de dártelo. Refleja, sí, pero lo hace siguiendo una cierta lógica, un estilo y unas reglas implícitas.
+Un modelo de lenguaje no se entrena en una sola fase. Primero aprende patrones del lenguaje a gran escala, pero después pasa por un proceso de ajuste en el que se le enseña a comportarse como asistente.
 
-Y aún hay otra capa más.
+Se le entrena para:
 
-Cuando usamos sistemas como ChatGPT, en realidad no estamos interactuando únicamente con un modelo de lenguaje. Estamos utilizando un sistema más amplio en el que intervienen varios elementos: el historial de la conversación, instrucciones internas que no vemos, posibles memorias del usuario, e incluso acceso a información externa mediante técnicas como RAG. En algunos casos, también hay herramientas que permiten ejecutar acciones o consultar datos en tiempo real.
+- ser útil  
+- responder de forma clara  
+- evitar ciertos errores  
+- mantener un tono determinado  
+
+Esto cambia profundamente su comportamiento.
+
+El modelo ya no solo transforma texto. **También interpreta, filtra y moldea la respuesta.**
+
+
+## Un espejo… con criterio
+
+Quizá una forma más precisa de verlo es esta:
+
+> un LLM es un espejo que alguien ha pulido antes de dártelo.
+
+Refleja, sí, pero no de forma neutra. Enfatiza ciertas cosas, suaviza otras y evita determinados caminos. La respuesta ya no depende solo de tu pregunta, sino también de cómo ha sido entrenado el modelo.
+
+
+## No estás hablando solo con un modelo
+
+Aquí hay otra capa que suele pasar desapercibida.
+
+Cuando usas herramientas como ChatGPT, no estás interactuando únicamente con un modelo de lenguaje. Estás utilizando un sistema más amplio en el que intervienen múltiples elementos.
+
+Además del modelo, entran en juego:
+
+- el historial de la conversación  
+- instrucciones internas (que no ves)  
+- posibles memorias del usuario  
+- acceso a información externa (RAG)  
+- herramientas y acciones en sistemas más avanzados  
 
 Todo eso forma parte de la respuesta.
 
-Es decir, no es solo una función. Es una función dentro de un sistema.
+> No es solo una función.  
+> Es una función dentro de un sistema.
 
-Y en ese sistema hay una pieza que a menudo se subestima: el propio usuario.
 
-La respuesta que recibes no depende solo del modelo ni del sistema. Depende también de cómo formulas la pregunta. De hecho, es el resultado de la interacción entre tres elementos: el modelo, el sistema y el usuario. Y de los tres, el más variable suele ser el usuario.
+## El usuario también forma parte del sistema
 
-Por eso dos personas usando la misma herramienta pueden obtener resultados completamente distintos. No porque el modelo cambie, sino porque la entrada cambia.
+Y aquí es donde todo encaja.
 
-Al final, cuando usas un LLM, no estás viendo simplemente lo que el modelo “sabe”. Estás viendo una combinación de lo que ha aprendido, cómo ha sido alineado, el contexto que tiene en ese momento y, sobre todo, cómo estás planteando el problema.
+La respuesta que recibes no depende solo del modelo ni del sistema. Depende también de ti. En realidad, es el resultado de la interacción entre tres elementos:
 
-Y ahí es donde aparece la consecuencia práctica.
+- el modelo  
+- el sistema  
+- el usuario  
 
-El valor no está solo en la herramienta. Está en cómo preguntas, en cómo estructuras el contexto y en cómo piensas el problema. La inteligencia artificial no es una ventaja automática. Es una ventaja para quien sabe utilizarla bien.
+Y de los tres, el más variable eres tú.
 
-Quizá el cambio importante no es que las máquinas respondan mejor. Es que nos obligan a pensar mejor qué preguntar.
+Dos personas usando la misma IA pueden obtener resultados completamente distintos. No porque el modelo cambie, sino porque cambia la entrada.
 
-Porque al final, el LLM no refleja simplemente lo que dices.
 
-Refleja cómo estás pensando.
+## La consecuencia (la parte que importa)
+
+Todo esto tiene una implicación muy práctica.
+
+El valor no está solo en la herramienta, sino en cómo la utilizas. Está en cómo preguntas, en cómo estructuras el contexto y en cómo defines el problema.
+
+La inteligencia artificial no es una ventaja automática. Es una ventaja para quien sabe utilizarla bien.
+
+
+## Un LLM es una función, pero especial
+
+Un LLM es una función en la que la calidad de la salida depende directamente de la calidad de la entrada.
+
+Y por eso se parece tanto a un espejo.
+
+No porque refleje lo que dices, sino porque refleja **cómo estás pensando**.
